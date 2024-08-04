@@ -1,0 +1,79 @@
+html, body {
+    min-height: 100%;
+    margin: 0;
+    background-color: #F5F5F5;
+}
+
+/* Estilos para el nav */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: calc(100% - 30vh);
+    height: 15vh;
+    background-color: #e0e0e0; /* Fondo semi-transparente */
+    z-index: 10; /* Asegura que esté por encima del header */
+    padding: 5vh;
+
+    border-radius: 50px;
+    margin: 10vh;
+}
+
+nav ul {
+    border: #231942 solid 1px;
+
+    list-style-type: none;
+    margin: 0;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    border: aqua solid 1px;
+    display: inline;
+}
+
+nav ul li a {
+    border: 1px solid #07c517;
+    color: black;
+    text-decoration: none;
+    padding: 0.5em;
+}
+
+/* Estilos para el header */
+header {
+    border-radius: 50px;
+    background-color: #9F86C0;
+    color: white;
+    padding: 10px;
+    margin: 5vh;
+    text-align: center;
+
+    width: auto; /* Resta 5vh por cada lado del margen */
+    height: 50vh;
+}
+
+/* Estilos para el main */
+main {
+    border: 1px solid rgb(109, 109, 109);
+    text-align: center;
+    padding: 10px;
+    margin-left: 5vh;
+    margin-right: 5vh;
+    margin-bottom: 4vh;
+
+    width: auto;
+    height: 50vh;
+}
+
+/* Estilos para el footer */
+footer {
+    background-color: #231942;
+    color: white;
+    padding: 10px;
+    text-align: center;
+
+    width: auto;
+    height: 50vh;
+}
