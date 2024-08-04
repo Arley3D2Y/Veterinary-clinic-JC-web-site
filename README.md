@@ -1,7 +1,7 @@
 # Veterinary-clinic-JC-web-site
-# Juan the Dog
+# Jhon the Cat
 
-Este proyecto es una simple página web para "Juan the Dog", que incluye una navegación fija, un encabezado, contenido principal y un pie de página. La página está diseñada con HTML y CSS.
+Este proyecto es una simple página web para una veterinaria llamada "Juan the Cat", que incluye una navegación fija, un encabezado, contenido principal y un pie de página. La página está diseñada con HTML y CSS.
 
 ## Estructura del Proyecto
 
