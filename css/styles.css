@@ -6,26 +6,76 @@ body {
     
 }
 
-/* Estilos para el nav */
-nav {
+/* Estilos para el contenedor del logo, nav y login*/
+.container {
     position: fixed;
     top: 0;
     left: 0;
-    width: calc(100% - 30vh);
-    height: 15vh;
-    background-color: #e0e0e0;
-    /* Fondo semi-transparente */
-    z-index: 10;
-    /* Asegura que esté por encima del header */
-    padding: 5vh;
-
-    border-radius: 50px;
+    width: calc(100% - 20vh);
+    height: 20vh;
+    background-color: #F5F5F5;
+    z-index: 10;    /* Fondo semi-transparente */
+    border-radius: 40px;
     margin: 10vh;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: left
+}
+
+/* Estilos para las cajas del logo y login */
+.square {
+    border-radius: 40px;
+    text-align: center;
+    padding: 0 10px;
+    
+    width: auto;
+    height: 20vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: red solid 1px;
+    transition: transform 0.5s ease;
+}
+
+/* Estilos para el botón de Login */
+.square a {
+    border-radius: 50px;
+    text-align: center;
+    background-color: #5E548E;
+    color: white;
+    text-decoration: none;
+    margin: 0, 25px;
+    padding: 12px 23px 13px 23px;
+    font-size: 1.2em;
+}
+
+.square img, .square a {
+    cursor: pointer;
+    transition: transform 0.5s ease;
+}
+
+.square img:hover, .square a:hover {
+    transform: scale(1.1);
+}
+
+
+/* Estilos para el nav */
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    border-radius: 40px;
+    text-align: center;
+    width: 150vh;
+    height: 20vh;
+    border: red solid 1px;
 }
 
 nav ul {
-    border: #231942 solid 1px;
-
     list-style-type: none;
     margin: 0;
     padding: 10px;
@@ -34,29 +84,60 @@ nav ul {
 }
 
 nav ul li {
-    border: aqua solid 1px;
+    padding-right: 4px; /* Ajusta el espaciado inicial */
     display: inline;
+    position: relative;
+    border-right: #5E548E solid 2px;
 }
 
 nav ul li a {
-    border: 1px solid #07c517;
     color: black;
     text-decoration: none;
     padding: 0.5em;
+    font-size: 1.09em;
+    cursor: pointer;
 }
+
+nav ul li:hover {
+    padding-right: 2px; /* Ajusta el espaciado al hacer hover */
+    border-right: #5E548E solid 4px; /* Aumenta el grosor del borde */
+}
+
 
 /* Estilos para el header */
 header {
     border-radius: 50px;
     background-color: #9F86C0;
     color: white;
-    padding: 10px;
+    padding: 0;
     margin: 5vh;
     text-align: center;
 
     width: auto;
     /* Resta 5vh por cada lado del margen */
-    height: 50vh;
+    height: 75vh;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+header .box-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end; /* Alinea las imágenes al final del contenedor */
+    width: 100%; /* Ajusta el contenedor al 100% del ancho disponible */
+    height: 100%; /* Permite que la altura del contenedor sea flexible */
+    padding: 50px;
+}
+
+.box-header img {
+    width: 200px;
+    height: auto;
+    flex: 1; /* Permite que las imágenes se ajusten para llenar el contenedor */
+    object-fit: contain; /* Asegura que las imágenes se ajusten bien dentro del contenedor */
 }
 
 /* Estilos para el main */
