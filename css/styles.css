@@ -1,9 +1,13 @@
+.selector-for-some-widget {
+    box-sizing: content-box;
+}
+
 html,
 body {
     min-height: 100%;
     margin: 0;
     background-color: #F5F5F5;
-    
+
 }
 
 /* Estilos para el nav */
@@ -61,7 +65,7 @@ header {
 
 /* Estilos para el main */
 main {
-    border: 1px solid rgb(109, 109, 109);
+
     text-align: center;
     padding: 10px;
     margin-left: 5vh;
@@ -69,7 +73,84 @@ main {
     margin-bottom: 4vh;
 
     width: auto;
-    height: 50vh;
+    height: 100%;
+}
+
+
+#servicesCenter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.accordion-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.accordion {
+    flex: 0 0 48%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .accordion {
+        flex: 0 0 100%;
+    }
+}
+
+/* Accordion styles */
+.accordion-item {
+    border: var(--accordion-border-width) solid var(--accordion-border-color);
+    border-radius: var(--accordion-border-radius);
+    margin-bottom: 1rem;
+    font-family: "ABeeZee", sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Sombra del acordeón */
+
+}
+
+.accordion-button {
+
+    display: flex;
+    flex-direction: column;
+    padding: var(--accordion-btn-padding-y) var(--accordion-btn-padding-x);
+    color: #F5F5F5;
+    background-color: var(--accordion-btn-bg);
+    transition: var(--accordion-transition);
+    border: none;
+    outline: none;
+    box-shadow: none;
+    cursor: pointer;
+    font-family: "ABeeZee", sans-serif;
+}
+
+
+.accordion-button .fa-solid {
+    color: #231942;
+    font-size: 3em;
+}
+
+.accordion-button p {
+    color: #9F86C0;
+    font-family: "ABeeZee", sans-serif;
+    font-size: 200%;
+    font-weight: 600;
+}
+
+
+.accordion-button:not(.collapsed) {
+    color: #F5F5F5;
+    background-color: var(--accordion-active-bg);
+}
+
+
+
+.accordion-body p {
+    text-align: justify;
 }
 
 /* Estilos para el footer */
@@ -84,7 +165,10 @@ footer {
     height: 100%;
     flex-shrink: 0;
 }
-#footerLeft, #footerCenter , #footerRight {
+
+#footerLeft,
+#footerCenter,
+#footerRight {
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -127,13 +211,13 @@ footer {
     align-self: center;
 }
 
-#RedesFooter  a{
+#RedesFooter a {
     text-decoration: none;
     color: #F5F5F5;
     font-weight: 200;
     font-style: normal;
     font-size: 1.8em;
-    margin: 2% ;
+    margin: 2%;
     align-self: center;
 }
 
@@ -149,7 +233,7 @@ footer {
     align-self: center;
 }
 
-.copy  {
+.copy {
     text-decoration: none;
     color: #F5F5F5;
     font-family: "Turret Road", sans-serif;
@@ -160,6 +244,28 @@ footer {
     align-self: center;
 }
 
+.textos {
+    font-family: "Turret Road", sans-serif;
+    font-style: normal;
+    font-size: 1.5em;
+    margin: 2%;
+    align-self: center;
+}
+
+.textos span {
+    color: #BE95C4;
+    font-weight: 600;
+}
+
+.title {
+    font-family: "ABeeZee", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 4em;
+    color: #5E548E;
+    margin: 0% 0% 0% 0%;
+}
+
 .titleFooter {
     color: #F5F5F5;
     font-family: "Turret Road", sans-serif;
@@ -167,7 +273,7 @@ footer {
     font-style: normal;
     font-size: 2.5em;
     margin: 3% 0% 0% 0%;
-    
+
 }
 
 .titleFooter2 {
@@ -177,12 +283,11 @@ footer {
     font-style: normal;
     font-size: 3em;
     margin: 3% 0% 2.5% 0%;
-    
+
 }
 
-.fa-regular,.fa-brands {
+.fa-regular,
+.fa-brands {
     color: #9F86C0;
     font-size: 1.5em;
 }
-
-
