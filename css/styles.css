@@ -162,7 +162,7 @@ footer {
     padding: 10px;
     text-align: center;
     width: auto;
-    height: 50vh;
+    height: 100%;
     flex-shrink: 0;
 }
 #footerLeft, #footerCenter , #footerRight {
