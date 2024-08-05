@@ -50,12 +50,12 @@ body {
 }
 
 /* Enlaces */
-a {
+#about li a {
     color: #4B0082; /* Color de enlaces */
     text-decoration: none; /* Sin subrayado */
 }
 
-a:hover {
+#about li a:hover {
     text-decoration: underline; /* Subrayado al pasar el mouse */
 }
 
