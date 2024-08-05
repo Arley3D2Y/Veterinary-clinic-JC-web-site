@@ -13,7 +13,7 @@ nav {
     left: 0;
     width: calc(100% - 30vh);
     height: 15vh;
-    background-color: #e0e0e0;
+    background-color: #F5F5F5;
     /* Fondo semi-transparente */
     z-index: 10;
     /* Asegura que esté por encima del header */
@@ -81,7 +81,7 @@ footer {
     padding: 10px;
     text-align: center;
     width: auto;
-    height: 50vh;
+    height: 100%;
     flex-shrink: 0;
 }
 #footerLeft, #footerCenter , #footerRight {
