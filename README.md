@@ -17,9 +17,11 @@ Este proyecto es una página web moderna, elegante y responsiva diseñada para u
 - **Estilos Personalizados**: Incluye una barra de desplazamiento estilizada y una variedad de tipografías atractivas.
 
 ## Diagrama UML
+<img src="images/uml.jpeg" width="200" height="200" alt="Diagrama UML">
+
 
 ## Paleta de colores
-<img src="images/Logo.png" width="80" height="80" alt="Descripción de la imagen">
+<img src="images/paleta.colores.jpeg" width="200" height="200" alt="Paleta de colores">
 
   
 ## Estructura del Proyecto
