@@ -10,6 +10,7 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,17 +24,38 @@
 
 <body>
 
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </nav>
+    <section class="container">
+        <div class="square">
+            <img src="../images/Logo.png" alt="Logo" width="140" height="auto">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="square">
+            <a href="index.html">Login</a>
+        </div>
+    </section>
+
 
     <header>
-        <h1>Welcome to Juan the dog</h1>
+        <section class="box-foto">
+            <img src="../images/Maru.png" alt="Foto de Maru">
+            <img src="../images/Mandy.png" alt="Foto de Mandy">
+        </section>
+
+        <section class="box-slogan">
+            <article>
+
+            </article>
+            <article>
+                <h1>Cuidamos a tus mascotas como si fueran nuestras</h1>
+            </article>
+        </section>
     </header>
 
     <main>
@@ -200,7 +222,24 @@
                 peludos!
             </p>
         </section>
-        <section id="about"></section>
+        <section id="about">
+            <h2>La Historia de John The Cat</h2>
+            <p>En el año 2024, en Bogotá, Colombia, nació "John The Cat", una veterinaria fundada por un grupo de amigos apasionados por los animales y la tecnología. La idea surgió de la necesidad de un lugar que combinara atención médica de calidad con innovaciones tecnológicas, creando una experiencia integral para las mascotas y sus dueños.</p>
+            
+            <h3>Nuestra Misión y Valores</h3>
+            <p>"John The Cat" abrió sus puertas con la misión de ofrecer un cuidado integral y personalizado para cada mascota. Nos comprometemos a:</p>
+            <ul>
+                <li><strong>Calidad Médica:</strong> Proporcionar la mejor atención veterinaria, utilizando las últimas tecnologías y tratamientos.</li>
+                <li><strong>Innovación Tecnológica:</strong> Integrar herramientas tecnológicas como aplicaciones móviles para seguimiento de la salud, recordatorios de citas y telemedicina.</li>
+                <li><strong>Bienestar Integral:</strong> Crear un ambiente acogedor y libre de estrés para nuestras mascotas y sus dueños.</li>
+                <li><strong>Compromiso Comunitario:</strong> Participar activamente en programas de adopción y educación sobre el cuidado responsable de mascotas.</li>
+            </ul>
+        
+            <h2>El Legado de John</h2>
+            <p>El nombre "John The Cat" es un homenaje a un gato especial que inspiró nuestra visión. Cada día, nos esforzamos por honrar su legado, ofreciendo un lugar donde las mascotas son tratadas con amor, respeto y la mejor atención posible.</p>
+            <p>En "John The Cat", creemos que nuestras mascotas son parte de la familia, y nos dedicamos a asegurar que cada visita a nuestra clínica sea una experiencia positiva y enriquecedora. Ven y forma parte de nuestra historia; estamos aquí para cuidar a tus amigos peludos con la misma dedicación y cariño que tú les brindas.</p>
+            
+        </section>
     </main>
 
     <!-- Footer -->
@@ -232,7 +271,7 @@
 
         <article id="footerCenter">
 
-            <img src="../images/Logo-invertido.png" alt="Logo-invertido">
+            <img src="../images/Logo-invertido.png" alt="Logo-invertido" width="100" height="auto">
             <p class="titleFooter2">Redes Sociales</p>
             <div id="RedesFooter">
 
