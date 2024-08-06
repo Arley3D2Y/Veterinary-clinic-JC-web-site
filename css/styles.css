@@ -205,7 +205,10 @@ header .box-slogan article {
     width: 100%;
     height: 25%;
 }
-
+.tituloHeader {
+    font-size: 3em;
+    font-family: "ABeeZee", sans-serif;
+}
 .box-slogan article h1 {
     inline-size: none;
     margin: 0;
