@@ -135,7 +135,7 @@ nav ul li a {
     padding: 0.5em;
     font-size: 1.3em;
     cursor: pointer;
-    font-family: "Turret Road", sans-serif;
+    font-family: "Baloo 2", sans-serif
 }
 
 nav ul li a:hover {
@@ -409,7 +409,7 @@ footer {
 #ContactFooter a {
     text-decoration: none;
     color: #F5F5F5;
-    font-family: "Turret Road", sans-serif;
+    font-family: "Baloo 2", sans-serif;
     font-weight: 200;
     font-style: normal;
     font-size: 1.5em;
@@ -427,7 +427,7 @@ footer {
 #HorarioFooter p {
     text-decoration: none;
     color: #F5F5F5;
-    font-family: "Turret Road", sans-serif;
+    font-family: "Baloo 2", sans-serif;
     font-weight: 200;
     font-style: normal;
     font-size: 1.5em;
@@ -454,7 +454,7 @@ footer {
 #EnlacesFooter a {
     text-decoration: none;
     color: #F5F5F5;
-    font-family: "Turret Road", sans-serif;
+    font-family: "Baloo 2", sans-serif;
     font-weight: 200;
     font-style: normal;
     font-size: 1.8em;
@@ -481,7 +481,7 @@ footer {
 .copy {
     text-decoration: none;
     color: #F5F5F5;
-    font-family: "Turret Road", sans-serif;
+    font-family: "Baloo 2", sans-serif;
     font-weight: 200;
     font-style: normal;
     font-size: 1.3em;
@@ -490,7 +490,7 @@ footer {
 }
 
 .textos {
-    font-family: "Turret Road", sans-serif;
+    font-family: "Baloo 2", sans-serif;
     font-style: normal;
     font-size: 1.5em;
     margin: 2%;
@@ -522,7 +522,7 @@ footer {
 
 .titleFooter {
     color: #F5F5F5;
-    font-family: "Turret Road", sans-serif;
+    font-family: "Baloo 2", sans-serif;
     font-weight: 500;
     font-style: normal;
     font-size: 2.5em;
@@ -532,7 +532,7 @@ footer {
 
 .titleFooter2 {
     color: #F5F5F5;
-    font-family: "Turret Road", sans-serif;
+    font-family: "Baloo 2", sans-serif;
     font-weight: 600;
     font-style: normal;
     font-size: 3em;
