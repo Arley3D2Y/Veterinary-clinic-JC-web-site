@@ -138,6 +138,12 @@ nav ul li a {
     font-family: "Turret Road", sans-serif;
 }
 
+nav ul li a:hover {
+    color:#9F86C0;
+    font-size: 1.4em;
+    transition: all 0.5s ease;
+}
+
 /* Estilo cuando se pasa el mouse sobre el elemento */
 nav ul li:hover {
     padding-right: 0;
