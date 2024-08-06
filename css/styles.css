@@ -8,6 +8,7 @@ body {
     margin: 0;
     background-color: #F5F5F5;
 }
+
 body {
     font-family: 'Karla', sans-serif;
     line-height: 1.6;
@@ -17,6 +18,17 @@ body {
     box-sizing: border-box;
 }
 
+body::-webkit-scrollbar {
+    width: 7px;
+    background-color: #5E548E;
+    border-radius: 16px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #9F86C0;
+    border-radius: 16px;
+    transition: .3 ease;
+}
 
 /* Estilos para el contenedor del logo, nav y login*/
 .container {
@@ -26,7 +38,7 @@ body {
     right: 0;
     height: 20vh;
     background-color: #ffffff;
-    z-index: 10;    
+    z-index: 10;
     border-radius: 40px;
     margin: 10vh 10vh 0 10vh;
     display: flex;
@@ -34,13 +46,17 @@ body {
     justify-content: left;
     box-shadow: 0 4px 8px 4px rgba(0, 0, 0, 0.068);
     transform: perspective(1000px) rotateX(2deg) rotateY(2deg);
-    transition: transform 0.3s ease, top 0.3s ease, opacity 0.5s ease; /* Transiciones para el efecto de ocultar/mostrar */
-    opacity: 1; /* Opacidad inicial */
+    transition: transform 0.3s ease, top 0.3s ease, opacity 0.5s ease;
+    /* Transiciones para el efecto de ocultar/mostrar */
+    opacity: 1;
+    /* Opacidad inicial */
 }
 
 .hidden {
-    transform: translateY(-100%); /* Mueve el contenedor hacia arriba */
-    opacity: 0; /* Desvanece el contenedor */
+    transform: translateY(-100%);
+    /* Mueve el contenedor hacia arriba */
+    opacity: 0;
+    /* Desvanece el contenedor */
 }
 
 /* Estilos para las cajas del logo y login */
@@ -125,7 +141,8 @@ nav ul li a {
 /* Estilo cuando se pasa el mouse sobre el elemento */
 nav ul li:hover {
     padding-right: 0;
-    border-right: #5E548E solid 4px; /* Aumento del grosor del borde al hacer hover */
+    border-right: #5E548E solid 4px;
+    /* Aumento del grosor del borde al hacer hover */
     border-radius: 6px;
 }
 
@@ -134,8 +151,10 @@ header {
     border-radius: 50px;
     background-image: url(../images/fondo.jpeg);
     background-repeat: no-repeat;
-    background-size: cover; /* Opcional: Ajusta el tamaño de la imagen de fondo para cubrir todo el área */
-    background-position: center; /* Opcional: Centra la imagen de fondo */
+    background-size: cover;
+    /* Opcional: Ajusta el tamaño de la imagen de fondo para cubrir todo el área */
+    background-position: center;
+    /* Opcional: Centra la imagen de fondo */
     color: white;
     padding: 0;
     margin: 5.5vh;
@@ -159,9 +178,12 @@ header .box-foto {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: flex-end; /* Alinea las imágenes al final del contenedor */
-    width: 100%; /* Ajusta el contenedor al 100% del ancho disponible */
-    height: 100%; /* Permite que la altura del contenedor sea flexible */
+    align-items: flex-end;
+    /* Alinea las imágenes al final del contenedor */
+    width: 100%;
+    /* Ajusta el contenedor al 100% del ancho disponible */
+    height: 100%;
+    /* Permite que la altura del contenedor sea flexible */
     padding: 50px 50px 0 50px;
 }
 
@@ -172,8 +194,10 @@ header .box-slogan {
     align-items: center;
     /* Alinea las imágenes al final del contenedor */
     font-size: 1.3em;
-    width: 100%; /* Ajusta el contenedor al 100% del ancho disponible */
-    height: 100%; /* Permite que la altura del contenedor sea flexible */
+    width: 100%;
+    /* Ajusta el contenedor al 100% del ancho disponible */
+    height: 100%;
+    /* Permite que la altura del contenedor sea flexible */
     padding: 50px 50px 0 50px;
 }
 
@@ -290,13 +314,19 @@ main {
     text-align: justify;
 
 }
+
 #about {
-    background-color: #F5F5F5; /* Color de fondo suave */
-    padding: 40px 20px; /* Espaciado interior */
-    
-    margin: 0 auto; /* Centrar en la página */
-    border-radius: 8px; /* Bordes redondeados */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    background-color: #F5F5F5;
+    /* Color de fondo suave */
+    padding: 40px 20px;
+    /* Espaciado interior */
+
+    margin: 0 auto;
+    /* Centrar en la página */
+    border-radius: 8px;
+    /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Sombra suave */
 }
 
 /* Listas en la sección About */
@@ -312,12 +342,15 @@ main {
 
 /* Enlaces */
 #about li a {
-    color: #4B0082; /* Color de enlaces */
-    text-decoration: none; /* Sin subrayado */
+    color: #4B0082;
+    /* Color de enlaces */
+    text-decoration: none;
+    /* Sin subrayado */
 }
 
 #about li a:hover {
-    text-decoration: underline; /* Subrayado al pasar el mouse */
+    text-decoration: underline;
+    /* Subrayado al pasar el mouse */
 }
 
 /* Ajustes responsivos */
@@ -349,7 +382,9 @@ footer {
     flex-shrink: 0;
 }
 
-#footerLeft, #footerCenter , #footerRight {
+#footerLeft,
+#footerCenter,
+#footerRight {
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -378,6 +413,13 @@ footer {
     margin-left: 5%;
     margin-bottom: 3%;
 }
+
+#ContactFooter a:hover {
+    color: #9F86C0;
+    font-size: 1.7em;
+    transition: all 0.5s ease;
+}
+
 
 #HorarioFooter p {
     text-decoration: none;
@@ -416,6 +458,21 @@ footer {
     margin: 2%;
     padding-top: 2%;
     align-self: center;
+}
+
+
+#RedesFooter a:hover {
+    font-size: 2.5em;
+    margin: 2%;
+    transition: all 0.5s ease;
+}
+
+#EnlacesFooter a:hover {
+    color: #9F86C0;
+    font-weight: 300;
+    font-size: 2em;
+    margin: 2%;
+    transition: all 0.5s ease;
 }
 
 .copy {
