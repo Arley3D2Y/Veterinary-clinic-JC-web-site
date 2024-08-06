@@ -19,7 +19,8 @@ body {
     width: calc(100% - 16vh);
     height: 20vh;
     background-color: #F5F5F5;
-    z-index: 10;    /* Fondo semi-transparente */
+    z-index: 10;
+    /* Fondo semi-transparente */
     border-radius: 40px;
     margin: 10vh;
 
@@ -56,12 +57,14 @@ body {
     font-size: 1.3em;
 }
 
-.square img, .square a {
+.square img,
+.square a {
     cursor: pointer;
     transition: transform 0.5s ease;
 }
 
-.square img:hover, .square a:hover {
+.square img:hover,
+.square a:hover {
     transform: scale(1.1);
 }
 
@@ -89,12 +92,15 @@ nav ul {
 }
 
 nav ul li {
-    padding-right: 4px; /* Ajusta el espaciado inicial */
+    padding-right: 4px;
+    /* Ajusta el espaciado inicial */
     display: inline;
     position: relative;
-    transition: transform 0.5s ease, border-radius 0.5s ease; /* Transición suave para el cambio de tamaño y bordes */
+    transition: transform 0.5s ease, border-radius 0.5s ease;
+    /* Transición suave para el cambio de tamaño y bordes */
     border-right: #5E548E solid 2px;
-    border-radius: 8px; /* Bordes redondeados por defecto */
+    border-radius: 8px;
+    /* Bordes redondeados por defecto */
 }
 
 nav ul li a {
@@ -103,13 +109,16 @@ nav ul li a {
     padding: 0.5em;
     font-size: 1.3em;
     cursor: pointer;
+    font-family: "Turret Road", sans-serif;
 }
 
 /* Estilo cuando se pasa el mouse sobre el elemento */
 nav ul li:hover {
     padding-right: 0;
-    border-right: #5E548E solid 4px; /* Aumento del grosor del borde al hacer hover */
-    border-radius: 8px; /* Bordes redondeados aumentados al hacer hover */
+    border-right: #5E548E solid 4px;
+    /* Aumento del grosor del borde al hacer hover */
+    border-radius: 8px;
+    /* Bordes redondeados aumentados al hacer hover */
 }
 
 /* Estilos para el header */
@@ -126,9 +135,12 @@ header {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    position: relative; /* Necesario para los pseudoelementos */
-    overflow: hidden; /* Asegura que las nubes no se salgan del contenedor */
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra hacia adentro */
+    position: relative;
+    /* Necesario para los pseudoelementos */
+    overflow: hidden;
+    /* Asegura que las nubes no se salgan del contenedor */
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    /* Sombra hacia adentro */
     font-family: 'Times New Roman', Times, serif;
 }
 
@@ -136,9 +148,12 @@ header .box-foto {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: flex-end; /* Alinea las imágenes al final del contenedor */
-    width: 100%; /* Ajusta el contenedor al 100% del ancho disponible */
-    height: 100%; /* Permite que la altura del contenedor sea flexible */
+    align-items: flex-end;
+    /* Alinea las imágenes al final del contenedor */
+    width: 100%;
+    /* Ajusta el contenedor al 100% del ancho disponible */
+    height: 100%;
+    /* Permite que la altura del contenedor sea flexible */
     padding: 50px;
 }
 
@@ -146,10 +161,13 @@ header .box-slogan {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; /* Alinea las imágenes al final del contenedor */
+    align-items: center;
+    /* Alinea las imágenes al final del contenedor */
     font-size: 1.3em;
-    width: 100%; /* Ajusta el contenedor al 100% del ancho disponible */
-    height: 100%; /* Permite que la altura del contenedor sea flexible */
+    width: 100%;
+    /* Ajusta el contenedor al 100% del ancho disponible */
+    height: 100%;
+    /* Permite que la altura del contenedor sea flexible */
     padding: 50px;
 }
 
@@ -158,19 +176,27 @@ header .box-slogan article {
     height: 30%;
 }
 
+.tituloHeader {
+    font-family: "ABeeZee", sans-serif;
+    font-size: 2.2em;
+}
+
 .box-slogan article h1 {
     inline-size: none;
     margin: 0;
     text-align: center;
     font-size: 1.6em;
-    line-height: 1.3; /* Cambia el valor a lo que prefieras */
+    line-height: 1.3;
+    /* Cambia el valor a lo que prefieras */
 }
 
 .box-foto img {
     width: 200px;
     height: auto;
-    flex: 1; /* Permite que las imágenes se ajusten para llenar el contenedor */
-    object-fit: contain; /* Asegura que las imágenes se ajusten bien dentro del contenedor */
+    flex: 1;
+    /* Permite que las imágenes se ajusten para llenar el contenedor */
+    object-fit: contain;
+    /* Asegura que las imágenes se ajusten bien dentro del contenedor */
 }
 
 /* Estilos para el main */
@@ -294,13 +320,17 @@ footer {
     height: 100%
 }
 
+.fleft#ContactFooter {
+    margin-left: 13%;
+}
+
 #ContactFooter a {
     text-decoration: none;
     color: #F5F5F5;
     font-family: "Turret Road", sans-serif;
     font-weight: 200;
     font-style: normal;
-    font-size: 1.8em;
+    font-size: 1.5em;
     margin-left: 5%;
     margin-bottom: 3%;
 }
@@ -311,7 +341,7 @@ footer {
     font-family: "Turret Road", sans-serif;
     font-weight: 200;
     font-style: normal;
-    font-size: 1.8em;
+    font-size: 1.5em;
     margin: 2%;
     align-self: center;
 }
@@ -374,6 +404,15 @@ footer {
     font-style: normal;
     font-size: 4em;
     color: #5E548E;
+    margin: 0% 0% 0% 0%;
+}
+
+.subtitulo {
+    font-family: "ABeeZee", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 3em;
+    color: #9F86C0;
     margin: 0% 0% 0% 0%;
 }
 
