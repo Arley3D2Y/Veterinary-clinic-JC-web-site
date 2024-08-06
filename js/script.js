@@ -7,7 +7,7 @@ window.addEventListener('scroll', () => {
     if (scrollTop > lastScrollTop) {
         // Scroll hacia abajo
         container.classList.add('hidden');
-    } else if (scrollTop < 150) {
+    } else if (scrollTop < 110) {
         // Scroll hacia arriba y cerca de la parte superior
         container.classList.remove('hidden');
     }
