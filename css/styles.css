@@ -12,7 +12,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    width: calc(100% - 16vh);
+    width: calc(100% - 16.5vh);
     height: 20vh;
     background-color: #F5F5F5;
     z-index: 10;    /* Fondo semi-transparente */
@@ -90,7 +90,6 @@ nav ul li {
     position: relative;
     transition: transform 0.5s ease, border-radius 0.5s ease; /* Transición suave para el cambio de tamaño y bordes */
     border-right: #5E548E solid 2px;
-    border-radius: 8px; /* Bordes redondeados por defecto */
 }
 
 nav ul li a {
@@ -105,7 +104,6 @@ nav ul li a {
 nav ul li:hover {
     padding-right: 0;
     border-right: #5E548E solid 4px; /* Aumento del grosor del borde al hacer hover */
-    border-radius: 8px; /* Bordes redondeados aumentados al hacer hover */
 }
 
 /* Estilos para el header */
@@ -114,7 +112,7 @@ header {
     background-image: url(../images/fondo.jpg);
     color: white;
     padding: 0;
-    margin: 5vh;
+    margin: 5.5vh;
     text-align: center;
     width: auto;
     height: 80vh;
@@ -171,7 +169,6 @@ header .box-slogan article {
 
 /* Estilos para el main */
 main {
-    border: 1px solid rgb(109, 109, 109);
     text-align: center;
     padding: 10px;
     margin-left: 5vh;
@@ -194,6 +191,7 @@ footer {
     height: 100%;
     flex-shrink: 0;
 }
+
 #footerLeft, #footerCenter , #footerRight {
     display: flex;
     flex-direction: column;
