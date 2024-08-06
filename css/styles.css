@@ -213,7 +213,7 @@ header .box-slogan article {
     font-family: "ABeeZee", sans-serif;
 }
 
-@media (max-width: 1500px) {
+@media (max-width: 750px) {
     .tituloHeader {
         font-size: 200%;
         transition: all 0.5s ease;
@@ -404,6 +404,7 @@ footer {
 }
 
 #ContactFooter a {
+    display: flex;
     text-decoration: none;
     color: #F5F5F5;
     font-family: "Baloo 2", sans-serif;
@@ -414,8 +415,12 @@ footer {
     margin-bottom: 3%;
 }
 
+#ContactFooter a i{
+    margin-right: 20px;
+}
+
 #ContactFooter a:hover {
-    color: #9F86C0;
+    color: #BE95C4;
     font-size: 1.7em;
     transition: all 0.5s ease;
 }
@@ -433,8 +438,8 @@ footer {
 }
 
 #footerCenter img {
-    width: 50%;
-    height: 50%;
+    width: 40%;
+    height: 40%;
     align-self: center;
 }
 
@@ -461,9 +466,8 @@ footer {
 }
 
 
-#RedesFooter a:hover {
-    font-size: 2.5em;
-    margin: 2%;
+#RedesFooter i:hover {
+    font-size: 2em;
     transition: all 0.5s ease;
 }
 
@@ -489,7 +493,7 @@ footer {
 .textos {
     font-family: "Baloo 2", sans-serif;
     font-style: normal;
-    font-size: 1.5em;
+    font-size: 1.85em;
     margin: 2%;
     align-self: center;
 }
