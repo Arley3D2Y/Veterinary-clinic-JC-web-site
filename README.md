@@ -16,6 +16,11 @@ Este proyecto es una página web moderna, elegante y responsiva diseñada para u
 - **Enlaces a Redes Sociales**: Fácil acceso a nuestras redes para más interacción.
 - **Estilos Personalizados**: Incluye una barra de desplazamiento estilizada y una variedad de tipografías atractivas.
 
+## Diagrama UML
+
+## Paleta de colores
+<img src="images/Logo.png" width="80" height="80" alt="Descripción de la imagen">
+
   
 ## Estructura del Proyecto
 
