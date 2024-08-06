@@ -8,6 +8,15 @@ body {
     margin: 0;
     background-color: #F5F5F5;
 }
+body {
+    font-family: 'Karla', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 
 /* Estilos para el contenedor del logo, nav y login*/
 .container {
@@ -281,6 +290,51 @@ main {
     text-align: justify;
 
 }
+#about {
+    background-color: #F5F5F5; /* Color de fondo suave */
+    padding: 40px 20px; /* Espaciado interior */
+    
+    margin: 0 auto; /* Centrar en la página */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Listas en la sección About */
+#about ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    text-align: start;
+}
+
+#about li {
+    margin-bottom: 10px;
+}
+
+/* Enlaces */
+#about li a {
+    color: #4B0082; /* Color de enlaces */
+    text-decoration: none; /* Sin subrayado */
+}
+
+#about li a:hover {
+    text-decoration: underline; /* Subrayado al pasar el mouse */
+}
+
+/* Ajustes responsivos */
+@media (max-width: 600px) {
+    #about {
+        padding: 20px 10px;
+    }
+
+    #about h2 {
+        font-size: 1.5em;
+    }
+
+    #about h3 {
+        font-size: 1.2em;
+    }
+}
+
 
 /* Estilos para el footer */
 footer {
