@@ -99,7 +99,6 @@ body::-webkit-scrollbar-thumb {
 /* Estilos para el nav */
 nav {
     font-family: 'Times New Roman', Times, serif;
-
     display: flex;
     flex-direction: row;
     justify-content: right;
@@ -154,7 +153,6 @@ nav ul li:hover {
 
 /* Estilos para el header */
 header {
-    border-radius: 50px;
     background-image: url(../images/fondo.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -163,10 +161,9 @@ header {
     /* Opcional: Centra la imagen de fondo */
     color: white;
     padding: 0;
-    margin: 5.5vh;
     text-align: center;
     width: auto;
-    height: 88vh;
+    height: 100vh;
     display: flex;
     flex-direction: row;
     justify-content: center;
