@@ -138,6 +138,12 @@ nav ul li a {
     font-family: "Turret Road", sans-serif;
 }
 
+nav ul li a:hover {
+    color:#9F86C0;
+    font-size: 1.4em;
+    transition: all 0.5s ease;
+}
+
 /* Estilo cuando se pasa el mouse sobre el elemento */
 nav ul li:hover {
     padding-right: 0;
@@ -206,15 +212,15 @@ header .box-slogan article {
     height: 25%;
 }
 .tituloHeader {
-    font-size: 3em;
+    font-size: 300%;
     font-family: "ABeeZee", sans-serif;
 }
-.box-slogan article h1 {
-    inline-size: none;
-    margin: 0;
-    text-align: center;
-    font-size: 2em;
-    line-height: 1em; /* Cambia el valor a lo que prefieras */
+
+@media (max-width: 1500px) {
+    .tituloHeader {
+        font-size: 200%;
+        transition: all 0.5s ease;
+    }
 }
 
 .box-foto img {
