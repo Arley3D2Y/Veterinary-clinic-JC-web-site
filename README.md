@@ -1,6 +1,6 @@
 # Veterinary-clinic-JC-web-site
 
-![logo](imagenes/Logo.png)
+![logo](../imagenes/Logo.png)
 
 
 # Jhon the Cat <img src="images/Logo.png" width="80" height="80" alt="Descripción de la imagen">
