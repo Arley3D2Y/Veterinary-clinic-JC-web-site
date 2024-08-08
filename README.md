@@ -1,5 +1,6 @@
 # Veterinary-clinic-JC-web-site
-# Jhon the Cat
+
+# Jhon the Cat <img src="images/Logo.png" width="80" height="80" alt="Descripción de la imagen">
 
 Este proyecto es una página web moderna, elegante y responsiva diseñada para una veterinaria llamada "Jhon the Cat" sobre servicios veterinarios, que incluye una navegación fija e intuitiva, un encabezado, contenido principal, una sección de servicios, infromación sobre la compañía y un pie de página con enlaces a redes sociales. La página está diseñada con HTML y CSS.
 
@@ -14,6 +15,13 @@ Este proyecto es una página web moderna, elegante y responsiva diseñada para u
 - **Sección de Información**: Detalles sobre la compañía, sus valores y misión.
 - **Enlaces a Redes Sociales**: Fácil acceso a nuestras redes para más interacción.
 - **Estilos Personalizados**: Incluye una barra de desplazamiento estilizada y una variedad de tipografías atractivas.
+
+## Diagrama UML
+<img src="images/uml.jpeg" width="1000" height="1000" alt="Diagrama UML">
+
+
+## Paleta de colores
+<img src="images/paleta.colores.jpeg" width="200" height="200" alt="Paleta de colores">
 
   
 ## Estructura del Proyecto
