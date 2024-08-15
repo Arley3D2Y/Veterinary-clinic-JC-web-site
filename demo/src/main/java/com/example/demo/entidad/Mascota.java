@@ -1,4 +1,4 @@
-package com.example.demo.enidad;
+package com.example.demo.entidad;
 
 public class Mascota{
 

@@ -13,7 +13,7 @@ public class MascotaRepository {
 
     private Map<Integer, Mascota> data = new HashMap<>();
 
-    public MascotaRepository(){+
+    public MascotaRepository(){
         
         data.put(1, new Mascota(1, "Toby", "Macho", "Birmano", "2017-11-13"));
         data.put(2, new Mascota(2, "Manchas", "Macho", "Persa", "2020-08-01"));
