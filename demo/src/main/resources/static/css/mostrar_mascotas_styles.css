@@ -9,7 +9,6 @@ body {
 h1 {
     text-align: center;
     margin-top: 20px;
-    color: #28a745;
     font-size: 2.5rem;
 }
 
@@ -52,16 +51,18 @@ table {
     margin: 0 auto;
     border-collapse: collapse;
 }
-
-thead {
-    background-color: #28a745;
-    color: white;
-}
-
-th, td {
+th {
     text-align: center;
+}
+td {
+    text-align: center;
+    vertical-align: middle;
     padding: 12px;
     border-bottom: 1px solid #ccc;
+}
+
+td img{
+    border-radius: 10%;
 }
 
 tr:hover {

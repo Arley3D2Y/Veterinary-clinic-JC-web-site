@@ -7,13 +7,15 @@ public class Mascota{
     private String sexo;
     private String raza;
     private String fechaNacimiento;
+    private String fotoString;
 
-    public Mascota(int id, String nombre, String sexo, String raza, String fechaNacimiento) {
+    public Mascota(int id, String nombre, String sexo, String raza, String fechaNacimiento, String fotoString) {
         this.id = id;
         this.nombre = nombre;
         this.sexo = sexo;
         this.raza = raza;
         this.fechaNacimiento = fechaNacimiento;
+        this.fotoString = fotoString;
     }
 
     public int getId() {
@@ -56,5 +58,12 @@ public class Mascota{
         this.fechaNacimiento = fechaNacimiento;
     }   
 
+    public String getFotoString() {
+        return fotoString;
+    }
+
+    public void setFotoString(String fotoString) {
+        this.fotoString = fotoString;
+    }
 
 }
