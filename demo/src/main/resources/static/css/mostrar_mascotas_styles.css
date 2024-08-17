@@ -1,0 +1,76 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 2.5rem;
+}
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+    margin-top: 30px;
+    list-style: none;
+}
+
+ul li {
+    margin: 15px;
+}
+
+ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+ul li a:hover{
+    text-decoration: none;
+    font-size: large;
+    color: blue;
+}
+
+
+div {
+    margin: 30px auto;
+    padding: 20px;
+    max-width: 90%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+th {
+    text-align: center;
+}
+td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 12px;
+    border-bottom: 1px solid #ccc;
+}
+
+td img{
+    border-radius: 10%;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+@media (min-width: 768px) {
+    .mascota-card {
+        width: 300px;
+    }
+}

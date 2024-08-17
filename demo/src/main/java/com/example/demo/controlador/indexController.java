@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/inicio")
 public class indexController {
 
+    //http://localhost:8080/inicio
     @GetMapping
     public String mostrarIncio() {
         return "index";
