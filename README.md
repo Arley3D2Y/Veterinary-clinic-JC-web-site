@@ -21,7 +21,7 @@ Este proyecto es una página web moderna, elegante y responsiva diseñada para u
 
 
 ## Paleta de colores
-<img src="/demo/src/main/resources/static/images/paletaColores.png width="200" height="200" alt="Paleta de colores">
+<img src="/demo/src/main/resources/static/images/paletaColores.png" width="200" height="200" alt="Paleta de colores">
 
   
 ## Estructura del Proyecto
