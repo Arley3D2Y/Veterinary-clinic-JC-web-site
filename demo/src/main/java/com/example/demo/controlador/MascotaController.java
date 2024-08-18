@@ -17,15 +17,15 @@ public class MascotaController {
     @Autowired
     MascotaService mascotaService;
 
-    //localhost:8080/mascota/all
-    @GetMapping("/all")
+    //localhost:8091/mascota
+    @GetMapping
     public String mostrarMascotas(Model model){
 
         model.addAttribute("mascotas", mascotaService.SearchAll());
         return "mostrar_todas_mascotas";
     }
 
-    //localhost:8080/mascota/find?id=1
+    //localhost:8091/mascota/find{id}
     @GetMapping("/find{id}")
     public String mostrarInfoMascota(Model model, @PathVariable("id") int identificacion) {
     

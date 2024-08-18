@@ -13,17 +13,17 @@ import com.example.demo.repositorio.MascotaRepository;
 public class MascotaServiceImpl implements MascotaService {
 
     @Autowired
-    MascotaRepository repo;
+    MascotaRepository MascotaRep;
     
     @Override
     public Mascota SearchById(int id) {
-        return repo.findById(id);
+        return MascotaRep.findById(id);
         
     }
 
     @Override
     public Collection<Mascota> SearchAll() {
-        return repo.findAll();
+        return MascotaRep.findAll();
        
     }
 }

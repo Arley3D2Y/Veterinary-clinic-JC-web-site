@@ -2,14 +2,14 @@ package com.example.demo.entidad;
 
 public class Mascota{
 
-    private int id;
+    private Integer id;
     private String nombre;
     private String sexo;
     private String raza;
     private String fechaNacimiento;
     private String fotoString;
 
-    public Mascota(int id, String nombre, String sexo, String raza, String fechaNacimiento, String fotoString) {
+    public Mascota(Integer id, String nombre, String sexo, String raza, String fechaNacimiento, String fotoString) {
         this.id = id;
         this.nombre = nombre;
         this.sexo = sexo;
