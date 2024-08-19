@@ -16,42 +16,43 @@
     <!-- Styles -->
     <link rel="stylesheet" href="../css/mostrar_info_styles.css">
 
-    <title>Mascotas</title>
+    <title>Clientes</title>
 </head>
 
 <body>
-    <h1>Mascotas</h1>
+    <h1>Clientes</h1>
     <div>
-        <table class="table table-success table-striped">
+        <table class="table table-bordered bordevt" >
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Sexo</th>
-                    <th>Raza</th>
-                    <th>Fecha de Nacimiento</th>
-                    <th>Foto</th>
+                    <th>Cedula</th>
+                    <th>Correo</th>
+                    <th>Celular</th>
                     <th></th>
                     <th></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="mascota : ${mascotas}">
-                    <td th:text="${mascota.nombre}"></td>
-                    <td th:text="${mascota.sexo}"></td>
-                    <td th:text="${mascota.raza}"></td>
-                    <td th:text="${mascota.fechaNacimiento}"></td>
-                    <td><img th:src="${mascota.fotoString}" width="100" height="100"></td>
-                    <td> <a th:href="@{/mascota/find{id}(id=${mascota.id})}"><button
-                                class="btn btn-primary">Detalles</button></a></td>
+                <tr th:each="cliente : ${clientes}">
+                    <td th:text="${cliente.nombre}"></td>
+                    <td th:text="${cliente.cedula}"></td>
+                    <td th:text="${cliente.correo}"></td>
+                    <td th:text="${cliente.celular}"></td>
+                    <td> <a th:href="@{/cliente/find{id}(id=${cliente.id})}"><button
+                        class="btn btn-dark">Detalles</button></a></td>
+
                     <td><a type="button" class="btn btn-success"
-                            th:href="@{/mascota/update/{id}(id=${mascota.id})}">Editar</a>
+                            th:href="@{/cliente/update/{id}(id=${cliente.id})}">Editar</a>
                     </td>
-                    <td><a type="button" class="btn btn-danger" th:href="@{/mascota/delete/{id}(id=${mascota.id})}"
+                    <td><a type="button" class="btn btn-danger" th:href="@{/cliente/delete/{id}(id=${cliente.id})}"
                             title='Agregar cliente'>Eliminar</a>
-                </tr>
+                    </td>
             </tbody>
         </table>
+        <a type="button" class="btn btn-dark" th:href="@{/cliente/add}" title='Agregar cliente'>+</a>
+
     </div>
 </body>
 

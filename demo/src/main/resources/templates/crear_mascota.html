@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- logo -->
+    <link rel="icon" type="image/png" href="../images/Logo.png">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"
+        defer></script>
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/forms_styles.css">
+    <title>Formulario Mascota</title>
+</head>
+
+<body>
+    <form th:object="${mascota}" th:action="@{/mascota/agregar}" method="POST">
+        <br>
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input th:field="*{nombre}" type="text" id="nombre" placeholder="Nombre de la mascota">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="sexo">Sexo de la mascota</label>
+            <select class="form-select" th:field="*{sexo}" id="sexo">
+                <option value="" disabled selected>Elegir sexo</option>
+                <option value="Macho">Macho</option>
+                <option value="Hembra">Hembra</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="raza">Raza</label>
+            <input th:field="*{raza}" type="text" id="raza" placeholder="Ingresa la raza">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="fechaNacimiento">Fecha de nacimiento</label>
+            <input th:field="*{fechaNacimiento}" type="date" id="fechaNacimiento" placeholder="Ingresa la fecha">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="fotoString">Foto</label>
+            <input th:field="*{fotoString}" type="text" id="fotoString" placeholder="Ingresa URL de la foto">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="duenho">Dueño</label>
+            <select th:field="*{duenho.id}" id="duenho">
+                <option value="" disabled selected>Seleccionar cliente</option>
+                <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nombre}"></option>
+            </select>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Crear</button>
+        <a type="button" class="btn btn-primary" th:href="@{/cliente}">Volver</a>
+    </form>
+</body>
+
+</html>

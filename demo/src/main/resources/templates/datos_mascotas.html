@@ -13,20 +13,28 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"
         defer></script>
+        <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Baloo+2:wght@400..800&family=Glass+Antiqua&family=Karla:ital,wght@0,200..800;1,200..800&family=Lexend:wght@100..900&family=Turret+Road:wght@200;300;400;500;700;800&display=swap"
+        rel="stylesheet">
+
 
     <!-- Styles -->
-    <link rel="stylesheet" href="../css/datos_mascotas.css">
-    <title>Información</title>
+    <link rel="stylesheet" href="../css/datos_styles.css">
+    <title th:text="'Información de ' + ${mascota.nombre}"></title>
 </head>
 
 <body>
-    <h1>Información de la mascota</h1>
+    <h1 th:text="'Información de ' + ${mascota.nombre}"></h1>
     <img th:src="${mascota.fotoString}" width="300" height="300">
     <p th:text="'Nombre: ' + ${mascota.nombre}"></p>
     <p th:text="'Sexo: ' + ${mascota.sexo}"></p>
     <p th:text="'Raza: ' + ${mascota.raza}"></p>
-    <p th:text="'Fechad Nacimiento: ' + ${mascota.fechaNacimiento}"></p>
-    <a type="button" class="btn btn-primary" th:href="@{/mascota/all}">volver</a>
+    <p th:text="'Fecha de Nacimiento: ' + ${mascota.fechaNacimiento}"></p>
+    <p th:text="'Dueño: ' + ${mascota.duenho.nombre}"></p>
+    <a type="button" class="btn btn-dark" th:href="@{/mascota}">volver</a>
 </body>
 
 </html>
