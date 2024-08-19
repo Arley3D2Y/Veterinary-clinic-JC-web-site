@@ -82,7 +82,7 @@ public class ClienteController {
     }
 
     // localhost:8091/cliente/update/1234
-    @PostMapping("/update/{id}")
+    @PostMapping("/save{id}")
     private String actualizarCliente(@PathVariable("id") int identificacion, @ModelAttribute("cliente") Cliente cliente) {
        
         clienteService.update(cliente);

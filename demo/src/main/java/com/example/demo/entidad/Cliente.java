@@ -1,16 +1,17 @@
 package com.example.demo.entidad;
 
 import java.util.ArrayList;
+
 public class Cliente {
-    //atributos
+    // atributos
     private Integer id;
     private String nombre;
     private String cedula;
     private String correo;
     private String celular;
-    private ArrayList <Mascota> mascotas;
+    private ArrayList<Mascota> mascotas;
 
-    //constructor
+    // constructor
     public Cliente(Integer id, String nombre, String cedula, String correo, String celular) {
         this.id = id;
         this.nombre = nombre;
@@ -20,9 +21,10 @@ public class Cliente {
         this.mascotas = new ArrayList<>();
     }
 
-    public Cliente() {}
+    public Cliente() {
+    }
 
-      //getters and setters
+    // getters and setters
     public Integer getId() {
         return id;
     }
@@ -71,17 +73,19 @@ public class Cliente {
         this.mascotas = mascotas;
     }
 
-
-    //metodos
-    public void agregarMascota(Mascota mascota){
-        this.mascotas.add(mascota);
+    // metodos
+    public void agregarMascota(Mascota mascota) {
+        if (!mascotas.contains(mascota)) {
+            this.mascotas.add(mascota);
+            mascota.setDuenho(this);
+        }
     }
 
-    public void eliminarMascota(Mascota mascota){
+    public void eliminarMascota(Mascota mascota) {
         this.mascotas.remove(mascota);
     }
 
-    public void modificarMascota(Mascota mascota){
+    public void modificarMascota(Mascota mascota) {
         this.mascotas.remove(mascota);
         this.mascotas.add(mascota);
     }
