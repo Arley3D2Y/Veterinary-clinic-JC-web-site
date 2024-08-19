@@ -38,6 +38,10 @@ ul li a:hover{
 
 
 div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin: 30px auto;
     padding: 20px;
     max-width: 90%;
@@ -50,6 +54,11 @@ table {
     width: 100%;
     margin: 0 auto;
     border-collapse: collapse;
+}
+
+.bordevt{
+    border: #9F86C0 solid 2px;
+
 }
 th {
     text-align: center;

@@ -1,5 +1,4 @@
 body {
-    font-family: 'Arial', sans-serif;
     background-color: #f8f9fa;
     color: #333;
     margin: 0;
@@ -8,14 +7,16 @@ body {
 
 h1 {
     text-align: center;
-    color: #007bff;
+    color: #5E548E;
+    font-family: "ABeeZee", sans-serif;
     margin-top: 20px;
     font-size: 2.5rem;
 }
 
 p {
     text-align: center;
-    font-size: 1.2rem;
+    font-family: "Baloo 2", sans-serif;
+    font-size: 1.3rem;
     margin: 10px 0;
     color: #555;
 }
@@ -29,11 +30,11 @@ img {
     height: auto;
 }
 
+
 a.btn {
     display: block;
     width: 150px;
     margin: 20px auto;
-    background-color: #007bff;
     color: white;
     text-align: center;
     padding: 10px;
@@ -42,10 +43,7 @@ a.btn {
     text-decoration: none;
 }
 
-a.btn:hover {
-    background-color: #0056b3;
-    color: white;
-}
+
 
 @media (min-width: 768px) {
     h1 {
