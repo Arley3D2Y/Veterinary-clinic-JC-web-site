@@ -22,4 +22,25 @@ public interface MascotaService {
      */
     public Collection<Mascota> SearchAll();
 
+    /**
+     * Este metodo es usado para agregar una nueva mascota.
+     *
+     * @param mascora El objeto Mascora que se desea agregar al sistema.
+     *
+     */
+    public void addMascota(Mascota mascota);
+
+    /**
+     * Este metodo es usado para borrar una mascota del sistema.
+     *
+     * @param id El ID de la mascota que se desea borrar.
+     */
+    public void deleteById(int id);
+
+    /**
+     * Este método se utiliza para actualizar una mascota en el sistema.
+     *
+     * @param mascota El objeto Mascota que se desea actualizar en el sistema.
+     */
+    public void update(Mascota mascota);
 }

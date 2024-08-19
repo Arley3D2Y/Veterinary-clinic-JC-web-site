@@ -41,10 +41,12 @@ public class ClienteRepository {
         data.put(cliente.getId(), cliente);
     }
 
+    //metodo para borrar un cliente
     public void deleteById(int id) {
         data.remove(id);
     }
 
+    //metodo para actualizar la info de un cliente
     public void update(Cliente cliente) {
         data.put(cliente.getId(), cliente);
     }

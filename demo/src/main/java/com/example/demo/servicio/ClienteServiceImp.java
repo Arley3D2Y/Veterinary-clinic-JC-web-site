@@ -13,6 +13,7 @@ public class ClienteServiceImp implements ClienteService {
     @Autowired
     ClienteRepository clientRep;
 
+     // Implementacion de los metodos
     @Override
     public Cliente SearchById(int id) {
         return clientRep.findById(id);

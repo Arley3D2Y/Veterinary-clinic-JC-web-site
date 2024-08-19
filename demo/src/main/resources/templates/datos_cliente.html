@@ -21,10 +21,15 @@
 
 <body>
     <h1 th:text="'Información de ' + ${cliente.nombre}"></h1>
-    <p th:text="'Nombre: ' + ${cliente.nombre}"></p>
-    <p th:text="'Cedula: ' + ${cliente.cedula}"></p>
-    <p th:text="'Correo: ' + ${cliente.correo}"></p>
-    <p th:text="'Celular: ' + ${cliente.celular}"></p>
+    <section>
+        <p th:text="'Nombre: ' + ${cliente.nombre}"></p>
+        <p th:text="'Cedula: ' + ${cliente.cedula}"></p>
+        <p th:text="'Correo: ' + ${cliente.correo}"></p>
+        <p th:text="'Celular: ' + ${cliente.celular}"></p>
+    </section>
+
+
+    <a type="button" class="btn btn-dark" th:href="@{/mascota/add}">Agregar Mascota</a>
     <a type="button" class="btn btn-dark" th:href="@{/cliente}">volver</a>
 </body>
 

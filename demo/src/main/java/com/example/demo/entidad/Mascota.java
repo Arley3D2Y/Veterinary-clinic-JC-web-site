@@ -8,6 +8,7 @@ public class Mascota{
     private String raza;
     private String fechaNacimiento;
     private String fotoString;
+    private Cliente duenho;
 
     public Mascota(Integer id, String nombre, String sexo, String raza, String fechaNacimiento, String fotoString) {
         this.id = id;
@@ -16,14 +17,6 @@ public class Mascota{
         this.raza = raza;
         this.fechaNacimiento = fechaNacimiento;
         this.fotoString = fotoString;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNombre() {
@@ -66,4 +59,21 @@ public class Mascota{
         this.fotoString = fotoString;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public Cliente getDuenho() {
+        return duenho;
+    }
+
+    public void setDuenho(Cliente duenho) {
+        this.duenho = duenho;
+    }
+
+    
 }
