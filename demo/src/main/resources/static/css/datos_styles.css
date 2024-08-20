@@ -43,6 +43,10 @@ a.btn {
     text-decoration: none;
 }
 
+.btn-dark{
+    background-color: #5E548E;
+    border-color: #5E548E;
+}
 
 
 @media (min-width: 768px) {

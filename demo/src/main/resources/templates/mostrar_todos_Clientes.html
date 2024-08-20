@@ -21,8 +21,8 @@
 
 <body>
     <h1>Clientes</h1>
-    <div>
-        <table class="table table-bordered bordevt" >
+    <div class="tableCenter">
+        <table>
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -41,7 +41,7 @@
                     <td th:text="${cliente.correo}"></td>
                     <td th:text="${cliente.celular}"></td>
                     <td> <a th:href="@{/cliente/find{id}(id=${cliente.id})}"><button
-                        class="btn btn-dark">Detalles</button></a></td>
+                                class="btn btn-dark">Detalles</button></a></td>
 
                     <td><a type="button" class="btn btn-success"
                             th:href="@{/cliente/update/{id}(id=${cliente.id})}">Editar</a>
@@ -53,6 +53,9 @@
         </table>
         <a type="button" class="btn btn-dark" th:href="@{/cliente/add}" title='Agregar cliente'>+</a>
 
+    </div>
+    <div class="botones">
+        <a type="button" class="btn btn-dark" th:href="@{/mascota}" title='Ver mascotas'>Ver mascotas</a>
     </div>
 </body>
 

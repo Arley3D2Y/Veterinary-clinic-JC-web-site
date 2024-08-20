@@ -14,11 +14,11 @@
         defer></script>
     <!-- Styles -->
     <link rel="stylesheet" href="../css/forms_styles.css">
-    <title>Actrualizar Mascota</title>
+    <title>Actualizar Mascota</title>
 </head>
 
 <body>
-    <form th:object="${mascota}" th:action="@{/mascota/update/{id}(id=${mascota.id})}" method="POST">
+    <form th:object="${mascota}" th:action="@{/mascota/save{id}(id=${mascota.id})}" method="POST">
         <br>
         <div class="form-group">
             <label for="nombre">Nombre</label>

@@ -38,10 +38,12 @@ public class ClienteController {
             // se agrega el estudiante al modelo para el html
             model.addAttribute("cliente", clienteService.SearchById(identificacion));
         }
-        // else{
-        //     //se lanza la excepcion NotFoundException creada anteriormente
-        //     throw new NotFoundException(identificacion);
-        // }
+        else{
+            //se lanza la excepcion NotFoundException creada anteriormente
+            throw new NotFoundException(identificacion);
+        }
+
+        System.out.println("Mascotas: " + cliente.getMascotas());
 
         return "datos_cliente";
     }
@@ -83,7 +85,7 @@ public class ClienteController {
     }
 
     // localhost:8091/cliente/update/1234
-    @PostMapping("/update/{id}")
+    @PostMapping("/save{id}")
     private String actualizarCliente(@PathVariable("id") int identificacion, @ModelAttribute("cliente") Cliente cliente) {
        
         clienteService.update(cliente);

@@ -21,8 +21,8 @@
 
 <body>
     <h1>Mascotas</h1>
-    <div>
-        <table class="table table-success table-striped">
+    <div class="tableCenter">
+        <table>
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -30,9 +30,9 @@
                     <th>Raza</th>
                     <th>Fecha de Nacimiento</th>
                     <th>Foto</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                    <th>Detalles</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,17 +41,20 @@
                     <td th:text="${mascota.sexo}"></td>
                     <td th:text="${mascota.raza}"></td>
                     <td th:text="${mascota.fechaNacimiento}"></td>
-                    <td><img th:src="${mascota.fotoString}" width="100" height="100"></td>
-                    <td> <a th:href="@{/mascota/find{id}(id=${mascota.id})}"><button
+                    <td><img th:src="${mascota.fotoString}" width="100" height="100" alt="Foto de ${mascota.nombre}">
+                    </td>
+                    <td><a th:href="@{/mascota/find{id}(id=${mascota.id})}"><button
                                 class="btn btn-primary">Detalles</button></a></td>
                     <td><a type="button" class="btn btn-success"
-                            th:href="@{/mascota/update/{id}(id=${mascota.id})}">Editar</a>
-                    </td>
+                            th:href="@{/mascota/update/{id}(id=${mascota.id})}">Editar</a></td>
                     <td><a type="button" class="btn btn-danger" th:href="@{/mascota/delete/{id}(id=${mascota.id})}"
-                            title='Agregar cliente'>Eliminar</a>
+                            title="Eliminar">Eliminar</a></td>
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div class="botones">
+        <a type="button" class="btn btn-dark" th:href="@{/cliente}" title='Ver mascotas'>Ver clientes</a>
     </div>
 </body>
 
