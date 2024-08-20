@@ -42,4 +42,14 @@ public interface ClienteService {
      * @param cliente El objeto Cliente que se desea actualizar en el sistema.
      */
     public void update(Cliente cliente);
+
+    /**
+     * Este método se utiliza para buscar un cliente por su cedula.
+     *
+     * @param cedula El ID con el que es identificado el cliente.
+     * @return El objeto Cliente representado al cliente con la cedula dada
+     *         o null si no existe
+     */
+    Cliente obtenerClientePorCedula(String cedula);
+
 }

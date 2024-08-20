@@ -28,6 +28,12 @@
         <p th:text="'Celular: ' + ${cliente.celular}"></p>
     </section>
 
+    <section th:each="mascota : ${mascotas}">
+        <h2 th:text="${mascota.nombre}"></h2>
+        <p th:text="'Nombre: ' + ${mascota.nombre}"></p>
+    </section>
+    
+
 
     <a type="button" class="btn btn-dark" th:href="@{/mascota/add}">Agregar Mascota</a>
     <a type="button" class="btn btn-dark" th:href="@{/cliente}">volver</a>

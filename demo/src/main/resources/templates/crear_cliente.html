@@ -14,39 +14,39 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"
         defer></script>
     <!-- Styles -->
-    <link rel="stylesheet" href="../css/forms_styles.css">
+    <link rel="stylesheet" th:href="@{/css/forms_styles.css}">
 
     <title>Formulario Clientes</title>
 </head>
 
 
 <body>
+    <h1>Crear Cliente</h1>
     <form th:object="${cliente}" th:action="@{/cliente/agregar}" method="POST">
-        <div class="form-group">
-            <label for="nombre">Nombre</label>
+        <div class="form-floating mb-3">
             <!-- th:field para indicar que atributo del objeto es el que se va a rellenar -->
-            <input th:field="*{nombre}" type="text" id="nombre" placeholder="Ingresa tu nombre">
+            <input th:field="*{nombre}" type="text" class="form-control" id="floatingInput"
+                placeholder="Ingresa tu nombre">
+            <label for="floatingInput">Nombre</label>
         </div>
-        <br>
-        <div class="form-group">
-            <label for="cedula">Cedula</label>
-            <input th:field="*{cedula}" type="text" id="cedula" placeholder="Ingresa tu cedula">
+        <div class="form-floating mb-3">
+            <input th:field="*{cedula}" type="text" class="form-control" id="cedula" placeholder="Ingresa tu cedula">
+            <label for="floatingInput">Cedula</label>
         </div>
-        <br>
-        <div class="form-group">
-            <label for="correo">Email</label>
-            <input th:field="*{correo}" type="text" id="correo" placeholder="Ingresa tu correo">
-        </div>
-        <br>
-        <div class="form-group">
-            <label for="celular">Numero telefonico</label>
-            <input th:field="*{celular}" type="text" id="celular" placeholder="Ingresa tu numero">
-        </div>
+        <div class="form-floating mb-3">
+            <input th:field="*{correo}" type="text" class="form-control" id="correo" placeholder="Ingresa tu correo">
+            <label for="floatingInput">Email</label>
 
+        </div>
+        <div class="form-floating mb-3">
+            <input th:field="*{celular}" type="text" class="form-control" id="celular" placeholder="Ingresa tu numero">
+            <label for="floatingInput">Numero telefonico</label>
+        </div>
         <br>
         <button type="submit" class="btn btn-primary">Crear</button>
-        <a type="button" class="btn btn-primary" th:href="@{/cliente}">volver</a>
+
     </form>
+    <a type="button" class="btn btn-primary" th:href="@{/cliente}">volver</a>
 </body>
 
 </html>
