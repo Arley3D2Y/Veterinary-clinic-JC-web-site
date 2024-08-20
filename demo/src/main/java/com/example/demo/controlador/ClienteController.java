@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -90,4 +91,24 @@ public class ClienteController {
         return "redirect:/cliente";
     }
 
+    @GetMapping("/login")
+    public String mostrarLogin() {
+        return "login_cliente";
+    }
+
+    @PostMapping("/login")
+    public String loginCliente(@RequestParam("cedula") String cedula, Model model) {
+        Cliente cliente = clienteService.obtenerClientePorCedula(cedula);
+        if (cliente != null) {
+            return "redirect:/cliente/home";
+        } else {
+            model.addAttribute("error", "El cliente no existe. Por favor, verifica tu cédula.");
+            return "login_cliente";
+        }
+    }
+
+    @GetMapping("/home")
+    public String mostrarHomeCliente() {
+        return "home_cliente";
+    }
 }
