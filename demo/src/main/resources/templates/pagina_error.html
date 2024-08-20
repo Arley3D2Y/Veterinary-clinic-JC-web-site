@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página no encontrada</title>
-    <link rel="stylesheet" href="error.css">
+    <link rel="stylesheet" th:href="@{/css/error.css}">
 </head>
 <body>
     <div class="container">
@@ -12,7 +12,7 @@
         <img src="../images/gato-error.jpg" alt="Gato error" class="cat-error">
         <p>¡Oh no! No podemos encontrar la página que estás buscando.</p>
         <p>Pero no te preocupes, nuestros amigos felinos están aquí para ayudarte.</p>
-        <a href="index.html" class="btn">Volver al inicio</a>
+        <a href="/cliente" class="btn">Volver al inicio</a>
     </div>
 </body>
 </html>
