@@ -37,10 +37,10 @@ public class ClienteController {
             // se agrega el estudiante al modelo para el html
             model.addAttribute("cliente", clienteService.SearchById(identificacion));
         }
-        // else{
-        //     //se lanza la excepcion NotFoundException creada anteriormente
-        //     throw new NotFoundException(identificacion);
-        // }
+        else{
+            //se lanza la excepcion NotFoundException creada anteriormente
+            throw new NotFoundException(identificacion);
+        }
 
         System.out.println("Mascotas: " + cliente.getMascotas());
 
