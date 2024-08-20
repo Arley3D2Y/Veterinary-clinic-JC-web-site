@@ -97,7 +97,7 @@ public class MascotaController {
     }
 
     // localhost:8091/mascota/update/1234
-    @PostMapping("/update/{id}")
+    @PostMapping("/save{id}")
     private String actualizarMascota(@PathVariable("id") int identificacion,
             @ModelAttribute("mascota") Mascota mascota) {
         Cliente duenho = clienteService.SearchById(mascota.getDuenho().getId());

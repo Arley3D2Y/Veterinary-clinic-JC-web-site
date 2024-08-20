@@ -42,6 +42,8 @@ public class ClienteController {
         //     throw new NotFoundException(identificacion);
         // }
 
+        System.out.println("Mascotas: " + cliente.getMascotas());
+
         return "datos_cliente";
     }
 

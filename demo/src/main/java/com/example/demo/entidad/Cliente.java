@@ -22,6 +22,7 @@ public class Cliente {
     }
 
     public Cliente() {
+        this.mascotas = new ArrayList<>();
     }
 
     // getters and setters
@@ -75,11 +76,14 @@ public class Cliente {
 
     // metodos
     public void agregarMascota(Mascota mascota) {
-        if (!mascotas.contains(mascota)) {
+        if (this.mascotas == null) {
+            this.mascotas = new ArrayList<>();
+        }
+        if (!this.mascotas.contains(mascota)) {
             this.mascotas.add(mascota);
-            mascota.setDuenho(this);
         }
     }
+    
 
     public void eliminarMascota(Mascota mascota) {
         this.mascotas.remove(mascota);

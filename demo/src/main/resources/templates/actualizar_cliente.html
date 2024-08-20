@@ -22,7 +22,7 @@
 
 <body>
     <h1> Actializar Cliente</h1>
-    <form th:object="${cliente}" th:action="@{/cliente/agregar}" method="POST">
+    <form th:object="${cliente}" th:action="@{/cliente/save{id}(id=${cliente.id})}" method="POST">
         <div class="form-floating mb-3">
             <!-- th:field para indicar que atributo del objeto es el que se va a rellenar -->
             <input th:field="*{nombre}" type="text" class="form-control" id="floatingInput"
@@ -49,7 +49,7 @@
         </div>
 
         <br>
-        <button type="submit" class="btn btn-primary">Crear</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
 
     </form>
     <a type="button" class="btn btn-primary" th:href="@{/cliente}">volver</a>
