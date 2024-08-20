@@ -18,48 +18,53 @@
 </head>
 
 <body>
+    <h1>Crear Mascota</h1>
     <form th:object="${mascota}" th:action="@{/mascota/agregar}" method="POST">
-        <br>
-        <div class="form-group">
+        <div class="form-floating mb-3">
+            <input th:field="*{nombre}" type="text" class="form-control" id="floatingInput"
+                placeholder="Nombre de la mascota">
             <label for="nombre">Nombre</label>
-            <input th:field="*{nombre}" type="text" id="nombre" placeholder="Nombre de la mascota">
         </div>
-        <br>
         <div class="form-group">
             <label for="sexo">Sexo de la mascota</label>
-            <select class="form-select" th:field="*{sexo}" id="sexo">
+            <select class="form-select form-control" th:field="*{sexo}" id="sexo">
                 <option value="" disabled selected>Elegir sexo</option>
                 <option value="Macho">Macho</option>
                 <option value="Hembra">Hembra</option>
             </select>
+
         </div>
         <br>
-        <div class="form-group">
-            <label for="raza">Raza</label>
-            <input th:field="*{raza}" type="text" id="raza" placeholder="Ingresa la raza">
+        <div class="form-floating mb-3">
+            <input th:field="*{raza}" type="text" class="form-control" id="floatingInput" placeholder="Ingresa la raza">
+            <label for="floatingInput">Raza</label>
         </div>
-        <br>
-        <div class="form-group">
-            <label for="fechaNacimiento">Fecha de nacimiento</label>
-            <input th:field="*{fechaNacimiento}" type="date" id="fechaNacimiento" placeholder="Ingresa la fecha">
+
+        <div class="form-floating mb-3">
+            <input th:field="*{fechaNacimiento}" type="date" class="form-control" id="floatingInput"
+                placeholder="Ingresa la fecha">
+            <label for="floatingInput">Fecha de nacimiento</label>
         </div>
-        <br>
-        <div class="form-group">
-            <label for="fotoString">Foto</label>
-            <input th:field="*{fotoString}" type="text" id="fotoString" placeholder="Ingresa URL de la foto">
+
+        <div class="form-floating mb-3">
+            <input th:field="*{fotoString}" type="text" class="form-control" id="floatingInput"
+                placeholder="Ingresa URL de la foto">
+            <label for="floatingInput">Foto URL</label>
         </div>
-        <br>
+
         <div class="form-group">
             <label for="duenho">Dueño</label>
-            <select th:field="*{duenho.id}" id="duenho">
+            <select class="form-select" th:field="*{duenho.id}" id="duenho">
                 <option value="" disabled selected>Seleccionar cliente</option>
                 <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nombre}"></option>
             </select>
         </div>
+
         <br>
         <button type="submit" class="btn btn-primary">Crear</button>
-        <a type="button" class="btn btn-primary" th:href="@{/cliente}">Volver</a>
+
     </form>
+    <a type="button" class="btn btn-primary" th:href="@{/cliente}">Volver</a>
 </body>
 
 </html>

@@ -39,4 +39,9 @@ public class ClienteServiceImp implements ClienteService {
         clientRep.update(cliente);
     }
 
+    @Override
+    public Cliente obtenerClientePorCedula(String cedula) {
+        return clientRep.findByCedula(cedula);
+    }
+
 }
