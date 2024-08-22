@@ -14,6 +14,17 @@ public interface ClienteService {
      */
     public Cliente SearchById(int id);
 
+
+    /**
+     * Este metodo es usado para buscar un cliente por su cedula.
+     *
+     * @param cedula El ID con el que es identificado el cliente.
+     * @return El objeto Cliente representado al cliente con la cedula dada
+     *         o null si no existe
+     */
+    public Cliente SearchByCedula(String cedula);
+
+
     /**
      * Este metodo es usado para obtener la información de todos los clientes.
      *

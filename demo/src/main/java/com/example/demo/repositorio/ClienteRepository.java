@@ -6,6 +6,7 @@ import java.util.Collection;
 import com.example.demo.entidad.Cliente;
 import org.springframework.stereotype.Repository;
 
+
 @Repository
 public class ClienteRepository {
 
@@ -13,7 +14,6 @@ public class ClienteRepository {
 
     //repositorio
     public ClienteRepository() {
-
         data.put(1, new Cliente(1, "Jose", "1087675675", "JY5se@hotmail.com", "3119378271"));
         data.put(2, new Cliente(2, "Luis", "9878767847", "luisillo34@gmail.com", "382873281"));
         data.put(3, new Cliente(3, "Juliana", "1038470394", "julix@gmail.com", "3982728387"));
@@ -24,7 +24,7 @@ public class ClienteRepository {
     //metodos
 
     // metodo para obtener la información de todos los clientes
-      public Collection<Cliente> findAll() {
+    public Collection<Cliente> findAll() {
         return data.values();
     }
 

@@ -3,10 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/login_cliente_styles.css">
+    <link rel="stylesheet" href="../css/home_cliente_styles.css">
     <title>Home Cliente</title>
 </head>
 <body>
-    <h2>Bienvenido a la página de inicio del cliente</h2>
+    <header id="datos_cliente">
+        <h1 th:text="'Información de ' + ${cliente.nombre}"></h1>
+        <section>
+            <p th:text="'Nombre: ' + ${cliente.nombre}"></p>
+            <p th:text="'Cedula: ' + ${cliente.cedula}"></p>
+            <p th:text="'Correo: ' + ${cliente.correo}"></p>
+            <p th:text="'Celular: ' + ${cliente.celular}"></p>
+        </section>
+    </header>
+
+    <main id="datos_mascotas">
+        <h1>Mascotas</h1>
+        <article class="cards">
+            <div th:each="mascota : ${mascotas}">
+                <section>   
+                    <!-- Aquí puedes agregar una imagen si las mascotas tienen asociada una -->
+                    <img th:src="@{${mascota.fotoString}}" alt="Imagen de mascota">
+                    <p th:text="${mascota.nombre}"></p>
+                </section>
+            </div>
+        </article>
+    </main>
 </body>
 </html>

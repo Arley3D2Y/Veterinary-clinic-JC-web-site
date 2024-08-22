@@ -9,20 +9,27 @@
 </head>
 <body>
     <main>
-        <section>
-            <form action="/cliente/login" method="post">
-                <fieldset>    <!-- fieldset: grupo de campos -->
-                    <label for="txtCedula">Cedula</label>
-                    <input type="text" name="cedula" id="txtCedula">
+        <section id="login_label">
+            <form action="/user/login" method="post">
+                <fieldset>
+                    <img src="../images/avatar.png" alt="Foto perfil por defecto" width="90">
 
-                    <hr>
-
+                    <div class="input-container">
+                        <img src="../images/user.png" alt="Icono">
+                        <input type="text" name="cedula" id="txtCedula" placeholder="Ingresa tu cedula">
+                    </div>
+                    <!-- Aquí se mostrará el mensaje de error -->
+                    <label for="txtCedula">
+                        <span th:text="${error}"></span>
+                    </label>
+                    
                 </fieldset>
 
-                <button type="submit">Login</button>
+                <button type="submit">LOGIN</button>
             </form>
-    
-        </section>    
+
+        </section>
+
     </main>
 </body>
 </html>

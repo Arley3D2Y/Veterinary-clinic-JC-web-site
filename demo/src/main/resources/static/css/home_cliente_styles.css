@@ -1,0 +1,116 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh; /* Ocupa el 100% de la altura de la ventana del navegador */
+    width: 100%;
+
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: 100%;
+}
+
+#datos_cliente {
+    width: 30%;
+    height: 100%;
+
+    background-color: #9F86C0;
+}
+
+#datos_mascotas {
+    width: 70%;
+    height: 100%;
+
+    background-color: #5E548E;
+}
+
+h1  {
+    text-align: center;
+    color: #ffffff;
+    padding: 0;
+    font-size: 2px;
+    font-size: 12px;
+}
+
+p {
+    text-align: center;
+    font-family: "Baloo 2", sans-serif;
+    font-size: 1.3rem;
+    margin: 10px 0;
+    color: #555;
+}
+
+img {
+    border-radius: 30%;
+    
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    height: auto;
+}
+
+
+a.btn {
+    display: block;
+    width: 150px;
+    margin: 20px auto;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.btn-dark{
+    background-color: #5E548E;
+    border-color: #5E548E;
+}
+
+
+@media (min-width: 768px) {
+    h1 {
+        font-size: 3rem;
+    }
+
+    p {
+        font-size: 1.5rem;
+    }
+
+    a.btn {
+        width: 200px;
+        font-size: 1.2rem;
+    }
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 20px;
+}
+
+.cards section {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 15px;
+    width: 200px; /* Ajusta el tamaño según sea necesario */
+    text-align: center;
+}
+
+.cards img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
