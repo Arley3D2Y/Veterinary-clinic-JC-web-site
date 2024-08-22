@@ -1,7 +1,5 @@
 package com.example.demo.controlador;
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.entidad.Cliente;
-import com.example.demo.entidad.Mascota;
 import com.example.demo.servicio.ClienteService;
 
 @Controller
@@ -39,14 +36,12 @@ public class ClienteController {
         if (cliente != null) {
             // se agrega el estudiante al modelo para el html
             model.addAttribute("cliente", clienteService.SearchById(identificacion));
-            ArrayList<Mascota> mascotas = cliente.getMascotas();
+        }
+        // else{
+        //     //se lanza la excepcion NotFoundException creada anteriormente
+        //     throw new NotFoundException(identificacion);
+        // }
 
-            model.addAttribute("mascotas", mascotas);    
-        }
-        else{
-            //se lanza la excepcion NotFoundException creada anteriormente
-            throw new NotFoundException(identificacion);
-        }
         return "datos_cliente";
     }
 
@@ -87,13 +82,12 @@ public class ClienteController {
     }
 
     // localhost:8091/cliente/update/1234
-    @PostMapping("/save{id}")
+    @PostMapping("/update/{id}")
     private String actualizarCliente(@PathVariable("id") int identificacion, @ModelAttribute("cliente") Cliente cliente) {
        
         clienteService.update(cliente);
 
         return "redirect:/cliente";
     }
-
 
 }
