@@ -23,7 +23,6 @@ public class MascotaRepository {
                                 "https://content.elmueble.com/medio/2023/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
                 data.put(5, new Mascota(5, "Trixy", "Hembra", "Siberiano", "2020-06-19",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
-
         }
 
         // metodo para buscar una mascota por id
