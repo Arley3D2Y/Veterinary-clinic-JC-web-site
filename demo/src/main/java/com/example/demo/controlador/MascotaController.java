@@ -39,7 +39,7 @@ public class MascotaController {
         Mascota mascota = mascotaService.SearchById(identificacion);
         if (mascota != null) {
             // se agrega el estudiante al modelo para el html
-            model.addAttribute("mascota", mascotaService.SearchById(identificacion));
+            model.addAttribute("mascota",mascota);
         }
 
         // else{
@@ -67,6 +67,10 @@ public class MascotaController {
     private String agregaMascota(@ModelAttribute("mascota") Mascota mascota) {
 
         Cliente duenho = clienteService.SearchById(mascota.getDuenho().getId());
+
+        duenho.agregarMascota(mascota);
+        clienteService.update(duenho);
+
         mascota.setDuenho(duenho);
         mascotaService.addMascota(mascota);
 
@@ -93,9 +97,9 @@ public class MascotaController {
     }
 
     // localhost:8091/mascota/update/1234
-    @PostMapping("/update/{id}")
+    @PostMapping("/save{id}")
     private String actualizarMascota(@PathVariable("id") int identificacion,
-            @ModelAttribute("mascota") Mascota mascota) {
+        @ModelAttribute("mascota") Mascota mascota) {
         Cliente duenho = clienteService.SearchById(mascota.getDuenho().getId());
         mascota.setDuenho(duenho);
         mascotaService.update(mascota);
