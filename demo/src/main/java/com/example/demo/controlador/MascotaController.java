@@ -50,28 +50,24 @@ public class MascotaController {
     }
 
     // localhost:8091/mascota/add
-    @GetMapping("/add")
-    private String mostrarFormularioCrear(Model model) {
+    @GetMapping("/add/{id}")
+    private String mostrarFormularioCrear(Model model, @PathVariable("id") int identificacion) {
 
         Mascota mascota = new Mascota(0, "", "", "", "", "");
         model.addAttribute("mascota", mascota);
-
-        // Obtener la lista de clientes y agregar al modelo
-        model.addAttribute("clientes", clienteService.SearchAll());
+        model.addAttribute("duenho", clienteService.SearchById(identificacion));
 
         return "crear_mascota";
     }
 
     // localhost:8091/mascota/agregar
-    @PostMapping("/agregar")
-    private String agregaMascota(@ModelAttribute("mascota") Mascota mascota) {
+    @PostMapping("/agregar/{id}")
+    private String agregaMascota(@ModelAttribute("mascota") Mascota mascota, @PathVariable("id") int identificacion) {
 
-        Cliente duenho = clienteService.SearchById(mascota.getDuenho().getId());
-
+        Cliente duenho = clienteService.SearchById(identificacion);
+        mascota.setDuenho(duenho);
         duenho.agregarMascota(mascota);
         clienteService.update(duenho);
-
-        mascota.setDuenho(duenho);
         mascotaService.addMascota(mascota);
 
         return "redirect:/mascota";
@@ -81,6 +77,10 @@ public class MascotaController {
     @GetMapping("/delete/{id}")
     private String borrarMascota(@PathVariable("id") int identificacion) {
         // llama al servicio y le dice que borre al usuario
+        Mascota mascota = mascotaService.SearchById(identificacion);
+        Cliente duenho = clienteService.SearchById(mascota.getDuenho().getId());
+
+        duenho.eliminarMascota(mascota);
         mascotaService.deleteById(identificacion);
         return "redirect:/mascota";
     }
