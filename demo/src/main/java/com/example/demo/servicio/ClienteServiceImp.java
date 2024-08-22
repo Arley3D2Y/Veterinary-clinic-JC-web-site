@@ -20,6 +20,11 @@ public class ClienteServiceImp implements ClienteService {
     }
 
     @Override
+    public Cliente SearchByCedula(String cedula) {
+        return clientRep.findByCedula(cedula);
+    }
+
+    @Override
     public Collection<Cliente> SearchAll() {
         return clientRep.findAll();
     }
