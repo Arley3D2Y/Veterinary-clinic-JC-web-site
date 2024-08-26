@@ -15,42 +15,35 @@ import com.example.demo.entidad.Mascota;
 import com.example.demo.servicio.ClienteService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/login")
 public class DuenhoController {
 
     @Autowired
     private ClienteService clienteService;
 
-    @GetMapping("/login")
+    @GetMapping("/cliente")
     public String mostrarLogin(Model model) {
-        model.addAttribute("txtCedula", ""); // Asegurarse de que el campo esté vacío al cargar la página
-        return "login_cliente";
+        model.addAttribute("txtCedula", "");  // Limpia el campo de cédula
+        model.addAttribute("error", "");      // Limpia el mensaje de error
+        return "login";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/cliente")
     public String loginCliente(@RequestParam("cedula") String cedula, Model model) {
-        if (cedula == null || cedula.trim().isEmpty()) {
-            model.addAttribute("error", "*Campo requerido");
-            return "login_cliente";
-        }
-        
         Cliente cliente = clienteService.obtenerClientePorCedula(cedula);
         if (cliente != null) {
-            return "redirect:/user/home?cedula=" + cedula;
+            return "redirect:/login/cliente/home?cedula=" + cedula;
         } else {
-            model.addAttribute("error", "*Usuario no registrado");
-            return "login_cliente";
+            model.addAttribute("txtCedula", cedula); // Mantener el valor ingresado por el usuario
+            model.addAttribute("error", "*Usuario no registrado"); // Mostrar el mensaje de error
+            return "login";
         }
     }
 
-    @GetMapping("/home")
+    @GetMapping("/cliente/home")
     public String mostrarHomeCliente(@RequestParam("cedula") String cedula, Model model) {
         Cliente cliente = clienteService.obtenerClientePorCedula(cedula);
 
-        if (cliente == null) {
-            model.addAttribute("error", "*Usuario no encontrado");
-            return "login_cliente";
-        }
         ArrayList<Mascota> mascotas = cliente.getMascotas();
 
         model.addAttribute("cliente", cliente); // Pasar la información del cliente al modelo
