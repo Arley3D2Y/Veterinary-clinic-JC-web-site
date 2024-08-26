@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Cliente</title>
+    <link rel="stylesheet" th:href="@{/css/login_styles.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="../js/login_cliente.js" defer></script>
+</head>
+<body>
+    <main>
+        <form th:action="@{/login/cliente}" method="post">
+            <img src="../images/avatar.png" alt="foto" width="80" height="80">
+
+            <div class="form-group">
+                <input type="text" id="txtCedula" class="form-input" name="cedula" required>
+                <label for="txtCedula" class="form-label">Ingrese su cédula</label>
+
+                <div class="error-label" th:if="${error}" th:text="${error}"></div>
+            </div>
+
+            <div class="layout">
+                <div class="layout-remember">
+                    <input class="form-check-input" type="checkbox" value="" id="form2Example31"/>
+                    <label class="form-check-label" for="form2Example31"> Recordar login </label>
+                </div>
+                <div class="col">
+                    <!-- Simple link -->
+                    <a href="#!">Olvidó usuario?</a>
+                </div>
+            </div>
+
+            <button type="submit">INGRESAR</button>
+
+        </form>
+
+    </main>
+</body>
+</html>
