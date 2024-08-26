@@ -41,7 +41,7 @@
         </article>
     </main>
     
-    <a type="button" class="btn btn-dark" th:href="@{/mascota/add}">Agregar Mascota</a>
+    <a type="button" class="btn btn-dark" th:href="@{/mascota/add/{id}(id =${cliente.id})}">Agregar Mascota</a>
     <a type="button" class="btn btn-dark" th:href="@{/cliente}">volver</a>
 </body>
 
