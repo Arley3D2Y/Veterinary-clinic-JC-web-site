@@ -39,7 +39,7 @@ body {
     box-shadow: 0 0 10px #9F86C0; /* Sombra en el borde para un efecto suave */
 }
 .box-foto h1 {
-    color: #231942;
+    color: #231942d8;
     margin: 0;
     padding: 10px 10px 5px 10px;
     font-family: "ABeeZee", sans-serif;
@@ -111,7 +111,7 @@ form label p {
 }
 #datos_mascotas h1 {
     text-align: center;
-    color: #000000;
+    color: #231942d8;
     font-family: "ABeeZee", sans-serif;
     margin: 0;
     padding: 10px 10px 20px 10px;

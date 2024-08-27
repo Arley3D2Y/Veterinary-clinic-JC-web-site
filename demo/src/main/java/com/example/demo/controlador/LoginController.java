@@ -1,23 +1,20 @@
 package com.example.demo.controlador;
 
-import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.entidad.Cliente;
-import com.example.demo.entidad.Mascota;
 import com.example.demo.servicio.ClienteService;
 
 @Controller
 @RequestMapping("/login")
-public class DuenhoController {
-
+public class LoginController {
     @Autowired
     private ClienteService clienteService;
 
@@ -25,31 +22,20 @@ public class DuenhoController {
     public String mostrarLogin(Model model) {
         model.addAttribute("txtCedula", "");  // Limpia el campo de cédula
         model.addAttribute("error", "");      // Limpia el mensaje de error
-        return "login";
+        return "Login";
     }
 
     @PostMapping("/cliente")
-    public String loginCliente(@RequestParam("cedula") String cedula, Model model) {
+    public String LoginCliente(@RequestParam("cedula") String cedula, Model model) {
         Cliente cliente = clienteService.obtenerClientePorCedula(cedula);
         if (cliente != null) {
-            return "redirect:/login/cliente/home?cedula=" + cedula;
+            return "redirect:/cliente/inicio?cedula=" + cedula;
         } else {
             model.addAttribute("txtCedula", cedula); // Mantener el valor ingresado por el usuario
             model.addAttribute("error", "*Usuario no registrado"); // Mostrar el mensaje de error
-            return "login";
+            return "Login";
         }
     }
 
-    @GetMapping("/cliente/home")
-    public String mostrarHomeCliente(@RequestParam("cedula") String cedula, Model model) {
-        Cliente cliente = clienteService.obtenerClientePorCedula(cedula);
-
-        ArrayList<Mascota> mascotas = cliente.getMascotas();
-
-        model.addAttribute("cliente", cliente); // Pasar la información del cliente al modelo
-        model.addAttribute("mascotas", mascotas);
-
-        return "home_cliente";
-    }
 
 }
