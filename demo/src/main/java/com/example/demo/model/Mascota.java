@@ -1,9 +1,13 @@
 package com.example.demo.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,16 +19,22 @@ public class Mascota {
     private Long id; // Cambiado de Integer a Long para coincidir con Cliente
 
     private String nombre;
+
     private String sexo;
+
     private String raza;
+
     private String fechaNacimiento;
+
     private String fotoString;
+
+    @OneToMany(mappedBy = "mascota")
+    private List<Tratamiento> tratamientos = new ArrayList<>();
 
     @ManyToOne
     private Cliente cliente; // Cambiado de duenho a cliente
 
-    public Mascota(Long id, String nombre, String sexo, String raza, String fechaNacimiento, String fotoString) {
-        this.id = id;
+    public Mascota( String nombre, String sexo, String raza, String fechaNacimiento, String fotoString) {
         this.nombre = nombre;
         this.sexo = sexo;
         this.raza = raza;
@@ -90,4 +100,13 @@ public class Mascota {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    public List<Tratamiento> getTratamientos() {
+        return tratamientos;
+    }
+
+    public void setTratamientos(List<Tratamiento> tratamientos) {
+        this.tratamientos = tratamientos;
+    }
+    
 }

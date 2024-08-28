@@ -50,7 +50,7 @@ public class ClienteController {
     // localhost:8091/cliente/add
     @GetMapping("/add")
     private String mostrarFormularioCrear(Model model) {
-        Cliente cliente = new Cliente("", "", "", "");
+        Cliente cliente = new Cliente("", "", "", "", "");
         model.addAttribute("cliente", cliente);
         return "crear_cliente";
     }

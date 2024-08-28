@@ -22,32 +22,26 @@ public class Cliente {
     private String nombre;
 
     private String cedula;
+
     private String correo;
+
     private String celular;
 
+    @Column(length = 2048)  // Ajusta el tamaño según sea necesario
+    private String fotoString;
+
     @OneToMany(mappedBy = "cliente")
-    private List<Mascota> mascotas;
+    private List<Mascota> mascotas = new ArrayList<>();;
 
-    // constructores
-    public Cliente(Long id, String nombre, String cedula, String correo, String celular) {
-        this.id = id;
+    public Cliente(String nombre, String cedula, String correo, String celular, String fotoString) {
         this.nombre = nombre;
         this.cedula = cedula;
         this.correo = correo;
         this.celular = celular;
-        this.mascotas = new ArrayList<>();
-    }
-
-    public Cliente(String nombre, String cedula, String correo, String celular) {
-        this.nombre = nombre;
-        this.cedula = cedula;
-        this.correo = correo;
-        this.celular = celular;
-        this.mascotas = new ArrayList<>();
+        this.fotoString = fotoString;
     }
 
     public Cliente() {
-        this.mascotas = new ArrayList<>();
     }
 
     // getters and setters
@@ -98,6 +92,16 @@ public class Cliente {
     public void setMascotas(List<Mascota> mascotas) {
         this.mascotas = mascotas;
     }
+    
+    
+    public String getFotoString() {
+        return fotoString;
+    }
+
+    public void setFotoString(String fotoString) {
+        this.fotoString = fotoString;
+    }
+
 
     // métodos
     public void agregarMascota(Mascota mascota) {
@@ -117,4 +121,5 @@ public class Cliente {
         this.mascotas.remove(mascota);
         this.mascotas.add(mascota);
     }
+
 }
