@@ -1,18 +1,19 @@
 package com.example.demo.controlador;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.demo.entidad.Cliente;
-import com.example.demo.entidad.Mascota;
+import com.example.demo.model.Cliente;
+import com.example.demo.model.Mascota;
 import com.example.demo.servicio.ClienteService;
 
 @Controller
@@ -22,8 +23,7 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-
-    //localhost:8091/cliente
+    // localhost:8091/cliente
     @GetMapping
     public String mostrarClientes(Model model) {
         model.addAttribute("clientes", clienteService.SearchAll());
@@ -32,68 +32,69 @@ public class ClienteController {
 
     // localhost:8091/cliente/find{id}
     @GetMapping("/find{id}")
-    //@PathVariable("id") indica que el parametro es un id
-    private String mostrarInfoCliente(Model model, @PathVariable("id") int identificacion) {
+    private String mostrarInfoCliente(Model model, @PathVariable("id") Long identificacion) {
 
-        Cliente cliente = clienteService.SearchById(identificacion);
-        if (cliente != null) {
-            // se agrega el estudiante al modelo para el html
-            model.addAttribute("cliente", clienteService.SearchById(identificacion));
-            ArrayList<Mascota> mascotas = cliente.getMascotas();
-
-            model.addAttribute("mascotas", mascotas);    
-        }
-        else{
-            //se lanza la excepcion NotFoundException creada anteriormente
-            throw new NotFoundException(identificacion);
+        Optional<Cliente> clienteOpt = clienteService.SearchById(identificacion);
+        
+        if (clienteOpt.isPresent()) {
+            Cliente cliente = clienteOpt.get();
+            model.addAttribute("cliente", cliente);
+            List<Mascota> mascotas = cliente.getMascotas();
+            model.addAttribute("mascotas", mascotas);
+        } else {
+            return "error_cliente_no_encontrado"; // Puedes crear una página de error personalizada
         }
         return "datos_cliente";
     }
 
-    //localhost:8091/cliente/add
+    // localhost:8091/cliente/add
     @GetMapping("/add")
     private String mostrarFormularioCrear(Model model) {
-
-        Cliente cliente = new Cliente(0, "", "", "", "");
+        Cliente cliente = new Cliente("", "", "", "");
         model.addAttribute("cliente", cliente);
-
         return "crear_cliente";
     }
 
     // localhost:8091/cliente/agregar
     @PostMapping("/agregar")
     private String agregaCliente(@ModelAttribute("cliente") Cliente cliente) {
-        //apenas llega la solicitud se llama al servicio para agregar los datos
         clienteService.addCliente(cliente);
-
         return "redirect:/cliente";
     }
 
-    // localhost:8091/cliente/delete/1234
+    // localhost:8091/cliente/delete/{id}
     @GetMapping("/delete/{id}")
-    private String borrarCliente(@PathVariable("id") int identificacion) {
-        //llama al servicio y le dice que borre al usuario
-        clienteService.deleteById(identificacion);
+    private String borrarCliente(@PathVariable("id") Long identificacion) {
+        Optional<Cliente> clienteOpt = clienteService.SearchById(identificacion);
+        if (clienteOpt.isPresent()) {
+            clienteService.deleteById(identificacion);
+        } else {
+            return "error_cliente_no_encontrado"; // Maneja el caso donde el cliente no existe
+        }
         return "redirect:/cliente";
     }
 
-    // localhost:8091/cliente/update/1234
+    // localhost:8091/cliente/update/{id}
     @GetMapping("/update/{id}")
-    private String mostrarFormularioUpdate(@PathVariable("id") int identificacion, Model model) {
-       
-        model.addAttribute("cliente", clienteService.SearchById(identificacion));
-       
+    private String mostrarFormularioUpdate(@PathVariable("id") Long identificacion, Model model) {
+        Optional<Cliente> clienteOpt = clienteService.SearchById(identificacion);
+        if (clienteOpt.isPresent()) {
+            model.addAttribute("cliente", clienteOpt.get());
+        } else {
+            return "error_cliente_no_encontrado"; // Maneja el caso donde el cliente no existe
+        }
         return "actualizar_cliente";
     }
 
     // localhost:8091/cliente/update/1234
     @PostMapping("/save{id}")
-    private String actualizarCliente(@PathVariable("id") int identificacion, @ModelAttribute("cliente") Cliente cliente) {
-       
-        clienteService.update(cliente);
-
+    private String actualizarCliente(@PathVariable("id") Long identificacion, @ModelAttribute("cliente") Cliente cliente) {
+        Optional<Cliente> clienteExistenteOpt = clienteService.SearchById(identificacion);
+        if (clienteExistenteOpt.isPresent()) {
+            clienteService.update(cliente);
+        } else {
+            return "error_cliente_no_encontrado"; // Maneja el caso donde el cliente no existe
+        }
         return "redirect:/cliente";
     }
-
-
 }

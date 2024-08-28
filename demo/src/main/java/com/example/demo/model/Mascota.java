@@ -1,22 +1,46 @@
-package com.example.demo.entidad;
+package com.example.demo.model;
 
-public class Mascota{
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
-    private Integer id;
+@Entity
+@Table(name = "mascota") // Corregido el nombre de la tabla
+public class Mascota {
+
+    @Id
+    @GeneratedValue
+    private Long id; // Cambiado de Integer a Long para coincidir con Cliente
+
     private String nombre;
     private String sexo;
     private String raza;
     private String fechaNacimiento;
     private String fotoString;
-    private Cliente duenho;
 
-    public Mascota(Integer id, String nombre, String sexo, String raza, String fechaNacimiento, String fotoString) {
+    @ManyToOne
+    private Cliente cliente; // Cambiado de duenho a cliente
+
+    public Mascota(Long id, String nombre, String sexo, String raza, String fechaNacimiento, String fotoString) {
         this.id = id;
         this.nombre = nombre;
         this.sexo = sexo;
         this.raza = raza;
         this.fechaNacimiento = fechaNacimiento;
         this.fotoString = fotoString;
+    }
+
+    public Mascota() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -31,13 +55,13 @@ public class Mascota{
         return sexo;
     }
 
-    public void setSexo(String sexo) {  
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
     public String getRaza() {
         return raza;
-    }   
+    }
 
     public void setRaza(String raza) {
         this.raza = raza;
@@ -49,7 +73,7 @@ public class Mascota{
 
     public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
-    }   
+    }
 
     public String getFotoString() {
         return fotoString;
@@ -59,21 +83,11 @@ public class Mascota{
         this.fotoString = fotoString;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public Integer getId() {
-        return id;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
-
-    public Cliente getDuenho() {
-        return duenho;
-    }
-
-    public void setDuenho(Cliente duenho) {
-        this.duenho = duenho;
-    }
-
-    
 }
