@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <h1>Crear Mascota</h1>
+    <h1 th:text="'Agregar Mascota de ' + ${duenho.nombre}"></h1>
     <form th:object="${mascota}" th:action="@{/veterinario/mascotas/agregar}" method="POST">
         <div class="form-floating mb-3">
             <input th:field="*{nombre}" type="text" class="form-control" id="floatingInput"

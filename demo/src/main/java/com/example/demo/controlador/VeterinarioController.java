@@ -1,20 +1,22 @@
 package com.example.demo.controlador;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.demo.entidad.Cliente;
-import com.example.demo.entidad.Mascota;
+import com.example.demo.model.Cliente;
+import com.example.demo.model.Mascota;
 import com.example.demo.servicio.ClienteService;
 import com.example.demo.servicio.MascotaService;
+
 
 @Controller
 @RequestMapping("/veterinario")
@@ -44,7 +46,7 @@ public class VeterinarioController {
     //localhost:8091/veterinario/clientes/add
     @GetMapping("/clientes/add")
     private String formularioCrearCliente(Model model) {
-        Cliente cliente = new Cliente(0, "", "", "", "");
+        Cliente cliente = new Cliente("", "", "", "", "");
         model.addAttribute("cliente", cliente);
         return "crear_cliente";
     }
@@ -52,49 +54,59 @@ public class VeterinarioController {
     // localhost:8091/veterinario/clientes/find/{id}
     @GetMapping("/clientes/find/{id}")
     //@PathVariable("id") indica que el parametro es un id
-    private String mostrarInfoClientes(Model model, @PathVariable("id") int identificacion) {
+    private String mostrarInfoCliente(Model model, @PathVariable("id") Long identificacion) {
 
-        Cliente cliente = clienteService.SearchById(identificacion);
-        if (cliente != null) {
-            // se agrega el estudiante al modelo para el html
-            model.addAttribute("cliente", clienteService.SearchById(identificacion));
-            ArrayList<Mascota> mascotas = cliente.getMascotas();
-
-            model.addAttribute("mascotas", mascotas);    
-        }
-        else{
-            //se lanza la excepcion NotFoundException creada anteriormente
-            throw new NotFoundException(identificacion);
+        Optional<Cliente> clienteOpt = clienteService.SearchById(identificacion);
+        if (clienteOpt.isPresent()) {
+            Cliente cliente = clienteOpt.get();
+            model.addAttribute("cliente", cliente);
+            List<Mascota> mascotas = cliente.getMascotas();
+            model.addAttribute("mascotas", mascotas);
+        } else {
+            return "error_cliente_no_encontrado"; // Puedes crear una página de error personalizada
         }
         return "datos_cliente";
     }
 
     // localhost:8091/veterinario/clientes/update/{id}
     @GetMapping("/clientes/update/{id}")
-    private String formularioUpdateCliente(@PathVariable("id") int identificacion, Model model) {
-        model.addAttribute("cliente", clienteService.SearchById(identificacion));
+    private String formularioUpdateCliente(@PathVariable("id") Long identificacion, Model model) {
+        Optional<Cliente> clienteOpt = clienteService.SearchById(identificacion);
+        if (clienteOpt.isPresent()) {
+            model.addAttribute("cliente", clienteOpt.get());
+        } else {
+            return "error_cliente_no_encontrado"; // Maneja el caso donde el cliente no existe
+        }
         return "actualizar_cliente";
     }
 
     // localhost:8091/veterinario/clientes/update/{id}
     @PostMapping("/clientes/save/{id}")
-    private String actualizarCliente(@PathVariable("id") int identificacion, @ModelAttribute("cliente") Cliente cliente) {
-        clienteService.update(cliente);
+    private String actualizarCliente(@PathVariable("id") Long identificacion, @ModelAttribute("cliente") Cliente cliente) {
+        Optional<Cliente> clienteExistenteOpt = clienteService.SearchById(identificacion);
+        if (clienteExistenteOpt.isPresent()) {
+            clienteService.update(cliente);
+        } else {
+            return "error_cliente_no_encontrado"; // Maneja el caso donde el cliente no existe
+        }
         return "redirect:/veterinario/clientes";
     }
 
     // localhost:8091/veterinario/clientes/delete/{id}
     @GetMapping("/clientes/delete/{id}")
-    private String borrarCliente(@PathVariable("id") int identificacion) {
-        //llama al servicio y le dice que borre al usuario
-        clienteService.deleteById(identificacion);
+    private String borrarCliente(@PathVariable("id") Long identificacion) {
+        Optional<Cliente> clienteOpt = clienteService.SearchById(identificacion);
+        if (clienteOpt.isPresent()) {
+            clienteService.deleteById(identificacion);
+        } else {
+            return "error_cliente_no_encontrado"; // Maneja el caso donde el cliente no existe
+        }
         return "redirect:/veterinario/clientes";
     }
 
     // localhost:8091/veterinario/clientes/agregar
     @PostMapping("/clientes/agregar")
     private String agregaCliente(@ModelAttribute("cliente") Cliente cliente) {
-        //apenas llega la solicitud se llama al servicio para agregar los datos
         clienteService.addCliente(cliente);
 
         return "redirect:/veterinario/clientes";
@@ -112,67 +124,97 @@ public class VeterinarioController {
 
     // localhost:8091/veterinario/mascotas/find/{id}
     @GetMapping("/mascotas/find/{id}")
-    public String mostrarInfoMascota(Model model, @PathVariable("id") int identificacion) {
-        Mascota mascota = mascotaService.SearchById(identificacion);
-        if (mascota != null) {
-            // se agrega el estudiante al modelo para el html
-            model.addAttribute("mascota",mascota);
+    public String mostrarInfoMascota(Model model, @PathVariable("id") Long id) {
+        Optional<Mascota> mascotaOpt = mascotaService.SearchById(id);
+        if (mascotaOpt.isPresent()) {
+            model.addAttribute("mascota", mascotaOpt.get());
+            return "datos_mascotas";
+        } else {
+            // Manejar el caso cuando no se encuentra la mascota
+            return "error_pagina"; // Cambiar por la página de error correspondiente
         }
-        return "datos_mascotas";
     }
 
     // localhost:8091/veterinario/mascotas/update/{id}
     @GetMapping("/mascotas/update/{id}")
-    private String formularioUpdateMascota(@PathVariable("id") int identificacion, Model model) {
-        model.addAttribute("mascota", mascotaService.SearchById(identificacion));
-        model.addAttribute("clientes", clienteService.SearchAll());
-        return "actualizar_mascota";
+    public String mostrarFormularioUpdate(@PathVariable("id") Long id, Model model) {
+        Optional<Mascota> mascotaOpt = mascotaService.SearchById(id);
+        if (mascotaOpt.isPresent()) {
+            model.addAttribute("mascota", mascotaOpt.get());
+            model.addAttribute("clientes", clienteService.SearchAll());
+            return "actualizar_mascota";
+        } else {
+            // Manejar el caso cuando no se encuentra la mascota
+            return "error_pagina"; // Cambiar por la página de error correspondiente
+        }
     }
 
     // localhost:8091/veterinario/mascotas/delete/{id}
     @GetMapping("/mascotas/delete/{id}")
-    private String borrarMascota(@PathVariable("id") int identificacion) {
-        // llama al servicio y le dice que borre al usuario
-        mascotaService.deleteById(identificacion);
-        return "redirect:/veterinario/mascotas";
+    public String borrarMascota(@PathVariable("id") Long id) {
+        Optional<Mascota> mascotaOpt = mascotaService.SearchById(id);
+        if (mascotaOpt.isPresent()) {
+            Mascota mascota = mascotaOpt.get();
+            Optional<Cliente> clienteOpt = clienteService.SearchById(mascota.getCliente().getId());
+            if (clienteOpt.isPresent()) {
+                Cliente cliente = clienteOpt.get();
+                cliente.eliminarMascota(mascota);
+                clienteService.update(cliente);
+                mascotaService.deleteById(id);
+            }
+            return "redirect:/veterinario/mascotas";
+        } else {
+            // Manejar el caso cuando no se encuentra la mascota
+            return "error_pagina"; // Cambiar por la página de error correspondiente
+        }
     }
 
     // localhost:8091/veterinario/mascotas/add
     @GetMapping("/mascotas/add")
-    private String formularioCrearMascotas(Model model) {
-        Mascota mascota = new Mascota(0, "", "", "", "", "");
-        model.addAttribute("mascota", mascota);
-        model.addAttribute("clientes", clienteService.SearchAll());
-        return "crear_mascota";
+    public String mostrarFormularioCrear(Model model, @PathVariable("id") Long id) {
+        Optional<Cliente> clienteOpt = clienteService.SearchById(id);
+        if (clienteOpt.isPresent()) {
+            Mascota mascota = new Mascota();
+            model.addAttribute("mascota", mascota);
+            model.addAttribute("cliente", clienteOpt.get());
+            return "crear_mascota";
+        } else {
+            // Manejar el caso cuando no se encuentra el cliente
+            return "error_pagina"; // Cambiar por la página de error correspondiente
+        }
     }
 
     // localhost:8091/veterinario/mascotas/agregar
     @PostMapping("/mascotas/agregar")
-    private String agregaMascota(@ModelAttribute("mascota") Mascota mascota) {
-        Cliente duenho = clienteService.SearchById(mascota.getDuenho().getId());
-        duenho.agregarMascota(mascota);
-        clienteService.update(duenho);
-        mascota.setDuenho(duenho);
-        mascotaService.addMascota(mascota);
-        return "redirect:/veterinario/mascotas";
+    public String agregarMascota(@ModelAttribute("mascota") Mascota mascota, @PathVariable("id") Long id) {
+        Optional<Cliente> clienteOpt = clienteService.SearchById(id);
+        if (clienteOpt.isPresent()) {
+            Cliente cliente = clienteOpt.get();
+            mascota.setCliente(cliente);
+            cliente.agregarMascota(mascota);
+            clienteService.update(cliente);
+            mascotaService.addMascota(mascota);
+            return "redirect:/veterinario/mascotas";
+        } else {
+            // Manejar el caso cuando no se encuentra el cliente
+            return "error_pagina"; // Cambiar por la página de error correspondiente
+        }
     }
 
     // localhost:8091/veterinario/mascotas/update/{id}
     @PostMapping("/mascotas/save/{id}")
-    private String actualizarMascota(@PathVariable("id") int identificacion,
-        @ModelAttribute("mascota") Mascota mascota) {
-        Cliente duenho = clienteService.SearchById(mascota.getDuenho().getId());
-        mascota.setDuenho(duenho);
-        mascotaService.update(mascota);
-
-        return "redirect:/veterinario/mascotas";
+    public String actualizarMascota(@PathVariable("id") Long id, @ModelAttribute("mascota") Mascota mascota) {
+        Optional<Cliente> clienteOpt = clienteService.SearchById(mascota.getCliente().getId());
+        if (clienteOpt.isPresent()) {
+            mascota.setCliente(clienteOpt.get());
+            mascotaService.update(mascota);
+            return "redirect:/veterinario/mascotas";
+        } else {
+            // Manejar el caso cuando no se encuentra el cliente
+            return "error_pagina"; // Cambiar por la página de error correspondiente
+        }
     }
-
 
     /** Tratamientos **/
-    @GetMapping("/tratamientos")
-    public String mostrarTratamientos(Model model) {
-        return "redirect:/veterinario/mascotas";
-    }
-    
+
 }

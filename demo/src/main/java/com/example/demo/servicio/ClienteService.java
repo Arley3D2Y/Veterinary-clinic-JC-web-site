@@ -1,18 +1,20 @@
 package com.example.demo.servicio;
 
 import java.util.Collection;
-import com.example.demo.entidad.Cliente;
+
+import java.util.Optional;
+import com.example.demo.model.Cliente;
 
 public interface ClienteService {
 
     /**
      * Este metodo es usado para buscar clientes por su id.
      *
-     * @param id El ID con el que es identificado el cliente.
+     * @param identificacion El ID con el que es identificado el cliente.
      * @return EL objeto Cliente representado al cliente con el ID dado
      *         o null si no existe
      */
-    public Cliente SearchById(int id);
+    public Optional<Cliente> SearchById(Long identificacion);
 
 
     /**
@@ -22,7 +24,7 @@ public interface ClienteService {
      * @return El objeto Cliente representado al cliente con la cedula dada
      *         o null si no existe
      */
-    public Cliente SearchByCedula(String cedula);
+    public Optional<Cliente> SearchByCedula(String cedula);
 
 
     /**
@@ -43,9 +45,9 @@ public interface ClienteService {
     /**
      * Este metodo es usado para borrar un cliente del sistema.
      *
-     * @param id El ID del cliente que se desea borrar.
+     * @param identificacion El ID del cliente que se desea borrar.
      */
-    public void deleteById(int id);
+    public void deleteById(Long identificacion);
 
     /**
      * Este método se utiliza para actualizar un cliente en el sistema.
@@ -53,14 +55,5 @@ public interface ClienteService {
      * @param cliente El objeto Cliente que se desea actualizar en el sistema.
      */
     public void update(Cliente cliente);
-
-    /**
-     * Este método se utiliza para buscar un cliente por su cedula.
-     *
-     * @param cedula El ID con el que es identificado el cliente.
-     * @return El objeto Cliente representado al cliente con la cedula dada
-     *         o null si no existe
-     */
-    Cliente obtenerClientePorCedula(String cedula);
 
 }

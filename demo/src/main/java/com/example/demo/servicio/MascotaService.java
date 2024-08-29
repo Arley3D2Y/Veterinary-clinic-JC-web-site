@@ -1,8 +1,8 @@
 package com.example.demo.servicio;
 
-import com.example.demo.entidad.Mascota;
-
 import java.util.Collection;
+import java.util.Optional;
+import com.example.demo.model.Mascota;
 
 public interface MascotaService {
 
@@ -13,7 +13,7 @@ public interface MascotaService {
      * @return EL objeto Mascota representado a la mascota con el ID dado
      *         o null si no existe
      */
-    public Mascota SearchById(int id);
+    public Optional<Mascota> SearchById(Long id);
 
     /**
      * Este metodo es usado para obtener la información de todas las mascotas.
@@ -35,7 +35,7 @@ public interface MascotaService {
      *
      * @param id El ID de la mascota que se desea borrar.
      */
-    public void deleteById(int id);
+    public void deleteById(Long id);
 
     /**
      * Este método se utiliza para actualizar una mascota en el sistema.
