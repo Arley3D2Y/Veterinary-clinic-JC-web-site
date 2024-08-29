@@ -47,6 +47,7 @@
                         <th>Cedula</th>
                         <th>Correo</th>
                         <th>Celular</th>
+                        <th>Foto</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -58,7 +59,7 @@
                         <td th:text="${cliente.cedula}"></td>
                         <td th:text="${cliente.correo}"></td>
                         <td th:text="${cliente.celular}"></td>
-
+                        <td><img th:src="${cliente.fotoString}" width="90" height="90" alt="Foto de ${cliente.nombre}"></td>
                         <td><a type="button" class="btn btn-dark"
                             th:href="@{/veterinario/clientes/find/{id}(id=${cliente.id})}">Detalles</a></td>
     

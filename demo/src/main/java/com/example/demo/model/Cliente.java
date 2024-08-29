@@ -4,14 +4,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import java.util.List;
 
 import java.util.ArrayList;
 
 @Entity
-@Table(name = "cliente") // Corregido el nombre de la tabla
 public class Cliente {
     // atributos
 
@@ -31,7 +30,7 @@ public class Cliente {
     @Column(length = 2048)  // Ajusta el tamaño según sea necesario
     private String fotoString;
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Mascota> mascotas = new ArrayList<>();;
 
     public Cliente(String nombre, String cedula, String correo, String celular, String fotoString) {

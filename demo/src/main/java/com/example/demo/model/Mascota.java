@@ -6,6 +6,7 @@ import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -32,6 +33,7 @@ public class Mascota {
     private List<Tratamiento> tratamientos = new ArrayList<>();
 
     @ManyToOne
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente; // Cambiado de duenho a cliente
 
     public Mascota( String nombre, String sexo, String raza, String fechaNacimiento, String fotoString) {

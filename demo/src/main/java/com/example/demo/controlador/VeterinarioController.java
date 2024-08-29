@@ -28,7 +28,7 @@ public class VeterinarioController {
     private ClienteService clienteService;
 
     //localhost:8091/veterinario/inicio
-    @GetMapping("/inicio")
+    @GetMapping
     public String mostrarInicio(Model model) {
         model.addAttribute("clientes", clienteService.SearchAll());
         return "home_veterinario";
@@ -85,6 +85,7 @@ public class VeterinarioController {
     private String actualizarCliente(@PathVariable("id") Long identificacion, @ModelAttribute("cliente") Cliente cliente) {
         Optional<Cliente> clienteExistenteOpt = clienteService.SearchById(identificacion);
         if (clienteExistenteOpt.isPresent()) {
+            cliente.setMascotas(clienteExistenteOpt.get().getMascotas());
             clienteService.update(cliente);
         } else {
             return "error_cliente_no_encontrado"; // Maneja el caso donde el cliente no existe
@@ -170,7 +171,7 @@ public class VeterinarioController {
     }
 
     // localhost:8091/veterinario/mascotas/add
-    @GetMapping("/mascotas/add")
+    @GetMapping("/mascotas/add/{id}")
     public String mostrarFormularioCrear(Model model, @PathVariable("id") Long id) {
         Optional<Cliente> clienteOpt = clienteService.SearchById(id);
         if (clienteOpt.isPresent()) {
@@ -185,7 +186,7 @@ public class VeterinarioController {
     }
 
     // localhost:8091/veterinario/mascotas/agregar
-    @PostMapping("/mascotas/agregar")
+    @PostMapping("/mascotas/agregar/{id}")
     public String agregarMascota(@ModelAttribute("mascota") Mascota mascota, @PathVariable("id") Long id) {
         Optional<Cliente> clienteOpt = clienteService.SearchById(id);
         if (clienteOpt.isPresent()) {

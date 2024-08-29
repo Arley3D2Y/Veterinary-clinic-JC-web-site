@@ -47,7 +47,11 @@
             <label for="floatingInput">Numero telefonico</label>
 
         </div>
-
+        <div class="form-floating mb-3">
+            <input th:field="*{fotoString}" type="text" class="form-control" id="floatingInput"
+                placeholder="Ingresa URL de la foto">
+            <label for="floatingInput">Foto URL</label>
+        </div>
         <br>
         <button type="submit" class="btn btn-primary">Guardar</button>
 
