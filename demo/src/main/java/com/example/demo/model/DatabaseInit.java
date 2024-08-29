@@ -41,7 +41,7 @@ public class DatabaseInit implements ApplicationRunner {
                 "https://ntvb.tmsimg.com/assets/assets/494807_v9_bd.jpg?w=360&h=480"));
         clienteRepository.save(new Cliente("Carlos Luis", "2234466", "carlos@gmail.com", "546544354",
                 "https://static.wikia.nocookie.net/esstarwars/images/2/29/Harrisonford.jpg/revision/latest?cb=20131222030038"));
-        clienteRepository.save(new Cliente("Luis Alberto", "14789806", "luis@gmail.com", "56766854",
+        clienteRepository.save(new Cliente("Luis Alberto", "14789808", "luis@gmail.com", "56766854",
                 "https://img.peliplat.com/api/resize/v1?imagePath=std/202301/a/2/a216e91526720344073201406fb3bee0.jpg&mode=FILL&width=304&height=456&limit=false"));
         clienteRepository.save(new Cliente("Ana María", "1234567", "anamaria@gmail.com", "3001234567",
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Ana_de_Armas_GQ_2018_2.png/330px-Ana_de_Armas_GQ_2018_2.png"));
