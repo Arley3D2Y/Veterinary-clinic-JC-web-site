@@ -79,7 +79,7 @@ public class VeterinarioController {
             List<Mascota> mascotas = cliente.getMascotas();
             model.addAttribute("mascotas", mascotas);
         } else {
-            return "error_cliente_no_encontrado"; // Puedes crear una página de error personalizada
+            throw new RuntimeException("El cliente no existe"); // Puedes crear una página de error personalizada
         }
         return "datos_cliente";
     }
@@ -91,7 +91,7 @@ public class VeterinarioController {
         if (clienteOpt.isPresent()) {
             model.addAttribute("cliente", clienteOpt.get());
         } else {
-            return "error_cliente_no_encontrado"; // Maneja el caso donde el cliente no existe
+            return "pagina_error"; // Maneja el caso donde el cliente no existe
         }
         return "actualizar_cliente";
     }
@@ -104,7 +104,7 @@ public class VeterinarioController {
             cliente.setMascotas(clienteExistenteOpt.get().getMascotas());
             clienteService.update(cliente);
         } else {
-            return "error_cliente_no_encontrado"; // Maneja el caso donde el cliente no existe
+            return "pagina_error"; // Maneja el caso donde el cliente no existe
         }
         return "redirect:/veterinario/clientes";
     }
@@ -116,7 +116,7 @@ public class VeterinarioController {
         if (clienteOpt.isPresent()) {
             clienteService.deleteById(identificacion);
         } else {
-            return "error_cliente_no_encontrado"; // Maneja el caso donde el cliente no existe
+            return "pagina_error"; // Maneja el caso donde el cliente no existe
         }
         return "redirect:/veterinario/clientes";
     }
@@ -148,7 +148,7 @@ public class VeterinarioController {
             return "datos_mascotas";
         } else {
             // Manejar el caso cuando no se encuentra la mascota
-            return "error_pagina"; // Cambiar por la página de error correspondiente
+            return "pagina_error"; // Cambiar por la página de error correspondiente
         }
     }
 
@@ -162,7 +162,7 @@ public class VeterinarioController {
             return "actualizar_mascota";
         } else {
             // Manejar el caso cuando no se encuentra la mascota
-            return "error_pagina"; // Cambiar por la página de error correspondiente
+            return "pagina_error"; // Cambiar por la página de error correspondiente
         }
     }
 
@@ -182,7 +182,7 @@ public class VeterinarioController {
             return "redirect:/veterinario/mascotas";
         } else {
             // Manejar el caso cuando no se encuentra la mascota
-            return "error_pagina"; // Cambiar por la página de error correspondiente
+            return "pagina_error"; // Cambiar por la página de error correspondiente
         }
     }
 
@@ -197,7 +197,7 @@ public class VeterinarioController {
             return "crear_mascota";
         } else {
             // Manejar el caso cuando no se encuentra el cliente
-            return "error_pagina"; // Cambiar por la página de error correspondiente
+            return "pagina_error"; // Cambiar por la página de error correspondiente
         }
     }
 
