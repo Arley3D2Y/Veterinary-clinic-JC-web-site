@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @Controller
-public class IndexController {
+public class indexController {
 
     //http://localhost:8080/inicio
     @GetMapping
