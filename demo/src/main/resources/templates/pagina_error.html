@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- logo -->
+     <link rel="icon" type="image/png" th:href="@{/images/Logo.png}">
     <title>Página no encontrada</title>
     <link rel="stylesheet" th:href="@{/css/error.css}">
 </head>
 <body>
     <div class="container">
         <h1>404</h1>
-        <img src="../images/gato-error.jpg" alt="Gato error" class="cat-error">
+        <img th:src="@{/images/gato-error.jpg}" alt="Gato error" class="cat-error">
         <p>¡Oh no! No podemos encontrar la página que estás buscando.</p>
         <p>Pero no te preocupes, nuestros amigos felinos están aquí para ayudarte.</p>
-        <a href="/cliente" class="btn">Volver al inicio</a>
+        <a th:href="${'/veterinario/inicio'}" class="btn">Volver al inicio</a>
     </div>
 </body>
 </html>

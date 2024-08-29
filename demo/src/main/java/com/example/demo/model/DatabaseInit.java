@@ -11,6 +11,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.MascotaRepository;
+import com.example.demo.repositorio.VeterinarioRepository;
 
 import org.springframework.boot.ApplicationArguments;
 
@@ -26,6 +27,9 @@ public class DatabaseInit implements ApplicationRunner {
     @Autowired
     MascotaRepository mascotaRepository;
 
+    @Autowired
+    VeterinarioRepository veterinarioRepository;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
@@ -37,10 +41,8 @@ public class DatabaseInit implements ApplicationRunner {
                 "https://ntvb.tmsimg.com/assets/assets/494807_v9_bd.jpg?w=360&h=480"));
         clienteRepository.save(new Cliente("Carlos Luis", "2234466", "carlos@gmail.com", "546544354",
                 "https://static.wikia.nocookie.net/esstarwars/images/2/29/Harrisonford.jpg/revision/latest?cb=20131222030038"));
-        clienteRepository.save(new Cliente("Luis Alberto", "14789806", "luis@gmail.com", "56766854",
+        clienteRepository.save(new Cliente("Luis Alberto", "14789808", "luis@gmail.com", "56766854",
                 "https://img.peliplat.com/api/resize/v1?imagePath=std/202301/a/2/a216e91526720344073201406fb3bee0.jpg&mode=FILL&width=304&height=456&limit=false"));
-        clienteRepository.save(new Cliente("Carlos Ret", "1435466", "carlosret@gmail.com", "456546554",
-                "https://upload.wikimedia.org/wikipedia/commons/b/b0/Carlos_Bacca%2C_2012-07-17.jpg"));
         clienteRepository.save(new Cliente("Ana María", "1234567", "anamaria@gmail.com", "3001234567",
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Ana_de_Armas_GQ_2018_2.png/330px-Ana_de_Armas_GQ_2018_2.png"));
         clienteRepository.save(new Cliente("Miguel Ángel", "2345678", "miguelangel@gmail.com", "3002345678",
@@ -351,6 +353,7 @@ public class DatabaseInit implements ApplicationRunner {
                 "https://content.elmueble.com/medio/2023/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
         mascotaRepository.save(new Mascota("Rusty", "Macho", "Siberiano", "2020-06-19",
                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
+        veterinarioRepository.save(new Veterinario("Sergio", "123456789", "s@t.com", "123", "https://i.ibb.co/0qX2b8t/sergio.jpg"));
 
         List<Cliente> clientes = clienteRepository.findAll();
         List<Mascota> mascotas = mascotaRepository.findAll();
