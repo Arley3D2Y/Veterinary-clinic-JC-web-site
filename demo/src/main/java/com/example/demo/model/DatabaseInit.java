@@ -11,6 +11,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.MascotaRepository;
+import com.example.demo.repositorio.VeterinarioRepository;
 
 import org.springframework.boot.ApplicationArguments;
 
@@ -25,6 +26,9 @@ public class DatabaseInit implements ApplicationRunner {
 
     @Autowired
     MascotaRepository mascotaRepository;
+
+    @Autowired
+    VeterinarioRepository veterinarioRepository;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -349,6 +353,7 @@ public class DatabaseInit implements ApplicationRunner {
                 "https://content.elmueble.com/medio/2023/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
         mascotaRepository.save(new Mascota("Rusty", "Macho", "Siberiano", "2020-06-19",
                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
+        veterinarioRepository.save(new Veterinario("Sergio", "123456789", "s@t.com", "123", "https://i.ibb.co/0qX2b8t/sergio.jpg"));
 
         List<Cliente> clientes = clienteRepository.findAll();
         List<Mascota> mascotas = mascotaRepository.findAll();

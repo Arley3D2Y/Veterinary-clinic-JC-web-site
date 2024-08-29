@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <!-- logo -->
      <link rel="icon" type="image/png" th:href="@{/images/Logo.png}">
-    <title>Login Cliente</title>
+    <title>Login Veterinario</title>
     <link rel="stylesheet" th:href="@{/css/login_styles.css}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <script src="../js/login_cliente.js" defer></script>
 </head>
 <body>
     <main>
-        <form th:action="@{/login/cliente}" method="post">
+        <form th:action="@{/login/veterinario}" method="post">
             <img src="../images/avatar.png" alt="foto" width="80" height="80">
 
             <div class="form-group">
@@ -20,7 +20,8 @@
                 <label for="txtCedula" class="form-label">Ingrese su cédula</label>
 
                 <div class="error-label" th:if="${error}" th:text="${error}"></div>
-                <a th:href="${'/login/veterinario'}">Ingresar como veterinario</a>
+                <a th:href="${'/login/cliente'}">Ingresar como cliente</a>
+
             </div>
 
             <div class="layout">

@@ -36,6 +36,6 @@ public class ClienteController {
         model.addAttribute("cliente", cliente.get()); // Pasar la información del cliente al modelo
         model.addAttribute("mascotas", mascotas);
 
-        return "Home_cliente";
+        return "home_cliente";
     }
 }

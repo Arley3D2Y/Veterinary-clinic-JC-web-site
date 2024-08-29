@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.Cliente;
 import com.example.demo.model.Mascota;
+import com.example.demo.model.Veterinario;
 import com.example.demo.servicio.ClienteService;
 import com.example.demo.servicio.MascotaService;
+import com.example.demo.servicio.VeterinarioService;
 
 
 @Controller
@@ -24,13 +27,26 @@ public class VeterinarioController {
     
     @Autowired
     MascotaService mascotaService;
+
     @Autowired
     private ClienteService clienteService;
 
+    @Autowired
+    private VeterinarioService veterinarioService;
+
     //localhost:8091/veterinario/inicio
-    @GetMapping
-    public String mostrarInicio(Model model) {
-        model.addAttribute("clientes", clienteService.SearchAll());
+
+    @GetMapping("/inicio")
+    public String mostrarHomeVeterinario(@RequestParam("cedula") String cedula, Model model) {
+        Optional<Veterinario> veterinario = veterinarioService.SearchByCedula(cedula);
+        if (veterinario.isEmpty()) {
+            model.addAttribute("error", "*Usuario no encontrado");
+            return "login_veterinario";
+        }
+
+        // Usar List<Mascota> en lugar de ArrayList<Mascota>
+        model.addAttribute("veterinario", veterinario.get()); // Pasar la información del cliente al modelo
+
         return "home_veterinario";
     }
 
