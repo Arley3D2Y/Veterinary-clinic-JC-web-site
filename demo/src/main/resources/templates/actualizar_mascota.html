@@ -18,7 +18,7 @@
 </head>
 <body>
     <h1>Crear Mascota</h1>
-    <form th:object="${mascota}" th:action="@{/mascota/save{id}(id=${mascota.id})}" method="POST">
+    <form th:object="${mascota}" th:action="@{/veterinario/mascotas/save/{id}(id=${mascota.id})}" method="POST">
         <div class="form-floating mb-3">
             <input th:field="*{nombre}" type="text" class="form-control" id="floatingInput"
                 placeholder="Nombre de la mascota">
@@ -63,7 +63,7 @@
         <button type="submit" class="btn btn-primary">Guardar</button>
 
     </form>
-    <a type="button" class="btn btn-primary" th:href="@{/cliente}">Volver</a>
+    <a type="button" class="btn btn-primary" th:href="@{/veterinario/clientes}">Volver</a>
 </body>
 
 </html>
