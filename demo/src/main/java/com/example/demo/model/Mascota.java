@@ -6,10 +6,8 @@ import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-<<<<<<< HEAD
-=======
+
 import jakarta.persistence.JoinColumn;
->>>>>>> Desarrollo
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -36,10 +34,7 @@ public class Mascota {
     private List<Tratamiento> tratamientos = new ArrayList<>();
 
     @ManyToOne
-<<<<<<< HEAD
-=======
     @JoinColumn(name = "cliente_id")
->>>>>>> Desarrollo
     private Cliente cliente; // Cambiado de duenho a cliente
 
     public Mascota( String nombre, String sexo, String raza, String fechaNacimiento, String fotoString) {

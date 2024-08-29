@@ -14,8 +14,15 @@ import com.example.demo.repositorio.MascotaRepository;
 import com.example.demo.repositorio.VeterinarioRepository;
 
 import org.springframework.boot.ApplicationArguments;
-
 import jakarta.transaction.Transactional;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Controller
 @Transactional
