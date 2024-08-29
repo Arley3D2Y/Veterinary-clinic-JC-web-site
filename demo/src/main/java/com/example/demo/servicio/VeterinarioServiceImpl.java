@@ -5,33 +5,33 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.Cliente;
-import com.example.demo.repositorio.ClienteRepository;
+import com.example.demo.model.Veterinario;
+import com.example.demo.repositorio.VeterinarioRepository;
 
 @Service
-public class ClienteServiceImp implements ClienteService {
+public class VeterinarioServiceImpl implements VeterinarioService {
 
     @Autowired
-    ClienteRepository repo;
+    VeterinarioRepository repo;
 
      // Implementacion de los metodos
     @Override
-    public Optional<Cliente> SearchById(Long id) {
+    public Optional<Veterinario> SearchById(Long id) {
         return repo.findById(id);
     }
 
     @Override
-    public Optional<Cliente> SearchByCedula(String cedula) {
+    public Optional<Veterinario> SearchByCedula(String cedula) {
         return repo.findByCedula(cedula);
     }
 
     @Override
-    public Collection<Cliente> SearchAll() {
+    public Collection<Veterinario> SearchAll() {
         return repo.findAll();
     }
 
     @Override
-    public void addCliente(Cliente cliente) {
+    public void addCliente(Veterinario cliente) {
         repo.save(cliente);
     }
 
@@ -41,7 +41,7 @@ public class ClienteServiceImp implements ClienteService {
     }
 
     @Override
-    public void update(Cliente cliente) {
+    public void update(Veterinario cliente) {
         repo.save(cliente);
     }
 }

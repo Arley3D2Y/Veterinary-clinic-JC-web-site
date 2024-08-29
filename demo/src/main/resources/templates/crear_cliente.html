@@ -19,10 +19,9 @@
     <title>Formulario Clientes</title>
 </head>
 
-
 <body>
     <h1>Crear Cliente</h1>
-    <form th:object="${cliente}" th:action="@{/cliente/agregar}" method="POST">
+    <form th:object="${cliente}" th:action="@{/veterinario/clientes/agregar}" method="POST">
         <div class="form-floating mb-3">
             <!-- th:field para indicar que atributo del objeto es el que se va a rellenar -->
             <input th:field="*{nombre}" type="text" class="form-control" id="floatingInput"
@@ -42,11 +41,16 @@
             <input th:field="*{celular}" type="text" class="form-control" id="celular" placeholder="Ingresa tu numero">
             <label for="floatingInput">Numero telefonico</label>
         </div>
+        <div class="form-floating mb-3">
+            <input th:field="*{fotoString}" type="text" class="form-control" id="floatingInput"
+                placeholder="Ingresa URL de la foto">
+            <label for="floatingInput">Foto URL</label>
+        </div>
         <br>
         <button type="submit" class="btn btn-primary">Crear</button>
 
     </form>
-    <a type="button" class="btn btn-primary" th:href="@{/cliente}">volver</a>
+    <a type="button" class="btn btn-primary" th:href="@{/veterinario/clientes}">volver</a>
 </body>
 
 </html>

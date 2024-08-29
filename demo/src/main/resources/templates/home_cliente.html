@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- logo -->
+     <link rel="icon" type="image/png" th:href="@{/images/Logo.png}">
     <title>Home Cliente</title>
     <link rel="stylesheet" th:href="@{/css/home_cliente_styles.css}">
     <link rel="icon" type="image/png" th:href="@{/images/Logo.png}">
@@ -13,7 +15,7 @@
     <header id="datos_cliente">
         <section class="box-foto">
             <h1 th:text="${cliente.nombre}"></h1>
-            <img th:src="@{/images/avatar.png}" alt="Imagen de cliente">
+            <img th:src="${cliente.fotoString}" width="90" height="90" alt="Foto de ${cliente.nombre}">
         </section>
 
         <form>

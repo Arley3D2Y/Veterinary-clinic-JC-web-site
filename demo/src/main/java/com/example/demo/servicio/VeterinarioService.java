@@ -3,9 +3,9 @@ package com.example.demo.servicio;
 import java.util.Collection;
 
 import java.util.Optional;
-import com.example.demo.model.Cliente;
+import com.example.demo.model.Veterinario;
 
-public interface ClienteService {
+public interface VeterinarioService {
 
     /**
      * Este metodo es usado para buscar clientes por su id.
@@ -14,7 +14,7 @@ public interface ClienteService {
      * @return EL objeto Cliente representado al cliente con el ID dado
      *         o null si no existe
      */
-    public Optional<Cliente> SearchById(Long identificacion);
+    public Optional<Veterinario> SearchById(Long identificacion);
 
 
     /**
@@ -24,7 +24,7 @@ public interface ClienteService {
      * @return El objeto Cliente representado al cliente con la cedula dada
      *         o null si no existe
      */
-    public Optional<Cliente> SearchByCedula(String cedula);
+    public Optional<Veterinario> SearchByCedula(String cedula);
 
 
     /**
@@ -32,7 +32,7 @@ public interface ClienteService {
      *
      * @return La colección de todos los clientes.
      */
-    public Collection<Cliente> SearchAll();
+    public Collection<Veterinario> SearchAll();
 
     /**
      * Este metodo es usado para agregar un nuevo cliente al sistema.
@@ -40,7 +40,7 @@ public interface ClienteService {
      * @param cliente El objeto Cliente que se desea agregar al sistema.
      *
      */
-    public void addCliente(Cliente cliente);
+    public void addCliente(Veterinario cliente);
 
     /**
      * Este metodo es usado para borrar un cliente del sistema.
@@ -54,6 +54,6 @@ public interface ClienteService {
      *
      * @param cliente El objeto Cliente que se desea actualizar en el sistema.
      */
-    public void update(Cliente cliente);
+    public void update(Veterinario cliente);
 
 }

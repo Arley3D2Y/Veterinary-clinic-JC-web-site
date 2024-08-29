@@ -1,36 +1,55 @@
-package com.example.demo.entidad;
+package com.example.demo.model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import java.util.List;
 
 import java.util.ArrayList;
 
+@Entity
 public class Cliente {
     // atributos
-    private Integer id;
-    private String nombre;
-    private String cedula;
-    private String correo;
-    private String celular;
-    private ArrayList<Mascota> mascotas;
 
-    // constructor
-    public Cliente(Integer id, String nombre, String cedula, String correo, String celular) {
-        this.id = id;
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @Column(name = "NAME")
+    private String nombre;
+
+    private String cedula;
+
+    private String correo;
+
+    private String celular;
+
+    @Column(length = 2048)  // Ajusta el tamaño según sea necesario
+    private String fotoString;
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Mascota> mascotas = new ArrayList<>();;
+
+    public Cliente(String nombre, String cedula, String correo, String celular, String fotoString) {
         this.nombre = nombre;
         this.cedula = cedula;
         this.correo = correo;
         this.celular = celular;
-        this.mascotas = new ArrayList<>();
+        this.fotoString = fotoString;
     }
 
     public Cliente() {
-        this.mascotas = new ArrayList<>();
     }
 
     // getters and setters
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -66,15 +85,25 @@ public class Cliente {
         this.celular = celular;
     }
 
-    public ArrayList<Mascota> getMascotas() {
+    public List<Mascota> getMascotas() {
         return mascotas;
     }
 
-    public void setMascotas(ArrayList<Mascota> mascotas) {
+    public void setMascotas(List<Mascota> mascotas) {
         this.mascotas = mascotas;
     }
+    
+    
+    public String getFotoString() {
+        return fotoString;
+    }
 
-    // metodos
+    public void setFotoString(String fotoString) {
+        this.fotoString = fotoString;
+    }
+
+
+    // métodos
     public void agregarMascota(Mascota mascota) {
         if (this.mascotas == null) {
             this.mascotas = new ArrayList<>();
@@ -83,7 +112,6 @@ public class Cliente {
             this.mascotas.add(mascota);
         }
     }
-    
 
     public void eliminarMascota(Mascota mascota) {
         this.mascotas.remove(mascota);

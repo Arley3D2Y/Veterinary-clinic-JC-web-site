@@ -22,32 +22,41 @@ body {
     position: relative; /* Para el pseudo-elemento */
 }
 .box-foto {
+    position: relative; /* Necesario para que los elementos hijos posicionados de forma absoluta se alineen correctamente */
     display: flex;
-    justify-content: flex-start; /* Alinea los elementos al inicio de la fila */
+    justify-content: space-between; /* Distribuye espacio entre los elementos, colocando uno a la izquierda y otro a la derecha */
     align-items: center; /* Alinea verticalmente al centro */
     width: 100%;
     height: auto;
     margin-bottom: 30px;
     flex-direction: row; /* Coloca los elementos en una fila */
 }
+
 .box-foto img {
-    width: 130px; /* Ajusta el tamaño al que quieras la imagen */
+    width: 130px; /* Ajusta el tamaño de la imagen */
     height: 130px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid #5E548E; /* Borde claro usando el color #9F86C0 */
     box-shadow: 0 0 10px #9F86C0; /* Sombra en el borde para un efecto suave */
+    z-index: 2; /* Coloca la imagen por delante del h1 */
+    position: relative; /* Mantiene la imagen en el flujo normal del flexbox */
 }
+
 .box-foto h1 {
-    color: #231942;
+    color: #231942d8;
+    width: 100%;
     margin: 0;
     padding: 10px 10px 5px 10px;
     font-family: "ABeeZee", sans-serif;
     font-size: 1.5rem;
     line-height: 1.3rem;
-    align-self: flex-start; /* Alinea el h1 al inicio del contenedor */
-    text-align: right;
+    text-align: left; /* Alinea el texto del h1 a la izquierda */
     border-bottom: 2px solid #231942c5; /* Borde inferior */
+    
+    position: relative; /* Mantiene el h1 en el flujo normal del flexbox */
+    z-index: 1; /* Coloca el h1 detrás de la imagen */
+    align-self: flex-start; /* Alinea el h1 verticalmente al inicio */
 }
 h2 {
     text-align: center;
@@ -111,7 +120,7 @@ form label p {
 }
 #datos_mascotas h1 {
     text-align: center;
-    color: #000000;
+    color: #231942d8;
     font-family: "ABeeZee", sans-serif;
     margin: 0;
     padding: 10px 10px 20px 10px;
