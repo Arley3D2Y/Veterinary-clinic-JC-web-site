@@ -19,7 +19,7 @@ import com.example.demo.model.Veterinario;
 import com.example.demo.servicio.ClienteService;
 import com.example.demo.servicio.MascotaService;
 import com.example.demo.servicio.VeterinarioService;
-
+import com.example.demo.errorHandling.NotFoundException;
 
 @Controller
 @RequestMapping("/veterinario")
@@ -79,7 +79,7 @@ public class VeterinarioController {
             List<Mascota> mascotas = cliente.getMascotas();
             model.addAttribute("mascotas", mascotas);
         } else {
-            throw new RuntimeException("El cliente no existe"); // Puedes crear una página de error personalizada
+            throw new NotFoundException(identificacion);
         }
         return "datos_cliente";
     }
@@ -128,7 +128,6 @@ public class VeterinarioController {
 
         return "redirect:/veterinario/clientes";
     }
-
 
     /** Mascotas **/
 
@@ -228,10 +227,14 @@ public class VeterinarioController {
             return "redirect:/veterinario/mascotas";
         } else {
             // Manejar el caso cuando no se encuentra el cliente
-            return "error_pagina"; // Cambiar por la página de error correspondiente
+            return "pagina_error"; // Cambiar por la página de error correspondiente
         }
     }
 
     /** Tratamientos **/
-
+    @GetMapping("/tratamientos")
+    public String mostrarTratamientos(Model model) {
+        throw new NotFoundException();
+    }
+    
 }
