@@ -1,10 +1,13 @@
-package com.example.demo.controlador;
+package com.example.demo.errorHandling;
 
 public class NotFoundException extends RuntimeException {
-    private int id;
+    private Long id;
     private String cedula;
 
-    public NotFoundException(int id) {
+    public NotFoundException() {
+    }
+
+    public NotFoundException(Long id) {
         this.id = id;
     }
 
@@ -12,11 +15,11 @@ public class NotFoundException extends RuntimeException {
         this.cedula = ced;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

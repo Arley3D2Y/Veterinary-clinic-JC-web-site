@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="../images/Logo.png">
+    <link rel="icon" type="image/png" th:href="@{/images/Logo.png}">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -15,7 +15,7 @@
         defer></script>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="../css/datos_styles.css">
+    <link rel="stylesheet" th:href="@{/css/datos_styles.css}">
     <title th:text="'Información de ' + ${cliente.nombre}"></title>
 </head>
 
@@ -41,8 +41,8 @@
         </article>
     </main>
     
-    <a type="button" class="btn btn-dark" th:href="@{/mascota/add}">Agregar Mascota</a>
-    <a type="button" class="btn btn-dark" th:href="@{/cliente}">volver</a>
+    <a type="button" class="btn btn-dark" th:href="@{/veterinario/mascotas/add/{id}(id =${cliente.id})}">Agregar Mascota</a>
+    <a type="button" class="btn btn-dark" th:href="@{/veterinario/clientes}">volver</a>
 </body>
 
 </html>
