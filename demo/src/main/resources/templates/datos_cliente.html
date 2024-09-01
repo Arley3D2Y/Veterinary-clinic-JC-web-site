@@ -20,15 +20,41 @@
 </head>
 
 <body>
-    <h1 th:text="'Información de ' + ${cliente.nombre}"></h1>
-    <section>
-        <p th:text="'Nombre: ' + ${cliente.nombre}"></p>
-        <p th:text="'Cedula: ' + ${cliente.cedula}"></p>
-        <p th:text="'Correo: ' + ${cliente.correo}"></p>
-        <p th:text="'Celular: ' + ${cliente.celular}"></p>
-    </section>
+
+     <!-- HEADER -->
+     <header>
+        <div class="columns-nav">
+            <nav class="first-nav">
+                <ul>
+                    <li><a th:href="@{/veterinario/tratamientos}" title="Ver tratamientos">Tratamientos</a></li>
+                    <li><a th:href="@{/veterinario/mascotas}" title='Ver mascotas'>Mascotas</a></li>
+                    <li><a id="active" th:href="@{/veterinario/clientes}" title="Ver clientes">Clientes</a></li>
+                </ul>
+
+                <div class="datos-vet">
+                    <h1>Dr. Lorena García Garavito Suarez</h1>
+                </div>
+            </nav>
+
+            <nav class="second-nav">
+                <p>Veterinario</p>
+            </nav>
+        </div>
+
+        <div class="header-logo">
+            <img th:src="@{/images/persona.png}" alt="foto" width="100" height="100">
+        </div>
+    </header>
 
     <main id="datos_mascotas">
+        <h1 th:text="'Información de ' + ${cliente.nombre}"></h1>
+        <section>
+            <p th:text="'Nombre: ' + ${cliente.nombre}"></p>
+            <p th:text="'Cedula: ' + ${cliente.cedula}"></p>
+            <p th:text="'Correo: ' + ${cliente.correo}"></p>
+            <p th:text="'Celular: ' + ${cliente.celular}"></p>
+        </section>
+
         <h1>Mascotas</h1>
         <article class="cards">
             <div th:each="mascota : ${mascotas}">

@@ -1,15 +1,169 @@
-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #F5F5F5;
-    font-family: 'Karla', sans-serif;
-    margin: 0;
-    padding: 0;
+* {
     box-sizing: border-box;
 }
+
+body {
+    margin: 0;
+    height: 100vh;
+    /* Ocupa el 100% de la altura de la ventana del navegador */
+    width: 100%;
+    margin: 0;
+}
+
+
+
+body::-webkit-scrollbar {
+    width: 7px;
+    background-color: #5E548E;
+    border-radius: 16px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #9F86C0;
+    border-radius: 16px;
+    transition: .3 ease;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    margin: 0;
+    width: 100%;
+    height: 18%;
+    display: flex;
+    flex-direction: row;
+    background-color: #231942;
+    font-family: "ABeeZee", sans-serif;
+    border-radius: 0% 0% 3% 3%;
+}
+
+.columns-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.columns-nav .first-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: end;
+    width: 100%;
+    height: 70%;
+    padding: 0;
+}
+
+.columns-nav .datos-vet {
+    width: 27%;
+    height: 100%;
+    margin: 0px;
+    padding: 30px 0px;
+    border-bottom: #FFFFFF 2px solid;
+}
+
+.datos-vet h1 {
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    padding: 0px;
+    color: #BE95C4;
+    font-size: 1.4rem;
+    line-height: 1.3rem;
+    margin: 0;
+}
+
+.columns-nav .second-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    width: 100%;
+    height: 30%;
+    padding: 0px;
+}
+
+.second-nav p {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: lighter;
+    text-align: center;
+    color: #BE95C4d8;
+    font-size: 1.2rem;
+    width: 27%;
+    padding: 1px;
+    margin: 0;
+}
+
+.header-logo {
+    width: 12%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.header-logo img {
+    border: 2px solid #5E548E;
+    /* Borde claro usando el color #9F86C0 */
+    box-shadow: 0 0 10px #9F86C0;
+    /* Sombra en el borde para un efecto suave */
+    border-radius: 50%;
+    object-fit: cover;
+    transform: translateX(-10%);
+}
+
+
+/** Estilos de lista general **/
+ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    width: 60%;
+    height: 44px;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    text-decoration: none;
+    border-bottom: #FFFFFF 2px solid;
+    font-family: "ABeeZee", sans-serif;
+    font-weight: bold;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    font-size: 22px;
+    width: 150px;
+    height: 35px;
+    margin: 5px;
+}
+
+a {
+    color: #ffffff;
+    width: auto;
+    height: 30px;
+    text-decoration: none;
+    padding: 2px;
+}
+
+ul li #active {
+
+    color: #9F86C0;
+    width: auto;
+    height: 30px;
+    text-decoration: none;
+    padding: 2px;
+}
+
+#active:hover,
+ul li a:hover {
+    color: #BE95C47c;
+    font-size: 23px;
+    transition: all 0.2s ease;
+}
+
+
 h1 {
     text-align: center;
     margin-top: 20px;
@@ -17,6 +171,7 @@ h1 {
     color: #5E548E;
     margin: 1%;
 }
+
 p {
     text-align: center;
     font-family: "Baloo 2", sans-serif;
@@ -24,16 +179,6 @@ p {
     margin: 10px 0;
     color: #555;
 }
-
-img {
-    border-radius: 10%;
-    
-    display: block;
-    margin: 10px auto;
-    max-width: 10%;
-    height: auto;
-}
-
 
 a.btn {
     display: block;
@@ -47,7 +192,7 @@ a.btn {
     text-decoration: none;
 }
 
-.btn-dark{
+.btn-dark {
     background-color: #2600e6;
     border-color: #5E548E;
 }
