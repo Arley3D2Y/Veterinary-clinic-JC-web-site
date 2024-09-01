@@ -35,6 +35,7 @@
     <p th:text="'Fecha de Nacimiento: ' + ${mascota.fechaNacimiento}"></p>
     <p th:if="${mascota.cliente != null}" th:text="'Dueño: ' + ${mascota.cliente.nombre}"></p>
     <p th:unless=" ${mascota.cliente !=null}">Dueño no asignado</p>
+    <a type="button" class="btn btn-success" th:href="@{/veterinario/mascotas/update/{id}(id=${mascota.id})}">Editar</a>
     <a type="button" class="btn btn-dark" th:href="@{/veterinario/mascotas}">Volver</a>
 </body>
 

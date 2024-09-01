@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veterinario - Mascotas</title>
     <link rel="icon" type="image/png" href="../images/Logo.png">
     <link rel="stylesheet" th:href="@{../css/inicio_vet_styles.css}">
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Baloo+2:wght@400..800&family=Glass+Antiqua&family=Karla:ital,wght@0,200..800;1,200..800&family=Lexend:wght@100..900&family=Turret+Road:wght@200;300;400;500;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Baloo+2:wght@400..800&family=Glass+Antiqua&family=Karla:ital,wght@0,200..800;1,200..800&family=Lexend:wght@100..900&family=Turret+Road:wght@200;300;400;500;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/a0a698ab6b.js" crossorigin="anonymous"></script>
 </head>
+</head>
+
 <body>
+    <!-- HEADER -->
     <header>
         <div class="columns-nav">
             <nav class="first-nav">
@@ -37,43 +46,47 @@
         </div>
     </header>
 
+    <!-- MAIN -->
     <main>
-        <h1>Mascotas</h1>
-        <div class="tableCenter">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Sexo</th>
-                        <th>Raza</th>
-                        <th>Fecha de Nacimiento</th>
-                        <th>Foto</th>
-                        <th>Detalles</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="mascota : ${mascotas}">
-                        <td th:text="${mascota.nombre}"></td>
-                        <td th:text="${mascota.sexo}"></td>
-                        <td th:text="${mascota.raza}"></td>
-                        <td th:text="${mascota.fechaNacimiento}"></td>
-                        <td><img th:src="${mascota.fotoString}" width="90" height="90" alt="Foto de ${mascota.nombre}">
-                        </td>
-                        <td><a type="button" class="btn btn-dark"
-                            th:href="@{/veterinario/mascotas/find/{id}(id=${mascota.id})}">Detalles</a></td>
-    
-                        <td><a type="button" class="btn btn-success"
-                            th:href="@{/veterinario/mascotas/update/{id}(id=${mascota.id})}">Editar</a>
-                        </td>
-                        <td><a type="button" class="btn btn-danger"
-                            th:href="@{/veterinario/mascotas/delete/{id}(id=${mascota.id})}">Eliminar</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <!-- SEARCH -->
+        <section class="search">
+            <h1>Buscar Mascotas</h1>
+            <P>Buscardor de clientes usando el nombre de la mascota o del dueño</P>
+
+            <!-- barra buscadora -->
+            <div class="searchBar">
+                <input type="text" id="search" name="search" placeholder="Buscar...">
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+
+        </section>
+
+        <!-- TABLE -->
+        <section class="clientes_table">
+            <!-- Taarjetas  -->
+            <div class="tableCenter" th:each="mascota : ${mascotas}">
+                <!-- imagen -->
+                <img th:src="${mascota.fotoString}" width="90" height="90" alt="Foto de ${mascota.nombre}">
+                <!-- informacion -->
+                <div>
+                    <h2 th:text="${mascota.nombre}"></h2>
+                    <p th:text=" 'Raza: ' + ${mascota.raza}"></p>
+                    <p th:if="${mascota.cliente != null}" th:text="'Dueño: ' + ${mascota.cliente.nombre}"></p>
+                    <p th:unless=" ${mascota.cliente !=null}">Dueño no asignado</p>
+                </div>
+                <!-- botones -->
+                <div class="info">
+                    <a type="button" class="btn btn-dark"
+                        th:href="@{/veterinario/mascotas/find/{id}(id=${mascota.id})}"><i
+                            class="fa-solid fa-circle-info" title="Detalles"></i></a>
+
+                    <a type="button" class="btn btn-danger"
+                        th:href="@{/veterinario/mascotas/delete/{id}(id=${mascota.id})}" title="Eliminar"><i
+                            class="fa-solid fa-trash-can"></i></a>
+                </div>
+            </div>
+        </section>
     </main>
 </body>
+
 </html>

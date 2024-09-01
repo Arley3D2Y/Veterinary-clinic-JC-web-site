@@ -32,7 +32,7 @@
         <h1>Mascotas</h1>
         <article class="cards">
             <div th:each="mascota : ${mascotas}">
-                <section>   
+                <section>
                     <!-- Aquí puedes agregar una imagen si las mascotas tienen asociada una -->
                     <img th:src="@{${mascota.fotoString}}" alt="Imagen de mascota">
                     <p th:text="${mascota.nombre}"></p>
@@ -40,8 +40,9 @@
             </div>
         </article>
     </main>
-    
-    <a type="button" class="btn btn-dark" th:href="@{/veterinario/mascotas/add/{id}(id =${cliente.id})}">Agregar Mascota</a>
+    <a type="button" class="btn btn-success" th:href="@{/veterinario/clientes/update/{id}(id=${cliente.id})}">Editar</a>
+    <a type="button" class="btn btn-dark" th:href="@{/veterinario/mascotas/add/{id}(id =${cliente.id})}">Agregar
+        Mascota</a>
     <a type="button" class="btn btn-dark" th:href="@{/veterinario/clientes}">volver</a>
 </body>
 

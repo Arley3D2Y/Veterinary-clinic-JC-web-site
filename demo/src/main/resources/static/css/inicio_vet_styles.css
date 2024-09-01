@@ -191,7 +191,7 @@ main p {
     text-align: start;
     font-family: "Baloo 2", sans-serif;
     font-size: 1.1rem;
-    color: #020202;
+
     padding: 0;
     margin: 10px 0px 0px 0px;
 }
@@ -228,8 +228,14 @@ main p {
     /* Incluye padding y border en el tamaño total del contenedor */
     overflow: auto;
     box-sizing: border-box;
+    position: relative;
 }
 
+.clientes_table::after {
+    content: "";
+    display: block;
+    clear: both;
+}
 
 /* buscar clientes */
 
@@ -267,6 +273,8 @@ main p {
     transition: all 0.5s ease;
 }
 
+
+/* Tabla de clientes */
 .tableCenter {
     display: flex;
     flex-direction: row;
@@ -303,7 +311,8 @@ main p {
     font-size: 1.1rem;
     color: #020202;
     padding: 0;
-    margin: 10px 0 0 0; /* Espacio superior para separar del h2 */
+    margin: 10px 0 0 0;
+    /* Espacio superior para separar del h2 */
 }
 
 img {
@@ -379,16 +388,11 @@ img {
     color: #fff;
     background-color: #c82333;
     border-color: #bd2130;
-}  */
-
-
-.fa-solid {
-    color: #ffffff;
 }
 
-
-
-
+ .fa-solid {
+    color: #ffffff;
+}
 
 
 /* .btn-success {
@@ -404,57 +408,4 @@ img {
 }
 
 
-/*
-main {
-    width: 100%;
-    height: auto;
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 30px 40px;
-    font-family: "ABeeZee", sans-serif;
-}
-
-
-.tableCenter {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 20px auto;
-    padding: 40px;
-    max-width: 90%;
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    font-size: 20px;
-    font-family: "Baloo 2", sans-serif;
-    font-size: 1.2rem;
-}
-
-table {
-    width: 100%;
-    margin: 0 auto;
-    padding: 0;
-    border: #5E548E solid 2px;
-    margin-bottom: 20px;
-}
-
-th,
-td {
-    padding: 0.5rem;
-    text-align: center;
-    border-bottom: #9b91d1 1px solid;
-    border-right: #9b91d1 1px solid;
-    border-collapse: collapse;
-    /* Para que las celdas compartan los bordes 
-}
-
-td img {
-    width: 100px;
-    height: 100px;
-    border-radius: 20%;
-}
 */
