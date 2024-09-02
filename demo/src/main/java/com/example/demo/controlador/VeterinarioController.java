@@ -64,7 +64,7 @@ public class VeterinarioController {
     //localhost:8091/veterinario/clientes/add
     @GetMapping("/clientes/add")
     private String formularioCrearCliente(Model model) {
-        Cliente cliente = new Cliente("", "", "", "", "");
+        Cliente cliente = new Cliente("", "", "", "", "", "");
         model.addAttribute("cliente", cliente);
         return "crear_cliente";
     }
@@ -108,7 +108,7 @@ public class VeterinarioController {
         } else {
             return "pagina_error"; // Maneja el caso donde el cliente no existe
         }
-        return "redirect:/veterinario/clientes";
+        return "redirect:/veterinario/clientes/find/{id}";
     }
 
     // localhost:8091/veterinario/clientes/delete/{id}
@@ -226,7 +226,7 @@ public class VeterinarioController {
         if (clienteOpt.isPresent()) {
             mascota.setCliente(clienteOpt.get());
             mascotaService.update(mascota);
-            return "redirect:/veterinario/mascotas";
+            return "redirect:/veterinario/mascotas/find/{id}";
         } else {
             // Manejar el caso cuando no se encuentra el cliente
             return "pagina_error"; // Cambiar por la página de error correspondiente

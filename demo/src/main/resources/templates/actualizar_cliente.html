@@ -47,6 +47,12 @@
             <label for="floatingInput">Numero telefonico</label>
 
         </div>
+
+        <div class="form-floating mb-3">
+            <input th:field="*{direccion}" type="text" class="form-control" id="direccion" placeholder="Ingresa tu dirección">
+            <label for="floatingInput">Dirección</label>
+
+        </div>
         <div class="form-floating mb-3">
             <input th:field="*{fotoString}" type="text" class="form-control" id="floatingInput"
                 placeholder="Ingresa URL de la foto">
@@ -56,7 +62,7 @@
         <button type="submit" class="btn btn-primary">Guardar</button>
 
     </form>
-    <a type="button" class="btn btn-primary" th:href="@{/veterinario/clientes}">Volver</a>
+    <a type="button" class="btn btn-primary" th:href="@{/veterinario/clientes/find/{id}(id=${cliente.id})}">Volver</a>
 </body>
 
 </html>

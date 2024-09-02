@@ -33,7 +33,7 @@ header {
     height: 18%;
     display: flex;
     flex-direction: row;
-    background-color: #231942;
+    background-color: #5E548E;
     font-family: "ABeeZee", sans-serif;
     border-radius: 0% 0% 3% 3%;
 }
@@ -68,7 +68,7 @@ header {
     font-family: 'Times New Roman', Times, serif;
     text-align: center;
     padding: 0px;
-    color: #BE95C4;
+    color: #F5F5F5;
     font-size: 1.4rem;
     line-height: 1.3rem;
     margin: 0;
@@ -87,7 +87,7 @@ header {
     font-family: 'Times New Roman', Times, serif;
     font-weight: lighter;
     text-align: center;
-    color: #BE95C4d8;
+    color: #BE95C4;
     font-size: 1.2rem;
     width: 27%;
     padding: 1px;
@@ -102,9 +102,9 @@ header {
 }
 
 .header-logo img {
-    border: 2px solid #5E548E;
+    border: 2px solid #BE95C4;
     /* Borde claro usando el color #9F86C0 */
-    box-shadow: 0 0 10px #9F86C0;
+    box-shadow: 0 0 10px #BE95C4;
     /* Sombra en el borde para un efecto suave */
     border-radius: 50%;
     object-fit: cover;
@@ -148,19 +148,19 @@ a {
 }
 
 ul li #active {
-
-    color: #9F86C0;
+    color: #BE95C4;
     width: auto;
     height: 30px;
+    font-size: 24px;
     text-decoration: none;
     padding: 2px;
 }
 
 #active:hover,
 ul li a:hover {
-    color: #BE95C47c;
-    font-size: 23px;
-    transition: all 0.2s ease;
+    color: #231942;
+    font-size: 25px;
+    transition: all 0.5s ease;
 }
 
 
@@ -182,7 +182,7 @@ main h1 {
     text-align: start;
     font-family: "ABeeZee", sans-serif;
     font-size: 3rem;
-    color: #5E548E;
+    color: #231942;
     padding: 0;
     margin: 0;
 }
@@ -390,22 +390,6 @@ img {
     border-color: #bd2130;
 }
 
- .fa-solid {
+.fa-solid {
     color: #ffffff;
 }
-
-
-/* .btn-success {
-    color: #fff;
-    background-color: #28a745;
-    border-color: #28a745;
-}
-
-.btn-success:hover {
-    color: #fff;
-    background-color: #218838;
-    border-color: #1e7e34;
-}
-
-
-*/

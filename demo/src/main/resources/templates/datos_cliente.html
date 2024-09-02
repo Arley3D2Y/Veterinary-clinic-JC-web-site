@@ -14,15 +14,25 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"
         defer></script>
 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Baloo+2:wght@400..800&family=Glass+Antiqua&family=Karla:ital,wght@0,200..800;1,200..800&family=Lexend:wght@100..900&family=Turret+Road:wght@200;300;400;500;700;800&display=swap"
+        rel="stylesheet">
+
     <!-- Styles -->
     <link rel="stylesheet" th:href="@{/css/datos_styles.css}">
     <title th:text="'Información de ' + ${cliente.nombre}"></title>
+
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/a0a698ab6b.js" crossorigin="anonymous" defer></script>
 </head>
 
 <body>
 
-     <!-- HEADER -->
-     <header>
+    <!-- HEADER -->
+    <header>
         <div class="columns-nav">
             <nav class="first-nav">
                 <ul>
@@ -45,31 +55,72 @@
             <img th:src="@{/images/persona.png}" alt="foto" width="100" height="100">
         </div>
     </header>
+    <!-- MAIN -->
+    <main>
+        <!-- información del cliente -->
+        <section class="main-info">
+            <!-- Imagend el cliente -->
+            <img th:src="${cliente.fotoString}" alt="Foto de ${cliente.nombre}">
 
-    <main id="datos_mascotas">
-        <h1 th:text="'Información de ' + ${cliente.nombre}"></h1>
-        <section>
-            <p th:text="'Nombre: ' + ${cliente.nombre}"></p>
-            <p th:text="'Cedula: ' + ${cliente.cedula}"></p>
-            <p th:text="'Correo: ' + ${cliente.correo}"></p>
-            <p th:text="'Celular: ' + ${cliente.celular}"></p>
+            <article class="box-info">
+                <!-- titulo -->
+                <h1 th:text="'Información de '+${cliente.nombre}"></h1>
+                <!-- información -->
+
+                <div class="celda">
+                    <h3 class="title-celda">Nombre</h3>
+                    <p th:text="${cliente.nombre}" class="celda-info"></p>
+                </div>
+                <div class="celda">
+                    <h3 class="title-celda">Cedula</h3>
+                    <p th:text=" ${cliente.cedula}" class="celda-info"></p>
+                </div>
+                <div class="celda">
+                    <h3 class="title-celda">Correo</h3>
+                    <p th:text="${cliente.correo}" class="celda-info"></p>
+                </div>
+                <div class="celda">
+                    <h3 class="title-celda">Dirección</h3>
+                    <p th:text="${cliente.direccion}" class="celda-info"></p>
+
+                </div>
+                <div class="celda">
+                    <h3 class="title-celda">Celular</h3>
+                    <p th:text="${cliente.celular}" class="celda-info"></p>
+                </div>
+                <div class="celda">
+                    <h3 class="title-celda">ID</h3>
+                    <p th:text="${cliente.id}" class="celda-info"></p>
+
+                </div>
+                <!-- botones -->
+                <a type="button" class="btn btn-dark"
+                    th:href="@{/veterinario/clientes/update/{id}(id=${cliente.id})}">Modificar</a>
+
+                <a type="button" class="btn btn-dark" href="#mascotas">Mascotas</a>
+            </article>
         </section>
 
-        <h1>Mascotas</h1>
-        <article class="cards">
-            <div th:each="mascota : ${mascotas}">
-                <section>
-                    <!-- Aquí puedes agregar una imagen si las mascotas tienen asociada una -->
-                    <img th:src="@{${mascota.fotoString}}" alt="Imagen de mascota">
-                    <p th:text="${mascota.nombre}"></p>
-                </section>
+        <!-- Tarjetas de mascotas -->
+        <H2>Mascotas</H2>
+        <section class="cards-main" id="mascotas">
+            <article class="cards">
+                <div class="mascota" th:each="mascota : ${mascotas}">
+                    <a th:href="@{/veterinario/mascotas/find/{id}(id=${mascota.id})}" title="Detalles">
+                        <!-- Aquí puedes agregar una imagen si las mascotas tienen asociada una -->
+                        <img th:src="@{${mascota.fotoString}}" alt="Imagen de mascota" height="100" weidth="100">
+                        <h3 th:text="${mascota.nombre}"></h3>
+                        <p th:text="${mascota.raza}"></p>
+                    </a>
+                </div>
+            </article>
+            <div>
+                <a type="button" th:href="@{/veterinario/mascotas/add/{id}(id =${cliente.id})}" title="Añadir Mascota">
+                    <i class="fa-solid fa-circle-plus"></i>
+                </a>
             </div>
-        </article>
+        </section>
     </main>
-    <a type="button" class="btn btn-success" th:href="@{/veterinario/clientes/update/{id}(id=${cliente.id})}">Editar</a>
-    <a type="button" class="btn btn-dark" th:href="@{/veterinario/mascotas/add/{id}(id =${cliente.id})}">Agregar
-        Mascota</a>
-    <a type="button" class="btn btn-dark" th:href="@{/veterinario/clientes}">volver</a>
 </body>
 
 </html>

@@ -27,17 +27,20 @@ public class Cliente {
 
     private String celular;
 
-    @Column(length = 2048)  // Ajusta el tamaño según sea necesario
+    private String direccion;
+
+    @Column(length = 2048) // Ajusta el tamaño según sea necesario
     private String fotoString;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Mascota> mascotas = new ArrayList<>();;
 
-    public Cliente(String nombre, String cedula, String correo, String celular, String fotoString) {
+    public Cliente(String nombre, String cedula, String correo, String celular, String direccion, String fotoString) {
         this.nombre = nombre;
         this.cedula = cedula;
         this.correo = correo;
         this.celular = celular;
+        this.direccion = direccion;
         this.fotoString = fotoString;
     }
 
@@ -92,8 +95,15 @@ public class Cliente {
     public void setMascotas(List<Mascota> mascotas) {
         this.mascotas = mascotas;
     }
-    
-    
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
     public String getFotoString() {
         return fotoString;
     }
@@ -101,7 +111,6 @@ public class Cliente {
     public void setFotoString(String fotoString) {
         this.fotoString = fotoString;
     }
-
 
     // métodos
     public void agregarMascota(Mascota mascota) {
@@ -121,5 +130,4 @@ public class Cliente {
         this.mascotas.remove(mascota);
         this.mascotas.add(mascota);
     }
-
 }
