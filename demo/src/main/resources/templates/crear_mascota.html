@@ -18,7 +18,34 @@
 </head>
 
 <body>
+    <!-- HEADER -->
+    <header>
+        <div class="columns-nav">
+            <nav class="first-nav">
+                <ul>
+                    <li><a th:href="@{/veterinario/tratamientos}" title="Ver tratamientos">Tratamientos</a></li>
+                    <li><a th:href="@{/veterinario/mascotas}" title='Ver mascotas'>Mascotas</a></li>
+                    <li><a id="active" th:href="@{/veterinario/clientes}" title="Ver clientes">Clientes</a></li>
+                </ul>
+
+                <div class="datos-vet">
+                    <h1>Dr. Lorena García Garavito Suarez</h1>
+                </div>
+            </nav>
+
+            <nav class="second-nav">
+                <p>Veterinario</p>
+            </nav>
+        </div>
+
+        <div class="header-logo">
+            <img th:src="@{/images/persona.png}" alt="foto" width="100" height="100">
+        </div>
+    </header>
+
+    <!-- MAIN -->
     <h1 th:text="'Agregar Mascota de ' + ${cliente.nombre}"></h1>
+    <!-- Formulario -->
     <form th:object="${mascota}" th:action="@{/veterinario/mascotas/agregar/{id}(id=${cliente.id})}" method="POST">
         <div class="form-floating mb-3">
             <input th:field="*{nombre}" type="text" class="form-control" id="floatingInput"

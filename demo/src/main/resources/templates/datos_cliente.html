@@ -22,15 +22,15 @@
         rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" th:href="@{/css/datos_styles.css}">
-    <title th:text="'Información de ' + ${cliente.nombre}"></title>
+    <link rel="stylesheet" th:href="@{/css/datosCliente_styles.css}">
 
     <!-- Icons -->
     <script src="https://kit.fontawesome.com/a0a698ab6b.js" crossorigin="anonymous" defer></script>
+
+    <title th:text="'Información de ' + ${cliente.nombre}"></title>
 </head>
 
 <body>
-
     <!-- HEADER -->
     <header>
         <div class="columns-nav">
@@ -94,10 +94,9 @@
 
                 </div>
                 <!-- botones -->
-                <a type="button" class="btn btn-dark"
-                    th:href="@{/veterinario/clientes/update/{id}(id=${cliente.id})}">Modificar</a>
-
                 <a type="button" class="btn btn-dark" href="#mascotas">Mascotas</a>
+                <a type="button" class="btn btn-success"
+                    th:href="@{/veterinario/clientes/update/{id}(id=${cliente.id})}">Modificar</a>
             </article>
         </section>
 

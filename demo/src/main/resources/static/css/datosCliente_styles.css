@@ -280,6 +280,7 @@ main {
     background-color: #9F86C0A6;
     border-radius: 20px;
 }
+
 .mascota {
     margin: 0px 20px 0px 20px;
 }
@@ -330,6 +331,30 @@ main {
 .btn-dark:hover {
     background-color: #BE95C4;
     border-color: #BE95C4;
+}
+
+.btn-danger {
+    width: 20%;
+    height: 50px;
+    margin-left: 2%;
+    margin-right: 2%;
+    color: #fff;
+    font-family: "Baloo 2", sans-serif;
+    font-size: 1.4rem;
+    align-self: center;
+    margin-top: 5%;
+}
+
+.btn-success {
+    width: 20%;
+    height: 50px;
+    margin-left: 2%;
+    margin-right: 2%;
+    color: #fff;
+    font-family: "Baloo 2", sans-serif;
+    font-size: 1.4rem;
+    align-self: center;
+    margin-top: 5%;
 }
 
 .fa-circle-plus {
