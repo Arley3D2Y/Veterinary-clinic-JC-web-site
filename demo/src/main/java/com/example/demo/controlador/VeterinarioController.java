@@ -24,7 +24,7 @@ import com.example.demo.errorHandling.NotFoundException;
 @Controller
 @RequestMapping("/veterinario")
 public class VeterinarioController {
-    
+
     @Autowired
     MascotaService mascotaService;
 
@@ -36,7 +36,7 @@ public class VeterinarioController {
 
     // HoLa
 
-    //localhost:8091/veterinario/inicio
+    // localhost:8091/veterinario/inicio
 
     @GetMapping("/inicio")
     public String mostrarHomeVeterinario(@RequestParam("cedula") String cedula, Model model) {
@@ -61,7 +61,7 @@ public class VeterinarioController {
         return "clientes_veterinario";
     }
 
-    //localhost:8091/veterinario/clientes/add
+    // localhost:8091/veterinario/clientes/add
     @GetMapping("/clientes/add")
     private String formularioCrearCliente(Model model) {
         Cliente cliente = new Cliente("", "", "", "", "", "");
@@ -71,7 +71,7 @@ public class VeterinarioController {
 
     // localhost:8091/veterinario/clientes/find/{id}
     @GetMapping("/clientes/find/{id}")
-    //@PathVariable("id") indica que el parametro es un id
+    // @PathVariable("id") indica que el parametro es un id
     private String mostrarInfoCliente(Model model, @PathVariable("id") Long identificacion) {
 
         Optional<Cliente> clienteOpt = clienteService.SearchById(identificacion);
@@ -100,7 +100,8 @@ public class VeterinarioController {
 
     // localhost:8091/veterinario/clientes/update/{id}
     @PostMapping("/clientes/save/{id}")
-    private String actualizarCliente(@PathVariable("id") Long identificacion, @ModelAttribute("cliente") Cliente cliente) {
+    private String actualizarCliente(@PathVariable("id") Long identificacion,
+            @ModelAttribute("cliente") Cliente cliente) {
         Optional<Cliente> clienteExistenteOpt = clienteService.SearchById(identificacion);
         if (clienteExistenteOpt.isPresent()) {
             cliente.setMascotas(clienteExistenteOpt.get().getMascotas());
@@ -210,8 +211,11 @@ public class VeterinarioController {
             Cliente cliente = clienteOpt.get();
             mascota.setCliente(cliente);
             cliente.agregarMascota(mascota);
+
+            // Aquí solo necesitamos actualizar el cliente, que en cascada guardará la
+            // mascota
             clienteService.update(cliente);
-            mascotaService.addMascota(mascota);
+
             return "redirect:/veterinario/mascotas";
         } else {
             // Manejar el caso cuando no se encuentra el cliente
@@ -238,5 +242,5 @@ public class VeterinarioController {
     public String mostrarTratamientos(Model model) {
         throw new NotFoundException();
     }
-    
+
 }
