@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <!-- logo -->
-     <link rel="icon" type="image/png" th:href="@{/images/Logo.png}">
+    <!-- logo -->
+    <link rel="icon" type="image/png" th:href="@{/images/Logo.png}">
     <title>Home Cliente</title>
     <link rel="stylesheet" th:href="@{/css/home_cliente_styles.css}">
     <link rel="icon" type="image/png" th:href="@{/images/Logo.png}">
 
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/a0a698ab6b.js" crossorigin="anonymous" defer></script>
 
 </head>
+
 <body>
     <header id="datos_cliente">
         <section class="box-foto">
@@ -35,6 +39,10 @@
 
         </form>
 
+
+     <a th:href="@{/login/cliente}" title="logout">
+        <i class="fa-solid fa-right-from-bracket"></i>
+    </a>
     </header>
 
     <main id="datos_mascotas">
@@ -51,4 +59,5 @@
         </section>
     </main>
 </body>
+
 </html>
