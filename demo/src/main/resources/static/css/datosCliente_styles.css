@@ -41,6 +41,21 @@ header {
     border-radius: 0% 0% 3% 3%;
 }
 
+.fa-right-from-bracket {
+    padding: 10px;
+    color: #F5F5F5;
+    font-size: 2.8rem;
+    margin: 0 10px;
+}
+
+a:hover .fa-right-from-bracket {
+    transition: all 0.5s ease;
+    padding: 10px;
+    color: #F5F5F5;
+    font-size: 3.1rem;
+    margin: 0 10px;
+}
+
 .columns-nav {
     display: flex;
     flex-direction: column;
@@ -311,6 +326,21 @@ main {
     margin: 0;
     padding: 0;
 }
+
+.mascota a:hover img {
+    opacity: 0.6;
+    width: 101px;
+    height: 101px;
+}
+
+.mascota a:hover h3 {
+    font-size: 1.6rem;
+}
+
+.mascota a:hover p {
+    font-size: 1.4rem;
+}
+
 
 /* Botones main */
 

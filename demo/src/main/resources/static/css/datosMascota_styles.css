@@ -40,6 +40,20 @@ header {
     font-family: "ABeeZee", sans-serif;
     border-radius: 0% 0% 3% 3%;
 }
+.fa-right-from-bracket {
+   padding: 10px;
+    color: #F5F5F5;
+    font-size: 2.8rem;
+    margin: 0 10px;
+}
+
+a:hover .fa-right-from-bracket {
+    transition: all 0.5s ease;
+    padding: 10px;
+    color: #F5F5F5;
+    font-size: 3.1rem;
+    margin: 0 10px;
+}
 
 .columns-nav {
     display: flex;
