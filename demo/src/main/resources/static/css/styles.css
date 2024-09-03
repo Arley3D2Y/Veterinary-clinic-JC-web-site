@@ -380,6 +380,7 @@ footer {
     width: auto;
     height: 100%;
     flex-shrink: 0;
+    font-size: 1.0em;
 }
 
 #footerLeft,
@@ -410,7 +411,7 @@ footer {
     font-family: "Baloo 2", sans-serif;
     font-weight: 200;
     font-style: normal;
-    font-size: 1.5em;
+    font-size: 1.0em;
     margin-left: 5%;
     margin-bottom: 3%;
 }
@@ -421,7 +422,7 @@ footer {
 
 #ContactFooter a:hover {
     color: #BE95C4;
-    font-size: 1.7em;
+    font-size: 1.5em;
     transition: all 0.5s ease;
 }
 
@@ -432,7 +433,7 @@ footer {
     font-family: "Baloo 2", sans-serif;
     font-weight: 200;
     font-style: normal;
-    font-size: 1.5em;
+    font-size: 1.0em;
     margin: 2%;
     align-self: center;
 }
@@ -448,7 +449,7 @@ footer {
     color: #F5F5F5;
     font-weight: 200;
     font-style: normal;
-    font-size: 1.8em;
+    font-size: 1.5em;
     margin: 2%;
     align-self: center;
 }
@@ -459,7 +460,7 @@ footer {
     font-family: "Baloo 2", sans-serif;
     font-weight: 200;
     font-style: normal;
-    font-size: 1.8em;
+    font-size: 1.1em;
     margin: 2%;
     padding-top: 2%;
     align-self: center;
@@ -474,7 +475,7 @@ footer {
 #EnlacesFooter a:hover {
     color: #9F86C0;
     font-weight: 300;
-    font-size: 2em;
+    font-size: 1.3em;
     margin: 2%;
     transition: all 0.5s ease;
 }
@@ -493,7 +494,7 @@ footer {
 .textos {
     font-family: "Baloo 2", sans-serif;
     font-style: normal;
-    font-size: 1.85em;
+    font-size: 1.2em;
     margin: 2%;
     align-self: center;
 }
@@ -507,7 +508,7 @@ footer {
     font-family: "ABeeZee", sans-serif;
     font-weight: 600;
     font-style: normal;
-    font-size: 4em;
+    font-size: 2em;
     color: #5E548E;
     margin: 0% 0% 0% 0%;
 }
@@ -516,7 +517,7 @@ footer {
     font-family: "ABeeZee", sans-serif;
     font-weight: 600;
     font-style: normal;
-    font-size: 3em;
+    font-size: 1.2em;
     color: #9F86C0;
     margin: 0% 0% 0% 0%;
 }
@@ -526,7 +527,7 @@ footer {
     font-family: "ABeeZee", sans-serif;
     font-weight: 500;
     font-style: normal;
-    font-size: 2.5em;
+    font-size: 1.1em;
     margin: 3% 0% 0% 0%;
 
 }
@@ -536,7 +537,7 @@ footer {
     font-family: "ABeeZee", sans-serif;;
     font-weight: 600;
     font-style: normal;
-    font-size: 2.7em;
+    font-size: 1.1em;
     margin: 3% 0% 2.5% 0%;
 
 }
@@ -544,5 +545,53 @@ footer {
 .fa-regular,
 .fa-brands {
     color: #9F86C0;
-    font-size: 1.5em;
+    font-size: 1.2em;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #231942;
+    font-family: Arial, sans-serif;
+    margin: 20px 0;
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #ccc;
+}
+
+.separator::before {
+    margin-right: 10px;
+}
+
+.separator::after {
+    margin-left: 10px;
+}
+
+.separator-symbol {
+    font-size: 24px;
+    margin: 0 5px;
+}
+
+#about {
+    overflow: hidden; /* Esto evita que el contenido flote fuera de la sección */
+}
+
+.float-right {
+    float: right;
+    margin: 0 0 20px 20px;
+    max-width: 300px;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .float-left, .float-right {
+        float: none;
+        display: block;
+        margin: 20px auto;
+    }
 }
