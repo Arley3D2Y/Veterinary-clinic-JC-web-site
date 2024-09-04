@@ -238,5 +238,7 @@ public class VeterinarioController {
     public String mostrarTratamientos(Model model) {
         throw new NotFoundException();
     }
+
+    
     
 }
