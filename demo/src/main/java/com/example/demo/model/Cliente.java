@@ -119,6 +119,7 @@ public class Cliente {
         }
         if (!this.mascotas.contains(mascota)) {
             this.mascotas.add(mascota);
+            mascota.setCliente(this);
         }
     }
 
