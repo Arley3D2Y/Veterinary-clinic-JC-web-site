@@ -242,6 +242,14 @@ public class VeterinarioController {
         }
     }
 
+    @GetMapping("/mascotas/buscar")
+    public String buscarMascotas(@RequestParam("search") String search, Model model) {
+        // Llamar al servicio para buscar clientes por nombre
+        List<Mascota> mascotas = mascotaService.buscarPorNombre(search);
+        model.addAttribute("mascotas", mascotas);
+        return "mascotas_veterinario"; // Redirigir a la vista de clientes con los resultados de búsqueda
+    }
+    
     /** Tratamientos **/
     @GetMapping("/tratamientos")
     public String mostrarTratamientos(Model model) {

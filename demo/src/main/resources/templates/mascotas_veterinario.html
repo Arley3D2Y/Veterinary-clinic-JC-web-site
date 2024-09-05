@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veterinario - Mascotas</title>
     <link rel="icon" type="image/png" href="../images/Logo.png">
-    <link rel="stylesheet" th:href="@{../css/inicio_vet_styles.css}">
+    <link rel="stylesheet" href="/css/inicio_vet_styles.css">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,7 +48,7 @@
         </div>
 
         <div class="header-logo">
-            <img th:src="@{../images/persona.png}" alt="foto" width="100" height="100">
+            <img src="/images/persona.png" alt="foto" width="100" height="100">
         </div>
     </header>
 
@@ -60,11 +60,13 @@
             <P>Buscardor de clientes usando el nombre de la mascota o del dueño</P>
 
             <!-- barra buscadora -->
-            <div class="searchBar">
+            <form action="/veterinario/mascotas/buscar" method="GET" class="searchBar">
                 <input type="text" id="search" name="search" placeholder="Buscar...">
                 <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </div>
-
+            </form>
+            <a th:href="@{/veterinario/mascotas}" title="Actualizar">
+                <img src="/images/arrows-rotate-solid.png" alt="logout" width="30px"></img>
+            </a>
         </section>
 
         <!-- TABLE -->

@@ -37,4 +37,9 @@ public class MascotaServiceImpl implements MascotaService {
     public void update(Mascota mascota) {
         MascotaRep.save(mascota);
     }
+
+    @Override
+    public List<Mascota> buscarPorNombre(String nombre) {
+        return MascotaRep.findByNombreContainingIgnoreCase(nombre);
+    }
 }
