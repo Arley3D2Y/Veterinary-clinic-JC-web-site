@@ -14,20 +14,9 @@
         defer></script>
     <!-- Styles -->
     <link rel="stylesheet" th:href="@{/css/forms_styles.css}">
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <title>Crear Mascota</title>
-</head>
-
-<body>
-    <h1 th:text="'Agregar Mascota de ' + ${duenho.nombre}"></h1>
-    <form th:object="${mascota}" th:action="@{/mascota/agregar/{id}(id=${duenho.id})}" method="POST">
-=======
-=======
     <!-- Icons -->
     <script src="https://kit.fontawesome.com/a0a698ab6b.js" crossorigin="anonymous" defer></script>
 
->>>>>>> Desarrollo
     <title>Formulario Mascota</title>
 </head>
 
@@ -67,10 +56,6 @@
     <h1 th:text="'Agregar Mascota de ' + ${cliente.nombre}"></h1>
     <!-- Formulario -->
     <form th:object="${mascota}" th:action="@{/veterinario/mascotas/agregar/{id}(id=${cliente.id})}" method="POST">
-<<<<<<< HEAD
->>>>>>> Desarrollo
-=======
->>>>>>> Desarrollo
         <div class="form-floating mb-3">
             <input th:field="*{nombre}" type="text" class="form-control" id="floatingInput"
                 placeholder="Nombre de la mascota">
