@@ -50,10 +50,10 @@ public class LoginController {
 
     @PostMapping("/veterinario")
     public String loginVeterinario(@RequestParam("correo") String correo, @RequestParam("password") String password, Model model) {
-        Optional<Veterinario> veterinario = veterinarioService.SearchByCorreo(correo);
-        if (veterinario.isPresent()) {
-            if (veterinario.get().getPassword().equals(password)) {
-                return "redirect:/veterinario/inicio?correo=" + veterinario.get().getCorreo();
+        Veterinario veterinario = veterinarioService.SearchByCorreo(correo);
+        if (veterinario != null) {
+            if (veterinario.getPassword().equals(password)) {
+                return "redirect:/veterinario/inicio?correo=" + veterinario.getCorreo();
             } else {
                 model.addAttribute("txtCorreo", correo); // Mantener el valor ingresado por el usuario
                 model.addAttribute("txtPassword", password);

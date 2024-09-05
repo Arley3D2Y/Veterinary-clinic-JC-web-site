@@ -5,13 +5,21 @@
 
 body {
     margin: 0;
-    height: 100vh;
+    height: 95vh;
     /* Ocupa el 100% de la altura de la ventana del navegador */
     width: 100%;
     margin: 0;
 }
 
-
+.logout-layout {
+    height: 100%;
+    width: 10%;
+    padding: 30px;
+}
+.logout-layout a:hover {
+    transition: all 0.5s ease;
+    padding: 5px;
+}
 
 body::-webkit-scrollbar {
     width: 7px;
@@ -60,7 +68,7 @@ a:hover .fa-right-from-bracket {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 90%;
     height: 100%;
 }
 
@@ -203,14 +211,13 @@ main {
     align-items: center;
     justify-content: center;
     padding: 30px 40px;
-    margin-top: 10%;
+    margin-top: 15%;
 }
 
 .main-info img {
-    width: 40%;
-    height: 80%;
+    width: 30%;
+    height: 70%;
     border-radius: 10%;
-    box-shadow: 0 0 90px #9F86C0;
 }
 
 .box-info {
@@ -261,7 +268,6 @@ main {
     border: #9F86C0 2px solid;
     background-color: #F5F5F5;
     border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .title-celda {

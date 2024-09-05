@@ -1,7 +1,6 @@
 package com.example.demo.controlador;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,11 +39,12 @@ public class VeterinarioController {
 
     @GetMapping("/inicio")
     public String mostrarHomeVeterinario(@RequestParam("correo") String correo, Model model) {
-        Optional<Veterinario> veterinario = veterinarioService.SearchByCorreo(correo);
+        Veterinario veterinario = veterinarioService.SearchByCorreo(correo);
         // Usar List<Mascota> en lugar de ArrayList<Mascota>
+        model.addAttribute("clientes", clienteService.SearchAll());
         model.addAttribute("veterinario", veterinario); // Pasar la información del cliente al modelo
 
-        return "home_veterinario";
+        return "clientes_veterinario";
     }
 
     /** Clientes **/

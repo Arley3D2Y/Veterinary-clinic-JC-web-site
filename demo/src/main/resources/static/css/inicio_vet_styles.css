@@ -4,13 +4,21 @@
 
 body {
     margin: 0;
-    height: 100vh;
+    height: 94vh;
     /* Ocupa el 100% de la altura de la ventana del navegador */
     width: 100%;
     margin: 0;
 }
 
-
+.logout-layout {
+    height: 100%;
+    width: 10%;
+    padding: 30px;
+}
+.logout-layout a:hover {
+    transition: all 0.5s ease;
+    padding: 5px;
+}
 
 body::-webkit-scrollbar {
     width: 7px;
@@ -57,7 +65,7 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 90%;
     height: 100%;
 }
 
@@ -154,11 +162,12 @@ li {
     margin: 5px;
 }
 
-a {
+li a {
     color: #ffffff;
     width: auto;
     height: 30px;
     text-decoration: none;
+    font-size: 24px;
     padding: 2px;
 }
 
@@ -330,7 +339,7 @@ main p {
     /* Espacio superior para separar del h2 */
 }
 
-img {
+.tableCenter img {
     width: 100px;
     height: 100px;
     margin-right: 10%;

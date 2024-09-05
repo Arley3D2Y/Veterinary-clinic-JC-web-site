@@ -11,10 +11,13 @@
 <body>
     <div class="container">
         <h1>404</h1>
-        <img th:src="@{/images/gato-error.jpg}" alt="Gato error" class="cat-error">
+        <img th:src="@{/images/gato-error.jpg}" alt="Gato error" class="cat-error" width="280px">
         <p>¡Oh no! No podemos encontrar la página que estás buscando.</p>
         <p>Pero no te preocupes, nuestros amigos felinos están aquí para ayudarte.</p>
-        <a th:href="${'/veterinario/inicio?cedula='}" class="btn">Volver al inicio</a>
+        
+        <!-- Mostrar enlace al inicio del veterinario si existe -->
+        <a th:href="${veterinario != null ? '/veterinario/inicio?correo=' + veterinario.getCorreo() : '/login/veterinario'}" class="btn">Volver al inicio</a>
     </div>
+    
 </body>
 </html>
