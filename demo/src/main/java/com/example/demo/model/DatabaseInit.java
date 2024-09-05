@@ -148,7 +148,7 @@ public class DatabaseInit implements ApplicationRunner {
                 clienteRepository.save(new Cliente("Tatiana Moreno", "8901247", "tatiana@gmail.com", "3008901247",
                                 "Cll 79 # 13-21",
                                 "https://upload.wikimedia.org/wikipedia/commons/9/97/Tania_Raymonde_2017_%28xwaKtuOkhX8%29.jpg"));
-                clienteRepository.save(new Cliente("Santiago Pérez", "9012358", "santiago@gmail.com", "3009012358",
+                clienteRepository.save(new Cliente("Santiago Pérez", "123456", "santiago@gmail.com", "3009012358",
                                 "Cll 79 # 13-21",
                                 "https://s3.abcstatics.com/Media/201404/05/cobain-foto--644x600.jpg"));
                 clienteRepository.save(new Cliente("Daniela Ríos", "0123469", "daniela@gmail.com", "3000123469",
@@ -401,7 +401,7 @@ public class DatabaseInit implements ApplicationRunner {
                                 "https://content.elmueble.com/medio/2023/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
                 mascotaRepository.save(new Mascota("Rusty", "Macho", "Siberiano", "2020-06-19",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
-                veterinarioRepository.save(new Veterinario("Sergio", "123456789", "s@t.com", "123",
+                veterinarioRepository.save(new Veterinario("Sergio", "123456789", "s@t.com", "1234",
                                 "https://i.ibb.co/0qX2b8t/sergio.jpg"));
 
                 List<Cliente> clientes = clienteRepository.findAll();

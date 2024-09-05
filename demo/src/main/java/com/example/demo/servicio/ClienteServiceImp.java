@@ -2,6 +2,7 @@ package com.example.demo.servicio;
 
 import java.util.Collection;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,8 @@ public class ClienteServiceImp implements ClienteService {
 
      // Implementacion de los metodos
     @Override
-    public Optional<Cliente> SearchById(Long id) {
-        return repo.findById(id);
+    public Cliente SearchById(Long id) {
+        return repo.findById(id).orElse(null);
     }
 
     @Override
@@ -44,4 +45,5 @@ public class ClienteServiceImp implements ClienteService {
     public void update(Cliente cliente) {
         repo.save(cliente);
     }
+
 }

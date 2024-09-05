@@ -14,7 +14,7 @@ public interface ClienteService {
      * @return EL objeto Cliente representado al cliente con el ID dado
      *         o null si no existe
      */
-    public Optional<Cliente> SearchById(Long identificacion);
+    public Cliente SearchById(Long identificacion);
 
 
     /**
@@ -55,5 +55,7 @@ public interface ClienteService {
      * @param cliente El objeto Cliente que se desea actualizar en el sistema.
      */
     public void update(Cliente cliente);
+
+
 
 }

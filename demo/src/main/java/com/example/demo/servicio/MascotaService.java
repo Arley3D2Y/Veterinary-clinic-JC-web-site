@@ -1,7 +1,6 @@
 package com.example.demo.servicio;
 
-import java.util.Collection;
-import java.util.Optional;
+import java.util.List;
 import com.example.demo.model.Mascota;
 
 public interface MascotaService {
@@ -13,14 +12,14 @@ public interface MascotaService {
      * @return EL objeto Mascota representado a la mascota con el ID dado
      *         o null si no existe
      */
-    public Optional<Mascota> SearchById(Long id);
+    public Mascota SearchById(Long id);
 
     /**
      * Este metodo es usado para obtener la información de todas las mascotas.
      *
      * @return La colección de todas las mascotas.
      */
-    public Collection<Mascota> SearchAll();
+    public List<Mascota> SearchAll();
 
     /**
      * Este metodo es usado para agregar una nueva mascota.

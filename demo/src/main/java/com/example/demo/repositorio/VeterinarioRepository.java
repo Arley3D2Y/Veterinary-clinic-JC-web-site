@@ -13,4 +13,7 @@ public interface VeterinarioRepository extends JpaRepository<Veterinario, Long> 
 
     // Método para buscar cliente por cédula
     Optional<Veterinario> findByCedula(String cedula);
+
+    // Método para buscar cliente por correo
+    Optional<Veterinario> findByCorreo(String correo);
 }

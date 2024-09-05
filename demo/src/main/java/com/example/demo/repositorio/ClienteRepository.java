@@ -13,4 +13,5 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
     // Método para buscar cliente por cédula
     Optional<Cliente> findByCedula(String cedula);
+
 }

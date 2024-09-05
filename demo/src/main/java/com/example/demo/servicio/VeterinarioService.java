@@ -28,6 +28,16 @@ public interface VeterinarioService {
 
 
     /**
+     * Este metodo es usado para buscar un cliente por su correo.
+     * 
+     * @param correo El ID con el que es identificado el cliente.
+     * @return El objeto Cliente representado al cliente con la cedula dada
+     *         o null si no existe
+     */
+    public Optional<Veterinario> SearchByCorreo(String correo);
+
+
+    /**
      * Este metodo es usado para obtener la información de todos los clientes.
      *
      * @return La colección de todos los clientes.
