@@ -23,7 +23,7 @@ Este proyecto es una página web moderna, elegante y responsiva diseñada para u
 
 ## Diagrama Entidad Relación
 
-<img src="/demo/src/main/resources/static/images/ERJonhTheCat.png" width="1000" height="1000" alt="Diagrama UML">
+<img src="/demo/src/main/resources/static/images/ERJonhTheCat.png" width="1000" height="700" alt="Diagrama UML">
 
 
 ## Paleta de colores
