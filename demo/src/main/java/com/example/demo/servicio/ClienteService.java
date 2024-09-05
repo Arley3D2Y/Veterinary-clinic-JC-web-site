@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import java.util.Optional;
 import com.example.demo.model.Cliente;
+import java.util.List;
 
 public interface ClienteService {
 
@@ -14,7 +15,7 @@ public interface ClienteService {
      * @return EL objeto Cliente representado al cliente con el ID dado
      *         o null si no existe
      */
-    public Optional<Cliente> SearchById(Long identificacion);
+    public Cliente SearchById(Long identificacion);
 
 
     /**
@@ -55,5 +56,13 @@ public interface ClienteService {
      * @param cliente El objeto Cliente que se desea actualizar en el sistema.
      */
     public void update(Cliente cliente);
+
+    /**
+     * Este metodo es usado para buscar clientes por su nombre.
+     *
+     * @param nombre El nombre con el que es identificado el cliente.
+     * @return La colección de todos los clientes que contengan el nombre dado
+     */
+    public List<Cliente> buscarPorNombre(String nombre);
 
 }
