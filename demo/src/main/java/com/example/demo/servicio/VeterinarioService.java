@@ -2,7 +2,6 @@ package com.example.demo.servicio;
 
 import java.util.Collection;
 
-import java.util.Optional;
 import com.example.demo.model.Veterinario;
 
 public interface VeterinarioService {
@@ -14,7 +13,7 @@ public interface VeterinarioService {
      * @return EL objeto Cliente representado al cliente con el ID dado
      *         o null si no existe
      */
-    public Optional<Veterinario> SearchById(Long identificacion);
+    public Veterinario SearchById(Long identificacion);
 
 
     /**
@@ -24,7 +23,17 @@ public interface VeterinarioService {
      * @return El objeto Cliente representado al cliente con la cedula dada
      *         o null si no existe
      */
-    public Optional<Veterinario> SearchByCedula(String cedula);
+    public Veterinario SearchByCedula(String cedula);
+
+
+    /**
+     * Este metodo es usado para buscar un cliente por su correo.
+     * 
+     * @param correo El ID con el que es identificado el cliente.
+     * @return El objeto Cliente representado al cliente con la cedula dada
+     *         o null si no existe
+     */
+    public Veterinario SearchByCorreo(String correo);
 
 
     /**

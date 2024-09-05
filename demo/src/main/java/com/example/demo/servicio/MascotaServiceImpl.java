@@ -1,7 +1,6 @@
 package com.example.demo.servicio;
 
-import java.util.Collection;
-import java.util.Optional;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +14,12 @@ public class MascotaServiceImpl implements MascotaService {
     MascotaRepository MascotaRep;
 
     @Override
-    public Optional<Mascota> SearchById(Long id) {
-        return MascotaRep.findById(id);
+    public Mascota SearchById(Long id) {
+        return MascotaRep.findById(id).orElse(null);
     }
 
     @Override
-    public Collection<Mascota> SearchAll() {
+    public List<Mascota> SearchAll() {
         return MascotaRep.findAll();
     }
 
@@ -37,5 +36,10 @@ public class MascotaServiceImpl implements MascotaService {
     @Override
     public void update(Mascota mascota) {
         MascotaRep.save(mascota);
+    }
+
+    @Override
+    public List<Mascota> buscarPorNombre(String nombre) {
+        return MascotaRep.findByNombreContainingIgnoreCase(nombre);
     }
 }

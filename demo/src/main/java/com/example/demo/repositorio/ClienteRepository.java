@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.Cliente;
 import java.util.Optional;
+import java.util.List;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
@@ -13,4 +14,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
     // Método para buscar cliente por cédula
     Optional<Cliente> findByCedula(String cedula);
+
+    List<Cliente> findByNombreContainingIgnoreCase(String nombre);
+
 }
