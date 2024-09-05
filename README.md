@@ -23,11 +23,11 @@ Este proyecto es una página web moderna, elegante y responsiva diseñada para u
 
 ## Diagrama Entidad Relación
 
-<img src="/demo/src/main/resources/static/images/uml.jpeg" width="1000" height="1000" alt="Diagrama ER">
+<img src="/demo/src/main/resources/static/images/ERJonhTheCat.png" width="1000" height="1000" alt="Diagrama UML">
 
 
 ## Paleta de colores
-<img src="/demo/src/main/resources/static/images/ERJonhTheCat.png" width="6000" height="500" alt="Paleta de colores">
+<img src="/demo/src/main/resources/static/images/paletaColores.png" width="6000" height="500" alt="Paleta de colores">
 
 ## Estructura del Proyecto
 
