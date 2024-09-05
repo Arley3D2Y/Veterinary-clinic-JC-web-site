@@ -8,7 +8,8 @@ Este proyecto es una página web moderna, elegante y responsiva diseñada para u
 
 # Para entrar como veterinario:
 Usuario: s@t.com
-Contraeña: 1234
+
+Contraseña: 1234
 
 ## Características
 
