@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Cliente;
 import com.example.demo.repositorio.ClienteRepository;
+import java.util.List;
 
 @Service
 public class ClienteServiceImp implements ClienteService {
@@ -45,5 +46,8 @@ public class ClienteServiceImp implements ClienteService {
     public void update(Cliente cliente) {
         repo.save(cliente);
     }
-
+    public List<Cliente> buscarPorNombre(String nombre) {
+        // Llamar al repositorio para buscar los clientes que contengan el nombre
+        return repo.findByNombreContainingIgnoreCase(nombre);
+    }
 }

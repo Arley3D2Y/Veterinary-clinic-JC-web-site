@@ -127,6 +127,15 @@ public class VeterinarioController {
         return "redirect:/veterinario/clientes";
     }
 
+    @GetMapping("/clientes/buscar")
+    public String buscarClientes(@RequestParam("search") String search, Model model) {
+        // Llamar al servicio para buscar clientes por nombre
+        List<Cliente> clientes = clienteService.buscarPorNombre(search);
+        model.addAttribute("clientes", clientes);
+        return "clientes_veterinario"; // Redirigir a la vista de clientes con los resultados de búsqueda
+    }
+
+
     /** Mascotas **/
 
     /** localhost:8091/veterinario/mascotas **/
