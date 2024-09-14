@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veterinario - Clientes</title>
+    <link rel="icon" type="image/png" href="../images/Logo.png">
+    <link rel="stylesheet" href="/css/inicio_vet_styles.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Baloo+2:wght@400..800&family=Glass+Antiqua&family=Karla:ital,wght@0,200..800;1,200..800&family=Lexend:wght@100..900&family=Turret+Road:wght@200;300;400;500;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/a0a698ab6b.js" crossorigin="anonymous" ></script>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header>
+        <!-- Navbar -->        
+         <div class="logout-layout">
+            <a th:href="@{/login/veterinario}" title="Logout">
+                <img src="/images/logout.png" alt="logout" width="50px" ></img>
+            </a>
+        </div>
+        <div class="columns-nav">
+            <nav class="first-nav">
+                <ul>
+                    <li><a th:href="@{/veterinario/tratamientos}" title="Ver tratamientos">Tratamientos</a></li>
+                    <li><a th:href="@{/veterinario/mascotas}" title='Ver mascotas'>Mascotas</a></li>
+                    <li><a id="active" th:href="@{/veterinario/clientes}" title="Ver clientes">Clientes</a></li>
+                </ul>
+
+                <div class="datos-vet">
+                    <h1>Dr. Lorena García Garavito Suarez</h1>
+                </div>
+            </nav>
+
+            <nav class="second-nav">
+                <p>Veterinario</p>
+            </nav>
+        </div>
+
+        <div class="header-logo">
+            <img src="/images/persona.png" alt="foto" width="100" height="100">
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+        <!-- SEARCH -->
+        <section class="search">
+            <h1>Buscar Cliente</h1>
+            <P>Buscardor de clientes usando el nombre o registra un nuevo cliente a la veterinaria</P>
+
+            <!-- barra buscadora -->
+            <form action="/veterinario/clientes/buscar" method="GET" class="searchBar">
+                <input type="text" id="search" name="search" placeholder="Buscar...">
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+            <br>
+            <P>O tambien...</P>
+            <a type="button" class="btn btn-dark-add" th:href="@{/veterinario/clientes/add}"
+                title='Agregar cliente'>Registar</a>
+
+            <a th:href="@{/veterinario/clientes}" title="Actualizar">
+                <img src="/images/arrows-rotate-solid.png" alt="logout" width="30px"></img>
+            </a>
+    
+        </section>
+
+        <!-- TABLA -->
+        <section class="clientes_table">
+            <!-- Taarjetas  -->
+            <div class="tableCenter" th:each="cliente : ${clientes}">
+                <!-- imagen -->
+                <img th:src="${cliente.fotoString}" width="90" height="90" alt="Foto de ${cliente.nombre}">
+                <!-- Información -->
+                <div>
+                    <h2 th:text="${cliente.nombre}"></h2>
+                    <p th:text="' CC: ' + ${cliente.cedula}"></p>
+                </div>
+                <!-- botones -->
+                <div class="info">
+                    <a type="button" class="btn btn-dark"
+                        th:href="@{/veterinario/clientes/find/{id}(id=${cliente.id})}"><i
+                            class="fa-solid fa-circle-info" title="Detalles"></i></a>
+
+                    <a type="button" class="btn btn-danger"
+                        th:href="@{/veterinario/clientes/delete/{id}(id=${cliente.id})}" title="Eliminar"><i
+                            class="fa-solid fa-trash-can"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
