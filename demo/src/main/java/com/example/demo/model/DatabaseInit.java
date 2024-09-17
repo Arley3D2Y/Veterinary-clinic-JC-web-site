@@ -438,7 +438,7 @@ public class DatabaseInit implements ApplicationRunner {
                 veterinarioRepository.save(new Veterinario("Diego", "987456123", "diego@animaldoctor.com", "7891",
                                 "https://i.ibb.co/LJSx78r/diego.jpg"));
                 veterinarioRepository.save(new Veterinario("Claudia", "456789321", "claudia@clinicvet.com", "8902",
-                                "https://i.ibb.co/MBSM4pj/claudia.jpg
+                                "https://i.ibb.co/MBSM4pj/claudia.jpg"));
 
                 List<Cliente> clientes = clienteRepository.findAll();
                 List<Mascota> mascotas = mascotaRepository.findAll();
