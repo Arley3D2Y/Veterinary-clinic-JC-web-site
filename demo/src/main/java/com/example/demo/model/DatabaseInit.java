@@ -403,6 +403,42 @@ public class DatabaseInit implements ApplicationRunner {
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
                 veterinarioRepository.save(new Veterinario("Sergio", "123456789", "s@t.com", "1234",
                                 "https://i.ibb.co/0qX2b8t/sergio.jpg"));
+                veterinarioRepository.save(new Veterinario("Sergio", "123456789", "s@t.com", "1234",
+                                "https://i.ibb.co/0qX2b8t/sergio.jpg"));
+                veterinarioRepository.save(new Veterinario("Carlos", "987654321", "c@vets.com", "2345",
+                                "https://i.ibb.co/1JZfv1Z/carlos.jpg"));
+                veterinarioRepository.save(new Veterinario("Laura", "456789123", "l@vetmail.com", "3456",
+                                "https://i.ibb.co/Zh2ZDS3/laura.jpg"));
+                veterinarioRepository.save(new Veterinario("Andrés", "321456987", "a@clinic.com", "4567",
+                                "https://i.ibb.co/YktjXzK/andres.jpg"));
+                veterinarioRepository.save(new Veterinario("Fernanda", "654321789", "f@catvets.com", "5678",
+                                "https://i.ibb.co/Ms1FbJZ/fernanda.jpg"));
+                veterinarioRepository.save(new Veterinario("Ricardo", "123987654", "r@medvet.com", "6789",
+                                "https://i.ibb.co/LdWh1rX/ricardo.jpg"));
+                veterinarioRepository.save(new Veterinario("Paula", "789456123", "p@vetservice.com", "7890",
+                                "https://i.ibb.co/ZXWJLSB/paula.jpg"));
+                veterinarioRepository.save(new Veterinario("María", "321654987", "m@vetclinic.com", "8901",
+                                "https://i.ibb.co/F7bc0Z8/maria.jpg"));
+                veterinarioRepository.save(new Veterinario("Javier", "456123789", "j@animalhealth.com", "9012",
+                                "https://i.ibb.co/WghgDxX/javier.jpg"));
+                veterinarioRepository.save(new Veterinario("Ana", "789123456", "ana@vetcare.com", "0123",
+                                "https://i.ibb.co/qW0tdBh/ana.jpg"));
+                veterinarioRepository.save(new Veterinario("Pedro", "987321654", "pedro@cathealth.com", "1235",
+                                "https://i.ibb.co/0r5X4B3/pedro.jpg"));
+                veterinarioRepository.save(new Veterinario("Daniela", "654789123", "daniela@felineclinic.com", "2346",
+                                "https://i.ibb.co/t2X5PCm/daniela.jpg"));
+                veterinarioRepository.save(new Veterinario("Gustavo", "123789654", "gustavo@animalclinic.com", "3457",
+                                "https://i.ibb.co/Fqf7vLY/gustavo.jpg"));
+                veterinarioRepository.save(new Veterinario("Lucía", "789321456", "lucia@vetprofession.com", "4568",
+                                "https://i.ibb.co/1Zh7rdV/lucia.jpg"));
+                veterinarioRepository.save(new Veterinario("Mauricio", "321987654", "mauricio@petcare.com", "5679",
+                                "https://i.ibb.co/HqKNPP5/mauricio.jpg"));
+                veterinarioRepository.save(new Veterinario("Adriana", "654123987", "adriana@vetservice.com", "6780",
+                                "https://i.ibb.co/hgQkWdk/adriana.jpg"));
+                veterinarioRepository.save(new Veterinario("Diego", "987456123", "diego@animaldoctor.com", "7891",
+                                "https://i.ibb.co/LJSx78r/diego.jpg"));
+                veterinarioRepository.save(new Veterinario("Claudia", "456789321", "claudia@clinicvet.com", "8902",
+                                "https://i.ibb.co/MBSM4pj/claudia.jpg
 
                 List<Cliente> clientes = clienteRepository.findAll();
                 List<Mascota> mascotas = mascotaRepository.findAll();
