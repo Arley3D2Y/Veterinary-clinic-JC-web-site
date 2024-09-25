@@ -3,20 +3,26 @@ package com.example.demo.controlador;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.Cliente;
 import com.example.demo.model.Mascota;
+import com.example.demo.model.Tratamiento;
 import com.example.demo.model.Veterinario;
 import com.example.demo.servicio.ClienteService;
 import com.example.demo.servicio.MascotaService;
+import com.example.demo.servicio.TratamientoService;
 import com.example.demo.servicio.VeterinarioService;
 import com.example.demo.errorHandling.NotFoundException;
 
@@ -32,6 +38,9 @@ public class VeterinarioController {
 
     @Autowired
     private VeterinarioService veterinarioService;
+
+    @Autowired
+    private TratamientoService tratamientoService;
 
     // HoLa
 
@@ -134,7 +143,6 @@ public class VeterinarioController {
         model.addAttribute("clientes", clientes);
         return "clientes_veterinario"; // Redirigir a la vista de clientes con los resultados de búsqueda
     }
-
 
     /** Mascotas **/
 
@@ -249,11 +257,30 @@ public class VeterinarioController {
         model.addAttribute("mascotas", mascotas);
         return "mascotas_veterinario"; // Redirigir a la vista de clientes con los resultados de búsqueda
     }
+
+    @GetMapping("/mascotas/{id}/tratamientos")
+    public void obtenerTratamientosPorMascota(@PathVariable Long id) {
+        List<Tratamiento> tratamientos = (List<Tratamiento>) tratamientoService.SearchByMascota(id);
     
+    }
+
     /** Tratamientos **/
     @GetMapping("/tratamientos")
     public String mostrarTratamientos(Model model) {
         throw new NotFoundException();
     }
 
+    @PostMapping("/tratamientos/agregar")
+    private String agregaTratamiento(@ModelAttribute("tratamiento") Tratamiento tratamiento) {
+        tratamientoService.addTratamiento(tratamiento);
+
+        return "redirect:/veterinario/tratamientos";
+
+    }
+
+    @PutMapping("taratamiento/update/{id}")
+    public void actualizarTratamiento(@PathVariable("id") Long id,
+            @ModelAttribute("tratamiento") Tratamiento tratamiento) {
+        tratamientoService.update(tratamiento);
+    }
 }

@@ -3,7 +3,6 @@ package com.example.demo.servicio;
 import java.time.LocalDate;
 import java.util.*;
 
-import com.example.demo.model.Mascota;
 import com.example.demo.model.Tratamiento;
 
 public interface TratamientoService {
