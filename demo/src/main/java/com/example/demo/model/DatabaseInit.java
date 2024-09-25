@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -10,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 import com.example.demo.repositorio.ClienteRepository;
+import com.example.demo.repositorio.DrogaRepository;
 import com.example.demo.repositorio.MascotaRepository;
+import com.example.demo.repositorio.TratamientoRepository;
 import com.example.demo.repositorio.VeterinarioRepository;
 
 import org.springframework.boot.ApplicationArguments;
@@ -29,6 +32,12 @@ public class DatabaseInit implements ApplicationRunner {
 
         @Autowired
         VeterinarioRepository veterinarioRepository;
+
+        @Autowired
+        TratamientoRepository tratamientoRepository;
+
+        @Autowired
+        DrogaRepository drogaRepository;
 
         @Override
         public void run(ApplicationArguments args) throws Exception {
@@ -401,6 +410,8 @@ public class DatabaseInit implements ApplicationRunner {
                                 "https://content.elmueble.com/medio/2023/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
                 mascotaRepository.save(new Mascota("Rusty", "Macho", "Siberiano", "2020-06-19",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
+
+                // VETERINARIOS
                 veterinarioRepository.save(new Veterinario("Sergio", "123456789", "s@t.com", "1234",
                                 "https://i.ibb.co/0qX2b8t/sergio.jpg"));
                 veterinarioRepository.save(new Veterinario("Sergio", "123456789", "s@t.com", "1234",
@@ -440,6 +451,42 @@ public class DatabaseInit implements ApplicationRunner {
                 veterinarioRepository.save(new Veterinario("Claudia", "456789321", "claudia@clinicvet.com", "8902",
                                 "https://i.ibb.co/MBSM4pj/claudia.jpg"));
 
+                // Tratamientos
+                tratamientoRepository.save(new Tratamiento("Tratamiento antiinflamatorio",
+                                "Reducción de inflamación y dolor", LocalDate.of(2023, 9, 1)));
+                tratamientoRepository.save(new Tratamiento("Tratamiento antibiótico",
+                                "Eliminación de infección bacteriana", LocalDate.of(2023, 9, 2)));
+                tratamientoRepository.save(new Tratamiento("Tratamiento dermatológico",
+                                "Tratamiento para problemas de piel", LocalDate.of(2023, 9, 3)));
+                tratamientoRepository.save(new Tratamiento("Vacunación", "Aplicación de vacunas rutinarias",
+                                LocalDate.of(2023, 9, 4)));
+                tratamientoRepository.save(new Tratamiento("Desparasitación",
+                                "Eliminación de parásitos internos y externos", LocalDate.of(2023, 9, 5)));
+                tratamientoRepository.save(new Tratamiento("Tratamiento para la ansiedad",
+                                "Manejo de ansiedad en mascotas", LocalDate.of(2023, 9, 6)));
+                tratamientoRepository.save(new Tratamiento("Tratamiento hormonal",
+                                "Regulación de desequilibrios hormonales", LocalDate.of(2023, 9, 7)));
+                tratamientoRepository.save(new Tratamiento("Cirugía menor", "Procedimientos quirúrgicos menores",
+                                LocalDate.of(2023, 9, 8)));
+                tratamientoRepository.save(new Tratamiento("Tratamiento para la obesidad", "Plan de reducción de peso",
+                                LocalDate.of(2023, 9, 9)));
+                tratamientoRepository.save(new Tratamiento("Rehabilitación física",
+                                "Terapias para recuperación de movilidad", LocalDate.of(2023, 9, 10)));
+
+                // Drogas
+                drogaRepository.save(new Droga("Paracetamol", 5.0f, 9.0f, 100, 50));
+                drogaRepository.save(new Droga("Ibuprofeno", 10.5f, 15.0f, 100, 50));
+                drogaRepository.save(new Droga("Amoxicilina", 8.0f, 12.5f, 200, 120));
+                drogaRepository.save(new Droga("Cefalexina", 7.5f, 11.0f, 150, 60));
+                drogaRepository.save(new Droga("Dexametasona", 5.0f, 9.0f, 300, 180));
+                drogaRepository.save(new Droga("Metronidazol", 6.2f, 10.5f, 250, 90));
+                drogaRepository.save(new Droga("Ketoconazol", 12.0f, 16.5f, 180, 70));
+                drogaRepository.save(new Droga("Prednisolona", 11.0f, 15.5f, 120, 45));
+                drogaRepository.save(new Droga("Enrofloxacina", 9.5f, 13.0f, 170, 95));
+                drogaRepository.save(new Droga("Clindamicina", 6.0f, 10.0f, 140, 80));
+                drogaRepository.save(new Droga("Fluconazol", 14.0f, 18.0f, 90, 30));
+
+                // Asignar mascotas aleatoriamente a clientes
                 List<Cliente> clientes = clienteRepository.findAll();
                 List<Mascota> mascotas = mascotaRepository.findAll();
 
