@@ -1,8 +1,5 @@
 package com.example.demo.servicio;
-
-import java.util.Collection;
-
-import java.util.Optional;
+import java.util.*;
 import com.example.demo.model.Cliente;
 import java.util.List;
 
