@@ -478,7 +478,7 @@ public class DatabaseInit implements ApplicationRunner {
 
                 // Drogas
                 excelService.cargarDrogasDesdeExcel();
-
+               
                 // Asignar mascotas aleatoriamente a clientes
                 List<Cliente> clientes = clienteRepository.findAll();
                 List<Mascota> mascotas = mascotaRepository.findAll();
