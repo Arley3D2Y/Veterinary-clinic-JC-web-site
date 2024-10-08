@@ -36,7 +36,7 @@ public class TratamientoServiceImp implements TratamientoService {
     @Override
     public Collection<Tratamiento> SearchByStartDate(LocalDate startDate) {
         Collection<Tratamiento> result = new ArrayList<Tratamiento>();
-        for (Tratamiento tratamiento : repo.findByDate(startDate)) {
+        for (Tratamiento tratamiento : repo.findByFechaInicio(startDate)) {
             if (tratamiento.getFechaInicio() != null) {
                 if (tratamiento.getFechaInicio() == LocalDate.from(startDate)) {
                     result.add(tratamiento);
@@ -49,9 +49,9 @@ public class TratamientoServiceImp implements TratamientoService {
     @Override
     public Collection<Tratamiento> SearchByEndDate(LocalDate startDate) {
         Collection<Tratamiento> result = new ArrayList<Tratamiento>();
-        for (Tratamiento tratamiento : repo.findByDate(startDate)) {
+        for (Tratamiento tratamiento : repo.findByFechaFin(startDate)) {
             if (tratamiento.getFechaFin() != null) {
-                if (tratamiento.getFechaInicio() == LocalDate.from(startDate)) {
+                if (tratamiento.getFechaFin() == LocalDate.from(startDate)) {
                     result.add(tratamiento);
                 }
             }
@@ -76,7 +76,7 @@ public class TratamientoServiceImp implements TratamientoService {
         Optional<Veterinario> optionalVeterianrio = vetRep.findById(veterianrioId); 
         if (optionalVeterianrio.isPresent()) {
             Veterinario veterinario = optionalVeterianrio.get();
-            return repo.findByVeterianario(veterinario);
+            return repo.findByVeterianarios(veterinario);
         } else {
 
             return Collections.emptyList();
@@ -88,7 +88,7 @@ public class TratamientoServiceImp implements TratamientoService {
         Optional<Droga> optionalDroga = drogaRep.findById(drograId);
         if (optionalDroga.isPresent()) {
             Droga droga = optionalDroga.get();
-            return repo.findByDroga(droga);
+            return repo.findByDrogas(droga);
         } else {
 
             return Collections.emptyList();
