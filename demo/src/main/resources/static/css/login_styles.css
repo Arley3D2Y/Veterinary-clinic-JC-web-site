@@ -11,6 +11,7 @@ body {
     background-repeat: no-repeat; /* No repetir la imagen */
     background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
     font-family: "ABeeZee", sans-serif;
+    border: red 1px solid;
 
     margin: 0;
 }
@@ -20,6 +21,8 @@ main {
     height: 60%;
     width: 100%;
     padding: 6vh 40vw 0 40vw; /* Padding relativo al tamaño del viewport */
+
+    border: yellow 1px solid;
 }
 
 /* Estilos del formulario */
