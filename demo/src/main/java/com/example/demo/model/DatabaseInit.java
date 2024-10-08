@@ -15,6 +15,7 @@ import com.example.demo.repositorio.DrogaRepository;
 import com.example.demo.repositorio.MascotaRepository;
 import com.example.demo.repositorio.TratamientoRepository;
 import com.example.demo.repositorio.VeterinarioRepository;
+import com.example.demo.servicio.ExcelService;
 
 import org.springframework.boot.ApplicationArguments;
 
@@ -39,6 +40,8 @@ public class DatabaseInit implements ApplicationRunner {
         @Autowired
         DrogaRepository drogaRepository;
 
+        @Autowired
+        ExcelService excelService;
         @Override
         public void run(ApplicationArguments args) throws Exception {
 
@@ -474,17 +477,7 @@ public class DatabaseInit implements ApplicationRunner {
                                 "Terapias para recuperación de movilidad", LocalDate.of(2023, 9, 10)));
 
                 // Drogas
-                drogaRepository.save(new Droga("Paracetamol", 5.0f, 9.0f, 100, 50));
-                drogaRepository.save(new Droga("Ibuprofeno", 10.5f, 15.0f, 100, 50));
-                drogaRepository.save(new Droga("Amoxicilina", 8.0f, 12.5f, 200, 120));
-                drogaRepository.save(new Droga("Cefalexina", 7.5f, 11.0f, 150, 60));
-                drogaRepository.save(new Droga("Dexametasona", 5.0f, 9.0f, 300, 180));
-                drogaRepository.save(new Droga("Metronidazol", 6.2f, 10.5f, 250, 90));
-                drogaRepository.save(new Droga("Ketoconazol", 12.0f, 16.5f, 180, 70));
-                drogaRepository.save(new Droga("Prednisolona", 11.0f, 15.5f, 120, 45));
-                drogaRepository.save(new Droga("Enrofloxacina", 9.5f, 13.0f, 170, 95));
-                drogaRepository.save(new Droga("Clindamicina", 6.0f, 10.0f, 140, 80));
-                drogaRepository.save(new Droga("Fluconazol", 14.0f, 18.0f, 90, 30));
+                excelService.cargarDrogasDesdeExcel();
 
                 // Asignar mascotas aleatoriamente a clientes
                 List<Cliente> clientes = clienteRepository.findAll();
