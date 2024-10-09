@@ -16,14 +16,16 @@ import com.example.demo.model.Veterinario;
 public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> {
 
     //Buscar por fecha
-    Collection<Tratamiento> findByDate(LocalDate nombre);
+    Collection<Tratamiento> findByFechaInicio(LocalDate startDate);
+
+    Collection<Tratamiento> findByFechaFin(LocalDate endDate);
 
     //Buscar por mascota
     Collection<Tratamiento> findByMascota(Mascota mascota);
 
     //Buscar por veterinario
-    Collection<Tratamiento> findByVeterianario(Veterinario veterinario);
+    Collection<Tratamiento> findByVeterianarios(Veterinario veterinario);
 
     //Buscar por droga
-    Collection<Tratamiento> findByDroga(Droga droga);
+    Collection<Tratamiento> findByDrogas(Droga droga);
 }

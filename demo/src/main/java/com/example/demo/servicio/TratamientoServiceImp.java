@@ -36,24 +36,25 @@ public class TratamientoServiceImp implements TratamientoService {
     @Override
     public Collection<Tratamiento> SearchByStartDate(LocalDate startDate) {
         Collection<Tratamiento> result = new ArrayList<Tratamiento>();
-        for (Tratamiento tratamiento : repo.findByDate(startDate)) {
-            if (tratamiento.getFechaInicio() != null) {
-                if (tratamiento.getFechaInicio() == LocalDate.from(startDate)) {
-                    result.add(tratamiento);
-                }
+        
+        // Usar el método correcto del repositorio
+        for (Tratamiento tratamiento : repo.findByFechaInicio(startDate)) {
+            // Aquí, ya no es necesario comprobar si la fecha es nula, 
+            // ya que el repositorio sólo devuelve tratamientos con esa fecha
+            if (tratamiento.getFechaInicio() != null && tratamiento.getFechaInicio().equals(startDate)) {
+                result.add(tratamiento);
             }
         }
         return result;
     }
 
     @Override
-    public Collection<Tratamiento> SearchByEndDate(LocalDate startDate) {
+    public Collection<Tratamiento> SearchByEndDate(LocalDate endDate) {
         Collection<Tratamiento> result = new ArrayList<Tratamiento>();
-        for (Tratamiento tratamiento : repo.findByDate(startDate)) {
-            if (tratamiento.getFechaFin() != null) {
-                if (tratamiento.getFechaInicio() == LocalDate.from(startDate)) {
-                    result.add(tratamiento);
-                }
+    
+        for (Tratamiento tratamiento : repo.findByFechaFin(endDate)) {
+            if (tratamiento.getFechaFin() != null && tratamiento.getFechaFin().equals(endDate)) {
+                result.add(tratamiento);
             }
         }
         return result;
@@ -72,11 +73,11 @@ public class TratamientoServiceImp implements TratamientoService {
     }
 
     @Override
-    public Collection<Tratamiento> SearchByVeterinario(Long veterianrioId) {
-        Optional<Veterinario> optionalVeterianrio = vetRep.findById(veterianrioId); 
+    public Collection<Tratamiento> SearchByVeterinario(Long veterinarioId) {
+        Optional<Veterinario> optionalVeterianrio = vetRep.findById(veterinarioId); 
         if (optionalVeterianrio.isPresent()) {
             Veterinario veterinario = optionalVeterianrio.get();
-            return repo.findByVeterianario(veterinario);
+            return repo.findByVeterianarios(veterinario);
         } else {
 
             return Collections.emptyList();
@@ -88,7 +89,7 @@ public class TratamientoServiceImp implements TratamientoService {
         Optional<Droga> optionalDroga = drogaRep.findById(drograId);
         if (optionalDroga.isPresent()) {
             Droga droga = optionalDroga.get();
-            return repo.findByDroga(droga);
+            return repo.findByDrogas(droga);
         } else {
 
             return Collections.emptyList();
