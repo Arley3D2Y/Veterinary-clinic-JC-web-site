@@ -78,6 +78,7 @@ public class TratamientoServiceImp implements TratamientoService {
         if (optionalVeterianrio.isPresent()) {
             Veterinario veterinario = optionalVeterianrio.get();
             return repo.findByVeterianarios(veterinario);
+            return repo.findByVeterianarios(veterinario);
         } else {
 
             return Collections.emptyList();
@@ -89,6 +90,7 @@ public class TratamientoServiceImp implements TratamientoService {
         Optional<Droga> optionalDroga = drogaRep.findById(drograId);
         if (optionalDroga.isPresent()) {
             Droga droga = optionalDroga.get();
+            return repo.findByDrogas(droga);
             return repo.findByDrogas(droga);
         } else {
 
