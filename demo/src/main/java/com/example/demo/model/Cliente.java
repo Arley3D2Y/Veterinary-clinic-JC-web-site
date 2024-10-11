@@ -2,11 +2,14 @@ package com.example.demo.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.ArrayList;
 
@@ -15,29 +18,29 @@ public class Cliente {
     // atributos
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "NAME")
     private String nombre;
-
     private String cedula;
-
     private String correo;
-
     private String celular;
+    private String direccion;
 
-    @Column(length = 2048)  // Ajusta el tamaño según sea necesario
+    @Column(length = 2048) // Ajusta el tamaño según sea necesario
     private String fotoString;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Mascota> mascotas = new ArrayList<>();;
 
-    public Cliente(String nombre, String cedula, String correo, String celular, String fotoString) {
+    public Cliente(String nombre, String cedula, String correo, String celular, String direccion, String fotoString) {
         this.nombre = nombre;
         this.cedula = cedula;
         this.correo = correo;
         this.celular = celular;
+        this.direccion = direccion;
         this.fotoString = fotoString;
     }
 
@@ -92,8 +95,15 @@ public class Cliente {
     public void setMascotas(List<Mascota> mascotas) {
         this.mascotas = mascotas;
     }
-    
-    
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
     public String getFotoString() {
         return fotoString;
     }
@@ -102,7 +112,6 @@ public class Cliente {
         this.fotoString = fotoString;
     }
 
-
     // métodos
     public void agregarMascota(Mascota mascota) {
         if (this.mascotas == null) {
@@ -110,6 +119,7 @@ public class Cliente {
         }
         if (!this.mascotas.contains(mascota)) {
             this.mascotas.add(mascota);
+            mascota.setCliente(this);
         }
     }
 
@@ -121,5 +131,4 @@ public class Cliente {
         this.mascotas.remove(mascota);
         this.mascotas.add(mascota);
     }
-
 }

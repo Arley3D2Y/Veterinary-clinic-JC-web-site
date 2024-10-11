@@ -1,12 +1,11 @@
 package com.example.demo.servicio;
 
-import java.util.Collection;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Cliente;
 import com.example.demo.repositorio.ClienteRepository;
+import java.util.List;
 
 @Service
 public class ClienteServiceImp implements ClienteService {
@@ -14,20 +13,19 @@ public class ClienteServiceImp implements ClienteService {
     @Autowired
     ClienteRepository repo;
 
-     // Implementacion de los metodos
     @Override
-    public Optional<Cliente> SearchById(Long id) {
-        return repo.findById(id);
-    }
-
-    @Override
-    public Optional<Cliente> SearchByCedula(String cedula) {
-        return repo.findByCedula(cedula);
-    }
-
-    @Override
-    public Collection<Cliente> SearchAll() {
+    public List<Cliente> SearchAll() {
         return repo.findAll();
+    }
+
+    @Override
+    public Cliente SearchById(Long id) {
+        return repo.findById(id).get();
+    }
+
+    @Override
+    public Cliente SearchByCedula(String cedula) {
+        return repo.findByCedula(cedula);
     }
 
     @Override
@@ -42,6 +40,15 @@ public class ClienteServiceImp implements ClienteService {
 
     @Override
     public void update(Cliente cliente) {
-        repo.save(cliente);
+        Cliente existingCliente = repo.findById(cliente.getId()).orElse(null);
+        if (existingCliente != null) {
+            repo.save(cliente);  // Save es usado tanto para crear como para actualizar
+        }
     }
+
+    public List<Cliente> buscarPorNombre(String nombre) {
+        // Llamar al repositorio para buscar los clientes que contengan el nombre
+        return repo.findByNombreContainingIgnoreCase(nombre);
+    }
+    
 }

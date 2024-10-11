@@ -23,8 +23,9 @@ public class Tratamiento {
 
     private LocalDate fechaFin;
 
-    @OneToMany(mappedBy = "tratamiento")
-    private List<Tratamiento_Droga> tratamientoDrogas = new ArrayList<Tratamiento_Droga>();
+    @ManyToMany
+    @JoinTable(name = "tratamiento_droga", joinColumns = @JoinColumn(name = "tratamiento_id"), inverseJoinColumns = @JoinColumn(name = "droga_id"))
+    private List<Droga> drogas = new ArrayList<>();
 
     @ManyToMany(mappedBy = "tratamientos")
     private List<Veterinario> veterianarios = new ArrayList<Veterinario>();
@@ -86,14 +87,6 @@ public class Tratamiento {
         this.fechaFin = fechaFin;
     }
 
-    public List<Tratamiento_Droga> getTratamientoDrogas() {
-        return tratamientoDrogas;
-    }
-
-    public void setTratamientoDrogas(List<Tratamiento_Droga> tratamientoDrogas) {
-        this.tratamientoDrogas = tratamientoDrogas;
-    }
-
     public List<Veterinario> getVeterianarios() {
         return veterianarios;
     }
@@ -108,6 +101,14 @@ public class Tratamiento {
 
     public void setMascota(Mascota mascota) {
         this.mascota = mascota;
+    }
+
+    public List<Droga> getDrogas() {
+        return drogas;
+    }
+
+    public void setDrogas(List<Droga> drogas) {
+        this.drogas = drogas;
     }
 
 }

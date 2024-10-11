@@ -2,11 +2,10 @@ package com.example.demo.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Droga {
@@ -27,9 +26,8 @@ public class Droga {
 
     private Integer unidadesVendidas;
 
-    @OneToMany(mappedBy = "droga")
-    private List<Tratamiento_Droga> tratamientoDrogas = new ArrayList<Tratamiento_Droga>();
-
+    @ManyToMany(mappedBy = "drogas")
+    private List<Tratamiento> tratamientos = new ArrayList<>();
 
     // Constructores
 
@@ -95,13 +93,12 @@ public class Droga {
         this.unidadesVendidas = unidadesVendidas;
     }
 
-    public List<Tratamiento_Droga> getTratamientoDrogas() {
-        return tratamientoDrogas;
+    public List<Tratamiento> getTratamientos() {
+        return tratamientos;
     }
 
-    public void setTratamientoDrogas(List<Tratamiento_Droga> tratamientoDrogas) {
-        this.tratamientoDrogas = tratamientoDrogas;
+    public void setTratamientos(List<Tratamiento> tratamientos) {
+        this.tratamientos = tratamientos;
     }
 
-    
 }

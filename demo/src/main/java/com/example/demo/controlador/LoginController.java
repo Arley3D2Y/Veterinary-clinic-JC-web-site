@@ -1,6 +1,5 @@
 package com.example.demo.controlador;
 
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,13 +37,8 @@ public class LoginController {
 
     @PostMapping("/cliente")
     public String loginCliente(@RequestParam("cedula") String cedula, Model model) {
-        if (cedula == null || cedula.trim().isEmpty()) {
-            model.addAttribute("error", "*Campo requerido");
-            return "login";
-        }
-        
-        Optional<Cliente> cliente = clienteService.SearchByCedula(cedula);
-        if (cliente.isPresent()) {
+        Cliente cliente = clienteService.SearchByCedula(cedula);
+        if (cliente != null) {
             return "redirect:/cliente/inicio?cedula=" + cedula;
         } else {
             model.addAttribute("txtCedula", cedula); // Mantener el valor ingresado por el usuario
@@ -54,21 +48,25 @@ public class LoginController {
     }
 
     @PostMapping("/veterinario")
-    public String loginVeterinario(@RequestParam("cedula") String cedula, Model model) {
-        if (cedula == null || cedula.trim().isEmpty()) {
-            model.addAttribute("error", "*Campo requerido");
-            return "login_veterinario";
-        }
-        
-        Optional<Veterinario> veterinario = veterinarioService.SearchByCedula(cedula);
-        if (veterinario.isPresent()) {
-            return "redirect:/veterinario/inicio?cedula=" + cedula;
+    public String loginVeterinario(@RequestParam("correo") String correo, @RequestParam("password") String password, Model model) {
+        Veterinario veterinario = veterinarioService.SearchByCorreo(correo);
+        if (veterinario != null) {
+            if (veterinario.getPassword().equals(password)) {
+                return "redirect:/veterinario/inicio?correo=" + veterinario.getCorreo();
+            } else {
+                model.addAttribute("txtCorreo", correo); // Mantener el valor ingresado por el usuario
+                model.addAttribute("txtPassword", password);
+                model.addAttribute("passwordError", "*Contraseña incorrecta"); // Mostrar el mensaje de error
+                return "login_veterinario";
+            }
         } else {
-            model.addAttribute("txtCedula", cedula); // Mantener el valor ingresado por el usuario
-            model.addAttribute("error", "*Usuario no registrado"); // Mostrar el mensaje de error
+            model.addAttribute("txtCorreo", correo); // Mantener el valor ingresado por el usuario
+            model.addAttribute("txtPassword", password);
+            model.addAttribute("emailError", "*Usuario no registrado");
             return "login_veterinario";
         }
     }
+    
 
 
 }
