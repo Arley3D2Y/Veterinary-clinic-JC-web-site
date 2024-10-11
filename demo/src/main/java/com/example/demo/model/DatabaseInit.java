@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -10,8 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 import com.example.demo.repositorio.ClienteRepository;
+import com.example.demo.repositorio.DrogaRepository;
 import com.example.demo.repositorio.MascotaRepository;
+import com.example.demo.repositorio.TratamientoRepository;
 import com.example.demo.repositorio.VeterinarioRepository;
+import com.example.demo.servicio.ExcelService;
 
 import org.springframework.boot.ApplicationArguments;
 
@@ -30,6 +34,14 @@ public class DatabaseInit implements ApplicationRunner {
         @Autowired
         VeterinarioRepository veterinarioRepository;
 
+        @Autowired
+        TratamientoRepository tratamientoRepository;
+
+        @Autowired
+        DrogaRepository drogaRepository;
+
+        @Autowired
+        ExcelService excelService;
         @Override
         public void run(ApplicationArguments args) throws Exception {
 
@@ -401,9 +413,73 @@ public class DatabaseInit implements ApplicationRunner {
                                 "https://content.elmueble.com/medio/2023/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
                 mascotaRepository.save(new Mascota("Rusty", "Macho", "Siberiano", "2020-06-19",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
+
+                // VETERINARIOS
                 veterinarioRepository.save(new Veterinario("Sergio", "123456789", "s@t.com", "1234",
                                 "https://i.ibb.co/0qX2b8t/sergio.jpg"));
+                veterinarioRepository.save(new Veterinario("Sergio", "123456789", "s@t.com", "1234",
+                                "https://i.ibb.co/0qX2b8t/sergio.jpg"));
+                veterinarioRepository.save(new Veterinario("Carlos", "987654321", "c@vets.com", "2345",
+                                "https://i.ibb.co/1JZfv1Z/carlos.jpg"));
+                veterinarioRepository.save(new Veterinario("Laura", "456789123", "l@vetmail.com", "3456",
+                                "https://i.ibb.co/Zh2ZDS3/laura.jpg"));
+                veterinarioRepository.save(new Veterinario("Andrés", "321456987", "a@clinic.com", "4567",
+                                "https://i.ibb.co/YktjXzK/andres.jpg"));
+                veterinarioRepository.save(new Veterinario("Fernanda", "654321789", "f@catvets.com", "5678",
+                                "https://i.ibb.co/Ms1FbJZ/fernanda.jpg"));
+                veterinarioRepository.save(new Veterinario("Ricardo", "123987654", "r@medvet.com", "6789",
+                                "https://i.ibb.co/LdWh1rX/ricardo.jpg"));
+                veterinarioRepository.save(new Veterinario("Paula", "789456123", "p@vetservice.com", "7890",
+                                "https://i.ibb.co/ZXWJLSB/paula.jpg"));
+                veterinarioRepository.save(new Veterinario("María", "321654987", "m@vetclinic.com", "8901",
+                                "https://i.ibb.co/F7bc0Z8/maria.jpg"));
+                veterinarioRepository.save(new Veterinario("Javier", "456123789", "j@animalhealth.com", "9012",
+                                "https://i.ibb.co/WghgDxX/javier.jpg"));
+                veterinarioRepository.save(new Veterinario("Ana", "789123456", "ana@vetcare.com", "0123",
+                                "https://i.ibb.co/qW0tdBh/ana.jpg"));
+                veterinarioRepository.save(new Veterinario("Pedro", "987321654", "pedro@cathealth.com", "1235",
+                                "https://i.ibb.co/0r5X4B3/pedro.jpg"));
+                veterinarioRepository.save(new Veterinario("Daniela", "654789123", "daniela@felineclinic.com", "2346",
+                                "https://i.ibb.co/t2X5PCm/daniela.jpg"));
+                veterinarioRepository.save(new Veterinario("Gustavo", "123789654", "gustavo@animalclinic.com", "3457",
+                                "https://i.ibb.co/Fqf7vLY/gustavo.jpg"));
+                veterinarioRepository.save(new Veterinario("Lucía", "789321456", "lucia@vetprofession.com", "4568",
+                                "https://i.ibb.co/1Zh7rdV/lucia.jpg"));
+                veterinarioRepository.save(new Veterinario("Mauricio", "321987654", "mauricio@petcare.com", "5679",
+                                "https://i.ibb.co/HqKNPP5/mauricio.jpg"));
+                veterinarioRepository.save(new Veterinario("Adriana", "654123987", "adriana@vetservice.com", "6780",
+                                "https://i.ibb.co/hgQkWdk/adriana.jpg"));
+                veterinarioRepository.save(new Veterinario("Diego", "987456123", "diego@animaldoctor.com", "7891",
+                                "https://i.ibb.co/LJSx78r/diego.jpg"));
+                veterinarioRepository.save(new Veterinario("Claudia", "456789321", "claudia@clinicvet.com", "8902",
+                                "https://i.ibb.co/MBSM4pj/claudia.jpg"));
 
+                // Tratamientos
+                tratamientoRepository.save(new Tratamiento("Tratamiento antiinflamatorio",
+                                "Reducción de inflamación y dolor", LocalDate.of(2023, 9, 1)));
+                tratamientoRepository.save(new Tratamiento("Tratamiento antibiótico",
+                                "Eliminación de infección bacteriana", LocalDate.of(2023, 9, 2)));
+                tratamientoRepository.save(new Tratamiento("Tratamiento dermatológico",
+                                "Tratamiento para problemas de piel", LocalDate.of(2023, 9, 3)));
+                tratamientoRepository.save(new Tratamiento("Vacunación", "Aplicación de vacunas rutinarias",
+                                LocalDate.of(2023, 9, 4)));
+                tratamientoRepository.save(new Tratamiento("Desparasitación",
+                                "Eliminación de parásitos internos y externos", LocalDate.of(2023, 9, 5)));
+                tratamientoRepository.save(new Tratamiento("Tratamiento para la ansiedad",
+                                "Manejo de ansiedad en mascotas", LocalDate.of(2023, 9, 6)));
+                tratamientoRepository.save(new Tratamiento("Tratamiento hormonal",
+                                "Regulación de desequilibrios hormonales", LocalDate.of(2023, 9, 7)));
+                tratamientoRepository.save(new Tratamiento("Cirugía menor", "Procedimientos quirúrgicos menores",
+                                LocalDate.of(2023, 9, 8)));
+                tratamientoRepository.save(new Tratamiento("Tratamiento para la obesidad", "Plan de reducción de peso",
+                                LocalDate.of(2023, 9, 9)));
+                tratamientoRepository.save(new Tratamiento("Rehabilitación física",
+                                "Terapias para recuperación de movilidad", LocalDate.of(2023, 9, 10)));
+
+                // Drogas
+                excelService.cargarDrogasDesdeExcel();
+               
+                // Asignar mascotas aleatoriamente a clientes
                 List<Cliente> clientes = clienteRepository.findAll();
                 List<Mascota> mascotas = mascotaRepository.findAll();
 

@@ -2,11 +2,14 @@ package com.example.demo.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.ArrayList;
 
@@ -14,7 +17,7 @@ import java.util.ArrayList;
 public class Cliente {
     // atributos
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
     private String cedula;
@@ -25,6 +28,7 @@ public class Cliente {
     @Column(length = 2048) // Ajusta el tamaño según sea necesario
     private String fotoString;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Mascota> mascotas = new ArrayList<>();;
 

@@ -42,4 +42,9 @@ public class MascotaServiceImpl implements MascotaService {
     public List<Mascota> buscarPorNombre(String nombre) {
         return MascotaRep.findByNombreContainingIgnoreCase(nombre);
     }
+
+    @Override
+    public List<Mascota> buscarPorClienteId(Long id) {
+        return MascotaRep.findByClienteId(id);
+    }
 }
