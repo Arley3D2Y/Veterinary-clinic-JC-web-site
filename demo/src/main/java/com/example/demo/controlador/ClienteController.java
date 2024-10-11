@@ -1,20 +1,20 @@
 package com.example.demo.controlador;
-
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.errorHandling.NotFoundException;
 import com.example.demo.model.Cliente;
 import com.example.demo.model.Mascota;
 import com.example.demo.servicio.ClienteService;
-import com.example.demo.servicio.MascotaService;
 
 @Controller
 @RequestMapping("/cliente")
@@ -22,48 +22,94 @@ public class ClienteController {
     
     @Autowired
     private ClienteService clienteService;
-    @Autowired
-    private MascotaService mascotaService; // Servicio para obtener los datos de la mascota
 
-    @GetMapping("/inicio")
-    public String mostrarHomeCliente(@RequestParam("cedula") String cedula, Model model) {
-        Optional<Cliente> cliente = clienteService.SearchByCedula(cedula);
+    /** Clientes **/
 
-        if (cliente.isEmpty()) {
-            model.addAttribute("error", "*Usuario no encontrado");
-            return "login_cliente";
-        }
-
-        // Usar List<Mascota> en lugar de ArrayList<Mascota>
-        List<Mascota> mascotas = cliente.get().getMascotas();
-
-        model.addAttribute("cliente", cliente.get()); // Pasar la información del cliente al modelo
-        model.addAttribute("mascotas", mascotas);
-        model.addAttribute("mascotaSeleccionada", null);
-
-        return "home_cliente";
+    /** localhost:8091/veterinario/clientes **/
+    @GetMapping("/findAll")
+    public String mostrarClientes(Model model) {
+        model.addAttribute("clientes", clienteService.SearchAll());
+        return "clientes_veterinario";
     }
 
-    // Cargar la página principal con la lista de mascotas y la mascota seleccionada
-    @GetMapping("/findMascota/{clienteId}/{mascotaId}")
-    public String findMascota(@PathVariable("clienteId") Long clienteId, @PathVariable("mascotaId") Long mascotaId, Model model) {
-        // Obtener el cliente por ID
-        Cliente cliente = clienteService.SearchById(clienteId);
-        // Obtener todas las mascotas
-        List<Mascota> mascotas = cliente.getMascotas();
+    // localhost:8091/veterinario/clientes/add
+    @GetMapping("/clientes/add")
+    private String formularioCrearCliente(Model model) {
+        Cliente cliente = new Cliente("", "", "", "", "", "");
+        model.addAttribute("cliente", cliente);
+        return "crear_cliente";
+    }
 
-        // Obtener la mascota seleccionada por ID
-        Mascota mascotaSeleccionada = mascotaService.SearchById(mascotaId);
+    // localhost:8091/veterinario/clientes/find/{id}
+    @GetMapping("/clientes/find/{id}")
+    // @PathVariable("id") indica que el parametro es un id
+    private String mostrarInfoCliente(Model model, @PathVariable("id") Long identificacion) {
 
-        if (cliente != null && mascotaSeleccionada != null) {
-            model.addAttribute("mascotas", mascotas);
-            model.addAttribute("mascotaSeleccionada", mascotaSeleccionada);
+        Cliente clienteOpt = clienteService.SearchById(identificacion);
+        if (clienteOpt != null) {
+            Cliente cliente = clienteOpt;
             model.addAttribute("cliente", cliente);
+            List<Mascota> mascotas = cliente.getMascotas();
+            model.addAttribute("mascotas", mascotas);
         } else {
-            model.addAttribute("mascotaSeleccionada", null);
-            model.addAttribute("cliente", null);
+            throw new NotFoundException(identificacion);
         }
-
-        return "home_cliente"; // Redirigir a la misma página principal
+        return "datos_cliente";
     }
+
+    // localhost:8091/veterinario/clientes/update/{id}
+    @GetMapping("/clientes/update/{id}")
+    private String formularioUpdateCliente(@PathVariable("id") Long identificacion, Model model) {
+        Cliente clienteOpt = clienteService.SearchById(identificacion);
+        if (clienteOpt != null) {
+            model.addAttribute("cliente", clienteOpt);
+        } else {
+            return "pagina_error"; // Maneja el caso donde el cliente no existe
+        }
+        return "actualizar_cliente";
+    }
+
+    // localhost:8091/veterinario/clientes/update/{id}
+    @PostMapping("/clientes/save/{id}")
+    private String actualizarCliente(@PathVariable("id") Long identificacion,
+            @ModelAttribute("cliente") Cliente cliente) {
+        Cliente clienteExistenteOpt = clienteService.SearchById(identificacion);
+        if (clienteExistenteOpt != null) {
+            cliente.setMascotas(clienteExistenteOpt.getMascotas());
+            clienteService.update(cliente);
+        } else {
+            return "pagina_error"; // Maneja el caso donde el cliente no existe
+        }
+        return "redirect:/veterinario/clientes/find/{id}";
+    }
+
+    // localhost:8091/veterinario/clientes/delete/{id}
+    @GetMapping("/clientes/delete/{id}")
+    private String borrarCliente(@PathVariable("id") Long identificacion) {
+        Cliente clienteOpt = clienteService.SearchById(identificacion);
+        if (clienteOpt != null) {
+            clienteService.deleteById(identificacion);
+        } else {
+            return "pagina_error"; // Maneja el caso donde el cliente no existe
+        }
+        return "redirect:/veterinario/clientes";
+    }
+
+    // localhost:8091/veterinario/clientes/agregar
+    @PostMapping("/clientes/agregar")
+    private String agregaCliente(@ModelAttribute("cliente") Cliente cliente) {
+        clienteService.addCliente(cliente);
+
+        return "redirect:/veterinario/clientes";
+    }
+
+    @GetMapping("/clientes/buscar")
+    public String buscarClientes(@RequestParam("search") String search, Model model) {
+        // Llamar al servicio para buscar clientes por nombre
+        List<Cliente> clientes = clienteService.buscarPorNombre(search);
+        model.addAttribute("clientes", clientes);
+        return "clientes_veterinario"; // Redirigir a la vista de clientes con los resultados de búsqueda
+    }
+
+
 }

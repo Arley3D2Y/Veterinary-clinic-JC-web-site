@@ -13,20 +13,13 @@ import java.util.ArrayList;
 @Entity
 public class Cliente {
     // atributos
-
     @Id
     @GeneratedValue
     private Long id;
-
-    @Column(name = "NAME")
     private String nombre;
-
     private String cedula;
-
     private String correo;
-
     private String celular;
-
     private String direccion;
 
     @Column(length = 2048) // Ajusta el tamaño según sea necesario
@@ -45,6 +38,7 @@ public class Cliente {
     }
 
     public Cliente() {
+        
     }
 
     // getters and setters
