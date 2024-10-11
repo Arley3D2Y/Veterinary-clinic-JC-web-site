@@ -51,4 +51,12 @@ public interface MascotaService {
      * @return La colección de todos los clientes que contengan el nombre dado
      */
     public List<Mascota> buscarPorNombre(String nombre);
+
+        /**
+     * Este método se utiliza para actualizar un tratamiento en el sistema.
+     *
+     * @param identificacion El ID del tratamiento que se desea borrar.
+     *                    sistema.
+     */
+    public List<Mascota> buscarPorClienteId(Long id);
 }

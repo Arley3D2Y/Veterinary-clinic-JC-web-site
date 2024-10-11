@@ -1,6 +1,5 @@
 package com.example.demo.controlador;
 
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,8 +37,8 @@ public class LoginController {
 
     @PostMapping("/cliente")
     public String loginCliente(@RequestParam("cedula") String cedula, Model model) {
-        Optional<Cliente> cliente = clienteService.SearchByCedula(cedula);
-        if (cliente.isPresent()) {
+        Cliente cliente = clienteService.SearchByCedula(cedula);
+        if (cliente != null) {
             return "redirect:/cliente/inicio?cedula=" + cedula;
         } else {
             model.addAttribute("txtCedula", cedula); // Mantener el valor ingresado por el usuario

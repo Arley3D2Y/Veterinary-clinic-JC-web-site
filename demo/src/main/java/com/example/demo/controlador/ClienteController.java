@@ -1,7 +1,6 @@
 package com.example.demo.controlador;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,17 +26,17 @@ public class ClienteController {
 
     @GetMapping("/inicio")
     public String mostrarHomeCliente(@RequestParam("cedula") String cedula, Model model) {
-        Optional<Cliente> cliente = clienteService.SearchByCedula(cedula);
+        Cliente cliente = clienteService.SearchByCedula(cedula);
 
-        if (cliente.isEmpty()) {
+        if (cliente == null) {
             model.addAttribute("error", "*Usuario no encontrado");
             return "login_cliente";
         }
 
         // Usar List<Mascota> en lugar de ArrayList<Mascota>
-        List<Mascota> mascotas = cliente.get().getMascotas();
+        List<Mascota> mascotas = cliente.getMascotas();
 
-        model.addAttribute("cliente", cliente.get()); // Pasar la información del cliente al modelo
+        model.addAttribute("cliente", cliente); // Pasar la información del cliente al modelo
         model.addAttribute("mascotas", mascotas);
         model.addAttribute("mascotaSeleccionada", null);
 
