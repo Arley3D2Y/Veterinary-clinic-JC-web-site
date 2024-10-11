@@ -1,13 +1,16 @@
 package com.example.demo.servicio;
-
-import java.util.Collection;
-
-import java.util.Optional;
 import com.example.demo.model.Cliente;
 import java.util.List;
 
 public interface ClienteService {
 
+    /**
+     * Este metodo es usado para obtener la información de todos los clientes.
+     *
+     * @return La colección de todos los clientes.
+     */
+    public List<Cliente> SearchAll();
+    
     /**
      * Este metodo es usado para buscar clientes por su id.
      *
@@ -25,15 +28,10 @@ public interface ClienteService {
      * @return El objeto Cliente representado al cliente con la cedula dada
      *         o null si no existe
      */
-    public Optional<Cliente> SearchByCedula(String cedula);
+    public Cliente SearchByCedula(String cedula);
 
 
-    /**
-     * Este metodo es usado para obtener la información de todos los clientes.
-     *
-     * @return La colección de todos los clientes.
-     */
-    public Collection<Cliente> SearchAll();
+
 
     /**
      * Este metodo es usado para agregar un nuevo cliente al sistema.

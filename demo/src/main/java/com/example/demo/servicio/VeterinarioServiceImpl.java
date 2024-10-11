@@ -14,7 +14,7 @@ public class VeterinarioServiceImpl implements VeterinarioService {
     @Autowired
     VeterinarioRepository repo;
 
-     // Implementacion de los metodos
+    // Implementacion de los metodos
     @Override
     public Veterinario SearchById(Long id) {
         return repo.findById(id).orElse(null);
@@ -34,19 +34,18 @@ public class VeterinarioServiceImpl implements VeterinarioService {
     public Collection<Veterinario> SearchAll() {
         return repo.findAll();
     }
-
-    @Override
-    public void addCliente(Veterinario cliente) {
-        repo.save(cliente);
-    }
-
     @Override
     public void deleteById(Long id) {
         repo.deleteById(id);
     }
 
     @Override
-    public void update(Veterinario cliente) {
-        repo.save(cliente);
+    public void update(Veterinario veterinario) {
+        repo.save(veterinario);
+    }
+
+    @Override
+    public void addVeterinario(Veterinario veterinario) {
+        repo.save(veterinario);
     }
 }
