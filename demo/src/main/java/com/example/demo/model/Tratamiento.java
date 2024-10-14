@@ -1,38 +1,34 @@
 package com.example.demo.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
 public class Tratamiento {
 
     // Atributos
-
     @Id
     @GeneratedValue
     private Long id;
-
     private String descripcion;
-
     private String observaciones;
-
     private LocalDate fechaInicio;
-
     private LocalDate fechaFin;
 
-    @ManyToMany
-    @JoinTable(name = "tratamiento_droga", joinColumns = @JoinColumn(name = "tratamiento_id"), inverseJoinColumns = @JoinColumn(name = "droga_id"))
-    private List<Droga> drogas = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "droga_id")
+    private Droga droga;
 
-    @ManyToMany(mappedBy = "tratamientos")
-    private List<Veterinario> veterianarios = new ArrayList<Veterinario>();
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "mascota_id")
     private Mascota mascota;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "veterinario_id")
+    private Veterinario veterinario;
 
     // Constructores
 
@@ -43,10 +39,13 @@ public class Tratamiento {
         this.descripcion = descripcion;
         this.observaciones = observaciones;
         this.fechaInicio = fechaInicio;
+        this.fechaFin = LocalDate.of(2020, 1, 1);
+        this.mascota = null;
+        this.veterinario = null;
+        this.droga = null;
     }
 
     // Getters y setters
-
     public Long getId() {
         return id;
     }
@@ -87,14 +86,6 @@ public class Tratamiento {
         this.fechaFin = fechaFin;
     }
 
-    public List<Veterinario> getVeterianarios() {
-        return veterianarios;
-    }
-
-    public void setVeterianarios(List<Veterinario> veterianarios) {
-        this.veterianarios = veterianarios;
-    }
-
     public Mascota getMascota() {
         return mascota;
     }
@@ -103,12 +94,20 @@ public class Tratamiento {
         this.mascota = mascota;
     }
 
-    public List<Droga> getDrogas() {
-        return drogas;
+    public Veterinario getVeterinario() {
+        return veterinario;
     }
 
-    public void setDrogas(List<Droga> drogas) {
-        this.drogas = drogas;
+    public void setVeterinario(Veterinario veterinario) {
+        this.veterinario = veterinario;
+    }
+
+    public Droga getDroga() {
+        return droga;
+    }
+
+    public void setDroga(Droga droga) {
+        this.droga = droga;
     }
 
 }

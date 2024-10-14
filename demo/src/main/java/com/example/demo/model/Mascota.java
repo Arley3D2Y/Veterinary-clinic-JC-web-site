@@ -21,15 +21,13 @@ public class Mascota {
     @Id
     @GeneratedValue
     private Long id; // Cambiado de Integer a Long para coincidir con Cliente
-
     private String nombre;
-
+    private String edad;
+    private String peso;
+    private String estado;
+    private String enfermedad;
     private String sexo;
-
     private String raza;
-
-    private String fechaNacimiento;
-
     private String fotoString;
 
     @JsonIgnore
@@ -40,17 +38,25 @@ public class Mascota {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente; // Cambiado de duenho a cliente
 
-    public Mascota( String nombre, String sexo, String raza, String fechaNacimiento, String fotoString) {
+    public Mascota(String nombre, String edad, String peso, String estado, String enfermedad, String sexo, String raza, String fotoString) {
         this.nombre = nombre;
+        this.edad = edad;
+        this.peso = peso;
+        this.estado = estado;
+        this.enfermedad = enfermedad;
         this.sexo = sexo;
         this.raza = raza;
-        this.fechaNacimiento = fechaNacimiento;
         this.fotoString = fotoString;
+        this.tratamientos = new ArrayList<>();
+        this.cliente = null;
     }
 
     public Mascota() {
+        
     }
 
+    
+    
     public Long getId() {
         return id;
     }
@@ -65,6 +71,38 @@ public class Mascota {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getEdad() {
+        return edad;
+    }
+
+    public void setEdad(String edad) {
+        this.edad = edad;
+    }
+
+    public String getPeso() {
+        return peso;
+    }
+
+    public void setPeso(String peso) {
+        this.peso = peso;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getEnfermedad() {
+        return enfermedad;
+    }
+
+    public void setEnfermedad(String enfermedad) {
+        this.enfermedad = enfermedad;
     }
 
     public String getSexo() {
@@ -83,14 +121,6 @@ public class Mascota {
         this.raza = raza;
     }
 
-    public String getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(String fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
     public String getFotoString() {
         return fotoString;
     }
@@ -107,12 +137,33 @@ public class Mascota {
         this.cliente = cliente;
     }
 
-    public List<Tratamiento> getTratamientos() {
-        return tratamientos;
+    public void agregarTratamiento(Tratamiento tratamiento) {
+        if (!this.tratamientos.contains(tratamiento)) {
+            tratamiento.setMascota(this);
+            this.tratamientos.add(tratamiento);
+        }
     }
 
-    public void setTratamientos(List<Tratamiento> tratamientos) {
-        this.tratamientos = tratamientos;
+    public void eliminarTratamiento(Tratamiento tratamiento) {
+        if (this.tratamientos.contains(tratamiento)) {
+            this.tratamientos.remove(tratamiento);
+        }
     }
-    
+
+    // Método para actualizar un tratamiento existente
+    public void actualizarTratamiento(Long id, Tratamiento tratamientoActualizado) {
+        for (int i = 0; i < tratamientos.size(); i++) {
+            Tratamiento tratamiento = tratamientos.get(i);
+            if (tratamiento.getId().equals(id)) { // Asumiendo que Tratamiento tiene un método getId()
+                tratamientos.set(i, tratamientoActualizado);
+                tratamientoActualizado.setMascota(this); // Asegúrate de establecer la relación inversa
+                return;
+            }
+        }
+    }
+
+    // Método para obtener todos los tratamientos
+    public List<Tratamiento> obtenerTratamientos() {
+        return new ArrayList<>(tratamientos); // Retornar una copia de la lista para evitar modificaciones externas
+    }
 }

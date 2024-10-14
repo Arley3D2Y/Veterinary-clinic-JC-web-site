@@ -6,49 +6,60 @@ import org.springframework.stereotype.Service;
 import com.example.demo.model.Cliente;
 import com.example.demo.repositorio.ClienteRepository;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClienteServiceImp implements ClienteService {
 
     @Autowired
-    ClienteRepository repo;
+    ClienteRepository clientRepo;
 
     @Override
-    public List<Cliente> SearchAll() {
-        return repo.findAll();
+    public List<Cliente> searchAll() {
+        return clientRepo.findAll();
     }
 
     @Override
-    public Cliente SearchById(Long id) {
-        return repo.findById(id).get();
+    public Optional<Cliente> searchById(Long id) {
+        return clientRepo.findById(id);
     }
 
     @Override
-    public Cliente SearchByCedula(String cedula) {
-        return repo.findByCedula(cedula);
+    public Cliente searchByCedula(String cedula) {
+        return clientRepo.findByCedula(cedula);
     }
 
     @Override
-    public void addCliente(Cliente cliente) {
-        repo.save(cliente);
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        repo.deleteById(id);
-    }
-
-    @Override
-    public void update(Cliente cliente) {
-        Cliente existingCliente = repo.findById(cliente.getId()).orElse(null);
-        if (existingCliente != null) {
-            repo.save(cliente);  // Save es usado tanto para crear como para actualizar
+    public boolean addCliente(Cliente cliente) {
+        if (!clientRepo.existsById(cliente.getId())) {
+            clientRepo.save(cliente);
+            return true;      
+        } else {
+            return false;
         }
     }
 
-    public List<Cliente> buscarPorNombre(String nombre) {
+    @Override
+    public boolean removeById(Long id) {
+        if (clientRepo.existsById(id)) {
+            clientRepo.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateById(Long id, Cliente cliente) {
+        if (clientRepo.existsById(id)) {
+            clientRepo.save(cliente);  // Save es usado tanto para crear como para actualizar
+            return true;
+        }
+        return false;
+    }
+
+    public List<Cliente> searchByNombre(String nombre) {
         // Llamar al repositorio para buscar los clientes que contengan el nombre
-        return repo.findByNombreContainingIgnoreCase(nombre);
+        return clientRepo.findByNombreContainingIgnoreCase(nombre);
     }
     
 }

@@ -1,32 +1,27 @@
 package com.example.demo.model;
 
-import java.util.ArrayList;
-import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Droga {
-
-    // Atributos
-
     @Id
     @GeneratedValue
     private Long id;
-
     private String nombre;
-
     private Float precioCompra;
-
     private Float precioVenta;
-
     private Integer unidadesDisponibles;
-
     private Integer unidadesVendidas;
 
-    @ManyToMany(mappedBy = "drogas")
+    @JsonIgnore
+    @OneToMany(mappedBy = "droga")
     private List<Tratamiento> tratamientos = new ArrayList<>();
 
     // Constructores
@@ -34,8 +29,7 @@ public class Droga {
     public Droga() {
     }
 
-    public Droga(String nombre, Float precioCompra, Float precioVenta, Integer unidadesDisponibles,
-            Integer unidadesVendidas) {
+    public Droga(String nombre, Float precioCompra, Float precioVenta, Integer unidadesDisponibles, Integer unidadesVendidas) {
         this.nombre = nombre;
         this.precioCompra = precioCompra;
         this.precioVenta = precioVenta;
