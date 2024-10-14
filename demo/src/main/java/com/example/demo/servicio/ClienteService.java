@@ -10,7 +10,7 @@ public interface ClienteService {
      *
      * @return La colección de todos los clientes.
      */
-    public List<Cliente> searchAll();
+    public List<Cliente> searchAllClientes();
     
     /**
      * Este metodo es usado para buscar clientes por su id.
@@ -19,7 +19,7 @@ public interface ClienteService {
      * @return EL objeto Cliente representado al cliente con el ID dado
      *         o null si no existe
      */
-    public Optional<Cliente> searchById(Long identificacion);
+    public Optional<Cliente> searchClienteById(Long identificacion);
 
     /**
      * Este metodo es usado para agregar un nuevo cliente al sistema.
@@ -27,7 +27,7 @@ public interface ClienteService {
      * @param cliente El objeto Cliente que se desea agregar al sistema.
      *
      */
-    public boolean addCliente(Cliente cliente);
+    public Optional<Cliente> addCliente(Cliente cliente);
 
     /**
      * Este metodo es usado para borrar un cliente del sistema.
@@ -41,7 +41,7 @@ public interface ClienteService {
      *
      * @param cliente El objeto Cliente que se desea actualizar en el sistema.
      */
-    public boolean updateById(Long id, Cliente cliente);
+    public Optional<Cliente> updateById(Long id, Cliente cliente);
 
     /**
      * Este metodo es usado para buscar un cliente por su cedula.
@@ -50,7 +50,7 @@ public interface ClienteService {
      * @return El objeto Cliente representado al cliente con la cedula dada
      *         o null si no existe
      */
-    public Cliente searchByCedula(String cedula);
+    public Optional<Cliente> searchByCedula(String cedula);
 
     /**
      * Este metodo es usado para buscar clientes por su nombre.

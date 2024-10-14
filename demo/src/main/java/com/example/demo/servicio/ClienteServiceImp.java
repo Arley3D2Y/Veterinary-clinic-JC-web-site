@@ -15,28 +15,24 @@ public class ClienteServiceImp implements ClienteService {
     ClienteRepository clientRepo;
 
     @Override
-    public List<Cliente> searchAll() {
+    public List<Cliente> searchAllClientes() {
         return clientRepo.findAll();
     }
 
     @Override
-    public Optional<Cliente> searchById(Long id) {
+    public Optional<Cliente> searchClienteById(Long id) {
         return clientRepo.findById(id);
     }
 
     @Override
-    public Cliente searchByCedula(String cedula) {
-        return clientRepo.findByCedula(cedula);
-    }
+    public Optional<Cliente> addCliente(Cliente cliente) {
+        Optional<Cliente> clienteOpt = clientRepo.findByCedula(cliente.getCedula());
 
-    @Override
-    public boolean addCliente(Cliente cliente) {
-        if (!clientRepo.existsById(cliente.getId())) {
-            clientRepo.save(cliente);
-            return true;      
-        } else {
-            return false;
+        if (!clienteOpt.isPresent()) {
+            cliente = clientRepo.save(cliente);
+            return Optional.of(cliente);
         }
+        return Optional.empty();
     }
 
     @Override
@@ -49,12 +45,17 @@ public class ClienteServiceImp implements ClienteService {
     }
 
     @Override
-    public boolean updateById(Long id, Cliente cliente) {
+    public Optional<Cliente> updateById(Long id, Cliente cliente) {
         if (clientRepo.existsById(id)) {
-            clientRepo.save(cliente);  // Save es usado tanto para crear como para actualizar
-            return true;
+            cliente = clientRepo.save(cliente);  // Save es usado tanto para crear como para actualizar
+            return Optional.of(cliente);
         }
-        return false;
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Cliente> searchByCedula(String cedula) {
+        return clientRepo.findByCedula(cedula);
     }
 
     public List<Cliente> searchByNombre(String nombre) {

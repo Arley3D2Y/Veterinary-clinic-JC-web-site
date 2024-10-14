@@ -15,24 +15,24 @@ public class DrogaServiceImp implements DrogaService {
     DrogaRepository drogaRepo;
 
     @Override
-    public List<Droga> searchAll() {
+    public List<Droga> searchAllDrogas() {
         return drogaRepo.findAll();
     }
 
     @Override
-    public Optional<Droga> searchById(Long id) {
+    public Optional<Droga> searchDrogaById(Long id) {
         return drogaRepo.findById(id);
     }
 
     @Override
-    public boolean addDroga(Droga droga) {
+    public Optional<Droga> addDroga(Droga droga) {
         Optional<Droga> drogaOpt = drogaRepo.findByNombreIgnoreCase(droga.getNombre());
+        
         if (!drogaOpt.isPresent()) {
-            drogaRepo.save(droga);
-            return true;      
-        } else {
-            return false;
+            droga = drogaRepo.save(droga);
+            return Optional.of(droga);     
         }
+        return Optional.empty();
     }
 
     @Override
@@ -45,12 +45,12 @@ public class DrogaServiceImp implements DrogaService {
     }
 
     @Override
-    public boolean updateById(Long id, Droga droga) {
+    public Optional<Droga> updateById(Long id, Droga droga) {
         if (drogaRepo.existsById(id)) {
-            drogaRepo.save(droga);  // Save es usado tanto para crear como para actualizar
-            return true;
+            droga = drogaRepo.save(droga);  // Save es usado tanto para crear como para actualizar
+            return Optional.of(droga);
         }
-        return false;
+        return Optional.empty();
     }
 
     @Override

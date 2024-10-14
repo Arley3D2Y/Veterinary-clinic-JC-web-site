@@ -31,20 +31,22 @@ public class MascotaServiceImp implements MascotaService {
     }
 
     @Override
-    public boolean addMascota(Long id, Mascota mascota) {
-        Optional<Cliente> cliente = clienteRepo.findById(id);
-        if (cliente.isPresent()) {
-            cliente.get().guardarMascota(mascota);
-            mascotaRep.save(mascota);
-            return true;
+    public Optional<Mascota> addMascota(Long id, Mascota mascota) {
+        Optional<Cliente> clienteOpt = clienteRepo.findById(id);
+        
+        if (clienteOpt.isPresent()) {
+            Cliente c = clienteOpt.get();
+            mascota = mascotaRep.save(mascota);
+            c.guardarMascota(mascota);
+            clienteRepo.save(c);
+            return Optional.of(mascota);
         }
-        return false;
+        return Optional.empty();
     }
     
     @Override
     public boolean removeById(Long id) {
-        Optional<Mascota> mascota = mascotaRep.findById(id);
-        if (mascota.isPresent()) {
+        if (mascotaRep.existsById(id)) {
             mascotaRep.deleteById(id);
             return true;
         }
@@ -52,13 +54,12 @@ public class MascotaServiceImp implements MascotaService {
     }
 
     @Override
-    public boolean updateById(Long id, Mascota mascota) {
-        Optional<Mascota> mascotaOpt = mascotaRep.findById(id);
-        if (mascotaOpt.isPresent()) {
-            mascotaRep.save(mascota);  // Save es usado tanto para crear como para actualizar
-            return true;
+    public Optional<Mascota> updateById(Long id, Mascota mascota) {
+        if (mascotaRep.existsById(id)) {
+            mascota = mascotaRep.save(mascota);  // Save es usado tanto para crear como para actualizar
+            return Optional.of(mascota);
         }
-        return false;
+        return Optional.empty();
     }
 
     @Override

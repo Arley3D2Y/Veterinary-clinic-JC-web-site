@@ -12,7 +12,7 @@ public interface DrogaService {
      *
      * @return La colección de todas las drogas.
      */
-    public List<Droga> searchAll();
+    public List<Droga> searchAllDrogas();
     
     /**
      * Este metodo es usado para buscar drogas por su id.
@@ -21,7 +21,7 @@ public interface DrogaService {
      * @return EL objeto Droga representado a la droga con el ID dado
      *         o null si no existe
      */
-    public Optional<Droga> searchById(Long id);
+    public Optional<Droga> searchDrogaById(Long id);
 
     /**
      * Este metodo es usado para agregar una nueva Droga al sistema.
@@ -29,7 +29,7 @@ public interface DrogaService {
      * @param cliente El objeto Droga que se desea agregar al sistema.
      *
      */
-    public boolean addDroga(Droga droga);
+    public Optional<Droga> addDroga(Droga droga);
 
     /**
      * Este metodo es usado para borrar una Droga del sistema.
@@ -43,7 +43,7 @@ public interface DrogaService {
      *
      * @param cliente El objeto Droga que se desea actualizar en el sistema.
      */
-    public boolean updateById(Long id, Droga droga);
+    public Optional<Droga> updateById(Long id, Droga droga);
 
     public List<Droga> searchByNombre(String nombre);
     

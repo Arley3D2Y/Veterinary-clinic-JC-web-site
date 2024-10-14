@@ -35,12 +35,9 @@ public class TratamientoServiceImp implements TratamientoService {
     }
 
     @Override
-    public boolean addTratamiento(Tratamiento tratamiento) {
-        if (!trataRepo.existsById(tratamiento.getId())) {
-            trataRepo.save(tratamiento);
-            return true;
-        }
-        return false;
+    public Optional<Tratamiento> addTratamiento(Tratamiento tratamiento) {
+        tratamiento = trataRepo.save(tratamiento);
+        return Optional.of(tratamiento);
     }
 
     @Override
@@ -53,12 +50,12 @@ public class TratamientoServiceImp implements TratamientoService {
     }
 
     @Override
-    public boolean updateById(Long id, Tratamiento tratamiento) {
+    public Optional<Tratamiento> updateById(Long id, Tratamiento tratamiento) {
         if (trataRepo.existsById(id)) {
-            trataRepo.save(tratamiento);
-            return true;
+            tratamiento = trataRepo.save(tratamiento);
+            return Optional.of(tratamiento);
         }
-        return false;
+        return Optional.empty();
     }
 
 

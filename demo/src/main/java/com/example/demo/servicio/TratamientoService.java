@@ -1,6 +1,8 @@
 package com.example.demo.servicio;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+
 import com.example.demo.model.Tratamiento;
 
 public interface TratamientoService {
@@ -28,7 +30,7 @@ public interface TratamientoService {
      * @param tratamiento El objeto Tratamiento que se desea agregar al sistema.
      *
      */
-    public boolean addTratamiento(Tratamiento tratamiento);
+    public Optional<Tratamiento> addTratamiento(Tratamiento tratamiento);
     /**
      * Este metodo es usado para borrar un tratamiento del sistema.
      *
@@ -42,7 +44,7 @@ public interface TratamientoService {
      * @param tratamiento El objeto Tratamiento que se desea actualizar en el
      *                    sistema.
      */
-    public boolean updateById(Long id, Tratamiento tratamiento);
+    public Optional<Tratamiento> updateById(Long id, Tratamiento tratamiento);
 
 
 }

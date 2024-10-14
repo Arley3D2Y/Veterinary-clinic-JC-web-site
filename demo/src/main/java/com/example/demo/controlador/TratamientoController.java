@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
 
 import com.example.demo.model.Tratamiento;
 import com.example.demo.servicio.TratamientoService;
@@ -51,12 +52,9 @@ public class TratamientoController {
     // localhost:8091/tratamientos/add
     @PostMapping("/add")
     @Operation(summary = "Add new treatment")
-    private ResponseEntity<String> crearTratamiento(@RequestBody Tratamiento tratamiento) {
-        boolean isAdded = tratamientoService.addTratamiento(tratamiento);
-        if (isAdded) {
-            return ResponseEntity.ok("Treatment added successfully");
-        }
-        return ResponseEntity.badRequest().body("Treatment already exists");
+    private ResponseEntity<Tratamiento> crearTratamiento(@RequestBody Tratamiento tratamiento) {
+        Optional<Tratamiento> nuevoTratamiento = tratamientoService.addTratamiento(tratamiento);
+        return nuevoTratamiento.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.CONFLICT).build());
     }
 
     // localhost:8091/tratamientos/delete/{id}
@@ -71,12 +69,11 @@ public class TratamientoController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Void> actualizarTratamiento(@PathVariable Long id, @RequestBody Tratamiento tratamiento) {
-        boolean isUpdated = tratamientoService.updateById(id, tratamiento);
-        if (isUpdated) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<Tratamiento> actualizarTratamiento(@PathVariable Long id, @RequestBody Tratamiento tratamiento) {
+        Optional<Tratamiento> tratamientoActualizado = tratamientoService.updateById(id, tratamiento);
+        return tratamientoActualizado.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    
 }
 

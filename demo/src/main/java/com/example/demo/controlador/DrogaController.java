@@ -1,6 +1,7 @@
 package com.example.demo.controlador;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,7 +33,7 @@ public class DrogaController {
     @GetMapping
     @Operation(summary = "Get all drugs")
     public ResponseEntity<List<Droga>> obteneDrogas() {
-        List<Droga> drogas = drogaService.searchAll();
+        List<Droga> drogas = drogaService.searchAllDrogas();
         if (drogas.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -43,19 +44,16 @@ public class DrogaController {
     @GetMapping("/find/{id}")
     @Operation(summary = "Get drug by id")
     public ResponseEntity<Droga> obtenerDrogaPorId(@PathVariable Long id) {
-        Optional<Droga> droga = drogaService.searchById(id);
+        Optional<Droga> droga = drogaService.searchDrogaById(id);
         return droga.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     // localhost:8091/drogas/add
     @PostMapping("/add")
     @Operation(summary = "Add a new drug")
-    public ResponseEntity<String> crearDroga(@RequestBody Droga droga) {
-        boolean isAdded = drogaService.addDroga(droga);
-        if (isAdded) {
-            return ResponseEntity.ok("Drug added successfully");
-        }
-        return ResponseEntity.badRequest().body("Drug already exists");
+    public ResponseEntity<Droga> crearDroga(@RequestBody Droga droga) {
+        Optional<Droga> nuevaDroga = drogaService.addDroga(droga);
+        return nuevaDroga.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.CONFLICT).build());
     }
 
     // localhost:8091/drogas/delete/{id}
@@ -71,16 +69,13 @@ public class DrogaController {
 
     @PutMapping("/update/{id}")
     @Operation(summary = "Update drug by id")
-    public ResponseEntity<Void> actualizarDroga(@PathVariable Long id, @RequestBody Droga droga) {
-        boolean isUpdated = drogaService.updateById(id, droga);
-        if (!isUpdated) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Droga> actualizarDroga(@PathVariable Long id, @RequestBody Droga droga) {
+        Optional<Droga> drogaActualizada = drogaService.updateById(id, droga);
+        return drogaActualizada.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/search-by-name/{search}")
-    @Operation(summary = "Find client by name")
+    @Operation(summary = "Find drug by name")
     public ResponseEntity<List<Droga>> buscarDrogas(@PathVariable String search) {
         List<Droga> drogas = drogaService.searchByNombre(search);
         return ResponseEntity.ok(drogas); 

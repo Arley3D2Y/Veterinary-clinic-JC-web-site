@@ -2,7 +2,6 @@ package com.example.demo.servicio;
 
 import java.util.List;
 import java.util.Optional;
-
 import com.example.demo.model.Veterinario;
 
 public interface VeterinarioService {
@@ -29,7 +28,7 @@ public interface VeterinarioService {
      * @param veterinario El objeto Veterinario que se desea agregar al sistema.
      *
      */
-    public boolean addVeterinario(Veterinario veterinario);
+    public Optional<Veterinario> addVeterinario(Veterinario veterinario);
     
     /**
      * Este metodo es usado para borrar un veterinario del sistema.
@@ -43,7 +42,7 @@ public interface VeterinarioService {
      *
      * @param veterinario El objeto Veterinario que se desea actualizar en el sistema.
      */
-    public boolean updateById(Long id, Veterinario veterinario);
+    public Optional<Veterinario> updateById(Long id, Veterinario veterinario);
 
     /**
      * Este metodo es usado para buscar un veterinario por su nombre.

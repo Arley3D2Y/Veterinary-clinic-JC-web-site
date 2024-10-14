@@ -26,19 +26,19 @@ public class VeterinarioServiceImp implements VeterinarioService {
     }
 
     @Override
-    public boolean addVeterinario(Veterinario veterinario) {
+    public Optional<Veterinario> addVeterinario(Veterinario veterinario) {
         Optional<Veterinario> veterinarioOpt = veterinarioRepo.findByCedula(veterinario.getCedula());
+        
         if (!veterinarioOpt.isPresent()) {
-            veterinarioRepo.save(veterinario);
-            return true;
+            veterinario = veterinarioRepo.save(veterinario);
+            return Optional.of(veterinario);
         } 
-        return false;
+        return Optional.empty();
     }
 
     @Override
     public boolean removeById(Long id) {
-        Optional<Veterinario> veterinarioOpt = searchVeterinarioById(id);
-        if (veterinarioOpt.isPresent()) {
+        if (veterinarioRepo.existsById(id)) {
             veterinarioRepo.deleteById(id);
             return true;
         }
@@ -46,13 +46,12 @@ public class VeterinarioServiceImp implements VeterinarioService {
     }
 
     @Override
-    public boolean updateById(Long id, Veterinario veterinario) {
-        Optional<Veterinario> veterinarioOpt = searchVeterinarioById(id);
-        if (veterinarioOpt.isPresent()) {
-            veterinarioRepo.save(veterinario);
-            return true;
-        }
-        return false;
+    public Optional<Veterinario> updateById(Long id, Veterinario veterinario) {
+        if (veterinarioRepo.existsById(id)) {
+            veterinario = veterinarioRepo.save(veterinario);
+            return Optional.of(veterinario);
+        } 
+        return Optional.empty();
     }
 
     @Override

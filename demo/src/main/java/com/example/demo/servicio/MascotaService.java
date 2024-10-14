@@ -29,7 +29,7 @@ public interface MascotaService {
      * @param mascora El objeto Mascora que se desea agregar al sistema.
      *
      */
-    public boolean addMascota(Long id, Mascota mascota);
+    public Optional<Mascota> addMascota(Long id, Mascota mascota);
 
     /**
      * Este metodo es usado para borrar una mascota del sistema.
@@ -43,7 +43,7 @@ public interface MascotaService {
      *
      * @param mascota El objeto Mascota que se desea actualizar en el sistema.
      */
-    public boolean updateById(Long id, Mascota mascota);
+    public Optional<Mascota> updateById(Long id, Mascota mascota);
 
     /**
      * Este metodo es usado para buscar clientes por su nombre.

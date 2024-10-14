@@ -55,8 +55,6 @@ public class Mascota {
         
     }
 
-    
-    
     public Long getId() {
         return id;
     }

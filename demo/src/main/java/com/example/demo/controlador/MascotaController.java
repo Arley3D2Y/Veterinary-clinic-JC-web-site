@@ -60,13 +60,9 @@ public class MascotaController {
     // localhost:8091/mascotas/add
     @PostMapping("/add/cliente-id/{id}")
     @Operation(summary = "Add a new pet by client id")
-    public ResponseEntity<String> crearMascota(@PathVariable Long id, @RequestBody Mascota mascota) {
-        boolean isAdded = mascotaService.addMascota(id, mascota);
-        if (!isAdded) {
-            return ResponseEntity.badRequest().body("Pet not found.");
-        } else {
-            return ResponseEntity.status(HttpStatus.CREATED).body("Pet added successfully."); // 201 Created
-        }
+    public ResponseEntity<Mascota> crearMascota(@PathVariable Long id, @RequestBody Mascota mascota) {
+        Optional<Mascota> nuevaMascota = mascotaService.addMascota(id, mascota);
+        return nuevaMascota.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
     }
 
     // localhost:8091/veterinario/mascotas/delete/{id}
@@ -84,12 +80,9 @@ public class MascotaController {
     // localhost:8091/mascotas/update/{id}
     @PutMapping("/update/{id}")
     @Operation(summary = "Update pet by id")
-    public ResponseEntity<Void> actualizarMascota(@PathVariable Long id, @RequestBody Mascota mascota) {
-        boolean isUpdated = mascotaService.updateById(id, mascota);
-        if (!isUpdated) {
-            return ResponseEntity.notFound().build(); // 404 Not Found
-        }
-        return ResponseEntity.noContent().build(); // 204 No Content si se actualizó con éxito
+    public ResponseEntity<Mascota> actualizarMascota(@PathVariable Long id, @RequestBody Mascota mascota) {
+        Optional<Mascota> mascotaActualizada = mascotaService.updateById(id, mascota);
+        return mascotaActualizada.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/search-by-name/{search}")
