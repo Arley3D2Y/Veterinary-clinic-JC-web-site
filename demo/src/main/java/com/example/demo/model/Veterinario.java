@@ -22,6 +22,7 @@ public class Veterinario {
     private String password;
     private String fotoString;
 
+    @JsonIgnore
     @ManyToMany
     private List<Especialidad> especialidades = new ArrayList<Especialidad>();
 

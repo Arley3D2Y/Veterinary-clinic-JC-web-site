@@ -57,7 +57,7 @@ public class DatabaseInit implements ApplicationRunner {
                                 "https://ntvb.tmsimg.com/assets/assets/494807_v9_bd.jpg?w=360&h=480"));
                 clienteRepository.save(new Cliente("Carlos Luis", "2234466", "carlos@gmail.com", "546544354",
                                 "Cr 9 # 130-21",
-                                "https://static.wikia.nocookie.net/esstarwars/images/2/29/Harrisonford.jpg/revision/latest?cb=20131222030038"));
+                                "https://ntvb.tmsimg.com/assets/assets/494807_v9_bd.jpg?w=360&h=480"));
                 clienteRepository.save(new Cliente("Luis Alberto", "14789808", "luis@gmail.com", "56766854",
                                 "Cll 79 # 13-21",
                                 "https://img.peliplat.com/api/resize/v1?imagePath=std/202301/a/2/a216e91526720344073201406fb3bee0.jpg&mode=FILL&width=304&height=456&limit=false"));
@@ -198,7 +198,7 @@ public class DatabaseInit implements ApplicationRunner {
                                 "https://es.web.img3.acsta.net/c_310_420/pictures/15/11/20/15/12/197269.jpg"));
                 clienteRepository.save(new Cliente("Elena Torres", "9876543", "elena.torres@gmail.com", "3009876543",
                                 "Cll 50 # 12-34",
-                                "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Emma_Stone_at_the_2018_Cannes_Film_Festival.jpg/330px-Emma_Stone_at_the_2018_Cannes_Film_Festival.jpg"));
+                                "https://ntvb.tmsimg.com/assets/assets/494807_v9_bd.jpg?w=360&h=480"));
                 
                 // agregar mascotas
                 mascotaRepository.save(new Mascota("Toby", "5", "4", "Enfermo", "Leucemia felina",  "Macho", "Birmano",
