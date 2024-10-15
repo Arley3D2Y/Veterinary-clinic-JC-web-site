@@ -4,18 +4,13 @@ import jakarta.persistence.*;
 
 @Entity
 public class Administrador {
-    
-    //Atributos
-
     @Id
     @GeneratedValue
     private Long id;
-
     private String usuario;
-
     private String password;
 
-    // cosntructores
+    // Constructores
 
     public Administrador(String usuario, String password) {
         this.usuario = usuario;

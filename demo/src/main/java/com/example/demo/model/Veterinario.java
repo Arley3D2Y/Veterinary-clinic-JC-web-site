@@ -3,35 +3,31 @@ package com.example.demo.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Veterinario {
-
-    // Atributos
     @Id
     @GeneratedValue
     private Long id;
-
     private String nombre;
-
     private String cedula;
-
     private String correo;
-
     private String password;
-
     private String fotoString;
 
     @ManyToMany
     private List<Especialidad> especialidades = new ArrayList<Especialidad>();
 
-    @ManyToMany
+    @JsonIgnore
+    @OneToMany(mappedBy = "veterinario")
     private List<Tratamiento> tratamientos = new ArrayList<Tratamiento>();
-    // Constructores
 
     public Veterinario(String nombre, String cedula, String correo, String password, String fotoString) {
         this.nombre = nombre;
@@ -39,10 +35,12 @@ public class Veterinario {
         this.correo = correo;
         this.password = password;
         this.fotoString = fotoString;
+
+        this.especialidades = new ArrayList<Especialidad>();
+        this.tratamientos = new ArrayList<Tratamiento>();
     }
 
-    public Veterinario() {
-    }
+    public Veterinario() { }
 
     // Getters y setters
 
@@ -109,6 +107,11 @@ public class Veterinario {
     public void setTratamientos(List<Tratamiento> tratamientos) {
         this.tratamientos = tratamientos;
     }
-    
+
+    public void agregarEspecialidad(Especialidad especialidad) {
+        if (!this.especialidades.contains(especialidad)) {
+            this.especialidades.add(especialidad);
+        }
+    }
 
 }

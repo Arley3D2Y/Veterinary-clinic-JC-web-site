@@ -1,38 +1,29 @@
 package com.example.demo.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Especialidad {
 
     // Atributos
-    
     @Id
     @GeneratedValue
     private Long id;
-
-    private String nombreEspecialidad;
-
-    @ManyToMany(mappedBy = "especialidades")
-    private List<Veterinario> veterinarios = new ArrayList<Veterinario>();
+    private String nombre;
+    private String caracteristicas;
 
     // Constructores
 
-    public Especialidad(String nombreEspecialidad) {
-        this.nombreEspecialidad = nombreEspecialidad;
+    public Especialidad(String nombreEsp, String caracteristicas) {
+        this.nombre = nombreEsp;
+        this.caracteristicas = caracteristicas;
     }
 
-    public Especialidad() {
-    }
+    public Especialidad() { }
 
     // Getters y Setters
-
     public Long getId() {
         return id;
     }
@@ -41,20 +32,19 @@ public class Especialidad {
         this.id = id;
     }
 
-    public String getNombreEspecialidad() {
-        return nombreEspecialidad;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreEspecialidad(String nombreEspecialidad) {
-        this.nombreEspecialidad = nombreEspecialidad;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public List<Veterinario> getVeterinarios() {
-        return veterinarios;
+    public String getCaracteristicas() {
+        return caracteristicas;
     }
 
-    public void setVeterinarios(List<Veterinario> veterinarios) {
-        this.veterinarios = veterinarios;
+    public void setCaracteristicas(String caracteristicas) {
+        this.caracteristicas = caracteristicas;
     }
-
 }
