@@ -1,7 +1,6 @@
 package com.example.demo.model;
 
 import java.time.LocalDate;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -20,12 +19,10 @@ public class Tratamiento {
     @JoinColumn(name = "droga_id")
     private Droga droga;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "mascota_id")
     private Mascota mascota;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "veterinario_id")
     private Veterinario veterinario;

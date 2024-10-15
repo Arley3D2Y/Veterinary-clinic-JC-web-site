@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/tratamientos")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class TratamientoController {
     @Autowired
     private TratamientoService tratamientoService;
@@ -69,11 +69,11 @@ public class TratamientoController {
     }
 
     @PutMapping("/update/{id}")
+    @Operation(summary = "Update treatment by id")
     public ResponseEntity<Tratamiento> actualizarTratamiento(@PathVariable Long id, @RequestBody Tratamiento tratamiento) {
         Optional<Tratamiento> tratamientoActualizado = tratamientoService.updateById(id, tratamiento);
         return tratamientoActualizado.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    
 }
 

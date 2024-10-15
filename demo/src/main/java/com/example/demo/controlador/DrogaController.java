@@ -22,7 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/drogas")
-@CrossOrigin(origins = "localhost:4200")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class DrogaController {
     @Autowired
     private DrogaService drogaService;

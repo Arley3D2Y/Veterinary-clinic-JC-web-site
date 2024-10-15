@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.demo.model.Mascota;
+import com.example.demo.model.Tratamiento;
 
 public interface MascotaService {
 
@@ -60,4 +61,6 @@ public interface MascotaService {
      *                    sistema.
      */
     public List<Mascota> searchByClienteId(Long id);
+
+    public List<Tratamiento> findTreatmentsByPetId(Long id);
 }

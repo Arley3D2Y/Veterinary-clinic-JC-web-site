@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Mascota;
+import com.example.demo.model.Tratamiento;
 import com.example.demo.servicio.MascotaService;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +22,7 @@ import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/mascotas")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class MascotaController {
 
     @Autowired
@@ -97,6 +98,13 @@ public class MascotaController {
     public ResponseEntity<List<Mascota>> buscarMascotasByClienteId(@PathVariable("id") Long identificacion) {
         List<Mascota> mascotas = mascotaService.searchByClienteId(identificacion);
         return ResponseEntity.ok(mascotas); // 200 OK
+    }
+
+    @GetMapping("/findTreatmentsByPetId/{id}")
+    @Operation(summary = "Find treatments by pet ID")
+    public ResponseEntity<List<Tratamiento>> findTreatmentsByPetId(@PathVariable Long id) {
+        List<Tratamiento> tratamientos = mascotaService.findTreatmentsByPetId(id);
+        return ResponseEntity.ok(tratamientos);
     }
 
 }

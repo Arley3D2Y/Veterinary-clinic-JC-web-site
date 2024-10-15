@@ -46,5 +46,4 @@ public interface TratamientoService {
      */
     public Optional<Tratamiento> updateById(Long id, Tratamiento tratamiento);
 
-
 }

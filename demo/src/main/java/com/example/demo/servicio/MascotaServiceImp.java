@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Cliente;
 import com.example.demo.model.Mascota;
+import com.example.demo.model.Tratamiento;
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.MascotaRepository;
 
@@ -70,5 +71,14 @@ public class MascotaServiceImp implements MascotaService {
     @Override
     public List<Mascota> searchByClienteId(Long id) {
         return mascotaRep.findByClienteId(id);
+    }
+
+    @Override
+    public List<Tratamiento> findTreatmentsByPetId(Long id) {
+        Optional<Mascota> mascotaOpt = mascotaRep.findById(id);
+        if (mascotaOpt.isPresent()) {
+            return mascotaOpt.get().obtenerTratamientos();
+        }
+        return null;
     }
 }
