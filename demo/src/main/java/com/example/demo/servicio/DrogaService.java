@@ -47,4 +47,6 @@ public interface DrogaService {
 
     public List<Droga> searchByNombre(String nombre);
     
+    public boolean decreaseDrugQuantity(Long id);
+
 }

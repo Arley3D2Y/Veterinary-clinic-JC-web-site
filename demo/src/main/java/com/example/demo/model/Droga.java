@@ -95,4 +95,8 @@ public class Droga {
         this.tratamientos = tratamientos;
     }
 
+    public void sellUnit() {
+        this.unidadesVendidas++;
+        this.unidadesDisponibles--;
+    }
 }

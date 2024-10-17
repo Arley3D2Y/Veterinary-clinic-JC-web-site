@@ -162,7 +162,11 @@ public class Mascota {
     }
 
     // Método para obtener todos los tratamientos
-    public List<Tratamiento> obtenerTratamientos() {
+    public List<Tratamiento> getTratamientos() {
         return new ArrayList<>(tratamientos); // Retornar una copia de la lista para evitar modificaciones externas
+    }
+
+    public void setTratamientos(List<Tratamiento> tratamientos) {
+        this.tratamientos = tratamientos;
     }
 }

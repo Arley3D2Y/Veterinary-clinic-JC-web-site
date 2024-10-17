@@ -47,7 +47,11 @@ public class VeterinarioServiceImp implements VeterinarioService {
 
     @Override
     public Optional<Veterinario> updateById(Long id, Veterinario veterinario) {
-        if (veterinarioRepo.existsById(id)) {
+        Optional<Veterinario> veterinarioOpt = veterinarioRepo.findById(id);
+        if (veterinarioOpt.isPresent()) {
+            veterinario.setTratamientos(veterinarioOpt.get().getTratamientos());
+            veterinario.setEspecialidades(veterinarioOpt.get().getEspecialidades());
+            
             veterinario = veterinarioRepo.save(veterinario);
             return Optional.of(veterinario);
         } 
@@ -56,7 +60,7 @@ public class VeterinarioServiceImp implements VeterinarioService {
 
     @Override
     public List<Veterinario> searchByNombre(String nombre) {
-        return veterinarioRepo.findByNombreContainingIgnoreCase(nombre);
+        return veterinarioRepo.findByNombreStartingWithIgnoreCase(nombre);
     }
 
     @Override
@@ -69,4 +73,24 @@ public class VeterinarioServiceImp implements VeterinarioService {
         return veterinarioRepo.findByCorreo(correo);
     }
 
+
+
+
+
+
+    @Override
+    public Number countVeterinariosActivos() {
+        return 0;
+
+    }
+
+    @Override
+    public Number countVeterinariosInactivos() {
+        return 0;
+    }
+
+
+
+
+    
 }

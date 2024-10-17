@@ -46,7 +46,9 @@ public class ClienteServiceImp implements ClienteService {
 
     @Override
     public Optional<Cliente> updateById(Long id, Cliente cliente) {
-        if (clientRepo.existsById(id)) {
+        Optional<Cliente> clientOpt = clientRepo.findById(id);
+        if (clientOpt.isPresent()) {
+            cliente.setMascotas(clientOpt.get().getMascotas());
             cliente = clientRepo.save(cliente);  // Save es usado tanto para crear como para actualizar
             return Optional.of(cliente);
         }
@@ -59,8 +61,7 @@ public class ClienteServiceImp implements ClienteService {
     }
 
     public List<Cliente> searchByNombre(String nombre) {
-        // Llamar al repositorio para buscar los clientes que contengan el nombre
-        return clientRepo.findByNombreContainingIgnoreCase(nombre);
+        return clientRepo.findByNombreStartingWithIgnoreCase(nombre);
     }
     
 }

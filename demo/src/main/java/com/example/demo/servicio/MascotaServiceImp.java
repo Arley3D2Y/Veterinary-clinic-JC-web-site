@@ -56,7 +56,9 @@ public class MascotaServiceImp implements MascotaService {
 
     @Override
     public Optional<Mascota> updateById(Long id, Mascota mascota) {
-        if (mascotaRep.existsById(id)) {
+        Optional<Mascota> mascotaOpt = mascotaRep.findById(id);
+        if (mascotaOpt.isPresent()) {
+            mascota.setTratamientos(mascotaOpt.get().getTratamientos());
             mascota = mascotaRep.save(mascota);  // Save es usado tanto para crear como para actualizar
             return Optional.of(mascota);
         }
@@ -65,7 +67,7 @@ public class MascotaServiceImp implements MascotaService {
 
     @Override
     public List<Mascota> searchByNombre(String nombre) {
-        return mascotaRep.findByNombreContainingIgnoreCase(nombre);
+        return mascotaRep.findByNombreStartingWithIgnoreCase(nombre);
     }
 
     @Override
@@ -77,8 +79,22 @@ public class MascotaServiceImp implements MascotaService {
     public List<Tratamiento> findTreatmentsByPetId(Long id) {
         Optional<Mascota> mascotaOpt = mascotaRep.findById(id);
         if (mascotaOpt.isPresent()) {
-            return mascotaOpt.get().obtenerTratamientos();
+            return mascotaOpt.get().getTratamientos();
         }
         return null;
     }
+
+
+    @Override
+    public Number countMascotas() {
+        return 0;
+    }
+
+    @Override
+    public Number countMascotasEnTratamiento() {
+
+        return 0;
+    }
+
+    
 }

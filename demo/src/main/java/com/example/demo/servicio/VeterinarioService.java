@@ -72,4 +72,11 @@ public interface VeterinarioService {
     public Optional<Veterinario> searchByCorreo(String correo);
 
 
+
+
+
+
+    public Number countVeterinariosActivos();
+    public Number countVeterinariosInactivos();
+
 }

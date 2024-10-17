@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.http.HttpStatus;
 
 import com.example.demo.model.Tratamiento;
 import com.example.demo.servicio.TratamientoService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping("/tratamientos")
@@ -50,11 +50,11 @@ public class TratamientoController {
     }
 
     // localhost:8091/tratamientos/add
-    @PostMapping("/add")
+    @PostMapping("/add/mascota-id/{petId}/veterinario-id/{vetId}")
     @Operation(summary = "Add new treatment")
-    private ResponseEntity<Tratamiento> crearTratamiento(@RequestBody Tratamiento tratamiento) {
-        Optional<Tratamiento> nuevoTratamiento = tratamientoService.addTratamiento(tratamiento);
-        return nuevoTratamiento.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.CONFLICT).build());
+    private ResponseEntity<Tratamiento> crearTratamiento(@PathVariable("petId") Long pId, @PathVariable("vetId") Long vId, @RequestBody Tratamiento tratamiento) {
+        Optional<Tratamiento> nuevoTratamiento = tratamientoService.addTratamiento(pId, vId, tratamiento);
+        return nuevoTratamiento.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     // localhost:8091/tratamientos/delete/{id}
@@ -75,5 +75,29 @@ public class TratamientoController {
         return tratamientoActualizado.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/search-by-name/{name}")
+    @Operation(summary = "Search treatments by name")
+    public ResponseEntity<List<Tratamiento>> mostrarTratamientoPorNombre(@PathVariable String name) {
+        List<Tratamiento> tratamientos = tratamientoService.searchByNombre(name);
+        if (tratamientos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(tratamientos);
+    }
+
+    @GetMapping("/search-by-veterinario_id/{id}")
+    @Operation(summary = "Search treatments by veterinarian id")
+    public ResponseEntity<List<Tratamiento>> mostrarTratamientoPorVeterinario(@PathVariable Long id) {
+        List<Tratamiento> tratamientos = tratamientoService.getTratamientosPorVeterinario(id);
+        return ResponseEntity.ok(tratamientos);
+    }
+
+    @GetMapping("/search-by-mascota_id/{id}")
+    @Operation(summary = "Search treatments by pet id")
+    public ResponseEntity<List<Tratamiento>> mostrarTratamientoPorMascota(@PathVariable Long id) {
+        List<Tratamiento> tratamientos = tratamientoService.getTratamientosPorMascota(id);
+        return ResponseEntity.ok(tratamientos);
+    }
+    
 }
 

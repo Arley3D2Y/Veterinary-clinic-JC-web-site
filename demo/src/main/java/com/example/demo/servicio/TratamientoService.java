@@ -1,5 +1,6 @@
 package com.example.demo.servicio;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,8 +31,8 @@ public interface TratamientoService {
      * @param tratamiento El objeto Tratamiento que se desea agregar al sistema.
      *
      */
-    public Optional<Tratamiento> addTratamiento(Tratamiento tratamiento);
-    /**
+    public Optional<Tratamiento> addTratamiento(Long idp, Long idv, Tratamiento tratamiento);
+        /**
      * Este metodo es usado para borrar un tratamiento del sistema.
      *
      * @param identificacion El ID del tratamiento que se desea borrar.
@@ -45,5 +46,17 @@ public interface TratamientoService {
      *                    sistema.
      */
     public Optional<Tratamiento> updateById(Long id, Tratamiento tratamiento);
+
+    public List<Tratamiento> searchByNombre(String name);
+    
+    public List<Tratamiento> getTratamientosPorVeterinario(Long id);
+
+    public List<Tratamiento> getTratamientosPorMascota(Long id);
+
+    public Number Count(Date o);
+
+    public List<Tratamiento> getTratamientosPorMedicamento();
+    
+    public List<Tratamiento> getTopTratamientos();
 
 }

@@ -58,4 +58,15 @@ public class DrogaServiceImp implements DrogaService {
         return drogaRepo.findByNombreContainingIgnoreCase(nombre);
     }
 
+    @Override
+    public boolean decreaseDrugQuantity(Long id) {
+        Optional<Droga> drogaOpt = drogaRepo.findById(id);
+        if (drogaOpt.isPresent()) {
+            Droga droga = drogaOpt.get();
+            droga.sellUnit();
+            drogaRepo.save(droga);
+            return true;
+        }
+        return false;
+    }
 }

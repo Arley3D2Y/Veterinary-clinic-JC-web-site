@@ -19,7 +19,7 @@ public interface VeterinarioRepository extends JpaRepository<Veterinario, Long> 
     Optional<Veterinario> findByCorreo(String correo);
 
     // Método para buscar veterinarios por un nombre común
-    List<Veterinario> findByNombreContainingIgnoreCase(String nombre);
+    List<Veterinario> findByNombreStartingWithIgnoreCase(String nombre);
 
     // Método para borrar un veterinario por nombre
     Optional<Veterinario> findByNombreIgnoreCase(String nombre);

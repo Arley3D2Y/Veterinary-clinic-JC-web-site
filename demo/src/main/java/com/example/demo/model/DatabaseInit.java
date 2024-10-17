@@ -473,11 +473,11 @@ public class DatabaseInit implements ApplicationRunner {
                 especialidadRepository.save(new Especialidad("Salud Pública Veterinaria", "Prevención y control de enfermedades zoonóticas"));
 
                 // Tratamientos
-                tratamientoRepository.save(new Tratamiento("Tratamiento antiinflamatorio",
+                tratamientoRepository.save(new Tratamiento("Medicamento antiinflamatorio",
                                 "Reducción de inflamación y dolor", LocalDate.of(2023, 9, 1)));
-                tratamientoRepository.save(new Tratamiento("Tratamiento antibiótico",
+                tratamientoRepository.save(new Tratamiento("Suministro de antintibiótico",
                                 "Eliminación de infección bacteriana", LocalDate.of(2023, 9, 2)));
-                tratamientoRepository.save(new Tratamiento("Tratamiento dermatológico",
+                tratamientoRepository.save(new Tratamiento("Dermatológico",
                                 "Tratamiento para problemas de piel", LocalDate.of(2023, 9, 3)));
                 tratamientoRepository.save(new Tratamiento("Vacunación", "Aplicación de vacunas rutinarias",
                                 LocalDate.of(2023, 9, 4)));
@@ -485,15 +485,21 @@ public class DatabaseInit implements ApplicationRunner {
                                 "Eliminación de parásitos internos y externos", LocalDate.of(2023, 9, 5)));
                 tratamientoRepository.save(new Tratamiento("Tratamiento para la ansiedad",
                                 "Manejo de ansiedad en mascotas", LocalDate.of(2023, 9, 6)));
-                tratamientoRepository.save(new Tratamiento("Tratamiento hormonal",
+                tratamientoRepository.save(new Tratamiento("Hormonal",
                                 "Regulación de desequilibrios hormonales", LocalDate.of(2023, 9, 7)));
                 tratamientoRepository.save(new Tratamiento("Cirugía menor", "Procedimientos quirúrgicos menores",
                                 LocalDate.of(2023, 9, 8)));
-                tratamientoRepository.save(new Tratamiento("Tratamiento para la obesidad", "Plan de reducción de peso",
+                tratamientoRepository.save(new Tratamiento("Regulación de la obesidad", "Plan de reducción de peso",
                                 LocalDate.of(2023, 9, 9)));
                 tratamientoRepository.save(new Tratamiento("Rehabilitación física",
                                 "Terapias para recuperación de movilidad", LocalDate.of(2023, 9, 10)));
+                tratamientoRepository.save(new Tratamiento("Tratamiento para la diabetes",
+                                "Plan de control de la diabetes", LocalDate.of(2023, 9, 11)));
+                tratamientoRepository.save(new Tratamiento("Regulamiento de la hipertensión",
+                                "Plan de control de la hipertensión", LocalDate.of(2023, 9, 12)));
+                
 
+                // Administradores
                 administradorRepository.save(new Administrador("Arley", "1111"));
                 administradorRepository.save(new Administrador("Kevin", "2222"));
                 administradorRepository.save(new Administrador("Daniel", "3333"));
@@ -528,6 +534,9 @@ public class DatabaseInit implements ApplicationRunner {
                         tratamiento.setMascota(mascotas.get(random.nextInt(mascotas.size())));
                 }
 
+                mascotas.get(0).agregarTratamiento(tratamientos.get(0));
+                mascotas.get(0).agregarTratamiento(tratamientos.get(1));
+                mascotas.get(0).agregarTratamiento(tratamientos.get(2));
         }
 
         private void asignarEspecialidadesAVeterinarios(List<Veterinario> veterinarios, List<Especialidad> especialidades) {

@@ -63,4 +63,12 @@ public interface MascotaService {
     public List<Mascota> searchByClienteId(Long id);
 
     public List<Tratamiento> findTreatmentsByPetId(Long id);
+
+
+
+
+
+    public Number countMascotas();
+    public Number countMascotasEnTratamiento();
+
 }

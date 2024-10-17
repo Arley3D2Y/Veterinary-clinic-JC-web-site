@@ -13,7 +13,7 @@ public interface MascotaRepository extends JpaRepository<Mascota, Long> {
     // JpaRepository ya tiene findAll(), findById(), deleteById(), y save()
 
     // Busqueda de mascotas por nombre
-    List<Mascota> findByNombreContainingIgnoreCase(String nombre);
+    List<Mascota> findByNombreStartingWithIgnoreCase(String nombre);
 
     // Busqueda de mascotas por el id del dueño
     List<Mascota> findByClienteId(Long id);
