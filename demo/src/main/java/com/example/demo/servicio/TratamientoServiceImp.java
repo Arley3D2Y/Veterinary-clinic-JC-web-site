@@ -1,11 +1,14 @@
 package com.example.demo.servicio;
 
+import java.time.LocalDate;
 import java.util.*;
-import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Droga;
+import com.example.demo.model.FinanzasDTO;
+import com.example.demo.model.GenericoDTO;
 import com.example.demo.model.Mascota;
 import com.example.demo.model.Tratamiento;
 import com.example.demo.model.Veterinario;
@@ -108,16 +111,65 @@ public class TratamientoServiceImp implements TratamientoService {
 
 
     @Override
-    public Number Count(Date o) {
+    public Number countTratamientosByMonth() {
+        LocalDate fechaActual = LocalDate.now();
+        int mesActual = fechaActual.getMonthValue(); // Obtener el mes actual
 
-        return 0;
+        // Buscar tratamientos por mes
+        List<Tratamiento> tratamientosPorMes = trataRepo.findByFechaInicioBetween(
+                LocalDate.of(fechaActual.getYear(), mesActual, 1),
+                LocalDate.of(fechaActual.getYear(), mesActual + 1, 1)
+        );
+        return tratamientosPorMes.size();
     }
 
-    @Override
-    public List<Tratamiento> getTratamientosPorMedicamento() {
-
-        return List.of();
+@Override
+public List<GenericoDTO> getTratamientosPorMedicamento() {
+    List<Tratamiento> tratamientos = trataRepo.findAll();
+    Map<String, Number> drogaCountMap = new HashMap<>();
+    
+    // Contar ocurrencias de cada droga
+    for (Tratamiento tratamiento : tratamientos) {
+        Droga droga = tratamiento.getDroga();
+        if (droga != null) {
+            String nombreDroga = droga.getNombre(); // Asegúrate de que 'Droga' tenga un método 'getNombre()'
+            // Incrementar el conteo
+            drogaCountMap.put(nombreDroga, drogaCountMap.getOrDefault(nombreDroga, 0).intValue() + 1);
+        }
     }
+    
+    // Convertir el mapa a una lista de GenericoDTO
+    List<GenericoDTO> result = new ArrayList<>();
+    for (Map.Entry<String, Number> entry : drogaCountMap.entrySet()) {
+        result.add(new GenericoDTO(entry.getKey(), entry.getValue()));
+    }
+    
+    return result;
+}
+
+@Override
+public FinanzasDTO getFinanzas() {
+    List<Tratamiento> tratamientos = trataRepo.findAll();
+
+    double ventasTotales = 0.0;
+    double costoTotal = 0.0;
+
+    for (Tratamiento tratamiento : tratamientos) {
+        Droga droga = tratamiento.getDroga();
+        if (droga != null) {
+            double precioDroga = droga.getPrecioVenta();
+            ventasTotales += precioDroga;
+            costoTotal += precioDroga; // Si el costo es diferente, ajustarlo aquí
+        }
+    }
+
+    double gananciasTotales = ventasTotales - costoTotal;
+
+    // Retornar el DTO con las ventas y ganancias
+    return new FinanzasDTO(ventasTotales, gananciasTotales);
+}
+
+        // Contar ocurrencias de cada veterinario
 
     @Override
     public List<Tratamiento> getTopTratamientos() {

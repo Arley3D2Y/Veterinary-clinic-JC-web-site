@@ -28,4 +28,6 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
     // Buscar por mascota
     List<Tratamiento> findByMascota(Mascota mascota);
 
+    List<Tratamiento> findByFechaInicioBetween(LocalDate fechaInicio, LocalDate fechaFin);
+
 }

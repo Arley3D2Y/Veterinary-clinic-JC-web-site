@@ -80,13 +80,18 @@ public class VeterinarioServiceImp implements VeterinarioService {
 
     @Override
     public Number countVeterinariosActivos() {
-        return 0;
-
+        List<Veterinario> veterinarios = veterinarioRepo.findAll(); // Obtener todos los veterinarios
+        return veterinarios.stream()
+                .filter(veterinario -> !veterinario.getTratamientos().isEmpty()) // Filtrar veterinarios activos
+                .count(); // Contar veterinarios activos
     }
 
     @Override
     public Number countVeterinariosInactivos() {
-        return 0;
+        List<Veterinario> veterinarios = veterinarioRepo.findAll(); // Obtener todos los veterinarios
+        return veterinarios.stream()
+                .filter(veterinario -> veterinario.getTratamientos().isEmpty()) // Filtrar veterinarios inactivos
+                .count(); // Contar veterinarios inactivos
     }
 
 

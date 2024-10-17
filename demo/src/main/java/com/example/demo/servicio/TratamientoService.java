@@ -1,9 +1,10 @@
 package com.example.demo.servicio;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.demo.model.FinanzasDTO;
+import com.example.demo.model.GenericoDTO;
 import com.example.demo.model.Tratamiento;
 
 public interface TratamientoService {
@@ -53,9 +54,12 @@ public interface TratamientoService {
 
     public List<Tratamiento> getTratamientosPorMascota(Long id);
 
-    public Number Count(Date o);
 
-    public List<Tratamiento> getTratamientosPorMedicamento();
+    public FinanzasDTO getFinanzas();
+
+    public Number countTratamientosByMonth();
+
+public List<GenericoDTO> getTratamientosPorMedicamento();
     
     public List<Tratamiento> getTopTratamientos();
 

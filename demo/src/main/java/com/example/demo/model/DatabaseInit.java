@@ -482,7 +482,7 @@ public class DatabaseInit implements ApplicationRunner {
                 tratamientoRepository.save(new Tratamiento("Vacunación", "Aplicación de vacunas rutinarias",
                                 LocalDate.of(2023, 9, 4)));
                 tratamientoRepository.save(new Tratamiento("Desparasitación",
-                                "Eliminación de parásitos internos y externos", LocalDate.of(2023, 9, 5)));
+                                "Eliminación de parásitos internos y externos", LocalDate.of(2024, 10, 5)));
                 tratamientoRepository.save(new Tratamiento("Tratamiento para la ansiedad",
                                 "Manejo de ansiedad en mascotas", LocalDate.of(2023, 9, 6)));
                 tratamientoRepository.save(new Tratamiento("Hormonal",
@@ -530,7 +530,7 @@ public class DatabaseInit implements ApplicationRunner {
 
                 for (Tratamiento tratamiento : tratamientos) {
                         tratamiento.setVeterinario(veterinarios.get(random.nextInt(veterinarios.size())));
-                        tratamiento.setDroga(drogas.get(random.nextInt(drogas.size())));
+                        tratamiento.setDroga(drogas.get(random.nextInt(5)));
                         tratamiento.setMascota(mascotas.get(random.nextInt(mascotas.size())));
                 }
 
