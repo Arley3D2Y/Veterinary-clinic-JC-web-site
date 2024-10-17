@@ -16,7 +16,9 @@ import org.springframework.http.HttpStatus;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.demo.model.Especialidad;
 import com.example.demo.model.Veterinario;
+import com.example.demo.servicio.EspecialidadesService;
 import com.example.demo.servicio.VeterinarioService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,7 +30,8 @@ public class VeterinarioController {
 
     @Autowired
     private VeterinarioService veterinarioService;
-
+    @Autowired
+    private EspecialidadesService especialidadService;
     /* Veterinarios */
 
     // localhost:8091/veterinarios
@@ -53,7 +56,9 @@ public class VeterinarioController {
     @Operation(summary = "Add a new veterinary")
     public ResponseEntity<Veterinario> crearVeterinario(@RequestBody Veterinario veterinario) {
         Optional<Veterinario> nuevoVeterinario = veterinarioService.addVeterinario(veterinario);
-        return nuevoVeterinario.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.CONFLICT).body(null)); // Retorna un error 409 Conflict si ya existe
+        return nuevoVeterinario.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.CONFLICT).body(null)); // Retorna un error 409
+                                                                                         // Conflict si ya existe
     }
 
     @DeleteMapping("/delete/{id}")
@@ -69,7 +74,8 @@ public class VeterinarioController {
 
     @PutMapping("/update/{id}")
     @Operation(summary = "Update veterinary by id")
-    public ResponseEntity<Veterinario> actualizarVeterinario(@PathVariable Long id, @RequestBody Veterinario veterinario) {
+    public ResponseEntity<Veterinario> actualizarVeterinario(@PathVariable Long id,
+            @RequestBody Veterinario veterinario) {
         Optional<Veterinario> veterionarioActualizado = veterinarioService.updateById(id, veterinario);
         return veterionarioActualizado.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -102,4 +108,16 @@ public class VeterinarioController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    // Dentro del controlador de veterinario
+    @GetMapping("/especialidades")
+    public List<Especialidad> getAllEspecialidades() {
+        return especialidadService.findAll();
+    }
+
+    @PostMapping("/especialidades")
+    public Especialidad createEspecialidad(@RequestBody Especialidad especialidad) {
+        return especialidadService.save(especialidad);
+    }
+
 }
