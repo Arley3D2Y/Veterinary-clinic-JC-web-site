@@ -24,10 +24,14 @@ public interface VeterinarioRepository extends JpaRepository<Veterinario, Long> 
     // Método para borrar un veterinario por nombre
     Optional<Veterinario> findByNombreIgnoreCase(String nombre);
 
+<<<<<<< HEAD
     // Contar veterinarios activos
     long countByEstadoTrue();
 
     // Contar veterinarios inactivos
     long countByEstadoFalse();
+=======
+    List<Veterinario> findByTratamientos_Id(Long tratamientoId);
+>>>>>>> 9660d0aa989c158b817e3336a46d23fc77c379f5
 
 }
