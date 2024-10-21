@@ -23,7 +23,7 @@ public class VeterinarioEstadisticasDTO {
         return inactivos;
     }
 
-    public void setInactivos(Number inactivos) {
+    public void setInactivos(Number inactivos){
         this.inactivos = inactivos;
     }
 }
