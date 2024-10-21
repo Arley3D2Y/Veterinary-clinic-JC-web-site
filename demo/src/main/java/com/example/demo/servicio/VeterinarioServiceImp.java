@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.model.Tratamiento;
 import com.example.demo.model.Veterinario;
 import com.example.demo.repositorio.VeterinarioRepository;
 
@@ -28,18 +29,23 @@ public class VeterinarioServiceImp implements VeterinarioService {
     @Override
     public Optional<Veterinario> addVeterinario(Veterinario veterinario) {
         Optional<Veterinario> veterinarioOpt = veterinarioRepo.findByCedula(veterinario.getCedula());
-        
+
         if (!veterinarioOpt.isPresent()) {
             veterinario = veterinarioRepo.save(veterinario);
             return Optional.of(veterinario);
-        } 
+        }
         return Optional.empty();
     }
 
     @Override
     public boolean removeById(Long id) {
-        if (veterinarioRepo.existsById(id)) {
-            veterinarioRepo.deleteById(id);
+        Optional<Veterinario> veterinarioOpt = veterinarioRepo.findById(id);
+        if (veterinarioOpt.isPresent()) {
+            // Desasociar tratamientos antes de eliminar el veterinario
+            for (Tratamiento tratamiento : veterinarioOpt.get().getTratamientos()) {
+                tratamiento.setVeterinario(null); // Desasociar el veterinario
+            }
+            veterinarioRepo.deleteById(id); // Ahora se puede eliminar el veterinario
             return true;
         }
         return false;
@@ -51,10 +57,10 @@ public class VeterinarioServiceImp implements VeterinarioService {
         if (veterinarioOpt.isPresent()) {
             veterinario.setTratamientos(veterinarioOpt.get().getTratamientos());
             veterinario.setEspecialidades(veterinarioOpt.get().getEspecialidades());
-            
+
             veterinario = veterinarioRepo.save(veterinario);
             return Optional.of(veterinario);
-        } 
+        }
         return Optional.empty();
     }
 
@@ -73,29 +79,14 @@ public class VeterinarioServiceImp implements VeterinarioService {
         return veterinarioRepo.findByCorreo(correo);
     }
 
-
-
-
-
-
     @Override
-    public Number countVeterinariosActivos() {
-        List<Veterinario> veterinarios = veterinarioRepo.findAll(); // Obtener todos los veterinarios
-        return veterinarios.stream()
-                .filter(veterinario -> !veterinario.getTratamientos().isEmpty()) // Filtrar veterinarios activos
-                .count(); // Contar veterinarios activos
+    public long contarVeterinariosActivos() {
+        return veterinarioRepo.countByEstadoTrue();
     }
 
     @Override
-    public Number countVeterinariosInactivos() {
-        List<Veterinario> veterinarios = veterinarioRepo.findAll(); // Obtener todos los veterinarios
-        return veterinarios.stream()
-                .filter(veterinario -> veterinario.getTratamientos().isEmpty()) // Filtrar veterinarios inactivos
-                .count(); // Contar veterinarios inactivos
+    public long contarVeterinariosInactivos() {
+        return veterinarioRepo.countByEstadoFalse();
     }
 
-
-
-
-    
 }

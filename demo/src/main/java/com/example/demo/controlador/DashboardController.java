@@ -51,14 +51,13 @@ public class DashboardController {
     @GetMapping("/veterinarios-estados")
     @Operation(summary = "Get active and inactive veterinarians count")
     public ResponseEntity<VeterinarioEstadisticasDTO> getVeterinarios() {
-        Number veterinariosActivos = veterinarioService.countVeterinariosActivos();
-        Number veterinariosInactivos = veterinarioService.countVeterinariosInactivos(); // Asegúrate de tener este
+        Number veterinariosActivos = veterinarioService.contarVeterinariosActivos();
+        Number veterinariosInactivos = veterinarioService.contarVeterinariosInactivos(); // Asegúrate de tener este
 
         VeterinarioEstadisticasDTO estadisticas = new VeterinarioEstadisticasDTO(veterinariosActivos,
                 veterinariosInactivos);
         return ResponseEntity.ok(estadisticas);
     }
-
 
     // localhost:8091/api/dashboard/finanzas
     @GetMapping("/finanzas")
