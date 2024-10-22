@@ -43,25 +43,13 @@ public class VeterinarioRepositoryTest {
 		veterinarioRepository.save(new Veterinario("Kevin", "2222222", "be@lol.com", "4321", "https://media.istockphoto.com/id/1389348844/es/foto/foto-de-estudio-de-una-hermosa-joven-sonriendo-mientras-está-de-pie-sobre-un-fondo-gris.jpg?s=612x612&w=0&k=20&c=kUufmNoTnDcRbyeHhU1wRiip-fNjTWP9owjHf75frFQ="));
 		veterinarioRepository.save(new Veterinario("Sergio", "123456789", "s@t.com", "1234", "https://i.ibb.co/0qX2b8t/sergio.jpg"));
 
-        mascotaRepository.save(new Mascota("Ginger", "5", "4.7", "Sano", "Ninguna", "Macho", "Burmés", 
-                        "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
-        mascotaRepository.save(new Mascota("Luna", "8", "5.4", "Enfermo", "Obesidad", "Hembra", "Ragdoll", 
-                        "https://content.elmueble.com/medio/2023/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
-    	mascotaRepository.save(new Mascota("Rufus", "2", "5.3", "Sano", "Ninguna", "Macho", "Siberiano", 
-                        "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
+        mascotaRepository.save(new Mascota("Ginger", "5", "4.7", "Sano", "Ninguna", "Macho", "Burmés", "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
+        mascotaRepository.save(new Mascota("Luna", "8", "5.4", "Enfermo", "Obesidad", "Hembra", "Ragdoll", "https://content.elmueble.com/medio/2023/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
 
 		drogaRepository.save(new Droga("Cefalexina", 3.54f, 23.4f, 12, 1));
 
-        tratamientoRepository.save(new Tratamiento("Medicamento antiinflamatorio",
-                        "Reducción de inflamación y dolor", LocalDate.of(2023, 9, 1)));
-        tratamientoRepository.save(new Tratamiento("Suministro de antintibiótico",
-                        "Eliminación de infección bacteriana", LocalDate.of(2023, 9, 2)));
-        tratamientoRepository.save(new Tratamiento("Dermatológico",
-                        "Tratamiento para problemas de piel", LocalDate.of(2023, 9, 3)));
-        tratamientoRepository.save(new Tratamiento("Vacunación", 
-		"Aplicación de vacunas rutinarias", LocalDate.of(2023, 9, 4)));
-        tratamientoRepository.save(new Tratamiento("Desparasitación",
-                        "Eliminación de parásitos internos y externos", LocalDate.of(2024, 10, 5)));
+        tratamientoRepository.save(new Tratamiento("Medicamento antiinflamatorio", "Reducción de inflamación y dolor", LocalDate.of(2023, 9, 1)));
+        tratamientoRepository.save(new Tratamiento("Suministro de antintibiótico", "Eliminación de infección bacteriana", LocalDate.of(2023, 9, 2)));
 
 		Tratamiento t = tratamientoRepository.findById(1l).get();
 		Veterinario v = veterinarioRepository.findById(1l).get();
@@ -130,18 +118,6 @@ public class VeterinarioRepositoryTest {
 		// assert
 		Assertions.assertThat(veterinarioRepository.findById(index)).isEmpty();
 	}
-
-	@Test
-	public void VeterinarioRepository_findByNombre_Veterinario() {
-		// arrange
-		String nombre = "Sergio";
-
-		// act
-		Optional<Veterinario> veterinario = veterinarioRepository.findByNombreIgnoreCase(nombre);
-
-		// assert
-		Assertions.assertThat(veterinario).isPresent();
-	}
  
 	@Test
 	public void VeterinarioRepository_updateById_Veterinario() {
@@ -160,7 +136,68 @@ public class VeterinarioRepositoryTest {
 	}
 
 	@Test
-	public void VeterinarioRepository_find(){
+	public void VeterinarioRepository_findByCedula_Veterinario() {
+		// arrange
+		String cedula = "123456789";
+
+		// act
+		Optional<Veterinario> veterinario = veterinarioRepository.findByCedula(cedula);
+
+		// assert
+		Assertions.assertThat(veterinario).isPresent();
+		Assertions.assertThat(veterinario.get().getNombre()).isEqualTo("Sergio");
+	}
+
+	@Test
+	public void VeterinarioRepository_findByCorreo_Veterinario() {
+		// arrange
+		String correo = "s@t.com";
+
+		// act
+		Optional<Veterinario> veterinario = veterinarioRepository.findByCorreo(correo);
+
+		// assert
+		Assertions.assertThat(veterinario).isPresent();
+		Assertions.assertThat(veterinario.get().getCedula()).isEqualTo("123456789");
+	}
+
+	@Test
+	public void VeterinarioRepository_findByNombreStartingWith_VeterinarioList() {
+		// arrange
+		String nombre = "S";
+
+		// act
+		List<Veterinario> veterinarios = veterinarioRepository.findByNombreStartingWithIgnoreCase(nombre);
+
+		// assert
+		Assertions.assertThat(veterinarios).isNotEmpty();
+		Assertions.assertThat(veterinarios.size()).isEqualTo(1);
+	}
+
+	@Test
+	public void VeterinarioRepository_findByNombre_Veterinario() {
+		// arrange
+		String nombre = "Sergio";
+
+		// act
+		Optional<Veterinario> veterinario = veterinarioRepository.findByNombreIgnoreCase(nombre);
+
+		// assert
+		Assertions.assertThat(veterinario).isPresent();
+	}
+
+	@Test
+	public void VeterinarioRepository_countByEstadoTrue() {
+		// act
+		Long count = veterinarioRepository.countByEstadoTrue();
+
+		// assert
+		Assertions.assertThat(count).isEqualTo(3);
+		Assertions.assertThat(count).isGreaterThan(0);
+	}
+
+	@Test
+	public void VeterinarioRepository_findByTratamientos_Id_NotEmptyList(){
 		// arrange
 		Long index = 1l;
 

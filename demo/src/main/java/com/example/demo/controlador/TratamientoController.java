@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,10 +36,9 @@ public class TratamientoController {
     @Operation(summary = "Find all treatments")
     public ResponseEntity<List<Tratamiento>> mostrarTratamientos() {
         List<Tratamiento> tratamientos = tratamientoService.searchAll();
-        if (tratamientos.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(tratamientos);
+        
+        ResponseEntity<List<Tratamiento>> response = new ResponseEntity<>(tratamientos, HttpStatus.OK);
+        return response;
     }
 
     // localhost:8091/tratamientos/find/{id}

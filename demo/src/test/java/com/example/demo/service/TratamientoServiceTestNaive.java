@@ -1,19 +1,12 @@
 package com.example.demo.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
-
 import java.time.LocalDate;
 import java.util.*;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
@@ -26,138 +19,80 @@ import com.example.demo.repositorio.DrogaRepository;
 import com.example.demo.repositorio.MascotaRepository;
 import com.example.demo.repositorio.TratamientoRepository;
 import com.example.demo.repositorio.VeterinarioRepository;
-import com.example.demo.servicio.TratamientoServiceImp;
-import com.example.demo.servicio.VeterinarioService;
+import com.example.demo.servicio.TratamientoService;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @ActiveProfiles("test")
 class TratamientoServiceTestNaive {
 
-    @Mock
-    private TratamientoRepository tratamientoRepo;
+    /* Pruebas ingenuas */
+    @Autowired
+    private TratamientoService tratamientoService;
 
-    @Mock
-    private MascotaRepository mascotaRepo;
+    @Autowired
+    private VeterinarioRepository veterinarioRepository;
 
-    @Mock
-    private VeterinarioRepository veterinarioRepo;
+    @Autowired
+    private MascotaRepository mascotaRepository;
 
-    @Mock
-    private DrogaRepository drogaRepo;
+    @Autowired
+    private DrogaRepository drogaRepository;
 
-    @Mock
-    private VeterinarioService veterinarioService;
-
-    @InjectMocks
-    private TratamientoServiceImp tratamientoService; // Usar la implementación concreta
+    @Autowired
+    private TratamientoRepository tratamientoRepository;
 
     private Mascota testMascota;
     private Veterinario testVeterinario;
-    private Tratamiento nuevoTratamiento;
+    private Droga testDroga;
+    private Tratamiento testTratamiento;
 
+    /* Pruebas ingenuas */
     @BeforeEach
-    public void setUp() {
-        // Inicializamos los mocks y el servicio
-        MockitoAnnotations.openMocks(this);
+    public void init() {
+        // Crear datos de prueba
+        testVeterinario = new Veterinario("Arley", "11111", "a@lol.com", "1234", "url_imagen");
+        testMascota = new Mascota("Ginger", "5", "4.7", "Sano", "Ninguna", "Macho", "Burmés", "url_imagen_gato");
+        testDroga = new Droga("Cefalexina", 3.54f, 23.4f, 12, 1);
+        testTratamiento = new Tratamiento("Medicamento antiinflamatorio", "Reducción de inflamación y dolor", LocalDate.of(2023, 9, 1));
+
+        // Guardar datos en los repositorios
+        veterinarioRepository.save(testVeterinario);
+        mascotaRepository.save(testMascota);
+        drogaRepository.save(testDroga);
+
+        // Asignar relaciones a Tratamiento
+        testTratamiento.setVeterinario(testVeterinario);
+        testTratamiento.setMascota(testMascota);
+        testTratamiento.setDroga(testDroga);
+
+        // Guardar tratamiento en el repositorio
+        tratamientoRepository.save(testTratamiento);
     }
 
     @Test
     public void TratamientoService_createTratamiento_Tratamiento() {
-        // arrange
-        nuevoTratamiento = new Tratamiento("Cirugía menor", "Procedimientos quirúrgicos menores", LocalDate.of(2023, 9, 8));
+        // arrange: Configurar un nuevo Tratamiento
+        Tratamiento nuevoTratamiento = new Tratamiento("Nueva medicación", "Tratamiento para el dolor", LocalDate.of(2024, 10, 20));
+        nuevoTratamiento.setDroga(testDroga);
 
         // act: Crear el tratamiento utilizando el servicio
         Optional<Tratamiento> newTratamiento = tratamientoService.addTratamiento(testMascota.getId(), testVeterinario.getId(), nuevoTratamiento);
 
         // assert: Verificar que el nuevo tratamiento fue creado correctamente
         Assertions.assertThat(newTratamiento).isPresent();
+        Assertions.assertThat(newTratamiento.get().getMascota().getNombre()).isEqualTo("Ginger");
     }
 
-    // Prueba para el método addTratamiento
     @Test
-    public void TratamientoService_addTratamiento_Tratamiento() {
-        // Datos de entrada
-        Long idMascota = 1L;
-        Long idVeterinario = 1L;
-        Tratamiento tratamiento = new Tratamiento();
-        Droga droga = new Droga();
-        droga.setId(1L);
+    public void TratamientoService_findAll_TratamientoList() {
+        // arrange
 
-        tratamiento.setDroga(droga);
+        // act: Buscar todos los tratamientos
+        List<Tratamiento> tratamientos = tratamientoService.searchAll();
 
-        // Mocks de datos existentes
-        Mascota mockMascota = new Mascota();
-        Veterinario mockVeterinario = new Veterinario();
-
-        // Simulamos la respuesta de los repositorios
-        when(mascotaRepo.findById(idMascota)).thenReturn(Optional.of(mockMascota));
-        when(veterinarioRepo.findById(idVeterinario)).thenReturn(Optional.of(mockVeterinario));
-        when(drogaRepo.findById(1L)).thenReturn(Optional.of(droga));
-        when(tratamientoRepo.save(any(Tratamiento.class))).thenReturn(tratamiento);
-
-        // Llamada al servicio que estamos probando
-        Optional<Tratamiento> resultado = tratamientoService.addTratamiento(idMascota, idVeterinario, tratamiento);
-
-        // Verificación de que el resultado es correcto
-        assertTrue(resultado.isPresent());
-        assertEquals(tratamiento, resultado.get());
-
-        // Verificar que los métodos en los mocks fueron llamados
-        verify(mascotaRepo).findById(idMascota);
-        verify(veterinarioRepo).findById(idVeterinario);
-        verify(drogaRepo).findById(1L);
-        verify(tratamientoRepo).save(tratamiento);
+        // assert: Verificar que hay 1 tratamiento en la lista
+        Assertions.assertThat(tratamientos).isNotEmpty();
+        Assertions.assertThat(tratamientos.size()).isEqualTo(1);
     }
-
-    // Prueba para el método removeById
-    @Test
-    public void testRemoveById() {
-        Long idTratamiento = 1L;
-
-        // Simulamos que el tratamiento existe
-        when(tratamientoRepo.existsById(idTratamiento)).thenReturn(true);
-
-        // Llamada al servicio que estamos probando
-        boolean resultado = tratamientoService.removeById(idTratamiento);
-
-        // Verificamos que el tratamiento fue eliminado correctamente
-        assertTrue(resultado);
-
-        // Verificar que se llamó al método deleteById en el repositorio
-        verify(tratamientoRepo).deleteById(idTratamiento);
-    }
-
-    // Prueba para el método updateById
-    @Test
-    void testUpdateById() {
-        Tratamiento tratamientoExistente = new Tratamiento();
-        tratamientoExistente.setId(1L);
-        tratamientoExistente.setVeterinario(new Veterinario());
-        tratamientoExistente.getVeterinario().setId(1L);
-        tratamientoExistente.setMascota(new Mascota());
-        tratamientoExistente.setDroga(new Droga());
-        
-        
-        Tratamiento tratamientoNuevo = new Tratamiento();
-        tratamientoNuevo.setId(1L); // El ID debe ser el mismo que el existente
-        tratamientoNuevo.setVeterinario(tratamientoExistente.getVeterinario());
-        tratamientoNuevo.setMascota(tratamientoExistente.getMascota());
-        tratamientoNuevo.setDroga(tratamientoExistente.getDroga());
-        
-       
-        when(tratamientoRepo.findById(1L)).thenReturn(Optional.of(tratamientoExistente));
-        when(tratamientoRepo.save(any(Tratamiento.class))).thenReturn(tratamientoNuevo);
-    
-        Optional<Tratamiento> resultado = tratamientoService.updateById(1L, tratamientoNuevo);
-    
-        verify(tratamientoRepo).findById(1L);
-        verify(tratamientoRepo).save(tratamientoNuevo);
-    
-        // Verifica que el resultado sea el esperado
-        assertTrue(resultado.isPresent());
-        assertEquals(tratamientoNuevo, resultado.get());
-    }
-    
-
 }

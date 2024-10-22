@@ -128,8 +128,7 @@ public class TratamientoRepositoryTest {
     public void testFindByVeterinarioAndActivoTrue() {
         List<Tratamiento> tratamientos = Arrays.asList(tratamientoActivo);
         
-        when(tratamientoRepository.findByVeterinarioAndActivoTrue(veterinario))
-            .thenReturn(tratamientos);
+        when(tratamientoRepository.findByVeterinarioAndActivoTrue(veterinario)).thenReturn(tratamientos);
 
         List<Tratamiento> result = tratamientoRepository.findByVeterinarioAndActivoTrue(veterinario);
         
