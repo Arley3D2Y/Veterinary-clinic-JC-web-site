@@ -110,14 +110,16 @@ public class Tratamiento {
     }
 
     // Método para determinar si está activo en base a las fechas
+    // Método para determinar si el tratamiento está activo
     public void actualizarEstado() {
         LocalDate fechaActual = LocalDate.now();
-        if (fechaFin == null || fechaFin.isAfter(fechaActual)) {
-            this.activo = true;  // Tratamiento activo si la fecha fin es futura o null
+        if (fechaFin == null || fechaFin.isAfter(fechaActual) || fechaFin.equals(fechaActual)) {
+            this.activo = true;  // Tratamiento activo si la fecha fin es futura, actual o no está definida
         } else {
             this.activo = false; // Tratamiento inactivo si la fecha fin es pasada
         }
     }
+
 
     public boolean isActivo() {
         return activo;
