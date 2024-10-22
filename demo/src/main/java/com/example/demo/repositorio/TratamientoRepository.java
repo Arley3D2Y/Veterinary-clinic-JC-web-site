@@ -30,4 +30,12 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
 
     List<Tratamiento> findByFechaInicioBetween(LocalDate fechaInicio, LocalDate fechaFin);
 
+  // Buscar tratamientos activos
+  List<Tratamiento> findByActivoTrue();
+
+  // Buscar tratamientos inactivos
+  List<Tratamiento> findByActivoFalse();
+
+  // Buscar tratamientos activos de un veterinario
+  List<Tratamiento> findByVeterinarioAndActivoTrue(Veterinario veterinario);
 }

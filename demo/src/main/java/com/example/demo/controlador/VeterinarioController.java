@@ -56,6 +56,7 @@ public class VeterinarioController {
     @Operation(summary = "Add a new veterinary")
     public ResponseEntity<Veterinario> crearVeterinario(@RequestBody Veterinario veterinario) {
         Optional<Veterinario> nuevoVeterinario = veterinarioService.addVeterinario(veterinario);
+        veterinarioService.actualizarEstadoVeterinario(nuevoVeterinario.get().getId());
         return nuevoVeterinario.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.CONFLICT).body(null)); // Retorna un error 409
                                                                                          // Conflict si ya existe
@@ -77,6 +78,7 @@ public class VeterinarioController {
     public ResponseEntity<Veterinario> actualizarVeterinario(@PathVariable Long id,
             @RequestBody Veterinario veterinario) {
         Optional<Veterinario> veterionarioActualizado = veterinarioService.updateById(id, veterinario);
+        veterinarioService.actualizarEstadoVeterinario(veterionarioActualizado.get().getId());
         return veterionarioActualizado.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 

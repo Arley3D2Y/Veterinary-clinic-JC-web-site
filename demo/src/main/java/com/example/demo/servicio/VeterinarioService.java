@@ -76,4 +76,7 @@ public interface VeterinarioService {
 
     public long contarVeterinariosInactivos();
 
+    public void actualizarEstadoVeterinario(Long veterinarioId);
 }
+
+

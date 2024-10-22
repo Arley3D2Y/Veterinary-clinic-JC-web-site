@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Tratamiento;
 import com.example.demo.model.Veterinario;
+import com.example.demo.repositorio.TratamientoRepository;
 import com.example.demo.repositorio.VeterinarioRepository;
 
 @Service
@@ -15,6 +16,9 @@ public class VeterinarioServiceImp implements VeterinarioService {
 
     @Autowired
     VeterinarioRepository veterinarioRepo;
+
+    @Autowired
+    TratamientoRepository tratamientoRepo;
 
     @Override
     public List<Veterinario> searchAllVeterinarios() {
@@ -88,5 +92,29 @@ public class VeterinarioServiceImp implements VeterinarioService {
     public long contarVeterinariosInactivos() {
         return veterinarioRepo.countByEstadoFalse();
     }
+
+    @Override
+    public void actualizarEstadoVeterinario(Long veterinarioId) {
+        Optional<Veterinario> veterinarioOpt = veterinarioRepo.findById(veterinarioId);
+
+        if (veterinarioOpt.isPresent()) {
+            Veterinario veterinario = veterinarioOpt.get();
+
+            // Consultar si el veterinario tiene algún tratamiento activo
+            List<Tratamiento> tratamientosActivos = tratamientoRepo.findByVeterinarioAndActivoTrue(veterinario);
+
+            if (tratamientosActivos.isEmpty()) {
+                // Si no tiene tratamientos activos, se considera inactivo
+                veterinario.setEstado(false);
+            } else {
+                // Si tiene al menos un tratamiento activo, se considera activo
+                veterinario.setEstado(true);
+            }
+
+            // Guardar los cambios en el veterinario
+            veterinarioRepo.save(veterinario);
+        }
+    }
+
 
 }

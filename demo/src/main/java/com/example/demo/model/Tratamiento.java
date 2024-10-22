@@ -15,6 +15,7 @@ public class Tratamiento {
     private String observaciones;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
+    private boolean activo;
 
     @ManyToOne
     @JoinColumn(name = "droga_id")
@@ -106,6 +107,20 @@ public class Tratamiento {
 
     public void setDroga(Droga droga) {
         this.droga = droga;
+    }
+
+    // Método para determinar si está activo en base a las fechas
+    public void actualizarEstado() {
+        LocalDate fechaActual = LocalDate.now();
+        if (fechaFin == null || fechaFin.isAfter(fechaActual)) {
+            this.activo = true;  // Tratamiento activo si la fecha fin es futura o null
+        } else {
+            this.activo = false; // Tratamiento inactivo si la fecha fin es pasada
+        }
+    }
+
+    public boolean isActivo() {
+        return activo;
     }
 
 }
