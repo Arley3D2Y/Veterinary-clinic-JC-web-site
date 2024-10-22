@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface VeterinarioRepository extends JpaRepository<Veterinario, Long> {
-    
+
     // JpaRepository ya tiene findAll(), findById(), deleteById(), y save()
 
     // Método para buscar veterinario por cédula
@@ -23,6 +23,12 @@ public interface VeterinarioRepository extends JpaRepository<Veterinario, Long> 
 
     // Método para borrar un veterinario por nombre
     Optional<Veterinario> findByNombreIgnoreCase(String nombre);
+
+    // Contar veterinarios activos
+    long countByEstadoTrue();
+
+    // Contar veterinarios inactivos
+    long countByEstadoFalse();
 
     List<Veterinario> findByTratamientos_Id(Long tratamientoId);
 

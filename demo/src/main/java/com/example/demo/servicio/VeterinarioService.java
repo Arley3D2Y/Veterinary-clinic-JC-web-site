@@ -29,7 +29,7 @@ public interface VeterinarioService {
      *
      */
     public Optional<Veterinario> addVeterinario(Veterinario veterinario);
-    
+
     /**
      * Este metodo es usado para borrar un veterinario del sistema.
      *
@@ -40,7 +40,8 @@ public interface VeterinarioService {
     /**
      * Este método se utiliza para actualizar un veterinario en el sistema.
      *
-     * @param veterinario El objeto Veterinario que se desea actualizar en el sistema.
+     * @param veterinario El objeto Veterinario que se desea actualizar en el
+     *                    sistema.
      */
     public Optional<Veterinario> updateById(Long id, Veterinario veterinario);
 
@@ -71,12 +72,11 @@ public interface VeterinarioService {
      */
     public Optional<Veterinario> searchByCorreo(String correo);
 
+    public long contarVeterinariosActivos();
 
+    public long contarVeterinariosInactivos();
 
-
-
-
-    public Number countVeterinariosActivos();
-    public Number countVeterinariosInactivos();
-
+    public void actualizarEstadoVeterinario(Long veterinarioId);
 }
+
+

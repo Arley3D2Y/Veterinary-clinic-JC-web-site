@@ -29,6 +29,9 @@ public class TratamientoServiceImp implements TratamientoService {
     @Autowired
     DrogaRepository drogaRep;
 
+    @Autowired
+    VeterinarioService vetService;
+
     @Override
     public List<Tratamiento> searchAll() {
         return trataRepo.findAll();
@@ -49,7 +52,10 @@ public class TratamientoServiceImp implements TratamientoService {
         if (pet.isPresent() && vet.isPresent() && droga.isPresent()) {
             tratamiento.setMascota(pet.get());
             tratamiento.setVeterinario(vet.get());
+            tratamiento.actualizarEstado();
             tratamiento = trataRepo.save(tratamiento);
+            // Llamar al servicio del veterinario para actualizar su estado
+            vetService.actualizarEstadoVeterinario(tratamiento.getVeterinario().getId());
             return Optional.of(tratamiento);
         }
         return Optional.empty();
@@ -71,8 +77,9 @@ public class TratamientoServiceImp implements TratamientoService {
             tratamiento.setMascota(tratOpt.get().getMascota());
             tratamiento.setVeterinario(tratOpt.get().getVeterinario());
             tratamiento.setDroga(tratOpt.get().getDroga());
-            
+            tratamiento.actualizarEstado();
             tratamiento = trataRepo.save(tratamiento);
+            vetService.actualizarEstadoVeterinario(tratamiento.getVeterinario().getId());
             return Optional.of(tratamiento);
         }
         return Optional.empty();
@@ -106,10 +113,6 @@ public class TratamientoServiceImp implements TratamientoService {
         }
     }
 
-
-
-
-
     @Override
     public Number countTratamientosByMonth() {
         LocalDate fechaActual = LocalDate.now();
@@ -118,63 +121,61 @@ public class TratamientoServiceImp implements TratamientoService {
         // Buscar tratamientos por mes
         List<Tratamiento> tratamientosPorMes = trataRepo.findByFechaInicioBetween(
                 LocalDate.of(fechaActual.getYear(), mesActual, 1),
-                LocalDate.of(fechaActual.getYear(), mesActual + 1, 1)
-        );
+                LocalDate.of(fechaActual.getYear(), mesActual + 1, 1));
         return tratamientosPorMes.size();
     }
 
-@Override
-public List<GenericoDTO> getTratamientosPorMedicamento() {
-    List<Tratamiento> tratamientos = trataRepo.findAll();
-    Map<String, Number> drogaCountMap = new HashMap<>();
-    
-    // Contar ocurrencias de cada droga
-    for (Tratamiento tratamiento : tratamientos) {
-        Droga droga = tratamiento.getDroga();
-        if (droga != null) {
-            String nombreDroga = droga.getNombre(); // Asegúrate de que 'Droga' tenga un método 'getNombre()'
-            // Incrementar el conteo
-            drogaCountMap.put(nombreDroga, drogaCountMap.getOrDefault(nombreDroga, 0).intValue() + 1);
+    @Override
+    public List<GenericoDTO> getTratamientosPorMedicamento() {
+        List<Tratamiento> tratamientos = trataRepo.findAll();
+        Map<String, Number> drogaCountMap = new HashMap<>();
+
+        // Contar ocurrencias de cada droga
+        for (Tratamiento tratamiento : tratamientos) {
+            Droga droga = tratamiento.getDroga();
+            if (droga != null) {
+                String nombreDroga = droga.getNombre(); // Asegúrate de que 'Droga' tenga un método 'getNombre()'
+                // Incrementar el conteo
+                drogaCountMap.put(nombreDroga, drogaCountMap.getOrDefault(nombreDroga, 0).intValue() + 1);
+            }
         }
-    }
-    
-    // Convertir el mapa a una lista de GenericoDTO
-    List<GenericoDTO> result = new ArrayList<>();
-    for (Map.Entry<String, Number> entry : drogaCountMap.entrySet()) {
-        result.add(new GenericoDTO(entry.getKey(), entry.getValue()));
-    }
-    
-    return result;
-}
 
-@Override
-public FinanzasDTO getFinanzas() {
-    List<Tratamiento> tratamientos = trataRepo.findAll();
-
-    double ventasTotales = 0.0;
-    double costoTotal = 0.0;
-
-    for (Tratamiento tratamiento : tratamientos) {
-        Droga droga = tratamiento.getDroga();
-        if (droga != null) {
-            double precioDroga = droga.getPrecioVenta();
-            ventasTotales += precioDroga;
-            costoTotal += precioDroga; // Si el costo es diferente, ajustarlo aquí
+        // Convertir el mapa a una lista de GenericoDTO
+        List<GenericoDTO> result = new ArrayList<>();
+        for (Map.Entry<String, Number> entry : drogaCountMap.entrySet()) {
+            result.add(new GenericoDTO(entry.getKey(), entry.getValue()));
         }
+
+        return result;
     }
 
-    double gananciasTotales = ventasTotales - costoTotal;
+    @Override
+    public FinanzasDTO getFinanzas() {
+        List<Tratamiento> tratamientos = trataRepo.findAll();
 
-    // Retornar el DTO con las ventas y ganancias
-    return new FinanzasDTO(ventasTotales, gananciasTotales);
-}
+        double ventasTotales = 0.0;
+        double costoTotal = 0.0;
 
-        // Contar ocurrencias de cada veterinario
+        for (Tratamiento tratamiento : tratamientos) {
+            Droga droga = tratamiento.getDroga();
+            if (droga != null) {
+                double precioDroga = droga.getPrecioVenta();
+                ventasTotales += precioDroga;
+                costoTotal += precioDroga; // Si el costo es diferente, ajustarlo aquí
+            }
+        }
+
+        double gananciasTotales = ventasTotales - costoTotal;
+
+        // Retornar el DTO con las ventas y ganancias
+        return new FinanzasDTO(ventasTotales, gananciasTotales);
+    }
+
+    // Contar ocurrencias de cada veterinario
 
     @Override
     public List<Tratamiento> getTopTratamientos() {
         return List.of();
     }
-
 
 }

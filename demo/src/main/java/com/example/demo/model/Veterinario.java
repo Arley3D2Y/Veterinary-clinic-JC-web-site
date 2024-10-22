@@ -21,6 +21,7 @@ public class Veterinario {
     private String correo;
     private String password;
     private String fotoString;
+    private boolean estado;
 
     @ManyToMany
     private List<Especialidad> especialidades = new ArrayList<Especialidad>();
@@ -35,7 +36,7 @@ public class Veterinario {
         this.correo = correo;
         this.password = password;
         this.fotoString = fotoString;
-
+        this.estado = true;
         this.especialidades = new ArrayList<Especialidad>();
         this.tratamientos = new ArrayList<Tratamiento>();
     }
@@ -114,4 +115,13 @@ public class Veterinario {
         }
     }
 
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    public boolean getEstado() {
+        return estado;
+    }
+
+    
 }
