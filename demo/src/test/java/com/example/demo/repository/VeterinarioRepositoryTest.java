@@ -118,7 +118,7 @@ public class VeterinarioRepositoryTest {
 		// assert
 		Assertions.assertThat(veterinarioRepository.findById(index)).isEmpty();
 	}
- 
+
 	@Test
 	public void VeterinarioRepository_updateById_Veterinario() {
 		// arrange
