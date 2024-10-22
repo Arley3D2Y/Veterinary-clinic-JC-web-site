@@ -77,7 +77,6 @@ public class VeterinarioServiceImp implements VeterinarioService {
 
 
 
-
     @Override
     public Number countVeterinariosActivos() {
         List<Veterinario> veterinarios = veterinarioRepo.findAll(); // Obtener todos los veterinarios
