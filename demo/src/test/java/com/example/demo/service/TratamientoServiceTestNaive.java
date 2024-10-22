@@ -95,4 +95,41 @@ class TratamientoServiceTestNaive {
         Assertions.assertThat(tratamientos).isNotEmpty();
         Assertions.assertThat(tratamientos.size()).isEqualTo(1);
     }
+
+    @Test
+    public void TratamientoService_findById_Tratamiento() {
+        // arrange
+
+        // act: Buscar un tratamiento por su ID
+        Optional<Tratamiento> foundTratamiento = tratamientoService.searchById(testTratamiento.getId());
+
+        // assert: Verificar que el tratamiento fue encontrado correctamente
+        Assertions.assertThat(foundTratamiento).isPresent();
+        Assertions.assertThat(foundTratamiento.get().getMascota().getNombre()).isEqualTo("Ginger");
+    }
+
+    @Test
+    public void TratamientoService_removeById() {
+        // arrange
+
+        // act: Borrar un tratamiento por su ID
+        boolean deleted = tratamientoService.removeById(testTratamiento.getId());
+
+        // assert: Verificar que el tratamiento fue borrado correctamente
+        Assertions.assertThat(deleted).isTrue();
+    }
+
+    @Test
+    public void TratamientoService_updateTratamiento() {
+        // arrange: Configurar un nuevo Tratamiento
+        Tratamiento nuevoTratamiento = new Tratamiento("Nueva medicación", "Tratamiento para el dolor", LocalDate.of(2024, 10, 20));
+        nuevoTratamiento.setDroga(testDroga);
+
+        // act: Actualizar el tratamiento utilizando el servicio
+        Optional<Tratamiento> updatedTratamiento = tratamientoService.updateById(testTratamiento.getId(), nuevoTratamiento);
+
+        // assert: Verificar que el nuevo tratamiento fue actualizado correctamente
+        Assertions.assertThat(updatedTratamiento).isPresent();
+        Assertions.assertThat(updatedTratamiento.get().getMascota().getNombre()).isEqualTo("Ginger");
+    }
 }
