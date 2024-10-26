@@ -21,13 +21,15 @@ import com.example.demo.repositorio.VeterinarioRepository;
 import com.example.demo.servicio.ExcelService;
 
 import org.springframework.boot.ApplicationArguments;
+import org.springframework.context.annotation.Profile;
 
 import jakarta.transaction.Transactional;
 
+
 @Controller
 @Transactional
-Profile("default")
-public class DatabaseInitTest implements ApplicationRunner {
+@Profile("default")
+public class DataBaseInitTest implements ApplicationRunner {
 
         @Autowired
         ClienteRepository clienteRepository;
