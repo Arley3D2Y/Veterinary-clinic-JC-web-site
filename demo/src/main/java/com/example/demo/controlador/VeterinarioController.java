@@ -1,180 +1,123 @@
 package com.example.demo.controlador;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
 
-import com.example.demo.model.Cliente;
-import com.example.demo.model.Mascota;
-import com.example.demo.model.Tratamiento;
-import com.example.demo.servicio.ClienteService;
-import com.example.demo.servicio.MascotaService;
-import com.example.demo.servicio.TratamientoService;
+import java.util.List;
+import java.util.Optional;
+
+import com.example.demo.model.Especialidad;
+import com.example.demo.model.Veterinario;
+import com.example.demo.servicio.EspecialidadesService;
+import com.example.demo.servicio.VeterinarioService;
 
 import io.swagger.v3.oas.annotations.Operation;
 
-import com.example.demo.errorHandling.NotFoundException;
-
 @RestController
-@RequestMapping("/veterinario")
-@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/veterinarios")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class VeterinarioController {
 
     @Autowired
-    private MascotaService mascotaService;
-
+    private VeterinarioService veterinarioService;
     @Autowired
-    private ClienteService clienteService;
+    private EspecialidadesService especialidadService;
+    /* Veterinarios */
 
-    @Autowired
-    private TratamientoService tratamientoService;
-
-    /** Clientes **/
-
-    /** localhost:8091/veterinario/clientes **/
-    @GetMapping("/clientes")
-    @Operation(summary = "Find all clients")
-    public List<Cliente> mostrarClientes(Model model) {
-        return clienteService.SearchAll();
+    // localhost:8091/veterinarios
+    @GetMapping
+    @Operation(summary = "Find all veterinarys")
+    public ResponseEntity<List<Veterinario>> obtenerVeterinarios() {
+        List<Veterinario> veterinarios = veterinarioService.searchAllVeterinarios();
+        if (veterinarios.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(veterinarios);
     }
 
-    // localhost:8091/veterinario/clientes/find/{id}
-    @GetMapping("/clientes/find/{id}")
-    @Operation(summary = "Find client by id")
-    private Cliente mostrarInfoCliente(@PathVariable("id") Long identificacion) {
-        Cliente cliente = clienteService.SearchById(identificacion);
-        return cliente;
+    @GetMapping("/find/{id}")
+    @Operation(summary = "Find veterinary by id")
+    public ResponseEntity<Veterinario> obtenerVeterinarioPorId(@PathVariable Long id) {
+        Optional<Veterinario> veterinario = veterinarioService.searchVeterinarioById(id);
+        return veterinario.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // localhost:8091/veterinario/clientes/search-by-document/{document}
-    @GetMapping("/clientes/search-by-document/{document}")
-    @Operation(summary = "Find client by document")
-    public Cliente buscarClienteByCedula(@PathVariable("document") String cedula) {
-        Cliente cliente = clienteService.SearchByCedula(cedula);
-        return cliente;
+    @PostMapping("/add")
+    @Operation(summary = "Add a new veterinary")
+    public ResponseEntity<Veterinario> crearVeterinario(@RequestBody Veterinario veterinario) {
+        Optional<Veterinario> nuevoVeterinario = veterinarioService.addVeterinario(veterinario);
+        return nuevoVeterinario.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.CONFLICT).body(null)); // Retorna un error 409
+                                                                                         // Conflict si ya existe
     }
 
-    // localhost:8091/veterinario/clientes/agregar
-    @PostMapping("/clientes/add")
-    @Operation(summary = "Add a new client")
-    private void agregarCliente(@RequestBody Cliente cliente) {
-        clienteService.addCliente(cliente);
+    @DeleteMapping("/delete/{id}")
+    @Operation(summary = "Delete veterinary by id")
+    public ResponseEntity<Void> eliminarVeterinario(@PathVariable Long id) {
+        boolean isDeleted = veterinarioService.removeById(id);
+        if (isDeleted) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    // localhost:8091/veterinario/clientes/delete/{id}
-    @DeleteMapping("/clientes/delete/{id}")
-    @Operation(summary = "Delete client by id")
-    private void eliminarCliente(@PathVariable("id") Long identificacion) {
-        clienteService.deleteById(identificacion);
+    @PutMapping("/update/{id}")
+    @Operation(summary = "Update veterinary by id")
+    public ResponseEntity<Veterinario> actualizarVeterinario(@PathVariable Long id,
+            @RequestBody Veterinario veterinario) {
+        Optional<Veterinario> veterionarioActualizado = veterinarioService.updateById(id, veterinario);
+        return veterionarioActualizado.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // localhost:8091/veterinario/clientes/update/{id}
-    @PutMapping("/clientes/update/{id}")
-    @Operation(summary = "Update client by id")
-    private void actualizarCliente(@PathVariable("id") Long identificacion, @RequestBody Cliente cliente) {
-        clienteService.update(cliente);
+    @GetMapping("/search-by-name/{search}")
+    @Operation(summary = "Search veterinary by name")
+    public ResponseEntity<List<Veterinario>> buscarVeterinarios(@PathVariable String search) {
+        List<Veterinario> veterinarios = veterinarioService.searchByNombre(search);
+        return ResponseEntity.ok(veterinarios); // 200 OK
     }
 
-    // localhost:8091/veterinario/clientes/search-by-name
-    @GetMapping("/clientes/search-by-name")
-    @Operation(summary = "Find client by name")
-    public List<Cliente> buscarClientes(@RequestParam("search") String search) {
-        List<Cliente> clientes = clienteService.buscarPorNombre(search);
-        return clientes; 
+    @GetMapping("/search-by-document/{search}")
+    @Operation(summary = "Search veterinary by document")
+    public ResponseEntity<Veterinario> buscarVeterinarioByCedula(@PathVariable String search) {
+        Optional<Veterinario> veterinario = veterinarioService.searchByCedula(search);
+        if (veterinario.isPresent()) {
+            return ResponseEntity.ok(veterinario.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-
-
-    /** Mascotas **/
-
-    /** localhost:8091/veterinario/mascotas **/
-    @GetMapping("/mascotas")
-    @Operation(summary = "Find all pets")
-    public List<Mascota> mostrarMascotas() {
-        List<Mascota> mascota = mascotaService.SearchAll();
-        return mascota;
+    @GetMapping("/search-by-email/{search}")
+    @Operation(summary = "Search veterinary by email")
+    public ResponseEntity<Veterinario> buscarVeterinarioByCorreo(@PathVariable String search) {
+        Optional<Veterinario> veterinario = veterinarioService.searchByCorreo(search);
+        if (veterinario.isPresent()) {
+            return ResponseEntity.ok(veterinario.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    // localhost:8091/veterinario/mascotas/find/{id}
-    @GetMapping("/mascotas/find/{id}")
-    public Mascota mostrarInfoMascota(@PathVariable("id") Long id) {
-        Mascota mascota = mascotaService.SearchById(id);
-        return mascota;
+    // Dentro del controlador de veterinario
+    @GetMapping("/especialidades")
+    public List<Especialidad> getAllEspecialidades() {
+        return especialidadService.findAll();
     }
 
-    // localhost:8091/veterinario/mascotas/add
-    @PostMapping("/mascotas/add/cliente/{id}")
-    @Operation(summary = "Add a new pet")
-    public void agregarMascota(@PathVariable("id") Long id, @RequestBody Mascota mascota) {
-        mascotaService.addMascota(mascota);
+    @PostMapping("/especialidades")
+    public Especialidad createEspecialidad(@RequestBody Especialidad especialidad) {
+        return especialidadService.save(especialidad);
     }
 
-    // localhost:8091/veterinario/mascotas/update/{id}
-    @PutMapping("/mascotas/update/{id}")
-    @Operation(summary = "Update pet by id")
-    public void actualizarMascota(@PathVariable("id") Long id, @RequestBody Mascota mascota) {
-        mascotaService.update(mascota);
-    }
-
-    // localhost:8091/veterinario/mascotas/delete/{id}
-    @DeleteMapping("/mascotas/delete/{id}")
-    @Operation(summary = "Delete pet by id")
-    public void eliminarMascota(@PathVariable("id") Long identificacion) {
-        mascotaService.deleteById(identificacion);
-    }
-
-    @GetMapping("/mascotas/search-by-name/{search}")
-    @Operation(summary = "Delete pet by id")
-    public List<Mascota> buscarMascotas(@RequestParam String search) {
-        List<Mascota> mascotas = mascotaService.buscarPorNombre(search);
-        return mascotas; // Redirigir a la vista de clientes con los resultados de búsqueda
-    }
-
-    @GetMapping("/mascotas/search-by-client/{id}")
-    @Operation(summary = "Find pet by client")
-    public List<Mascota> buscarMascotasByClienteId(@PathVariable Long id) {
-        List<Mascota> mascotas = mascotaService.buscarPorClienteId(id);
-        return mascotas;
-    }
-
-
-
-
-
-    @GetMapping("/mascotas/{id}/tratamientos")
-    public void obtenerTratamientosPorMascota(@PathVariable Long id) {
-    
-    }
-
-    /** Tratamientos **/
-    @GetMapping("/tratamientos")
-    public String mostrarTratamientos(Model model) {
-        throw new NotFoundException();
-    }
-
-    @PostMapping("/tratamientos/agregar")
-    private String agregaTratamiento(@ModelAttribute("tratamiento") Tratamiento tratamiento) {
-        tratamientoService.addTratamiento(tratamiento);
-
-        return "redirect:/veterinario/tratamientos";
-
-    }
-
-    @PutMapping("taratamiento/update/{id}")
-    public void actualizarTratamiento(@PathVariable("id") Long id,
-            @ModelAttribute("tratamiento") Tratamiento tratamiento) {
-        tratamientoService.update(tratamiento);
-    }
 }

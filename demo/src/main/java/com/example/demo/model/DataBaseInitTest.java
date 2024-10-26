@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 
 import com.example.demo.repositorio.AdministradorRepository;
@@ -22,13 +21,15 @@ import com.example.demo.repositorio.VeterinarioRepository;
 import com.example.demo.servicio.ExcelService;
 
 import org.springframework.boot.ApplicationArguments;
+import org.springframework.context.annotation.Profile;
 
 import jakarta.transaction.Transactional;
+
 
 @Controller
 @Transactional
 @Profile("default")
-public class DatabaseInit implements ApplicationRunner {
+public class DataBaseInitTest implements ApplicationRunner {
 
         @Autowired
         ClienteRepository clienteRepository;

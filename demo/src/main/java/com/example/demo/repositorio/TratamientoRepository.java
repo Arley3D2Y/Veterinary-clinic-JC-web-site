@@ -6,7 +6,6 @@ import java.util.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.model.Droga;
 import com.example.demo.model.Mascota;
 import com.example.demo.model.Tratamiento;
 import com.example.demo.model.Veterinario;
@@ -14,18 +13,29 @@ import com.example.demo.model.Veterinario;
 @Repository
 public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> {
 
+    // JpaRepository ya tiene findAll(), findById(), deleteById(), y save()
+
+    List<Tratamiento> findByDescripcionStartingWithIgnoreCase(String nombre);
+
+    List<Tratamiento> findByVeterinario(Veterinario veterinario);
+    
     // Buscar por fecha
-    Collection<Tratamiento> findByFechaInicio(LocalDate fechaInicio);
+    List<Tratamiento> findByFechaInicio(LocalDate fechaInicio);
 
     // Buscar por fecha
-    Collection<Tratamiento> findByFechaFin(LocalDate fechaFin);
+    List<Tratamiento> findByFechaFin(LocalDate fechaFin);
 
     // Buscar por mascota
-    Collection<Tratamiento> findByMascota(Mascota mascota);
+    List<Tratamiento> findByMascota(Mascota mascota);
 
-    // Buscar por veterinario
-    Collection<Tratamiento> findByVeterianarios(Veterinario veterinario);
+    List<Tratamiento> findByFechaInicioBetween(LocalDate fechaInicio, LocalDate fechaFin);
 
-    // Buscar por droga
-    Collection<Tratamiento> findByDrogas(Droga droga);
+  // Buscar tratamientos activos
+  List<Tratamiento> findByActivoTrue();
+
+  // Buscar tratamientos inactivos
+  List<Tratamiento> findByActivoFalse();
+
+  // Buscar tratamientos activos de un veterinario
+  List<Tratamiento> findByVeterinarioAndActivoTrue(Veterinario veterinario);
 }

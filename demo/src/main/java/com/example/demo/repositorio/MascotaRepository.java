@@ -10,9 +10,12 @@ import com.example.demo.model.Mascota;
 @Repository
 public interface MascotaRepository extends JpaRepository<Mascota, Long> {
 
-    // JpaRepository ya tiene findById() y findAll()
-    List<Mascota> findByNombreContainingIgnoreCase(String nombre);
+    // JpaRepository ya tiene findAll(), findById(), deleteById(), y save()
 
+    // Busqueda de mascotas por nombre
+    List<Mascota> findByNombreStartingWithIgnoreCase(String nombre);
+
+    // Busqueda de mascotas por el id del dueño
     List<Mascota> findByClienteId(Long id);
 
 }

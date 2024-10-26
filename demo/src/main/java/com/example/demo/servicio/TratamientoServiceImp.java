@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Droga;
+import com.example.demo.model.FinanzasDTO;
+import com.example.demo.model.GenericoDTO;
 import com.example.demo.model.Mascota;
 import com.example.demo.model.Tratamiento;
 import com.example.demo.model.Veterinario;
@@ -19,7 +21,7 @@ import com.example.demo.repositorio.VeterinarioRepository;
 public class TratamientoServiceImp implements TratamientoService {
 
     @Autowired
-    TratamientoRepository repo;
+    TratamientoRepository trataRepo;
     @Autowired
     MascotaRepository petRep;
     @Autowired
@@ -27,93 +29,153 @@ public class TratamientoServiceImp implements TratamientoService {
     @Autowired
     DrogaRepository drogaRep;
 
+    @Autowired
+    VeterinarioService vetService;
+
+    @Override
+    public List<Tratamiento> searchAll() {
+        return trataRepo.findAll();
+    }
+
     // implementacion de los metodos
     @Override
-    public Tratamiento SearchById(Long id) {
-        return repo.findById(id).orElse(null);
+    public Optional<Tratamiento> searchById(Long id) {
+        return trataRepo.findById(id);
     }
 
     @Override
-    public Collection<Tratamiento> SearchByStartDate(LocalDate startDate) {
-        Collection<Tratamiento> result = new ArrayList<Tratamiento>();
-        
-        // Usar el método correcto del repositorio
-        for (Tratamiento tratamiento : repo.findByFechaInicio(startDate)) {
-            // Aquí, ya no es necesario comprobar si la fecha es nula, 
-            // ya que el repositorio sólo devuelve tratamientos con esa fecha
-            if (tratamiento.getFechaInicio() != null && tratamiento.getFechaInicio().equals(startDate)) {
-                result.add(tratamiento);
+    public Optional<Tratamiento> addTratamiento(Long idp, Long idv, Tratamiento tratamiento) {
+        Optional<Mascota> pet = petRep.findById(idp);
+        Optional<Veterinario> vet = vetRep.findById(idv);
+        Optional<Droga> droga = drogaRep.findById(tratamiento.getDroga().getId());
+
+        if (pet.isPresent() && vet.isPresent() && droga.isPresent()) {
+            tratamiento.setMascota(pet.get());
+            tratamiento.setVeterinario(vet.get());
+            tratamiento.actualizarEstado();
+            tratamiento = trataRepo.save(tratamiento);
+            // Llamar al servicio del veterinario para actualizar su estado
+            vetService.actualizarEstadoVeterinario(tratamiento.getVeterinario().getId());
+            return Optional.of(tratamiento);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean removeById(Long id) {
+        if (trataRepo.existsById(id)) {
+            trataRepo.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Optional<Tratamiento> updateById(Long id, Tratamiento tratamiento) {
+        Optional<Tratamiento> tratOpt = trataRepo.findById(id);
+        if (tratOpt.isPresent()) {
+            tratamiento.setMascota(tratOpt.get().getMascota());
+            tratamiento.setVeterinario(tratOpt.get().getVeterinario());
+            tratamiento.setDroga(tratOpt.get().getDroga());
+            tratamiento.actualizarEstado();
+            tratamiento = trataRepo.save(tratamiento);
+            vetService.actualizarEstadoVeterinario(tratamiento.getVeterinario().getId());
+            return Optional.of(tratamiento);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Tratamiento> searchByNombre(String name) {
+        List<Tratamiento> tratamientos = trataRepo.findByDescripcionStartingWithIgnoreCase(name);
+        return tratamientos;
+    }
+
+    @Override
+    public List<Tratamiento> getTratamientosPorVeterinario(Long id) {
+        Optional<Veterinario> vet = vetRep.findById(id);
+        if (vet.isPresent()) {
+            List<Tratamiento> tratamientos = trataRepo.findByVeterinario(vet.get());
+            return tratamientos;
+        } else {
+            return List.of();
+        }
+    }
+
+    @Override
+    public List<Tratamiento> getTratamientosPorMascota(Long id) {
+        Optional<Mascota> pet = petRep.findById(id);
+        if (pet.isPresent()) {
+            List<Tratamiento> tratamientos = trataRepo.findByMascota(pet.get());
+            return tratamientos;
+        } else {
+            return List.of();
+        }
+    }
+
+    @Override
+    public Number countTratamientosByMonth() {
+        LocalDate fechaActual = LocalDate.now();
+        int mesActual = fechaActual.getMonthValue(); // Obtener el mes actual
+
+        // Buscar tratamientos por mes
+        List<Tratamiento> tratamientosPorMes = trataRepo.findByFechaInicioBetween(
+                LocalDate.of(fechaActual.getYear(), mesActual, 1),
+                LocalDate.of(fechaActual.getYear(), mesActual + 1, 1));
+        return tratamientosPorMes.size();
+    }
+
+    @Override
+    public List<GenericoDTO> getTratamientosPorMedicamento() {
+        List<Tratamiento> tratamientos = trataRepo.findAll();
+        Map<String, Number> drogaCountMap = new HashMap<>();
+
+        // Contar ocurrencias de cada droga
+        for (Tratamiento tratamiento : tratamientos) {
+            Droga droga = tratamiento.getDroga();
+            if (droga != null) {
+                String nombreDroga = droga.getNombre(); // Asegúrate de que 'Droga' tenga un método 'getNombre()'
+                // Incrementar el conteo
+                drogaCountMap.put(nombreDroga, drogaCountMap.getOrDefault(nombreDroga, 0).intValue() + 1);
             }
         }
+
+        // Convertir el mapa a una lista de GenericoDTO
+        List<GenericoDTO> result = new ArrayList<>();
+        for (Map.Entry<String, Number> entry : drogaCountMap.entrySet()) {
+            result.add(new GenericoDTO(entry.getKey(), entry.getValue()));
+        }
+
         return result;
     }
 
     @Override
-    public Collection<Tratamiento> SearchByEndDate(LocalDate endDate) {
-        Collection<Tratamiento> result = new ArrayList<Tratamiento>();
-    
-        for (Tratamiento tratamiento : repo.findByFechaFin(endDate)) {
-            if (tratamiento.getFechaFin() != null && tratamiento.getFechaFin().equals(endDate)) {
-                result.add(tratamiento);
+    public FinanzasDTO getFinanzas() {
+        List<Tratamiento> tratamientos = trataRepo.findAll();
+
+        double ventasTotales = 0.0;
+        double costoTotal = 0.0;
+
+        for (Tratamiento tratamiento : tratamientos) {
+            Droga droga = tratamiento.getDroga();
+            if (droga != null) {
+                double precioDroga = droga.getPrecioVenta();
+                ventasTotales += precioDroga;
+                costoTotal += precioDroga; // Si el costo es diferente, ajustarlo aquí
             }
         }
-        return result;
+
+        double gananciasTotales = ventasTotales - costoTotal;
+
+        // Retornar el DTO con las ventas y ganancias
+        return new FinanzasDTO(ventasTotales, gananciasTotales);
     }
 
-    @Override
-    public Collection<Tratamiento> SearchByMascota(Long mascotaId) {
-        Optional<Mascota> optionalMascota = petRep.findById(mascotaId);
-        if (optionalMascota.isPresent()) {
-            Mascota mascota = optionalMascota.get();
-            return repo.findByMascota(mascota);
-        } else {
-
-            return Collections.emptyList();
-        }
-    }
+    // Contar ocurrencias de cada veterinario
 
     @Override
-    public Collection<Tratamiento> SearchByVeterinario(Long veterinarioId) {
-        Optional<Veterinario> optionalVeterianrio = vetRep.findById(veterinarioId); 
-        if (optionalVeterianrio.isPresent()) {
-            Veterinario veterinario = optionalVeterianrio.get();
-            return repo.findByVeterianarios(veterinario);
-        } else {
-
-            return Collections.emptyList();
-        }
-    }
-
-    @Override
-    public Collection<Tratamiento> SearchByDroga(Long drograId) {
-        Optional<Droga> optionalDroga = drogaRep.findById(drograId);
-        if (optionalDroga.isPresent()) {
-            Droga droga = optionalDroga.get();
-            return repo.findByDrogas(droga);
-        } else {
-
-            return Collections.emptyList();
-        }
-    }
-
-    @Override
-    public Collection<Tratamiento> SearchAll() {
-        return repo.findAll();
-    }
-
-    @Override
-    public void addTratamiento(Tratamiento tratamiento) {
-        repo.save(tratamiento);
-    }
-
-    @Override
-    public void deleteById(Long identificacion) {
-        repo.deleteById(identificacion);
-    }
-
-    @Override
-    public void update(Tratamiento tratamiento) {
-        repo.save(tratamiento);
+    public List<Tratamiento> getTopTratamientos() {
+        return List.of();
     }
 
 }

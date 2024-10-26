@@ -6,49 +6,62 @@ import org.springframework.stereotype.Service;
 import com.example.demo.model.Cliente;
 import com.example.demo.repositorio.ClienteRepository;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClienteServiceImp implements ClienteService {
 
     @Autowired
-    ClienteRepository repo;
+    ClienteRepository clientRepo;
 
     @Override
-    public List<Cliente> SearchAll() {
-        return repo.findAll();
+    public List<Cliente> searchAllClientes() {
+        return clientRepo.findAll();
     }
 
     @Override
-    public Cliente SearchById(Long id) {
-        return repo.findById(id).get();
+    public Optional<Cliente> searchClienteById(Long id) {
+        return clientRepo.findById(id);
     }
 
     @Override
-    public Cliente SearchByCedula(String cedula) {
-        return repo.findByCedula(cedula);
-    }
+    public Optional<Cliente> addCliente(Cliente cliente) {
+        Optional<Cliente> clienteOpt = clientRepo.findByCedula(cliente.getCedula());
 
-    @Override
-    public void addCliente(Cliente cliente) {
-        repo.save(cliente);
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        repo.deleteById(id);
-    }
-
-    @Override
-    public void update(Cliente cliente) {
-        Cliente existingCliente = repo.findById(cliente.getId()).orElse(null);
-        if (existingCliente != null) {
-            repo.save(cliente);  // Save es usado tanto para crear como para actualizar
+        if (!clienteOpt.isPresent()) {
+            cliente = clientRepo.save(cliente);
+            return Optional.of(cliente);
         }
+        return Optional.empty();
     }
 
-    public List<Cliente> buscarPorNombre(String nombre) {
-        // Llamar al repositorio para buscar los clientes que contengan el nombre
-        return repo.findByNombreContainingIgnoreCase(nombre);
+    @Override
+    public boolean removeById(Long id) {
+        if (clientRepo.existsById(id)) {
+            clientRepo.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Optional<Cliente> updateById(Long id, Cliente cliente) {
+        Optional<Cliente> clientOpt = clientRepo.findById(id);
+        if (clientOpt.isPresent()) {
+            cliente.setMascotas(clientOpt.get().getMascotas());
+            cliente = clientRepo.save(cliente);  // Save es usado tanto para crear como para actualizar
+            return Optional.of(cliente);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Cliente> searchByCedula(String cedula) {
+        return clientRepo.findByCedula(cedula);
+    }
+
+    public List<Cliente> searchByNombre(String nombre) {
+        return clientRepo.findByNombreStartingWithIgnoreCase(nombre);
     }
     
 }

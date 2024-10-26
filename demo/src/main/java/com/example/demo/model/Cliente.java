@@ -15,13 +15,9 @@ import java.util.ArrayList;
 
 @Entity
 public class Cliente {
-    // atributos
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "NAME")
     private String nombre;
     private String cedula;
     private String correo;
@@ -33,7 +29,7 @@ public class Cliente {
 
     @JsonIgnore
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Mascota> mascotas = new ArrayList<>();;
+    private List<Mascota> mascotas = new ArrayList<>();
 
     public Cliente(String nombre, String cedula, String correo, String celular, String direccion, String fotoString) {
         this.nombre = nombre;
@@ -42,9 +38,11 @@ public class Cliente {
         this.celular = celular;
         this.direccion = direccion;
         this.fotoString = fotoString;
+        this.mascotas = new ArrayList<>();
     }
 
     public Cliente() {
+        
     }
 
     // getters and setters
@@ -113,22 +111,31 @@ public class Cliente {
     }
 
     // métodos
-    public void agregarMascota(Mascota mascota) {
-        if (this.mascotas == null) {
-            this.mascotas = new ArrayList<>();
-        }
+    public void guardarMascota(Mascota mascota) {
         if (!this.mascotas.contains(mascota)) {
-            this.mascotas.add(mascota);
             mascota.setCliente(this);
+            this.mascotas.add(mascota);
         }
     }
 
     public void eliminarMascota(Mascota mascota) {
-        this.mascotas.remove(mascota);
+        if (this.mascotas.contains(mascota)) {
+            this.mascotas.remove(mascota);
+        }
     }
 
-    public void modificarMascota(Mascota mascota) {
-        this.mascotas.remove(mascota);
-        this.mascotas.add(mascota);
+    public void actualizarMascota(Long id, Mascota mascotaActualizada) {
+        for (int i = 0; i < mascotas.size(); i++) {
+            Mascota mascota = mascotas.get(i);
+            if (mascota.getId().equals(id)) { // Asumiendo que Mascota tiene un método getId()
+                mascotas.set(i, mascotaActualizada);
+                mascotaActualizada.setCliente(this); // Asegúrate de establecer la relacion inversa
+                return;
+            }
+        }
+    }
+
+    public List<Mascota> obtenerMascotas() {
+        return this.mascotas;
     }
 }
