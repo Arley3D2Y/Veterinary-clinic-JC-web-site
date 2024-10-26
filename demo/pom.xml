@@ -77,18 +77,11 @@
 		</dependency>
 
 		<!-- Dependecia de MVN -->
-		<!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui -->
+<!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui -->
 		<dependency>
     		<groupId>org.springdoc</groupId>
     		<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
     		<version>2.1.0</version>
-		</dependency>
-
-		<!-- Dependencia para Pruebas -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
 		</dependency>
 
 
