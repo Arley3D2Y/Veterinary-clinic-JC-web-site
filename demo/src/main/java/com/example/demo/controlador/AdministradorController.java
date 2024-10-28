@@ -1,6 +1,7 @@
 package com.example.demo.controlador;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,28 +23,33 @@ public class AdministradorController {
     @Autowired
     private AdministradorService admService;
 
+    // localhost:8080/administradores
     @GetMapping
     @Operation(summary = "Find all administrators")
     public ResponseEntity<List<Administrador>> getAdministradores() {
         List<Administrador> administradores = admService.searchAllAdministradores();
-        if (administradores.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
+
         return ResponseEntity.ok(administradores);
     }
 
+    // localhost:8080/administradores/find/{id}
     @GetMapping("/find/{id}")
     @Operation(summary = "Find administrator by id")
     public ResponseEntity<Administrador> getAdministradorById(@PathVariable Long id) {
         Optional<Administrador> administrador = admService.searchAdministradorById(id);
-        return administrador.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+
+        return administrador.map(ResponseEntity::ok)
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
+    /* Busquedas - search by */
 
     @GetMapping("/find/search-by-username/{username}")
     @Operation(summary = "Find administrator by username")
     public ResponseEntity<Administrador> getAdministradorByUsername(@PathVariable String username) {
         Optional<Administrador> administrador = admService.searchByUser(username);
-        return administrador.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        
+        return administrador.map(ResponseEntity::ok).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
 }

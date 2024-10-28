@@ -15,14 +15,21 @@ public class AdministradorServiceImp implements AdministradorService{
     @Autowired
     private AdministradorRepository admRepository;
 
+    /* Administrador: Peticiones CRUD */
+
+    // Obtener todos los veterinarios
     public List<Administrador> searchAllAdministradores() {
         return admRepository.findAll();
     }
 
+    // Obtener un veterinario por su ID
     public Optional<Administrador> searchAdministradorById(Long identificacion) {
         return admRepository.findById(identificacion);
     }
 
+    /* Busquedas - search by */
+
+    // Obtener un veterinario por su nombre
     public Optional<Administrador> searchByUser(String user) {
         return admRepository.findByUsuario(user);
     }

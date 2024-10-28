@@ -9,8 +9,21 @@ import java.util.List;
 @Repository
 public interface DrogaRepository extends JpaRepository<Droga, Long> {
         
-    // JpaRepository ya tiene findAll(), findById(), deleteById(), y save()
+
+    // findAll()
+
+    // findById()
+
+    // save()
+
+    // deleteById()
+
+    // update whit save()
+
     Optional<Droga> findByNombreIgnoreCase(String nombre);
 
+    List<Droga> findByNombreStartingWithIgnoreCase(String nombre);
+
     List<Droga> findByNombreContainingIgnoreCase(String nombre);
+    
 }

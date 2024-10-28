@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import java.util.ArrayList;
@@ -12,8 +13,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Droga {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nombre;
     private Float precioCompra;
     private Float precioVenta;
@@ -26,8 +28,7 @@ public class Droga {
 
     // Constructores
 
-    public Droga() {
-    }
+    public Droga() {  }
 
     public Droga(String nombre, Float precioCompra, Float precioVenta, Integer unidadesDisponibles, Integer unidadesVendidas) {
         this.nombre = nombre;
@@ -36,6 +37,25 @@ public class Droga {
         this.unidadesDisponibles = unidadesDisponibles;
         this.unidadesVendidas = unidadesVendidas;
     }
+
+
+    // Metodos
+    public void agregarTratamiento(Tratamiento tratamiento) {
+        if (!this.tratamientos.contains(tratamiento)) {
+            tratamiento.setDroga(this);
+            this.tratamientos.add(tratamiento);
+        }
+    }
+
+    public boolean actualizarUnidadesVentas() {
+        if (this.unidadesDisponibles > 0) {
+            this.unidadesDisponibles--;
+            this.unidadesVendidas++;
+            return true; // Decremento exitoso
+        }
+        return false; // No se puede decrementar
+    }
+    
 
     // Getters y setters
 
@@ -95,8 +115,5 @@ public class Droga {
         this.tratamientos = tratamientos;
     }
 
-    public void sellUnit() {
-        this.unidadesVendidas++;
-        this.unidadesDisponibles--;
-    }
+    
 }

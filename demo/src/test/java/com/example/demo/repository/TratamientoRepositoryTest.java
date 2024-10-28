@@ -75,10 +75,10 @@ public class TratamientoRepositoryTest {
     public void testFindByVeterinario() {
         List<Tratamiento> tratamientos = Arrays.asList(tratamientoActivo);
         
-        when(tratamientoRepository.findByVeterinario(veterinario))
+        when(tratamientoRepository.findByVeterinarioId(veterinario.getId()))
             .thenReturn(tratamientos);
 
-        List<Tratamiento> result = tratamientoRepository.findByVeterinario(veterinario);
+        List<Tratamiento> result = tratamientoRepository.findByVeterinarioId(veterinario.getId());
         
         assertEquals(1, result.size());
         assertEquals(veterinario.getNombre(), result.get(0).getVeterinario().getNombre());

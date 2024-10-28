@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Droga;
+import com.example.demo.model.Tratamiento;
 import com.example.demo.servicio.DrogaService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,58 +28,78 @@ public class DrogaController {
     @Autowired
     private DrogaService drogaService;
 
-    /* Drogas */
+    /* Drogas: Peticiones CRUD */
 
-    // localhost:4200/drogas
+    // localhost:8088/drogas
     @GetMapping
-    @Operation(summary = "Get all drugs")
+    @Operation(summary = "Find all drugs")
     public ResponseEntity<List<Droga>> obteneDrogas() {
         List<Droga> drogas = drogaService.searchAllDrogas();
-        if (drogas.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
+
         return ResponseEntity.ok(drogas);
     }
 
-    // localhost:8091/drogas/find/{id}
+    // localhost:8088/drogas/find/{id}
     @GetMapping("/find/{id}")
-    @Operation(summary = "Get drug by id")
+    @Operation(summary = "Find drug by id")
     public ResponseEntity<Droga> obtenerDrogaPorId(@PathVariable Long id) {
         Optional<Droga> droga = drogaService.searchDrogaById(id);
-        return droga.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+
+        return droga.map(ResponseEntity::ok)
+        .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    // localhost:8091/drogas/add
+    // localhost:8088/drogas/add
     @PostMapping("/add")
     @Operation(summary = "Add a new drug")
     public ResponseEntity<Droga> crearDroga(@RequestBody Droga droga) {
         Optional<Droga> nuevaDroga = drogaService.addDroga(droga);
-        return nuevaDroga.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.CONFLICT).build());
+
+        return nuevaDroga.map(d -> new ResponseEntity<>(d, HttpStatus.CREATED))
+            .orElse(new ResponseEntity<>(HttpStatus.CONFLICT));
     }
 
-    // localhost:8091/drogas/delete/{id}
+    // localhost:8088/drogas/delete/{id}
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "Delete drug by id")
     public ResponseEntity<Void> eliminarDroga(@PathVariable Long id) {
         boolean isDeleted = drogaService.removeById(id);
-        if (isDeleted) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
+
+        return isDeleted ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+            : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    // localhost:8088/drogas/update/{id}
     @PutMapping("/update/{id}")
     @Operation(summary = "Update drug by id")
     public ResponseEntity<Droga> actualizarDroga(@PathVariable Long id, @RequestBody Droga droga) {
         Optional<Droga> drogaActualizada = drogaService.updateById(id, droga);
-        return drogaActualizada.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        
+        return drogaActualizada.map(ResponseEntity::ok).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+
+    /* Busquedas - search by */
+    
+    // localhost:8088/drogas/search-by-name/{search}
     @GetMapping("/search-by-name/{search}")
     @Operation(summary = "Find drug by name")
     public ResponseEntity<List<Droga>> buscarDrogas(@PathVariable String search) {
         List<Droga> drogas = drogaService.searchByNombre(search);
+        
         return ResponseEntity.ok(drogas); 
     }
 
+
+    /* buscar listas del veterinario o por entidades */
+
+    // localhost:8088/drogas/tratamientos-droga/{id}
+    @GetMapping("/tratamientos-droga/{id}")
+    @Operation(summary = "Get treatments by drug")
+    public ResponseEntity<List<Tratamiento>> getTratamientosDroga(@PathVariable Long id) {
+        List<Tratamiento> tratamientos = drogaService.getTratamientosDroga(id);
+        
+        return (tratamientos == null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND)
+            : new ResponseEntity<>(tratamientos, HttpStatus.OK); 
+    }
 }

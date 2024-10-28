@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import java.util.List;
 import com.example.demo.model.Droga;
+import com.example.demo.model.Tratamiento;
 
 public interface DrogaService {
     
@@ -45,8 +46,24 @@ public interface DrogaService {
      */
     public Optional<Droga> updateById(Long id, Droga droga);
 
+    /**
+     * Este metodo es usado para buscar drogas por su nombre.
+     *
+     * @param nombre El nombre con el que es identificado la droga.
+     * @return La colección de todas las drogas que contengan el nombre dado
+     */
     public List<Droga> searchByNombre(String nombre);
     
+
+    /**
+     * Obtener tratamientos de una droga
+     * 
+     * @param id El ID de la droga
+     * @return La lista de tratamientos
+     */
+    public List<Tratamiento> getTratamientosDroga(Long id);
+
+
     public boolean decreaseDrugQuantity(Long id);
 
 }

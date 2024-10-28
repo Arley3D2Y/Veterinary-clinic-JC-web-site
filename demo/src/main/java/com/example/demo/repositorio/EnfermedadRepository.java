@@ -1,15 +1,15 @@
 package com.example.demo.repositorio;
 
+import com.example.demo.model.Enfermedad;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import com.example.demo.model.Especialidad;
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface EspecialidadRepository extends JpaRepository<Especialidad, Long> {
+public interface EnfermedadRepository extends JpaRepository<Enfermedad, Long> {
 
     // findAll()
 
@@ -21,9 +21,10 @@ public interface EspecialidadRepository extends JpaRepository<Especialidad, Long
 
     // update whit save()
 
-    Optional<Especialidad> findByNombreIgnoreCase(String nombre);
+    Optional<Enfermedad> findByNombre(String nombre);
 
-    List<Especialidad> findByNombreContainingIgnoreCase(String nombre);
+    List<Enfermedad> findByNombreStartingWithIgnoreCase(String nombre);
 
-    
+    List<Enfermedad> findByNombreContainingIgnoreCase(String nombre);
+
 }

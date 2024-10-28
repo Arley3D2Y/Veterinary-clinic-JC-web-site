@@ -2,16 +2,14 @@ package com.example.demo.repositorio;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import com.example.demo.model.Cliente;
 import com.example.demo.model.Estado;
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ClienteRepository extends JpaRepository<Cliente, Long> {
-
+public interface EstadoRepository extends JpaRepository<Estado, Long> {
+    
     // findAll()
 
     // findById()
@@ -21,11 +19,11 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     // deleteById()
 
     // update whit save()
+
+    Optional<Estado> findByDescripcionIgnoreCase(String descripcion);
+
+    List<Estado> findByDescripcionStartingWithIgnoreCase(String descripcion);
+
+    List<Estado> findByDescripcionContainingIgnoreCase(String descripcion);
     
-    Optional<Cliente> findByCedula(String cedula);
-
-    List<Cliente> findByNombreStartingWithIgnoreCase(String nombre);
-
-    List<Estado> findByNombreContainingIgnoreCase(String descripcion);
-
 }

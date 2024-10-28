@@ -7,11 +7,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+
 import java.util.List;
+import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.util.ArrayList;
 
 @Entity
 public class Cliente {
@@ -45,7 +45,31 @@ public class Cliente {
         
     }
 
-    // getters and setters
+    // métodos
+    public void guardarMascota(Mascota mascota) {
+        if (!this.mascotas.contains(mascota)) {
+            mascota.setCliente(this);
+            this.mascotas.add(mascota);
+        }
+    }
+
+    public void eliminarMascota(Mascota mascota) {
+        if (this.mascotas.contains(mascota)) {
+            this.mascotas.remove(mascota);
+        }
+    }
+
+    public void actualizarMascota(Long id, Mascota mascotaActualizada) {
+        for (int i = 0; i < mascotas.size(); i++) {
+            Mascota mascota = mascotas.get(i);
+            if (mascota.getId().equals(id)) { // Asumiendo que Mascota tiene un método getId()
+                mascotas.set(i, mascotaActualizada);
+                mascotaActualizada.setCliente(this); // Asegúrate de establecer la relacion inversa
+                return;
+            }
+        }
+    }
+
     public Long getId() {
         return id;
     }
@@ -86,14 +110,6 @@ public class Cliente {
         this.celular = celular;
     }
 
-    public List<Mascota> getMascotas() {
-        return mascotas;
-    }
-
-    public void setMascotas(List<Mascota> mascotas) {
-        this.mascotas = mascotas;
-    }
-
     public String getDireccion() {
         return direccion;
     }
@@ -110,32 +126,17 @@ public class Cliente {
         this.fotoString = fotoString;
     }
 
-    // métodos
-    public void guardarMascota(Mascota mascota) {
-        if (!this.mascotas.contains(mascota)) {
-            mascota.setCliente(this);
-            this.mascotas.add(mascota);
-        }
+    public List<Mascota> getMascotas() {
+        return mascotas;
     }
 
-    public void eliminarMascota(Mascota mascota) {
-        if (this.mascotas.contains(mascota)) {
-            this.mascotas.remove(mascota);
-        }
+    public void setMascotas(List<Mascota> mascotas) {
+        this.mascotas = mascotas;
     }
 
-    public void actualizarMascota(Long id, Mascota mascotaActualizada) {
-        for (int i = 0; i < mascotas.size(); i++) {
-            Mascota mascota = mascotas.get(i);
-            if (mascota.getId().equals(id)) { // Asumiendo que Mascota tiene un método getId()
-                mascotas.set(i, mascotaActualizada);
-                mascotaActualizada.setCliente(this); // Asegúrate de establecer la relacion inversa
-                return;
-            }
-        }
-    }
 
-    public List<Mascota> obtenerMascotas() {
-        return this.mascotas;
-    }
+    // Getters y setters
+        
+
+
 }

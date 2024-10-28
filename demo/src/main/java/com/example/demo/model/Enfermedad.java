@@ -6,26 +6,24 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Especialidad {
-
-    // Atributos
+public class Enfermedad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
+
     private String nombre;
     private String caracteristicas;
+    private String medicacion;
 
-    // Constructores
-
-    public Especialidad(String nombre, String caracteristicas) {
+    public Enfermedad(String nombre, String caracteristicas, String medicacion) {
         this.nombre = nombre;
         this.caracteristicas = caracteristicas;
+        this.medicacion = medicacion;
     }
 
-    public Especialidad() { }
+    public Enfermedad() {
+    }
 
-    // Getters y Setters
     public Long getId() {
         return id;
     }
@@ -49,4 +47,14 @@ public class Especialidad {
     public void setCaracteristicas(String caracteristicas) {
         this.caracteristicas = caracteristicas;
     }
+
+    public String getmedicacion() {
+        return medicacion;
+    }
+
+    public void setmedicacion(String medicacion) {
+        this.medicacion = medicacion;
+    }
+
+    
 }

@@ -5,43 +5,63 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
 public class Veterinario {
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nombre;
+
     private String cedula;
-    private String correo;
     private String password;
+    private String nombre;
+    private String correo;
     private String fotoString;
+    private Integer cantidadAtenciones;
     private boolean estado;
 
-    @ManyToMany
-    private List<Especialidad> especialidades = new ArrayList<Especialidad>();
+    @ManyToOne
+    Especialidad especialidad;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "veterinario")
+    @OneToMany(mappedBy = "veterinario", cascade = CascadeType.DETACH, orphanRemoval = false)
     private List<Tratamiento> tratamientos = new ArrayList<Tratamiento>();
 
-    public Veterinario(String nombre, String cedula, String correo, String password, String fotoString) {
-        this.nombre = nombre;
-        this.cedula = cedula;
-        this.correo = correo;
-        this.password = password;
-        this.fotoString = fotoString;
-        this.estado = true;
-        this.especialidades = new ArrayList<Especialidad>();
-        this.tratamientos = new ArrayList<Tratamiento>();
-    }
 
     public Veterinario() { }
+
+    public Veterinario(String nombre, String cedula,  String correo, String password, String fotoString) {
+        this.cedula = cedula;
+        this.password = password;
+        this.nombre = nombre;
+        this.correo = correo;
+        this.fotoString = fotoString;
+        this.cantidadAtenciones = 0;
+        this.estado = true;
+    }
+
+    // Métodos
+
+    public void agregarTratamiento(Tratamiento tratamiento) {
+        if (!this.tratamientos.contains(tratamiento)) {
+            tratamiento.setVeterinario(this);
+            this.tratamientos.add(tratamiento);
+        }
+    }
+
+    public void eliminarTratamiento(Tratamiento tratamiento) {
+        if (this.tratamientos.contains(tratamiento)) {
+            this.tratamientos.remove(tratamiento);
+        }
+    }
 
     // Getters y setters
 
@@ -53,28 +73,12 @@ public class Veterinario {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public String getCedula() {
         return cedula;
     }
 
     public void setCedula(String cedula) {
         this.cedula = cedula;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
     }
 
     public String getPassword() {
@@ -85,6 +89,22 @@ public class Veterinario {
         this.password = password;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
     public String getFotoString() {
         return fotoString;
     }
@@ -93,12 +113,28 @@ public class Veterinario {
         this.fotoString = fotoString;
     }
 
-    public List<Especialidad> getEspecialidades() {
-        return especialidades;
+    public Number getCantidadAtenciones() {
+        return cantidadAtenciones;
     }
 
-    public void setEspecialidades(List<Especialidad> especialidades) {
-        this.especialidades = especialidades;
+    public void setCantidadAtenciones(Integer cantidadAtenciones) {
+        this.cantidadAtenciones = cantidadAtenciones;
+    }
+
+    public boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    public Especialidad getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(Especialidad especialidad) {
+        this.especialidad = especialidad;
     }
 
     public List<Tratamiento> getTratamientos() {
@@ -109,19 +145,4 @@ public class Veterinario {
         this.tratamientos = tratamientos;
     }
 
-    public void agregarEspecialidad(Especialidad especialidad) {
-        if (!this.especialidades.contains(especialidad)) {
-            this.especialidades.add(especialidad);
-        }
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
-
-    public boolean getEstado() {
-        return estado;
-    }
-
-    
 }

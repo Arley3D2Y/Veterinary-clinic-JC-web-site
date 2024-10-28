@@ -102,7 +102,7 @@ class TratamientoServiceTestMocks {
         when(tratamientoRepo.save(any(Tratamiento.class))).thenReturn(tratamiento);
 
         // Llamada al servicio que estamos probando
-        Optional<Tratamiento> resultado = tratamientoService.addTratamiento(idMascota, idVeterinario, tratamiento);
+        Optional<Tratamiento> resultado = tratamientoService.addTratamiento(idMascota, idVeterinario, 1L, tratamiento);
 
         // Verificación de que el resultado es correcto
         assertTrue(resultado.isPresent());

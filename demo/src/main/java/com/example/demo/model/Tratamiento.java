@@ -2,14 +2,23 @@ package com.example.demo.model;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
 
 @Entity
 public class Tratamiento {
 
     // Atributos
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
     private String descripcion;
     private String observaciones;
@@ -17,34 +26,45 @@ public class Tratamiento {
     private LocalDate fechaFin;
     private boolean activo;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "droga_id")
     private Droga droga;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "mascota_id")
     private Mascota mascota;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "veterinario_id")
     private Veterinario veterinario;
 
     // Constructores
 
-    public Tratamiento() {
-    }
+    public Tratamiento() {  }
 
-    public Tratamiento(String descripcion, String observaciones, LocalDate fechaInicio) {
+    public Tratamiento(String descripcion, String observaciones, LocalDate fechaFin) {
         this.descripcion = descripcion;
         this.observaciones = observaciones;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = LocalDate.of(2020, 1, 1);
-        this.mascota = null;
-        this.veterinario = null;
-        this.droga = null;
+        this.fechaInicio = LocalDate.now();
+        this.fechaFin = fechaFin;
+        this.activo = true;
+    }
+
+    // Método para determinar si el tratamiento está activo
+    public void actualizarEstado() {
+        LocalDate fechaActual = LocalDate.now();
+        if (fechaFin == null || fechaFin.isAfter(fechaActual) || fechaFin.equals(fechaActual)) {
+            this.activo = true;  // Tratamiento activo si la fecha fin es futura, actual o no está definida
+        } else {
+            this.activo = false; // Tratamiento inactivo si la fecha fin es pasada
+        }
     }
 
     // Getters y setters
+
     public Long getId() {
         return id;
     }
@@ -85,6 +105,22 @@ public class Tratamiento {
         this.fechaFin = fechaFin;
     }
 
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    public Droga getDroga() {
+        return droga;
+    }
+
+    public void setDroga(Droga droga) {
+        this.droga = droga;
+    }
+
     public Mascota getMascota() {
         return mascota;
     }
@@ -99,30 +135,6 @@ public class Tratamiento {
 
     public void setVeterinario(Veterinario veterinario) {
         this.veterinario = veterinario;
-    }
-
-    public Droga getDroga() {
-        return droga;
-    }
-
-    public void setDroga(Droga droga) {
-        this.droga = droga;
-    }
-
-    // Método para determinar si está activo en base a las fechas
-    // Método para determinar si el tratamiento está activo
-    public void actualizarEstado() {
-        LocalDate fechaActual = LocalDate.now();
-        if (fechaFin == null || fechaFin.isAfter(fechaActual) || fechaFin.equals(fechaActual)) {
-            this.activo = true;  // Tratamiento activo si la fecha fin es futura, actual o no está definida
-        } else {
-            this.activo = false; // Tratamiento inactivo si la fecha fin es pasada
-        }
-    }
-
-
-    public boolean isActivo() {
-        return activo;
     }
 
 }

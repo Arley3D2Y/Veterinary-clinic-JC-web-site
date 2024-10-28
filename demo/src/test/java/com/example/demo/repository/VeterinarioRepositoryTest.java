@@ -43,8 +43,8 @@ public class VeterinarioRepositoryTest {
 		veterinarioRepository.save(new Veterinario("Kevin", "2222222", "be@lol.com", "4321", "https://media.istockphoto.com/id/1389348844/es/foto/foto-de-estudio-de-una-hermosa-joven-sonriendo-mientras-está-de-pie-sobre-un-fondo-gris.jpg?s=612x612&w=0&k=20&c=kUufmNoTnDcRbyeHhU1wRiip-fNjTWP9owjHf75frFQ="));
 		veterinarioRepository.save(new Veterinario("Sergio", "123456789", "s@t.com", "1234", "https://i.ibb.co/0qX2b8t/sergio.jpg"));
 
-        mascotaRepository.save(new Mascota("Ginger", "5", "4.7", "Sano", "Ninguna", "Macho", "Burmés", "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
-        mascotaRepository.save(new Mascota("Luna", "8", "5.4", "Enfermo", "Obesidad", "Hembra", "Ragdoll", "https://content.elmueble.com/medio/2023/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
+        mascotaRepository.save(new Mascota("Ginger", "5", "4.7","Macho", "Burmés", "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
+        mascotaRepository.save(new Mascota("Luna", "8", "5.4", "Hembra", "Ragdoll", "https://content.elmueble.com/medio/2023/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
 
 		drogaRepository.save(new Droga("Cefalexina", 3.54f, 23.4f, 12, 1));
 

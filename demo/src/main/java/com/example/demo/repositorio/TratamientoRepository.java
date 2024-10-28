@@ -6,36 +6,57 @@ import java.util.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.model.Mascota;
 import com.example.demo.model.Tratamiento;
 import com.example.demo.model.Veterinario;
 
 @Repository
 public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> {
 
-    // JpaRepository ya tiene findAll(), findById(), deleteById(), y save()
+    // findAll()
+
+    // findById()
+
+    // save()
+
+    // deleteById()
+
+    // update whit save()
+
+    // Buscar por descripcion
+    List<Tratamiento> findByDescripcionIgnoreCase(String nombre);
 
     List<Tratamiento> findByDescripcionStartingWithIgnoreCase(String nombre);
 
-    List<Tratamiento> findByVeterinario(Veterinario veterinario);
-    
-    // Buscar por fecha
+    List<Tratamiento> findByDescripcionContainingIgnoreCase(String nombre);
+
+
+    // Buscar por veterinario
+    List<Tratamiento> findByVeterinarioId(Long id);
+    // Buscar por mascota
+    List<Tratamiento> findByMascotaId(Long id);
+    // Buscar por droga
+    List<Tratamiento> findByDrogaId(Long id);
+
+
+    // Buscar por fecha inicio
     List<Tratamiento> findByFechaInicio(LocalDate fechaInicio);
 
-    // Buscar por fecha
+    // Buscar por fecha fin
     List<Tratamiento> findByFechaFin(LocalDate fechaFin);
 
-    // Buscar por mascota
-    List<Tratamiento> findByMascota(Mascota mascota);
-
+    // Buscar por fecha inicio y fin
     List<Tratamiento> findByFechaInicioBetween(LocalDate fechaInicio, LocalDate fechaFin);
 
-  // Buscar tratamientos activos
-  List<Tratamiento> findByActivoTrue();
 
-  // Buscar tratamientos inactivos
-  List<Tratamiento> findByActivoFalse();
 
-  // Buscar tratamientos activos de un veterinario
-  List<Tratamiento> findByVeterinarioAndActivoTrue(Veterinario veterinario);
+    // Buscar tratamientos activos
+    List<Tratamiento> findByActivoTrue();
+
+    // Buscar tratamientos inactivos
+    List<Tratamiento> findByActivoFalse();
+
+
+    // ELIMINAR, Se debe verificar antes
+    List<Tratamiento> findByVeterinarioAndActivoTrue(Veterinario veterinario);
+
 }

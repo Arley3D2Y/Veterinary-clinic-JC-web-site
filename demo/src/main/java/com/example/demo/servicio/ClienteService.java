@@ -1,28 +1,29 @@
 package com.example.demo.servicio;
 import com.example.demo.model.Cliente;
+import com.example.demo.model.Mascota;
+
 import java.util.List;
 import java.util.Optional;
 
 public interface ClienteService {
 
     /**
-     * Este metodo es usado para obtener la información de todos los clientes.
+     * Obtener la información de todos los clientes
      *
-     * @return La colección de todos los clientes.
+     * @return La colección de todos los clientes
      */
     public List<Cliente> searchAllClientes();
     
     /**
-     * Este metodo es usado para buscar clientes por su id.
+     * Buscar clientes por su id
      *
-     * @param identificacion El ID con el que es identificado el cliente.
-     * @return EL objeto Cliente representado al cliente con el ID dado
-     *         o null si no existe
+     * @param identificacion El ID con el que es identificado el cliente
+     * @return EL objeto Cliente optional representado al cliente con el ID dado
      */
     public Optional<Cliente> searchClienteById(Long identificacion);
 
     /**
-     * Este metodo es usado para agregar un nuevo cliente al sistema.
+     * Agregar un nuevo cliente al sistema.
      *
      * @param cliente El objeto Cliente que se desea agregar al sistema.
      *
@@ -59,5 +60,15 @@ public interface ClienteService {
      * @return La colección de todos los clientes que contengan el nombre dado
      */
     public List<Cliente> searchByNombre(String nombre);
+
+
+    /**
+     * Este metodo es usado para obtener la información de todas las mascotas del cliente.
+     *
+     * @param id El ID del cliente.
+     * @return La colección de las mascotas de un cliente.
+     * 
+     */
+    public List<Mascota> getMascotascliente(Long id);
 
 }

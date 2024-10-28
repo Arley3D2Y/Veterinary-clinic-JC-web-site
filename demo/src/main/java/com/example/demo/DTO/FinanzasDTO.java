@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.demo.DTO;
 
 public class FinanzasDTO {
     private double ventasTotales;

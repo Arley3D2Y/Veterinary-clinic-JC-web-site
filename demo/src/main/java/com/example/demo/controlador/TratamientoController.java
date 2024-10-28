@@ -29,73 +29,102 @@ public class TratamientoController {
     @Autowired
     private TratamientoService tratamientoService;
 
-    /* Tratamientos */
+    /* Tratamientos: Peticiones CRUD */
 
-    // localhost:8091/tratamientos
+    // localhost:8088/tratamientos
     @GetMapping
     @Operation(summary = "Find all treatments")
-    public ResponseEntity<List<Tratamiento>> mostrarTratamientos() {
+    public ResponseEntity<List<Tratamiento>> obtenerTratamientos() {
         List<Tratamiento> tratamientos = tratamientoService.searchAll();
         
-        ResponseEntity<List<Tratamiento>> response = new ResponseEntity<>(tratamientos, HttpStatus.OK);
-        return response;
+        return ResponseEntity.ok(tratamientos);
     }
 
-    // localhost:8091/tratamientos/find/{id}
+    // localhost:8088/tratamientos/find/{id}
     @GetMapping("/find/{id}")
     @Operation(summary = "Find treatment by id")
-    public ResponseEntity<Tratamiento> mostrarInfoTratamientoPorId(@PathVariable Long id) {
+    public ResponseEntity<Tratamiento> obtenerInfoTratamientoPorId(@PathVariable Long id) {
         Optional<Tratamiento> tratamiento = tratamientoService.searchById(id);
-        return tratamiento.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+
+        return tratamiento.map(ResponseEntity::ok)
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    // localhost:8091/tratamientos/add
-    @PostMapping("/add/mascota-id/{petId}/veterinario-id/{vetId}")
+    // localhost:8088/tratamientos/add
+    @PostMapping("/add/mascota/{petId}/veterinario/{vetId}/droga/{drugId}")
     @Operation(summary = "Add new treatment")
-    private ResponseEntity<Tratamiento> crearTratamiento(@PathVariable("petId") Long pId, @PathVariable("vetId") Long vId, @RequestBody Tratamiento tratamiento) {
-        Optional<Tratamiento> nuevoTratamiento = tratamientoService.addTratamiento(pId, vId, tratamiento);
-        return nuevoTratamiento.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    private ResponseEntity<Tratamiento> crearTratamiento(@PathVariable("petId") Long mascotaId, @PathVariable("vetId") Long veterinarioId,
+            @PathVariable("drugId") Long drogaId, @RequestBody Tratamiento tratamiento) {
+        
+        try {
+            Optional<Tratamiento> nuevoTratamiento = tratamientoService.addTratamiento(mascotaId, veterinarioId, drogaId, tratamiento);
+            return nuevoTratamiento.map(ResponseEntity::ok)
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
-    // localhost:8091/tratamientos/delete/{id}
+    // localhost:8088/tratamientos/delete/{id}
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "Delete treatment by id")
     public ResponseEntity<Void> eliminarTratamiento(@PathVariable Long id) {
         boolean isDeleted = tratamientoService.removeById(id);
-        if (isDeleted) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
+        
+        return isDeleted ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+            : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    // localhost:8088/tratamientos/update/{id}
     @PutMapping("/update/{id}")
     @Operation(summary = "Update treatment by id")
     public ResponseEntity<Tratamiento> actualizarTratamiento(@PathVariable Long id, @RequestBody Tratamiento tratamiento) {
         Optional<Tratamiento> tratamientoActualizado = tratamientoService.updateById(id, tratamiento);
-        return tratamientoActualizado.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        
+        return tratamientoActualizado.map(ResponseEntity::ok)
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/search-by-name/{name}")
+
+    /* Busquedas - search by */
+    
+    // localhost:8088/tratamientos/search-by-description/{search}
+    @GetMapping("/search-by-description/{search}")
     @Operation(summary = "Search treatments by name")
-    public ResponseEntity<List<Tratamiento>> mostrarTratamientoPorNombre(@PathVariable String name) {
-        List<Tratamiento> tratamientos = tratamientoService.searchByNombre(name);
-        if (tratamientos.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
+    public ResponseEntity<List<Tratamiento>> obtenerTratamientosPorNombre(@PathVariable String search) {
+        List<Tratamiento> tratamientos = tratamientoService.searchByDescription(search);
+        
         return ResponseEntity.ok(tratamientos);
     }
 
+
+    /* Buscar listas del vtratamiento o por entidades */
+
+    // localhost:8088/tratamientos/search-by-veterinario_id/{id}
     @GetMapping("/search-by-veterinario_id/{id}")
     @Operation(summary = "Search treatments by veterinarian id")
-    public ResponseEntity<List<Tratamiento>> mostrarTratamientoPorVeterinario(@PathVariable Long id) {
-        List<Tratamiento> tratamientos = tratamientoService.getTratamientosPorVeterinario(id);
+    public ResponseEntity<List<Tratamiento>> buscarTratamientosByVeterinarioId(@PathVariable Long id) {
+        List<Tratamiento> tratamientos = tratamientoService.searchByVeterinarioId(id);
+        
         return ResponseEntity.ok(tratamientos);
     }
 
+    // localhost:8088/tratamientos/search-by-mascota_id/{id}
     @GetMapping("/search-by-mascota_id/{id}")
     @Operation(summary = "Search treatments by pet id")
-    public ResponseEntity<List<Tratamiento>> mostrarTratamientoPorMascota(@PathVariable Long id) {
-        List<Tratamiento> tratamientos = tratamientoService.getTratamientosPorMascota(id);
+    public ResponseEntity<List<Tratamiento>> buscarTratamientosByMascotaId(@PathVariable Long id) {
+        List<Tratamiento> tratamientos = tratamientoService.searchByMascotaId(id);
+        
+        return ResponseEntity.ok(tratamientos);
+    }
+
+    // localhost:8088/tratamientos/search-by-droga_id/{id}
+    @GetMapping("/search-by-droga_id/{id}")
+    @Operation(summary = "Search treatments by pet id")
+    public ResponseEntity<List<Tratamiento>> buscarTratamientosByDrogaId(@PathVariable Long id) {
+        List<Tratamiento> tratamientos = tratamientoService.searchByDrogaId(id);
+        
         return ResponseEntity.ok(tratamientos);
     }
     

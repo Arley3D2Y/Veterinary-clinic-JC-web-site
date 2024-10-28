@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.servicio.TratamientoService;
 import com.example.demo.servicio.VeterinarioService;
-import com.example.demo.model.FinanzasDTO;
-import com.example.demo.model.GenericoDTO;
-import com.example.demo.model.VeterinarioEstadisticasDTO;
+import com.example.demo.DTO.GenericoDTO;
+import com.example.demo.DTO.VeterinarioEstadisticasDTO;
 
 import io.swagger.v3.oas.annotations.Operation;
 
@@ -59,13 +58,7 @@ public class DashboardController {
         return ResponseEntity.ok(estadisticas);
     }
 
-    // localhost:8091/api/dashboard/finanzas
-    @GetMapping("/finanzas")
-    @Operation(summary = "Get total sales and earnings")
-    public ResponseEntity<FinanzasDTO> getFinanzas() {
-        FinanzasDTO finanzas = tratamientoService.getFinanzas();
-        return ResponseEntity.ok(finanzas);
-    }
+
      
     // localhost:8091/api/dashboard/top-tratamientos
      /* // localhost:8091/api/dashboard/mascotas

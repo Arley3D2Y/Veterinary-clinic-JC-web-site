@@ -3,8 +3,7 @@ package com.example.demo.servicio;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.demo.model.FinanzasDTO;
-import com.example.demo.model.GenericoDTO;
+import com.example.demo.DTO.GenericoDTO;
 import com.example.demo.model.Tratamiento;
 
 public interface TratamientoService {
@@ -32,7 +31,8 @@ public interface TratamientoService {
      * @param tratamiento El objeto Tratamiento que se desea agregar al sistema.
      *
      */
-    public Optional<Tratamiento> addTratamiento(Long idp, Long idv, Tratamiento tratamiento);
+    public Optional<Tratamiento> addTratamiento(Long idp, Long idv, Long idd, Tratamiento tratamiento);
+    
         /**
      * Este metodo es usado para borrar un tratamiento del sistema.
      *
@@ -48,18 +48,40 @@ public interface TratamientoService {
      */
     public Optional<Tratamiento> updateById(Long id, Tratamiento tratamiento);
 
-    public List<Tratamiento> searchByNombre(String name);
+    /**
+     * Este metodo es usado para buscar tratamientos por su nombre.
+     * @param name El nombre con el que es identificado el tratamiento.
+     * @return La colección de todos los tratamientos que contengan el nombre dado
+     */
+    public List<Tratamiento> searchByDescription(String name);
     
-    public List<Tratamiento> getTratamientosPorVeterinario(Long id);
+    /**
+     * Este metodo es usado para obtener los tratamientos de un veterinario.
+     * @param id El ID del veterinario
+     * @return La lista de tratamientos
+     */
+    public List<Tratamiento> searchByVeterinarioId(Long id);
 
-    public List<Tratamiento> getTratamientosPorMascota(Long id);
+    /**
+     * Este metodo es usado para obtener la lista de tratamientos de una mascota
+     * @param id El ID de la mascota
+     * @return La lista de tratamientos
+     */
+    public List<Tratamiento> searchByMascotaId(Long id);
 
+    /**
+     * Este metodo es usado para obtener la lista de tratamientos de una droga
+     * @param id El ID de la droga
+     * @return La lista de tratamientos
+     */
+    public List<Tratamiento> searchByDrogaId(Long id);
 
-    public FinanzasDTO getFinanzas();
+    
+
 
     public Number countTratamientosByMonth();
 
-public List<GenericoDTO> getTratamientosPorMedicamento();
+    public List<GenericoDTO> getTratamientosPorMedicamento();
     
     public List<Tratamiento> getTopTratamientos();
 
