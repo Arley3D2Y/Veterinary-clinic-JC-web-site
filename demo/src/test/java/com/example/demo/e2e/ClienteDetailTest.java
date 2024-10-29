@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.util.List;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -75,9 +76,14 @@ public class ClienteDetailTest {
       driver.get(BASE_URL + "/cliente/dashboard/1435466");
 
       wait.until(ExpectedConditions.presenceOfElementLocated(By.className("card-pet")));
-      List<WebElement> listPets = driver.findElements(By.className("pet-card"));
+      List<WebElement> listPets = driver.findElements(By.className("card-pet"));
 
       Assertions.assertThat(listPets.size()).isEqualTo(2);
+   }
+
+   @AfterEach
+   public void close(){
+      driver.quit();
    }
 
 
