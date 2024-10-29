@@ -53,7 +53,7 @@ public class DataBaseInitTest implements ApplicationRunner {
         AdministradorRepository administradorRepository;
         @Autowired
         ExcelService excelService;
-        
+
         @Override
         public void run(ApplicationArguments args) throws Exception {
 
@@ -207,7 +207,7 @@ public class DataBaseInitTest implements ApplicationRunner {
                 clienteRepository.save(new Cliente("Elena Torres", "9876543", "elena.torres@gmail.com", "3009876543",
                                 "Cll 50 # 12-34",
                                 "https://ntvb.tmsimg.com/assets/assets/494807_v9_bd.jpg?w=360&h=480"));
-                
+
                 // agregar mascotas
                 mascotaRepository.save(new Mascota("Toby", "5", "4", "Macho", "Birmano",
                                 "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
@@ -219,7 +219,7 @@ public class DataBaseInitTest implements ApplicationRunner {
                                 "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
                 mascotaRepository.save(new Mascota("Trixy", "3", "6", "Hembra", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
-                
+
                 // ESTADOS DE MASCOTAS
                 estadoRepository.save(new Estado("Sano"));
                 estadoRepository.save(new Estado("Enfermo"));
@@ -229,40 +229,84 @@ public class DataBaseInitTest implements ApplicationRunner {
                 // ENFERMEDADES
                 enfermedadRepository.save(new Enfermedad("Sin enfermedad", "La mascota está saludable", "No Aplica"));
 
-                enfermedadRepository.save(new Enfermedad("Gripe Felina", "Resfriado común con estornudos, ojos llorosos y fiebre", "ACOLAN, ACTIONIS"));
-                enfermedadRepository.save(new Enfermedad("Infección Respiratoria Superior", "Congestión nasal, tos y pérdida de apetito", "AQUACOLI, AMOXICILINA"));
-                enfermedadRepository.save(new Enfermedad("Dermatitis Felina", "Irritación en la piel, enrojecimiento y picazón", "APRAVET, AURIZON"));
-                enfermedadRepository.save(new Enfermedad("Otitis", "Infección del oído, mal olor y rascado excesivo", "CANAURAL, OTOMAX"));
-                enfermedadRepository.save(new Enfermedad("Cistitis Felina", "Dolor al orinar, sangre en la orina y letargo", "COTRISUL, DIACOL"));
-                enfermedadRepository.save(new Enfermedad("Gastroenteritis", "Vómitos, diarrea y deshidratación", "ENTEROSTREP, ENROCAT"));
-                enfermedadRepository.save(new Enfermedad("Conjuntivitis", "Ojos irritados, secreción ocular y parpadeo constante", "OPHTOCYCLINE, ISATHAL"));
-                enfermedadRepository.save(new Enfermedad("Parásitos Intestinales", "Pérdida de peso, vómitos y diarrea", "DEPOCILLIN, COLIMICINA"));
-                enfermedadRepository.save(new Enfermedad("Moquillo Felino", "Secreción nasal, fiebre y pérdida de apetito", "BAYTRIL, CLAMOXYL"));
-                enfermedadRepository.save(new Enfermedad("Infección Urinaria", "Dificultad al orinar, orina turbia y olor fuerte", "COTRISUL, CEVAXEL-RTU"));
-                enfermedadRepository.save(new Enfermedad("Panleucopenia", "Fiebre alta, vómitos y deshidratación", "CONVENIA, FLORON"));
-                enfermedadRepository.save(new Enfermedad("Anemia Infecciosa Felina", "Letargo, pérdida de apetito y encías pálidas", "GENTAMOX, ENROVET"));
-                enfermedadRepository.save(new Enfermedad("Toxoplasmosis", "Diarrea, vómitos y fiebre", "PANTOMICINA, TETRACICLINA"));
-                enfermedadRepository.save(new Enfermedad("Leucemia Felina", "Pérdida de peso, infecciones recurrentes y letargo", "LYDAXX, RONAXAN"));
-                enfermedadRepository.save(new Enfermedad("Tiña Felina", "Lesiones circulares en la piel y pérdida de pelaje", "CLORTETRA, FUNGINIX"));
-                enfermedadRepository.save(new Enfermedad("Artritis Felina", "Rigidez en las articulaciones y dificultad para moverse", "DEXABIOPEN, VETMULIN"));
-                enfermedadRepository.save(new Enfermedad("Rabia Felina", "Agitación, cambios de comportamiento y agresividad", "ZUPREVO, STABOX"));
-                enfermedadRepository.save(new Enfermedad("Calicivirus", "Úlceras en la boca, fiebre y secreción nasal", "ENROX, ADVOCIN"));
-                enfermedadRepository.save(new Enfermedad("Peritonitis Infecciosa Felina", "Fiebre, inflamación abdominal y pérdida de apetito", "DENAGARD, METROTAB"));
-                enfermedadRepository.save(new Enfermedad("Asma Felina", "Tos, dificultad para respirar y silbidos al exhalar", "AEROFAR, MARBOSOL"));
-                enfermedadRepository.save(new Enfermedad("Enfermedad periodontal", "Inflamación de los tejidos que rodean los dientes, puede causar mal aliento y pérdida dental", "AMOXICILINA, CLINDAMICINA"));
-                enfermedadRepository.save(new Enfermedad("Gingivitis felina", "Inflamación de las encías, puede provocar dolor y dificultad para comer", "CLAVULÁNICO, ENROVET"));
-                enfermedadRepository.save(new Enfermedad("Miocardiopatía hipertrófica", "Engrosamiento del músculo cardíaco, puede causar insuficiencia cardíaca", "DIGOXINA, BENAZEPRIL"));
-                enfermedadRepository.save(new Enfermedad("Enfermedad valvular", "Afección de las válvulas del corazón que puede provocar soplos cardíacos", "FUROSEMIDA, SPIRONOLACTONA"));
-                enfermedadRepository.save(new Enfermedad("Linfoma felino", "Cáncer que afecta los ganglios linfáticos y otros órganos", "DOXORUBICINA, VINCRISTINA"));
-                enfermedadRepository.save(new Enfermedad("Tumores mamarios", "Crecimientos anormales en las glándulas mamarias, pueden ser benignos o malignos", "MASTINIB, CARBOPLATINO"));
-                enfermedadRepository.save(new Enfermedad("Piometra", "Infección del útero que puede ser potencialmente mortal", "CEFALEXINA, PROSTAGLANDINAS"));
-                enfermedadRepository.save(new Enfermedad("Aborto espontáneo", "Pérdida del embarazo en etapas avanzadas, puede ser causada por infecciones o problemas hormonales", "PROGESTERONA, ANTIBIÓTICOS"));
-                enfermedadRepository.save(new Enfermedad("Reacciones adversas a la anestesia", "Complicaciones que pueden surgir durante o después de la anestesia", "DEXMETOROMIDINA, ISOFLURANO"));
-                enfermedadRepository.save(new Enfermedad("Hipotensión anestésica", "Descenso en la presión arterial durante la anestesia que puede ser peligroso", "DOBUTAMINA, NORADRENALINA"));
-                enfermedadRepository.save(new Enfermedad("Obesidad felina", "Acumulación excesiva de grasa que puede provocar enfermedades secundarias", "ORLISTAT, suplementos nutricionales"));
-                enfermedadRepository.save(new Enfermedad("Enfermedades gastrointestinales", "Trastornos que afectan el tracto digestivo, pueden causar vómitos y diarrea", "METRONIDAZOL, PROBIÓTICOS"));
+                enfermedadRepository.save(new Enfermedad("Gripe Felina",
+                                "Resfriado común con estornudos, ojos llorosos y fiebre", "ACOLAN, ACTIONIS"));
+                enfermedadRepository.save(new Enfermedad("Infección Respiratoria Superior",
+                                "Congestión nasal, tos y pérdida de apetito", "AQUACOLI, AMOXICILINA"));
+                enfermedadRepository.save(new Enfermedad("Dermatitis Felina",
+                                "Irritación en la piel, enrojecimiento y picazón", "APRAVET, AURIZON"));
+                enfermedadRepository.save(new Enfermedad("Otitis", "Infección del oído, mal olor y rascado excesivo",
+                                "CANAURAL, OTOMAX"));
+                enfermedadRepository.save(new Enfermedad("Cistitis Felina",
+                                "Dolor al orinar, sangre en la orina y letargo", "COTRISUL, DIACOL"));
+                enfermedadRepository.save(new Enfermedad("Gastroenteritis", "Vómitos, diarrea y deshidratación",
+                                "ENTEROSTREP, ENROCAT"));
+                enfermedadRepository.save(new Enfermedad("Conjuntivitis",
+                                "Ojos irritados, secreción ocular y parpadeo constante", "OPHTOCYCLINE, ISATHAL"));
+                enfermedadRepository.save(new Enfermedad("Parásitos Intestinales", "Pérdida de peso, vómitos y diarrea",
+                                "DEPOCILLIN, COLIMICINA"));
+                enfermedadRepository.save(new Enfermedad("Moquillo Felino",
+                                "Secreción nasal, fiebre y pérdida de apetito", "BAYTRIL, CLAMOXYL"));
+                enfermedadRepository.save(new Enfermedad("Infección Urinaria",
+                                "Dificultad al orinar, orina turbia y olor fuerte", "COTRISUL, CEVAXEL-RTU"));
+                enfermedadRepository.save(new Enfermedad("Panleucopenia", "Fiebre alta, vómitos y deshidratación",
+                                "CONVENIA, FLORON"));
+                enfermedadRepository.save(new Enfermedad("Anemia Infecciosa Felina",
+                                "Letargo, pérdida de apetito y encías pálidas", "GENTAMOX, ENROVET"));
+                enfermedadRepository.save(new Enfermedad("Toxoplasmosis", "Diarrea, vómitos y fiebre",
+                                "PANTOMICINA, TETRACICLINA"));
+                enfermedadRepository.save(new Enfermedad("Leucemia Felina",
+                                "Pérdida de peso, infecciones recurrentes y letargo", "LYDAXX, RONAXAN"));
+                enfermedadRepository.save(new Enfermedad("Tiña Felina",
+                                "Lesiones circulares en la piel y pérdida de pelaje", "CLORTETRA, FUNGINIX"));
+                enfermedadRepository.save(new Enfermedad("Artritis Felina",
+                                "Rigidez en las articulaciones y dificultad para moverse", "DEXABIOPEN, VETMULIN"));
+                enfermedadRepository.save(new Enfermedad("Rabia Felina",
+                                "Agitación, cambios de comportamiento y agresividad", "ZUPREVO, STABOX"));
+                enfermedadRepository.save(new Enfermedad("Calicivirus", "Úlceras en la boca, fiebre y secreción nasal",
+                                "ENROX, ADVOCIN"));
+                enfermedadRepository.save(new Enfermedad("Peritonitis Infecciosa Felina",
+                                "Fiebre, inflamación abdominal y pérdida de apetito", "DENAGARD, METROTAB"));
+                enfermedadRepository.save(new Enfermedad("Asma Felina",
+                                "Tos, dificultad para respirar y silbidos al exhalar", "AEROFAR, MARBOSOL"));
+                enfermedadRepository.save(new Enfermedad("Enfermedad periodontal",
+                                "Inflamación de los tejidos que rodean los dientes, puede causar mal aliento y pérdida dental",
+                                "AMOXICILINA, CLINDAMICINA"));
+                enfermedadRepository.save(new Enfermedad("Gingivitis felina",
+                                "Inflamación de las encías, puede provocar dolor y dificultad para comer",
+                                "CLAVULÁNICO, ENROVET"));
+                enfermedadRepository.save(new Enfermedad("Miocardiopatía hipertrófica",
+                                "Engrosamiento del músculo cardíaco, puede causar insuficiencia cardíaca",
+                                "DIGOXINA, BENAZEPRIL"));
+                enfermedadRepository.save(new Enfermedad("Enfermedad valvular",
+                                "Afección de las válvulas del corazón que puede provocar soplos cardíacos",
+                                "FUROSEMIDA, SPIRONOLACTONA"));
+                enfermedadRepository.save(new Enfermedad("Linfoma felino",
+                                "Cáncer que afecta los ganglios linfáticos y otros órganos",
+                                "DOXORUBICINA, VINCRISTINA"));
+                enfermedadRepository.save(new Enfermedad("Tumores mamarios",
+                                "Crecimientos anormales en las glándulas mamarias, pueden ser benignos o malignos",
+                                "MASTINIB, CARBOPLATINO"));
+                enfermedadRepository.save(
+                                new Enfermedad("Piometra", "Infección del útero que puede ser potencialmente mortal",
+                                                "CEFALEXINA, PROSTAGLANDINAS"));
+                enfermedadRepository.save(new Enfermedad("Aborto espontáneo",
+                                "Pérdida del embarazo en etapas avanzadas, puede ser causada por infecciones o problemas hormonales",
+                                "PROGESTERONA, ANTIBIÓTICOS"));
+                enfermedadRepository.save(new Enfermedad("Reacciones adversas a la anestesia",
+                                "Complicaciones que pueden surgir durante o después de la anestesia",
+                                "DEXMETOROMIDINA, ISOFLURANO"));
+                enfermedadRepository.save(new Enfermedad("Hipotensión anestésica",
+                                "Descenso en la presión arterial durante la anestesia que puede ser peligroso",
+                                "DOBUTAMINA, NORADRENALINA"));
+                enfermedadRepository.save(new Enfermedad("Obesidad felina",
+                                "Acumulación excesiva de grasa que puede provocar enfermedades secundarias",
+                                "ORLISTAT, suplementos nutricionales"));
+                enfermedadRepository.save(new Enfermedad("Enfermedades gastrointestinales",
+                                "Trastornos que afectan el tracto digestivo, pueden causar vómitos y diarrea",
+                                "METRONIDAZOL, PROBIÓTICOS"));
 
-                //Mascotas
+                // Mascotas
                 mascotaRepository.save(new Mascota("Nina", "4", "5", "Hembra", "Birmano",
                                 "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
                 mascotaRepository.save(new Mascota("Rex", "3", "5.5", "Macho", "Persa",
@@ -273,216 +317,223 @@ public class DataBaseInitTest implements ApplicationRunner {
                                 "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
                 mascotaRepository.save(new Mascota("Bella", "3", "5.5", "Hembra", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
-        
-                mascotaRepository.save(new Mascota("Oreo", "4", "5", "Macho", "Birmano", 
+
+                mascotaRepository.save(new Mascota("Oreo", "4", "5", "Macho", "Birmano",
                                 "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Cleo", "3", "4.5",  "Hembra", "Persa", 
+                mascotaRepository.save(new Mascota("Cleo", "3", "4.5", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
-                mascotaRepository.save(new Mascota("Leo", "5", "6", "Macho", "Burmés", 
+                mascotaRepository.save(new Mascota("Leo", "5", "6", "Macho", "Burmés",
                                 "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
-                mascotaRepository.save(new Mascota("Sasha", "7", "5", "Hembra", "Ragdoll", 
+                mascotaRepository.save(new Mascota("Sasha", "7", "5", "Hembra", "Ragdoll",
                                 "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Milo", "4", "5.5", "Macho", "Siberiano", 
+                mascotaRepository.save(new Mascota("Milo", "4", "5.5", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
-                
-                mascotaRepository.save(new Mascota("Simba", "5", "4.2", "Macho", "Birmano", 
+
+                mascotaRepository.save(new Mascota("Simba", "5", "4.2", "Macho", "Birmano",
                                 "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Misty", "3", "3.8", "Hembra", "Persa", 
+                mascotaRepository.save(new Mascota("Misty", "3", "3.8", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
-                mascotaRepository.save(new Mascota("Whiskers", "6", "5.0", "Macho", "Burmés", 
+                mascotaRepository.save(new Mascota("Whiskers", "6", "5.0", "Macho", "Burmés",
                                 "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
-                mascotaRepository.save(new Mascota("Lola", "8", "4.5", "Hembra", "Ragdoll", 
+                mascotaRepository.save(new Mascota("Lola", "8", "4.5", "Hembra", "Ragdoll",
                                 "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Charlie", "4", "6.2", "Macho", "Siberiano", 
+                mascotaRepository.save(new Mascota("Charlie", "4", "6.2", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
-                
-                mascotaRepository.save(new Mascota("Pepper", "5", "4.1", "Hembra", "Birmano", 
+
+                mascotaRepository.save(new Mascota("Pepper", "5", "4.1", "Hembra", "Birmano",
                                 "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Nala", "3", "3.9", "Hembra", "Persa", 
+                mascotaRepository.save(new Mascota("Nala", "3", "3.9", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
-                mascotaRepository.save(new Mascota("Zeus", "7", "5.5", "Macho", "Burmés", 
+                mascotaRepository.save(new Mascota("Zeus", "7", "5.5", "Macho", "Burmés",
                                 "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
-                mascotaRepository.save(new Mascota("Maggie", "9", "4.8", "Hembra", "Ragdoll", 
+                mascotaRepository.save(new Mascota("Maggie", "9", "4.8", "Hembra", "Ragdoll",
                                 "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Buddy", "4", "5.5", "Macho", "Siberiano", 
+                mascotaRepository.save(new Mascota("Buddy", "4", "5.5", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
-                                
-                mascotaRepository.save(new Mascota("Jack", "4", "5.0", "Macho", "Birmano", 
+
+                mascotaRepository.save(new Mascota("Jack", "4", "5.0", "Macho", "Birmano",
                                 "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Minnie", "3", "3.5", "Hembra", "Persa", 
+                mascotaRepository.save(new Mascota("Minnie", "3", "3.5", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
-                mascotaRepository.save(new Mascota("Smokey", "5", "4.8", "Macho", "Burmés", 
+                mascotaRepository.save(new Mascota("Smokey", "5", "4.8", "Macho", "Burmés",
                                 "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
-                mascotaRepository.save(new Mascota("Sandy", "8", "6.2", "Hembra", "Ragdoll", 
+                mascotaRepository.save(new Mascota("Sandy", "8", "6.2", "Hembra", "Ragdoll",
                                 "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Rusty", "2", "5.5", "Macho", "Siberiano", 
+                mascotaRepository.save(new Mascota("Rusty", "2", "5.5", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
-                
-                mascotaRepository.save(new Mascota("Milo", "4", "4.0", "Hembra", "Birmano", 
+
+                mascotaRepository.save(new Mascota("Milo", "4", "4.0", "Hembra", "Birmano",
                                 "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Oreo", "3", "4.1", "Macho", "Persa", 
+                mascotaRepository.save(new Mascota("Oreo", "3", "4.1", "Macho", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
-                mascotaRepository.save(new Mascota("Cleo", "6", "5.0", "Hembra", "Burmés", 
+                mascotaRepository.save(new Mascota("Cleo", "6", "5.0", "Hembra", "Burmés",
                                 "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
-                mascotaRepository.save(new Mascota("Tommy", "9", "6.0", "Macho", "Ragdoll", 
+                mascotaRepository.save(new Mascota("Tommy", "9", "6.0", "Macho", "Ragdoll",
                                 "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Zara", "5", "5.3", "Hembra", "Siberiano", 
+                mascotaRepository.save(new Mascota("Zara", "5", "5.3", "Hembra", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
-                
-                mascotaRepository.save(new Mascota("Dexter", "4", "5.2", "Macho", "Birmano", 
+
+                mascotaRepository.save(new Mascota("Dexter", "4", "5.2", "Macho", "Birmano",
                                 "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Maggie", "3", "4.0", "Hembra", "Persa", 
+                mascotaRepository.save(new Mascota("Maggie", "3", "4.0", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
-                mascotaRepository.save(new Mascota("Oscar", "5", "4.8", "Macho", "Burmés", 
+                mascotaRepository.save(new Mascota("Oscar", "5", "4.8", "Macho", "Burmés",
                                 "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
-                mascotaRepository.save(new Mascota("Penny", "8", "6.0", "Hembra", "Ragdoll", 
+                mascotaRepository.save(new Mascota("Penny", "8", "6.0", "Hembra", "Ragdoll",
                                 "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Fritz", "2", "5.5", "Macho", "Siberiano", 
+                mascotaRepository.save(new Mascota("Fritz", "2", "5.5", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
-                
-                mascotaRepository.save(new Mascota("Juno", "4", "4.4", "Hembra", "Birmano", 
+
+                mascotaRepository.save(new Mascota("Juno", "4", "4.4", "Hembra", "Birmano",
                                 "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Milo", "3", "4.2", "Macho", "Persa", 
+                mascotaRepository.save(new Mascota("Milo", "3", "4.2", "Macho", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
-                mascotaRepository.save(new Mascota("Bella", "6", "5.3", "Hembra", "Burmés", 
+                mascotaRepository.save(new Mascota("Bella", "6", "5.3", "Hembra", "Burmés",
                                 "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
-                mascotaRepository.save(new Mascota("Rex", "9", "6.1", "Macho", "Ragdoll", 
+                mascotaRepository.save(new Mascota("Rex", "9", "6.1", "Macho", "Ragdoll",
                                 "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Luna", "5", "5.5", "Hembra", "Siberiano", 
+                mascotaRepository.save(new Mascota("Luna", "5", "5.5", "Hembra", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
-                
-                mascotaRepository.save(new Mascota("Nina", "4", "4.5", "Hembra", "Birmano", 
+
+                mascotaRepository.save(new Mascota("Nina", "4", "4.5", "Hembra", "Birmano",
                                 "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Cleo", "3", "3.9", "Hembra", "Persa", 
+                mascotaRepository.save(new Mascota("Cleo", "3", "3.9", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
-                mascotaRepository.save(new Mascota("Leo", "5", "5.1", "Macho", "Burmés", 
+                mascotaRepository.save(new Mascota("Leo", "5", "5.1", "Macho", "Burmés",
                                 "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
-                mascotaRepository.save(new Mascota("Sasha", "8", "6.3", "Hembra", "Ragdoll", 
+                mascotaRepository.save(new Mascota("Sasha", "8", "6.3", "Hembra", "Ragdoll",
                                 "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Max", "2", "5.4", "Macho", "Siberiano", 
+                mascotaRepository.save(new Mascota("Max", "2", "5.4", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
-                
-                mascotaRepository.save(new Mascota("Toby", "4", "4.0", "Hembra", "Birmano", 
+
+                mascotaRepository.save(new Mascota("Toby", "4", "4.0", "Hembra", "Birmano",
                                 "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Rex", "3", "5.1", "Macho", "Persa", 
+                mascotaRepository.save(new Mascota("Rex", "3", "5.1", "Macho", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
-                mascotaRepository.save(new Mascota("Oreo", "5", "4.5", "Macho", "Burmés", 
+                mascotaRepository.save(new Mascota("Oreo", "5", "4.5", "Macho", "Burmés",
                                 "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
-                mascotaRepository.save(new Mascota("Trixy", "8", "6.0", "Hembra", "Ragdoll", 
+                mascotaRepository.save(new Mascota("Trixy", "8", "6.0", "Hembra", "Ragdoll",
                                 "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Manchas", "2", "5.8", "Macho", "Siberiano", 
+                mascotaRepository.save(new Mascota("Manchas", "2", "5.8", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
-                
-                mascotaRepository.save(new Mascota("Pip", "4", "4.2", "Macho", "Birmano", 
+
+                mascotaRepository.save(new Mascota("Pip", "4", "4.2", "Macho", "Birmano",
                                 "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Chloe", "3", "3.8", "Hembra", "Persa", 
+                mascotaRepository.save(new Mascota("Chloe", "3", "3.8", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
-                mascotaRepository.save(new Mascota("Toby", "5", "4.9", "Macho", "Burmés", 
+                mascotaRepository.save(new Mascota("Toby", "5", "4.9", "Macho", "Burmés",
                                 "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
-                mascotaRepository.save(new Mascota("Lola", "9", "6.5", "Hembra", "Ragdoll", 
+                mascotaRepository.save(new Mascota("Lola", "9", "6.5", "Hembra", "Ragdoll",
                                 "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Sam", "6", "5.2", "Macho", "Siberiano", 
+                mascotaRepository.save(new Mascota("Sam", "6", "5.2", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
-                
-                mascotaRepository.save(new Mascota("Jasper", "4", "4.0", "Macho", "Birmano", 
+
+                mascotaRepository.save(new Mascota("Jasper", "4", "4.0", "Macho", "Birmano",
                                 "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Fifi", "3", "3.5", "Hembra", "Persa", 
+                mascotaRepository.save(new Mascota("Fifi", "3", "3.5", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
-                mascotaRepository.save(new Mascota("Tiger", "5", "4.8", "Macho", "Burmés", 
+                mascotaRepository.save(new Mascota("Tiger", "5", "4.8", "Macho", "Burmés",
                                 "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
-                mascotaRepository.save(new Mascota("Ella", "8", "5.0", "Hembra", "Ragdoll", 
+                mascotaRepository.save(new Mascota("Ella", "8", "5.0", "Hembra", "Ragdoll",
                                 "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Marty", "2", "5.5", "Macho", "Siberiano", 
+                mascotaRepository.save(new Mascota("Marty", "2", "5.5", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
-                
-                mascotaRepository.save(new Mascota("Jack", "4", "4.1", "Hembra", "Birmano", 
+
+                mascotaRepository.save(new Mascota("Jack", "4", "4.1", "Hembra", "Birmano",
                                 "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Penny", "3", "3.9", "Hembra", "Persa", 
+                mascotaRepository.save(new Mascota("Penny", "3", "3.9", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
                 mascotaRepository.save(new Mascota("Ginger", "5", "4.7", "Macho", "Burmés",
                                 "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
-                mascotaRepository.save(new Mascota("Luna", "8", "5.4", "Hembra", "Ragdoll", 
+                mascotaRepository.save(new Mascota("Luna", "8", "5.4", "Hembra", "Ragdoll",
                                 "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Rufus", "2", "5.3", "Macho", "Siberiano", 
-                                "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
-                
-                mascotaRepository.save(new Mascota("Lily", "4", "4.2", "Hembra", "Birmano", 
-                                "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Oscar", "3", "3.8", "Macho", "Persa", 
-                                "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
-                mascotaRepository.save(new Mascota("Sammy", "5", "4.6", "Hembra", "Burmés", 
-                                "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
-                mascotaRepository.save(new Mascota("Maggie", "8", "5.7", "Macho", "Ragdoll", 
-                                "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Cleo", "2", "5.0", "Hembra", "Siberiano", 
+                mascotaRepository.save(new Mascota("Rufus", "2", "5.3", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
 
-                mascotaRepository.save(new Mascota("Dexter", "4", "4.0", "Macho", "Birmano", 
+                mascotaRepository.save(new Mascota("Lily", "4", "4.2", "Hembra", "Birmano",
                                 "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Luna", "3", "3.8", "Hembra", "Persa", 
+                mascotaRepository.save(new Mascota("Oscar", "3", "3.8", "Macho", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
-                mascotaRepository.save(new Mascota("Charlie", "5", "4.5", "Macho", "Burmés", 
+                mascotaRepository.save(new Mascota("Sammy", "5", "4.6", "Hembra", "Burmés",
                                 "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
-                mascotaRepository.save(new Mascota("Maggie", "8", "6.0", "Hembra", "Ragdoll", 
+                mascotaRepository.save(new Mascota("Maggie", "8", "5.7", "Macho", "Ragdoll",
                                 "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Rusty", "2", "5.1", "Macho", "Siberiano", 
+                mascotaRepository.save(new Mascota("Cleo", "2", "5.0", "Hembra", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
-                
-                mascotaRepository.save(new Mascota("Oscar", "4", "4.2", "Macho", "Birmano", 
+
+                mascotaRepository.save(new Mascota("Dexter", "4", "4.0", "Macho", "Birmano",
                                 "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Zara", "3", "3.9", "Hembra", "Persa", 
+                mascotaRepository.save(new Mascota("Luna", "3", "3.8", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
-                mascotaRepository.save(new Mascota("Buddy", "5", "4.8", "Macho", "Burmés", 
+                mascotaRepository.save(new Mascota("Charlie", "5", "4.5", "Macho", "Burmés",
                                 "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
-                mascotaRepository.save(new Mascota("Ellie", "8", "5.5", "Hembra", "Ragdoll", 
+                mascotaRepository.save(new Mascota("Maggie", "8", "6.0", "Hembra", "Ragdoll",
                                 "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Max", "6", "5.0", "Macho", "Siberiano", 
+                mascotaRepository.save(new Mascota("Rusty", "2", "5.1", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
-                                
-                mascotaRepository.save(new Mascota("Ziggy", "4", "4.0", "Macho", "Birmano", 
+
+                mascotaRepository.save(new Mascota("Oscar", "4", "4.2", "Macho", "Birmano",
                                 "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Nina", "3", "3.5", "Hembra", "Persa", 
+                mascotaRepository.save(new Mascota("Zara", "3", "3.9", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
-                mascotaRepository.save(new Mascota("Finn", "5", "4.8", "Macho", "Burmés", 
+                mascotaRepository.save(new Mascota("Buddy", "5", "4.8", "Macho", "Burmés",
                                 "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
-                mascotaRepository.save(new Mascota("Lola", "9", "6.3", "Hembra", "Ragdoll", 
+                mascotaRepository.save(new Mascota("Ellie", "8", "5.5", "Hembra", "Ragdoll",
                                 "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Leo", "3", "5.2", "Macho", "Siberiano", 
+                mascotaRepository.save(new Mascota("Max", "6", "5.0", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
-                
-                mascotaRepository.save(new Mascota("Misty", "4", "4.1", "Hembra", "Birmano", 
+
+                mascotaRepository.save(new Mascota("Ziggy", "4", "4.0", "Macho", "Birmano",
                                 "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Gizmo", "3", "4.5", "Macho", "Persa", 
+                mascotaRepository.save(new Mascota("Nina", "3", "3.5", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
-                mascotaRepository.save(new Mascota("Apollo", "5", "4.9", "Macho", "Burmés", 
+                mascotaRepository.save(new Mascota("Finn", "5", "4.8", "Macho", "Burmés",
                                 "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
-                mascotaRepository.save(new Mascota("Nala", "9", "6.0", "Hembra", "Ragdoll", 
+                mascotaRepository.save(new Mascota("Lola", "9", "6.3", "Hembra", "Ragdoll",
                                 "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Max", "2", "5.5", "Macho", "Siberiano", 
+                mascotaRepository.save(new Mascota("Leo", "3", "5.2", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
-                
-                mascotaRepository.save(new Mascota("Luna", "4", "4.3", "Hembra", "Birmano", 
+
+                mascotaRepository.save(new Mascota("Misty", "4", "4.1", "Hembra", "Birmano",
                                 "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Daisy", "3", "3.6", "Hembra", "Persa", 
+                mascotaRepository.save(new Mascota("Gizmo", "3", "4.5", "Macho", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
-                mascotaRepository.save(new Mascota("Buster", "5", "4.7", "Macho", "Burmés", 
+                mascotaRepository.save(new Mascota("Apollo", "5", "4.9", "Macho", "Burmés",
                                 "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
-                mascotaRepository.save(new Mascota("Mia", "9", "6.4", "Hembra", "Ragdoll", 
+                mascotaRepository.save(new Mascota("Nala", "9", "6.0", "Hembra", "Ragdoll",
                                 "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
-                mascotaRepository.save(new Mascota("Rusty", "2", "5.0", "Macho", "Siberiano", 
+                mascotaRepository.save(new Mascota("Max", "2", "5.5", "Macho", "Siberiano",
+                                "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
+
+                mascotaRepository.save(new Mascota("Luna", "4", "4.3", "Hembra", "Birmano",
+                                "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
+                mascotaRepository.save(new Mascota("Daisy", "3", "3.6", "Hembra", "Persa",
+                                "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
+                mascotaRepository.save(new Mascota("Buster", "5", "4.7", "Macho", "Burmés",
+                                "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
+                mascotaRepository.save(new Mascota("Mia", "9", "6.4", "Hembra", "Ragdoll",
+                                "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
+                mascotaRepository.save(new Mascota("Rusty", "2", "5.0", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
 
                 // ESPECIALIDADES
                 especialidadRepository.save(new Especialidad("Ortopédico", "Tratamiento de las articulaciones"));
-                especialidadRepository.save(new Especialidad("Dermatología", "Diagnóstico y tratamiento de enfermedades de la piel"));
-                especialidadRepository.save(new Especialidad("Odontología Veterinaria", "Cuidado y tratamiento dental"));
-                especialidadRepository.save(new Especialidad("Cardiología", "Diagnóstico y tratamiento de enfermedades del corazón"));
-                especialidadRepository.save(new Especialidad("Oncología", "Diagnóstico y tratamiento de cáncer en animales"));
-                especialidadRepository.save(new Especialidad("Medicina Interna", "Diagnóstico y tratamiento de enfermedades internas"));
-                especialidadRepository.save(new Especialidad("Reproducción y Obstetricia", "Manejo de la reproducción y cuidado durante el parto"));
-                especialidadRepository.save(new Especialidad("Anestesiología", "Administración de anestesia y manejo del dolor"));
-                especialidadRepository.save(new Especialidad("Nutrición Veterinaria", "Asesoría en dietas y alimentación para mascotas"));
-
+                especialidadRepository.save(new Especialidad("Dermatología",
+                                "Diagnóstico y tratamiento de enfermedades de la piel"));
+                especialidadRepository
+                                .save(new Especialidad("Odontología Veterinaria", "Cuidado y tratamiento dental"));
+                especialidadRepository.save(new Especialidad("Cardiología",
+                                "Diagnóstico y tratamiento de enfermedades del corazón"));
+                especialidadRepository
+                                .save(new Especialidad("Oncología", "Diagnóstico y tratamiento de cáncer en animales"));
+                especialidadRepository.save(new Especialidad("Medicina Interna",
+                                "Diagnóstico y tratamiento de enfermedades internas"));
+                especialidadRepository.save(new Especialidad("Reproducción y Obstetricia",
+                                "Manejo de la reproducción y cuidado durante el parto"));
+                especialidadRepository.save(
+                                new Especialidad("Anestesiología", "Administración de anestesia y manejo del dolor"));
+                especialidadRepository.save(new Especialidad("Nutrición Veterinaria",
+                                "Asesoría en dietas y alimentación para mascotas"));
 
                 // VETERINARIOS
                 veterinarioRepository.save(new Veterinario("Sergio", "123456789", "s@t.com", "1234",
@@ -547,7 +598,6 @@ public class DataBaseInitTest implements ApplicationRunner {
                                 "Plan de control de la diabetes", LocalDate.of(2025, 1, 11)));
                 tratamientoRepository.save(new Tratamiento("Regulamiento de la hipertensión",
                                 "Plan de control de la hipertensión", LocalDate.of(2025, 1, 12)));
-                
 
                 // Administradores
                 administradorRepository.save(new Administrador("Arley", "1111"));
@@ -627,7 +677,6 @@ public class DataBaseInitTest implements ApplicationRunner {
                 }
         }
 
-
         private void asignarEspecialidadesAVeterinarios(List<Veterinario> veterinarios,
                         List<Especialidad> especialidades) {
                 Random random = new Random();
@@ -639,24 +688,66 @@ public class DataBaseInitTest implements ApplicationRunner {
                 }
         }
 
-
-        private void asignarRelacionesATratamientos(List<Veterinario> veterinarios, List<Tratamiento> tratamientos, List<Droga> drogas, List<Mascota> mascotas, List<Estado> estados) {
+        private void asignarRelacionesATratamientos(List<Veterinario> veterinarios, List<Tratamiento> tratamientos,
+                        List<Droga> drogas, List<Mascota> mascotas, List<Estado> estados) {
                 Random random = new Random();
 
-                int i = random.nextInt(6);
-                for (Tratamiento tratamiento : tratamientos) {
-                        boolean vetEstado = veterinarios.get(i).getEstado();
-                        int drogasDisponibles = drogas.get(i).getUnidadesDisponibles();
-                        String mascotEstado = mascotas.get(i).getEstado().getDescripcion();
+                // Asignar los mismos datos para los primeros tres tratamientos
+                if (!veterinarios.isEmpty() && !drogas.isEmpty() && !mascotas.isEmpty()) {
+                        Veterinario veterinarioFijo = veterinarios.get(0); // El primer veterinario disponible
+                        Droga drogaFija = drogas.get(0); // La primera droga disponible
+                        Mascota mascotaFija = mascotas.get(0); // La primera mascota disponible
 
-                        if (vetEstado && drogasDisponibles > 0 && mascotEstado.equals("Enfermo")) {
-                                veterinarios.get(i).agregarTratamiento(tratamiento);
-                                drogas.get(i).agregarTratamiento(tratamiento);
-                                mascotas.get(i).agregarTratamiento(tratamiento, estados.get(2));
-                        } else {
+                        for (int i = 0; i < 3 && i < tratamientos.size(); i++) {
+                                Tratamiento tratamiento = tratamientos.get(i);
+                                veterinarioFijo.agregarTratamiento(tratamiento);
+                                drogaFija.agregarTratamiento(tratamiento);
+                                mascotaFija.agregarTratamiento(tratamiento, estados.get(2)); // Estado final (ej. "En
+                                                                                             // tratamiento")
+                        }
+                }
 
+                // Asignar datos aleatorios para el resto de los tratamientos
+                for (int i = 3; i < tratamientos.size(); i++) {
+                        Tratamiento tratamiento = tratamientos.get(i);
+
+                        // Encontrar un veterinario disponible
+                        Veterinario veterinarioAsignado = null;
+                        for (int j = 0; j < veterinarios.size(); j++) {
+                                Veterinario veterinario = veterinarios.get(random.nextInt(veterinarios.size()));
+                                if (veterinario.getEstado()) {
+                                        veterinarioAsignado = veterinario;
+                                        break;
+                                }
                         }
 
+                        // Encontrar una droga con unidades disponibles
+                        Droga drogaAsignada = null;
+                        for (int j = 0; j < drogas.size(); j++) {
+                                Droga droga = drogas.get(random.nextInt(drogas.size()));
+                                if (droga.getUnidadesDisponibles() > 0) {
+                                        drogaAsignada = droga;
+                                        break;
+                                }
+                        }
+
+                        // Encontrar una mascota que esté enferma
+                        Mascota mascotaAsignada = null;
+                        for (int j = 0; j < mascotas.size(); j++) {
+                                Mascota mascota = mascotas.get(random.nextInt(mascotas.size()));
+                                if (mascota.getEstado().getDescripcion().equals("Enfermo")) {
+                                        mascotaAsignada = mascota;
+                                        break;
+                                }
+                        }
+
+                        // Si todos los elementos necesarios están disponibles, asignarlos al
+                        // tratamiento
+                        if (veterinarioAsignado != null && drogaAsignada != null && mascotaAsignada != null) {
+                                veterinarioAsignado.agregarTratamiento(tratamiento);
+                                drogaAsignada.agregarTratamiento(tratamiento);
+                                mascotaAsignada.agregarTratamiento(tratamiento, estados.get(2));
+                        }
                 }
         }
 

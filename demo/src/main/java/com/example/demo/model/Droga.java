@@ -43,6 +43,8 @@ public class Droga {
     public void agregarTratamiento(Tratamiento tratamiento) {
         if (!this.tratamientos.contains(tratamiento)) {
             tratamiento.setDroga(this);
+            this.unidadesDisponibles--;
+            this.unidadesVendidas++;
             this.tratamientos.add(tratamiento);
         }
     }
