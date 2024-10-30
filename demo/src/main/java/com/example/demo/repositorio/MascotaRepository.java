@@ -3,11 +3,11 @@ package com.example.demo.repositorio;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.Estado;
 import com.example.demo.model.Mascota;
-
 
 @Repository
 public interface MascotaRepository extends JpaRepository<Mascota, Long> {
@@ -27,11 +27,14 @@ public interface MascotaRepository extends JpaRepository<Mascota, Long> {
 
     List<Mascota> findByNombreContainingIgnoreCase(String nombre);
 
-    
     // Busqueda de mascotas por estado
     List<Mascota> findByEstado(Estado estado);
 
     // Busqueda de mascotas por el id del dueño
     List<Mascota> findByClienteId(Long id);
+
+    // Consulta para contar el total de mascotas activas
+    @Query("SELECT COUNT(m) FROM Mascota m WHERE m.activo = true")
+    Long countActiveMascotas();
 
 }
