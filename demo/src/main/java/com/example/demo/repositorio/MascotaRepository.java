@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.model.Estado;
 import com.example.demo.model.Mascota;
 
-
 @Repository
 public interface MascotaRepository extends JpaRepository<Mascota, Long> {
 
@@ -28,7 +27,6 @@ public interface MascotaRepository extends JpaRepository<Mascota, Long> {
 
     List<Mascota> findByNombreContainingIgnoreCase(String nombre);
 
-    
     // Busqueda de mascotas por estado
     List<Mascota> findByEstado(Estado estado);
 
@@ -36,7 +34,7 @@ public interface MascotaRepository extends JpaRepository<Mascota, Long> {
     List<Mascota> findByClienteId(Long id);
 
     // Consulta para contar el total de mascotas activas
-    @Query("SELECT COUNT(m) FROM Mascota m WHERE m.estado = 'ACTIVO'")
+    @Query("SELECT COUNT(m) FROM Mascota m WHERE m.activo = true")
     Long countActiveMascotas();
 
 }
