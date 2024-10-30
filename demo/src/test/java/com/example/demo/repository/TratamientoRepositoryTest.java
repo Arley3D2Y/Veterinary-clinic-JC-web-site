@@ -45,7 +45,6 @@ public class TratamientoRepositoryTest {
         tratamientoActivo.setMascota(mascota);
         tratamientoActivo.setFechaInicio(LocalDate.of(2023, 1, 1));
         tratamientoActivo.setFechaFin(LocalDate.of(2024, 12, 31));
-        tratamientoActivo.actualizarEstado();  // Este tratamiento debería ser activo
 
         // Tratamiento inactivo
         tratamientoInactivo = new Tratamiento();
@@ -54,7 +53,6 @@ public class TratamientoRepositoryTest {
         tratamientoInactivo.setMascota(mascota);
         tratamientoInactivo.setFechaInicio(LocalDate.of(2022, 1, 1));
         tratamientoInactivo.setFechaFin(LocalDate.of(2022, 12, 31));
-        tratamientoInactivo.actualizarEstado();  // Este tratamiento debería ser inactivo
     }
 
     @Test
@@ -98,44 +96,6 @@ public class TratamientoRepositoryTest {
         assertEquals(fechaInicio, result.get(0).getFechaInicio());
     }
 
-    @Test
-    public void testFindByActivoTrue() {
-        List<Tratamiento> tratamientos = Arrays.asList(tratamientoActivo);
-        
-        when(tratamientoRepository.findByActivoTrue())
-            .thenReturn(tratamientos);
-
-        List<Tratamiento> result = tratamientoRepository.findByActivoTrue();
-        
-        assertEquals(1, result.size());
-        assertEquals(true, result.get(0).isActivo());
-    }
-
-    @Test
-    public void testFindByActivoFalse() {
-        List<Tratamiento> tratamientos = Arrays.asList(tratamientoInactivo);
-        
-        when(tratamientoRepository.findByActivoFalse())
-            .thenReturn(tratamientos);
-
-        List<Tratamiento> result = tratamientoRepository.findByActivoFalse();
-        
-        assertEquals(1, result.size());
-        assertEquals(false, result.get(0).isActivo());
-    }
-
-    @Test
-    public void testFindByVeterinarioAndActivoTrue() {
-        List<Tratamiento> tratamientos = Arrays.asList(tratamientoActivo);
-        
-        when(tratamientoRepository.findByVeterinarioAndActivoTrue(veterinario)).thenReturn(tratamientos);
-
-        List<Tratamiento> result = tratamientoRepository.findByVeterinarioAndActivoTrue(veterinario);
-        
-        assertEquals(1, result.size());
-        assertEquals(veterinario.getNombre(), result.get(0).getVeterinario().getNombre());
-        assertEquals(true, result.get(0).isActivo());
-    }
 
     @Test
     public void testFindByFechaInicioBetween() {

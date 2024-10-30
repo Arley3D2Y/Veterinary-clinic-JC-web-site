@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,7 +24,7 @@ public class Droga {
     private Integer unidadesVendidas;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "droga")
+    @OneToMany(mappedBy = "droga", cascade = CascadeType.DETACH, orphanRemoval = false)
     private List<Tratamiento> tratamientos = new ArrayList<>();
 
     // Constructores
@@ -38,26 +39,27 @@ public class Droga {
         this.unidadesVendidas = unidadesVendidas;
     }
 
-
-    // Metodos
-    public void agregarTratamiento(Tratamiento tratamiento) {
-        if (!this.tratamientos.contains(tratamiento)) {
+    // Métodos para agregar tratamiento y actualizar unidades
+    public boolean agregarTratamiento(Tratamiento tratamiento) {
+        if (!this.tratamientos.contains(tratamiento) && this.unidadesDisponibles > 0) {
             tratamiento.setDroga(this);
-            this.unidadesDisponibles--;
-            this.unidadesVendidas++;
             this.tratamientos.add(tratamiento);
+            this.unidadesDisponibles--; // Disminuir unidades disponibles
+            this.unidadesVendidas++; // Aumentar unidades vendidas
+            return true; // Agregado exitosamente
         }
+        return false; // El tratamiento ya está en la lista
     }
 
-    public boolean actualizarUnidadesVentas() {
-        if (this.unidadesDisponibles > 0) {
-            this.unidadesDisponibles--;
-            this.unidadesVendidas++;
-            return true; // Decremento exitoso
+    public boolean eliminarTratamiento(Tratamiento tratamiento) {
+        if (this.tratamientos.contains(tratamiento)) {
+            this.tratamientos.remove(tratamiento);
+            this.unidadesDisponibles++;
+            this.unidadesVendidas--;
+            return true; // Removido exitosamente
         }
-        return false; // No se puede decrementar
+        return false;
     }
-    
 
     // Getters y setters
 

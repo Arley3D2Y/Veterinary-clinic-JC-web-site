@@ -7,19 +7,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Cliente;
+import com.example.demo.model.Enfermedad;
+import com.example.demo.model.Estado;
 import com.example.demo.model.Mascota;
 import com.example.demo.model.Tratamiento;
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.MascotaRepository;
+import com.example.demo.repositorio.EnfermedadRepository;
+import com.example.demo.repositorio.EstadoRepository;
 
 @Service
 public class MascotaServiceImp implements MascotaService {
 
     @Autowired
     MascotaRepository mascotaRep;
-
     @Autowired
     ClienteRepository clienteRepo;
+    @Autowired
+    EnfermedadRepository enfermedadRepo;
+    @Autowired
+    EstadoRepository estadoRepo;
 
     /* Mascotas: Peticiones CRUD */
 
@@ -36,21 +43,28 @@ public class MascotaServiceImp implements MascotaService {
     }
 
     // Creacion de una nueva mascota
-    @Override
-    public Optional<Mascota> addMascota(Long id, Mascota mascota) {
-        Optional<Cliente> clienteOpt = clienteRepo.findById(id);
-        // Se debe crear con lista de tratamientos vacia
-        // Se debe saber que estado asignar desde el Frontend
-        // Se debe conocer que enfermedad asignar igualemente
+@Override
+public Optional<Mascota> addMascota(Long id, Mascota mascota) {
+    Optional<Cliente> clienteOpt = clienteRepo.findById(id);
+    
+    // Suponiendo que tienes métodos para encontrar Estado y Enfermedad
+    Optional<Estado> estadoOpt = estadoRepo.findById(mascota.getEstado().getId());
+    Optional<Enfermedad> enfermedadOpt = enfermedadRepo.findById(mascota.getEnfermedad().getId());
+
+    if (clienteOpt.isPresent() && estadoOpt.isPresent() && enfermedadOpt.isPresent()) {
+        Cliente cliente = clienteOpt.get();
         
-        if (clienteOpt.isPresent()) {
-            Cliente c = clienteOpt.get();
-            c.guardarMascota(mascota);
-            clienteRepo.save(c);
-            return Optional.of(mascotaRep.save(mascota));
-        }
-        return Optional.empty();
+        // Asocia la enfermedad y el estado a la mascota
+        mascota.setEstado(estadoOpt.get());
+        mascota.setEnfermedad(enfermedadOpt.get());
+
+        // Asocia la mascota al cliente
+        mascota.setCliente(cliente);
+        mascota = mascotaRep.save(mascota);  // Save es usado tanto para crear como para actualizar
+        return Optional.of(mascota);
     }
+    return Optional.empty();
+}
     
     // Eliminacion de una mascotas
     @Override

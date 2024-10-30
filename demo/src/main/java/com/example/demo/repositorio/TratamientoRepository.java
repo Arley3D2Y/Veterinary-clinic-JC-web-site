@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.Tratamiento;
-import com.example.demo.model.Veterinario;
 
 @Repository
 public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> {
@@ -46,17 +45,5 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
 
     // Buscar por fecha inicio y fin
     List<Tratamiento> findByFechaInicioBetween(LocalDate fechaInicio, LocalDate fechaFin);
-
-
-
-    // Buscar tratamientos activos
-    List<Tratamiento> findByActivoTrue();
-
-    // Buscar tratamientos inactivos
-    List<Tratamiento> findByActivoFalse();
-
-
-    // ELIMINAR, Se debe verificar antes
-    List<Tratamiento> findByVeterinarioAndActivoTrue(Veterinario veterinario);
 
 }

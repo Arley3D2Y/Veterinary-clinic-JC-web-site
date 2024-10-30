@@ -24,7 +24,6 @@ public class Tratamiento {
     private String observaciones;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
-    private boolean activo;
 
     @JsonIgnore
     @ManyToOne
@@ -50,17 +49,6 @@ public class Tratamiento {
         this.observaciones = observaciones;
         this.fechaInicio = LocalDate.now();
         this.fechaFin = fechaFin;
-        this.activo = true;
-    }
-
-    // Método para determinar si el tratamiento está activo
-    public void actualizarEstado() {
-        LocalDate fechaActual = LocalDate.now();
-        if (fechaFin == null || fechaFin.isAfter(fechaActual) || fechaFin.equals(fechaActual)) {
-            this.activo = true;  // Tratamiento activo si la fecha fin es futura, actual o no está definida
-        } else {
-            this.activo = false; // Tratamiento inactivo si la fecha fin es pasada
-        }
     }
 
     // Getters y setters
@@ -103,14 +91,6 @@ public class Tratamiento {
 
     public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
-    }
-
-    public boolean isActivo() {
-        return activo;
-    }
-
-    public void setActivo(boolean activo) {
-        this.activo = activo;
     }
 
     public Droga getDroga() {

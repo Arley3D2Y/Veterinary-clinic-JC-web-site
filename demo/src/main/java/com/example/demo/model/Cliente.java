@@ -48,7 +48,6 @@ public class Cliente {
     // métodos
     public void guardarMascota(Mascota mascota) {
         if (!this.mascotas.contains(mascota)) {
-            mascota.setCliente(this);
             this.mascotas.add(mascota);
         }
     }

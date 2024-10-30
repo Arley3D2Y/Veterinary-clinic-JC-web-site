@@ -99,7 +99,15 @@ public class ClienteServiceImp implements ClienteService {
         return null;
     }
 
+    public Optional<Cliente> searchByMascotaId(Long id) {
+        Optional<Mascota> mascotaOpt = mascotaRepo.findById(id);
 
+        if (mascotaOpt.isPresent()) {
+            Cliente c = mascotaOpt.get().getCliente();
+            return Optional.of(c);
+        }
+        return Optional.empty();
+    }
 
     
 }

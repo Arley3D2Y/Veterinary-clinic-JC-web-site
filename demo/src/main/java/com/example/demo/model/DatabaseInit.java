@@ -695,14 +695,13 @@ public class DatabaseInit implements ApplicationRunner {
                 if (!veterinarios.isEmpty() && !drogas.isEmpty() && !mascotas.isEmpty()) {
                         Veterinario veterinarioFijo = veterinarios.get(0); // El primer veterinario disponible
                         Droga drogaFija = drogas.get(0); // La primera droga disponible
-                        Mascota mascotaFija = mascotas.get(0); // La primera mascota disponible
+                        Mascota mascotaFija = mascotas.get(2); // La primera mascota disponible
 
                         for (int i = 0; i < 3 && i < tratamientos.size(); i++) {
                                 Tratamiento tratamiento = tratamientos.get(i);
                                 veterinarioFijo.agregarTratamiento(tratamiento);
                                 drogaFija.agregarTratamiento(tratamiento);
                                 mascotaFija.agregarTratamiento(tratamiento, estados.get(2)); // Estado final (ej. "En
-                                                                                             // tratamiento")
                         }
                 }
 

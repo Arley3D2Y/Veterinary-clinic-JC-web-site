@@ -116,4 +116,17 @@ public class ClienteController {
         return (mascotas == null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND)
             : new ResponseEntity<>(mascotas, HttpStatus.OK); 
     }
+
+
+    // localhost:8088/clientes/search-by-pet_id/{id}
+    @GetMapping("/search-by-pet_id/{id}")
+    @Operation(summary = "Find client by pet ID")
+    public ResponseEntity<Cliente> buscarClienteByMascotaId(@PathVariable Long id) {
+        Optional<Cliente> cliente = clienteService.searchByMascotaId(id);
+        
+        return cliente.map(c -> new ResponseEntity<>(c, HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+    
+    
 }

@@ -39,7 +39,7 @@ public class Mascota {
     private Estado estado;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "mascota", cascade = CascadeType.DETACH, orphanRemoval = false)
     private List<Tratamiento> tratamientos = new ArrayList<>();
 
     @JsonIgnore
@@ -64,32 +64,23 @@ public class Mascota {
 
     // Métodos funcionales de listas de tratamientos
 
-    public void agregarTratamiento(Tratamiento tratamiento, Estado estado) {
-        if (!this.tratamientos.contains(tratamiento)) {
+    public boolean agregarTratamiento(Tratamiento tratamiento, Estado estado) {
+        if (!this.tratamientos.contains(tratamiento) && this.estado.getDescripcion().equals("Enfermo") || estado.getDescripcion().equals("Medicado")) {
             tratamiento.setMascota(this);
             this.estado = estado;
             this.tratamientos.add(tratamiento);
+            return true;
         }
+        return false;
     }
 
-    public void eliminarTratamiento(Tratamiento tratamiento) {
+    public boolean eliminarTratamiento(Tratamiento tratamiento) {
         if (this.tratamientos.contains(tratamiento)) {
             this.tratamientos.remove(tratamiento);
+            return true;
         }
+        return false;
     }
-
-    // Método para actualizar un tratamiento existente
-    public void actualizarTratamiento(Long id, Tratamiento tratamientoActualizado) {
-        for (int i = 0; i < tratamientos.size(); i++) {
-            Tratamiento tratamiento = tratamientos.get(i);
-            if (tratamiento.getId().equals(id)) { // Asumiendo que Tratamiento tiene un método getId()
-                tratamientos.set(i, tratamientoActualizado);
-                tratamientoActualizado.setMascota(this); // Asegúrate de establecer la relación inversa
-                return;
-            }
-        }
-    }
-
     
     // Getter and Setter
     

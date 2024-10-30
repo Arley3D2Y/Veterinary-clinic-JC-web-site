@@ -106,7 +106,8 @@ public class DrogaServiceImp implements DrogaService {
         Optional<Droga> drogaOpt = drogaRepo.findById(id);
         if (drogaOpt.isPresent()) {
             Droga droga = drogaOpt.get();
-            droga.actualizarUnidadesVentas();
+            droga.setUnidadesDisponibles(droga.getUnidadesDisponibles() - 1);
+            droga.setUnidadesVendidas(droga.getUnidadesVendidas() + 1);
             drogaRepo.save(droga);
             return true;
         }

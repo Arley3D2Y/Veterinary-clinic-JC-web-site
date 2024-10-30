@@ -50,20 +50,15 @@ public class TratamientoController {
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    // localhost:8088/tratamientos/add
+    // http://localhost:8088/tratamientos/add/mascota/2/veterinario/1/droga/1
     @PostMapping("/add/mascota/{petId}/veterinario/{vetId}/droga/{drugId}")
     @Operation(summary = "Add new treatment")
     private ResponseEntity<Tratamiento> crearTratamiento(@PathVariable("petId") Long mascotaId, @PathVariable("vetId") Long veterinarioId,
             @PathVariable("drugId") Long drogaId, @RequestBody Tratamiento tratamiento) {
         
-        try {
-            Optional<Tratamiento> nuevoTratamiento = tratamientoService.addTratamiento(mascotaId, veterinarioId, drogaId, tratamiento);
-            return nuevoTratamiento.map(ResponseEntity::ok)
-                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
+        Optional<Tratamiento> nuevoTratamiento = tratamientoService.addTratamiento(mascotaId, veterinarioId, drogaId, tratamiento);
+        return nuevoTratamiento.map(ResponseEntity::ok)
+            .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
     }
 
     // localhost:8088/tratamientos/delete/{id}

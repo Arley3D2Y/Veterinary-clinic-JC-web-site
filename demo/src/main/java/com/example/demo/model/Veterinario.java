@@ -50,17 +50,23 @@ public class Veterinario {
 
     // Métodos
 
-    public void agregarTratamiento(Tratamiento tratamiento) {
+    public boolean agregarTratamiento(Tratamiento tratamiento) {
         if (!this.tratamientos.contains(tratamiento)) {
             tratamiento.setVeterinario(this);
+            this.cantidadAtenciones++;
             this.tratamientos.add(tratamiento);
+            return true;
         }
+        return false;
     }
 
-    public void eliminarTratamiento(Tratamiento tratamiento) {
-        if (this.tratamientos.contains(tratamiento)) {
+    public boolean eliminarTratamiento(Tratamiento tratamiento) {
+        if (this.tratamientos.contains(tratamiento) && this.estado) {
+            this.cantidadAtenciones--;
             this.tratamientos.remove(tratamiento);
+            return true;
         }
+        return false;
     }
 
     // Getters y setters

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.DTO.GenericoDTO;
 import com.example.demo.model.Droga;
+import com.example.demo.model.Estado;
 import com.example.demo.model.Mascota;
 import com.example.demo.model.Tratamiento;
 import com.example.demo.model.Veterinario;
@@ -51,19 +52,25 @@ public class TratamientoServiceImp implements TratamientoService {
         Optional<Mascota> mascota = mascotaRep.findById(idp);
         Optional<Veterinario> veterinario = veterinarioRepo.findById(idv);
         Optional<Droga> droga = drogaRep.findById(idd);
-        // Aquí se podría pasar el id de la droga tambien, esto desde la lista despegable
+        Optional<Estado> estado = estadoRep.findById(3L);
 
         if (mascota.isPresent() && veterinario.isPresent() && droga.isPresent()) {
-            if (mascota.get().getEstado().getDescripcion().equals("Enfermo")) {
-                if (veterinario.get().getEstado()) {
-                    if (droga.get().getUnidadesDisponibles() > 0) {
-                        veterinario.get().agregarTratamiento(tratamiento);
-                        droga.get().agregarTratamiento(tratamiento);
-                        mascota.get().agregarTratamiento(tratamiento, estadoRep.findById(3L).get());
-                        return Optional.of(tratamientoRep.save(tratamiento));
-                    }
+            if (veterinario.get().getEstado() ) {
+                Mascota m = mascota.get();
+                Droga d = droga.get();
+                Veterinario v = veterinario.get();
+
+                if (v.agregarTratamiento(tratamiento) && m.agregarTratamiento(tratamiento, estado.get()) && d.agregarTratamiento(tratamiento)) {
+                    return Optional.of(tratamientoRep.save(tratamiento)); // Guardar el tratamiento
+                } else {
+                    v.eliminarTratamiento(tratamiento);
+                    m.eliminarTratamiento(tratamiento);
+                    d.eliminarTratamiento(tratamiento);
+
+                    return Optional.empty();
                 }
-            }
+
+            }       
         }
         return Optional.empty();
     }
@@ -86,7 +93,6 @@ public class TratamientoServiceImp implements TratamientoService {
             tratamiento.setMascota(tratOpt.get().getMascota());
             tratamiento.setVeterinario(tratOpt.get().getVeterinario());
             tratamiento.setDroga(tratOpt.get().getDroga());
-            tratamiento.actualizarEstado();
             tratamiento = tratamientoRep.save(tratamiento);
             return Optional.of(tratamiento);
         }

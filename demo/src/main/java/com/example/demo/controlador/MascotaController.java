@@ -54,7 +54,7 @@ public class MascotaController {
         Optional<Mascota> mascota = mascotaService.searchMascotaById(id);
         
         return mascota.map(ResponseEntity::ok)
-        .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     // localhost:8088/mascotas/add
