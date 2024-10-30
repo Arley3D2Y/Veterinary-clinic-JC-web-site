@@ -24,7 +24,7 @@ public class DashboardServiceImp implements DashboardService {
 
     // Método para obtener el total de ventas por medicamento
     public Map<String, Double> obtenerTotalVentasPorMedicamento() {
-        List<Map<String, Object>> resultados = tratamientoRepository.findTotalVentasPorMedicamento();
+        List<Map<String, Object>> resultados = tratamientoRepository.findTotalVentasPorDroga();
         Map<String, Double> totalVentasPorMedicamento = new HashMap<>();
 
         for (Map<String, Object> resultado : resultados) {
@@ -64,11 +64,6 @@ public class DashboardServiceImp implements DashboardService {
         }
 
         return ganancias;
-    }
-
-    // Método para obtener el total de mascotas activas
-    public Long obtenerTotalMascotasActivas() {
-        return mascotaRepository.countActiveMascotas();
     }
 
     // Método para obtener el total de mascotas

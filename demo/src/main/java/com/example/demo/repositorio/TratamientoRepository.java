@@ -51,10 +51,10 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
     @Query("SELECT SUM(t.droga.unidadesVendidas) FROM Tratamiento t")
     Integer totalMedicamentosSuministrados();
 
-    @Query("SELECT t.medicamento.nombre AS medicamento, SUM(t.cantidadVendida) AS totalVentas " +
+    @Query("SELECT t.droga.nombre AS droga, SUM(t.cantidadVendida) AS totalVentas " +
             "FROM Tratamiento t " +
-            "GROUP BY t.medicamento.nombre")
+            "GROUP BY t.droga.nombre")
             
-    List<Map<String, Object>> findTotalVentasPorMedicamento();
+    List<Map<String, Object>> findTotalVentasPorDroga();
 
 }

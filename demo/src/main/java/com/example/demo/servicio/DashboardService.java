@@ -14,9 +14,6 @@ public interface DashboardService {
 
     // public boolean incrementarCantidadVendida(Long drogaId);
 
-    // Método para obtener el total de mascotas activas
-    public Long obtenerTotalMascotasActivas();
-
     // Método para obtener el total de mascotas
     public Long obtenerTotalMascotas();
 }

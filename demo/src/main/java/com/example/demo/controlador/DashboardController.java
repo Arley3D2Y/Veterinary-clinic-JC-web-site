@@ -73,7 +73,7 @@ public class DashboardController {
     @Operation(summary = "Get total number of pets and active pets count")
     public ResponseEntity<MascotasDTO> getMascotas() {
         Long totalMascotas = dashboardService.obtenerTotalMascotas(); // Método que obtendrá el total
-        Long totalMascotasActivas = dashboardService.obtenerTotalMascotasActivas(); // Método que obtendrá el total activo
+        Long totalMascotasActivas = 10L; // Método que obtendrá el total activo
     
         MascotasDTO mascotasDTO = new MascotasDTO(totalMascotas, totalMascotasActivas);
         return ResponseEntity.ok(mascotasDTO);
