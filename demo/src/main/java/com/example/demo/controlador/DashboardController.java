@@ -77,8 +77,8 @@ public class DashboardController {
     // localhost:8088/dashboard/total-sales
     @GetMapping("/total-sales")
     @Operation(summary = "Get total sales")
-    public ResponseEntity<Double> getTotalSales() {
-        Double totalSales = dashboardService.calculateTotalSales();
+    public ResponseEntity<Integer> getTotalSales() {
+        Integer totalSales = dashboardService.calculateTotalSales();
 
         return ResponseEntity.ok(totalSales);
     }

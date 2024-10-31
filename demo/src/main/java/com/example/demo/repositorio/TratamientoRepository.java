@@ -61,15 +61,15 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
     @Query("SELECT t.droga.nombre, COUNT(t) FROM Tratamiento t WHERE t.fechaInicio BETWEEN :startDate AND :endDate GROUP BY t.droga.nombre")
     List<Object[]> countTreatmentsByMedication(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
-    // Obtener tratamientos por droga en el mes actual
-    @Query("SELECT SUM(d.precioVenta) FROM Tratamiento t JOIN t.droga d")
-    Double calculateTotalSales();
+    // // Obtener tratamientos por droga en el mes actual
+    // @Query("SELECT SUM(d.precioVenta) FROM Tratamiento t JOIN t.droga d")
+    // Double calculateTotalSales();
 
-    // Consulta para calcular el total de ganancias
-    @Query("SELECT SUM((d.precioVenta - d.precioCompra) * d.unidadesVendidas) " +
-    "FROM Tratamiento t JOIN t.droga d " +
-    "WHERE d.unidadesVendidas IS NOT NULL AND d.unidadesVendidas > 0")
-    Double calculateTotalProfits();
+    // // Consulta para calcular el total de ganancias
+    // @Query("SELECT SUM((d.precioVenta - d.precioCompra) * d.unidadesVendidas) " +
+    // "FROM Tratamiento t JOIN t.droga d " +
+    // "WHERE d.unidadesVendidas IS NOT NULL AND d.unidadesVendidas > 0")
+    // Double calculateTotalProfits();
 
     
 }

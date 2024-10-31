@@ -24,7 +24,7 @@ public interface DashboardService {
     public List<EstadoMascotasDTO> countPetsByEstado();
 
     // Método para obtener el total de ventas
-    public Double calculateTotalSales();
+    public Integer calculateTotalSales();
 
     // Método para obtener el total de ganancias
     public Double calculateTotalProfits();
