@@ -115,17 +115,4 @@ public class VeterinarioServiceImp implements VeterinarioService {
         return null;
     }
 
-    // Métodos no revisados
-
-    @Override
-    public long contarVeterinariosActivos() {
-        return veterinarioRepo.countByEstadoTrue();
-    }
-
-    @Override
-    public long contarVeterinariosInactivos() {
-        return veterinarioRepo.countByEstadoFalse();
-    }
-
-
 }

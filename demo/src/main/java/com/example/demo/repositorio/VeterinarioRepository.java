@@ -1,6 +1,7 @@
 package com.example.demo.repositorio;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.Veterinario;
@@ -35,16 +36,12 @@ public interface VeterinarioRepository extends JpaRepository<Veterinario, Long> 
     List<Veterinario> findByNombreContainingIgnoreCase(String nombre);
 
 
+
+    /** Querys **/
+
+    @Query("SELECT CASE WHEN v.estado THEN 'Activo' ELSE 'Inactivo' END AS estado, CAST(COUNT(v) AS int) " +
+    "FROM Veterinario v GROUP BY v.estado")
+    List<Object[]> countVeterinariansByStatus();
+
     
-    // Cosas a eliminar
-
-    // Contar veterinarios activos
-    long countByEstadoTrue();
-
-    // Contar veterinarios inactivos
-    long countByEstadoFalse();
-
-    // Buscar por tratamientos
-    List<Veterinario> findByTratamientos_Id(Long tratamientoId);
-
 }

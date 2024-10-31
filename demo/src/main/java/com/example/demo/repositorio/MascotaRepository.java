@@ -3,6 +3,8 @@ package com.example.demo.repositorio;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.Estado;
@@ -32,4 +34,11 @@ public interface MascotaRepository extends JpaRepository<Mascota, Long> {
     // Busqueda de mascotas por el id del dueño
     List<Mascota> findByClienteId(Long id);
 
+    // Consulta para contar el total de mascotas
+    @Query("SELECT COUNT(m) FROM Mascota m")
+    Integer countTotalPets();
+
+
+    @Query("SELECT COUNT(m) FROM Mascota m WHERE m.estado.id = :estadoId")
+    Integer countPetsByEstado(@Param("estadoId") Long estadoId);
 }

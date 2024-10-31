@@ -51,7 +51,7 @@ class TratamientoServiceTestNaive {
     @BeforeEach
     public void init() {
         // Crear datos de prueba
-        testVeterinario = new Veterinario("Arley", "11111", "a@lol.com", "1234", "url_imagen");
+        testVeterinario = new Veterinario("Arley", "11111", "a@lol.com", "1234", "url_imagen", true);
         testMascota = new Mascota("Ginger", "5", "4.7", "Macho", "Burmés", "url_imagen_gato");
         testDroga = new Droga("Cefalexina", 3.54f, 23.4f, 12, 1);
         testTratamiento = new Tratamiento("Medicamento antiinflamatorio", "Reducción de inflamación y dolor", LocalDate.of(2023, 9, 1));

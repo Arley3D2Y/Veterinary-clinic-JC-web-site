@@ -83,13 +83,6 @@ public interface VeterinarioService {
      */
     public List<Tratamiento> getTratamientosVeterinario(Long id);
 
-
-    // Métodos no implementados - revisados
-
-    public long contarVeterinariosActivos();
-
-    public long contarVeterinariosInactivos();
-
 }
 
 

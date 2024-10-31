@@ -536,48 +536,48 @@ public class DatabaseInit implements ApplicationRunner {
 
                 // VETERINARIOS
                 veterinarioRepository.save(new Veterinario("Sergio", "123456789", "s@t.com", "1234",
-                                "https://i.ibb.co/0qX2b8t/sergio.jpg"));
+                                "https://i.ibb.co/0qX2b8t/sergio.jpg", true));
                 veterinarioRepository.save(new Veterinario("Carlos", "987654321", "c@vets.com", "2345",
-                                "https://i.ibb.co/1JZfv1Z/carlos.jpg"));
+                                "https://i.ibb.co/1JZfv1Z/carlos.jpg", true));
                 veterinarioRepository.save(new Veterinario("Laura", "456789123", "l@vetmail.com", "3456",
-                                "https://i.ibb.co/Zh2ZDS3/laura.jpg"));
+                                "https://i.ibb.co/Zh2ZDS3/laura.jpg", true));
                 veterinarioRepository.save(new Veterinario("Andrés", "321456987", "a@clinic.com", "4567",
-                                "https://i.ibb.co/YktjXzK/andres.jpg"));
+                                "https://i.ibb.co/YktjXzK/andres.jpg", true));
                 veterinarioRepository.save(new Veterinario("Fernanda", "654321789", "f@catvets.com", "5678",
-                                "https://i.ibb.co/Ms1FbJZ/fernanda.jpg"));
+                                "https://i.ibb.co/Ms1FbJZ/fernanda.jpg", true));
                 veterinarioRepository.save(new Veterinario("Ricardo", "123987654", "r@medvet.com", "6789",
-                                "https://i.ibb.co/LdWh1rX/ricardo.jpg"));
+                                "https://i.ibb.co/LdWh1rX/ricardo.jpg", true));
                 veterinarioRepository.save(new Veterinario("Paula", "789456123", "p@vetservice.com", "7890",
-                                "https://i.ibb.co/ZXWJLSB/paula.jpg"));
+                                "https://i.ibb.co/ZXWJLSB/paula.jpg", true));
                 veterinarioRepository.save(new Veterinario("María", "321654987", "m@vetclinic.com", "8901",
-                                "https://i.ibb.co/F7bc0Z8/maria.jpg"));
+                                "https://i.ibb.co/F7bc0Z8/maria.jpg", true));
                 veterinarioRepository.save(new Veterinario("Javier", "456123789", "j@animalhealth.com", "9012",
-                                "https://i.ibb.co/WghgDxX/javier.jpg"));
+                                "https://i.ibb.co/WghgDxX/javier.jpg", true));
                 veterinarioRepository.save(new Veterinario("Ana", "789123456", "ana@vetcare.com", "0123",
-                                "https://i.ibb.co/qW0tdBh/ana.jpg"));
+                                "https://i.ibb.co/qW0tdBh/ana.jpg", true));
                 veterinarioRepository.save(new Veterinario("Pedro", "987321654", "pedro@cathealth.com", "1235",
-                                "https://i.ibb.co/0r5X4B3/pedro.jpg"));
+                                "https://i.ibb.co/0r5X4B3/pedro.jpg", true));
                 veterinarioRepository.save(new Veterinario("Daniela", "654789123", "daniela@felineclinic.com", "2346",
-                                "https://i.ibb.co/t2X5PCm/daniela.jpg"));
+                                "https://i.ibb.co/t2X5PCm/daniela.jpg", true));
                 veterinarioRepository.save(new Veterinario("Gustavo", "123789654", "gustavo@animalclinic.com", "3457",
-                                "https://i.ibb.co/Fqf7vLY/gustavo.jpg"));
+                                "https://i.ibb.co/Fqf7vLY/gustavo.jpg", true));
                 veterinarioRepository.save(new Veterinario("Lucía", "789321456", "lucia@vetprofession.com", "4568",
-                                "https://i.ibb.co/1Zh7rdV/lucia.jpg"));
+                                "https://i.ibb.co/1Zh7rdV/lucia.jpg", true));
                 veterinarioRepository.save(new Veterinario("Mauricio", "321987654", "mauricio@petcare.com", "5679",
-                                "https://i.ibb.co/HqKNPP5/mauricio.jpg"));
+                                "https://i.ibb.co/HqKNPP5/mauricio.jpg", true));
                 veterinarioRepository.save(new Veterinario("Adriana", "654123987", "adriana@vetservice.com", "6780",
-                                "https://i.ibb.co/hgQkWdk/adriana.jpg"));
+                                "https://i.ibb.co/hgQkWdk/adriana.jpg", true));
                 veterinarioRepository.save(new Veterinario("Diego", "987456123", "diego@animaldoctor.com", "7891",
-                                "https://i.ibb.co/LJSx78r/diego.jpg"));
+                                "https://i.ibb.co/LJSx78r/diego.jpg", true));
                 veterinarioRepository.save(new Veterinario("Claudia", "456789321", "claudia@clinicvet.com", "8902",
-                                "https://i.ibb.co/MBSM4pj/claudia.jpg"));
+                                "https://i.ibb.co/MBSM4pj/claudia.jpg", false));
 
                 // Tratamientos
                 tratamientoRepository.save(new Tratamiento("Medicamento antiinflamatorio",
                                 "Reducción de inflamación y dolor", LocalDate.of(2025, 1, 1)));
                 tratamientoRepository.save(new Tratamiento("Suministro de antintibiótico",
                                 "Eliminación de infección bacteriana", LocalDate.of(2025, 1, 2)));
-                tratamientoRepository.save(new Tratamiento("Dermatológico",
+               /* tratamientoRepository.save(new Tratamiento("Dermatológico",
                                 "Tratamiento para problemas de piel", LocalDate.of(2025, 1, 3)));
                 tratamientoRepository.save(new Tratamiento("Vacunación", "Aplicación de vacunas rutinarias",
                                 LocalDate.of(2025, 1, 4)));
@@ -597,7 +597,7 @@ public class DatabaseInit implements ApplicationRunner {
                                 "Plan de control de la diabetes", LocalDate.of(2025, 1, 11)));
                 tratamientoRepository.save(new Tratamiento("Regulamiento de la hipertensión",
                                 "Plan de control de la hipertensión", LocalDate.of(2025, 1, 12)));
-
+                */
                 // Administradores
                 administradorRepository.save(new Administrador("Arley", "1111"));
                 administradorRepository.save(new Administrador("Kevin", "2222"));

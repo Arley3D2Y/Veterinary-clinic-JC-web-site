@@ -11,7 +11,6 @@ public class Estado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String descripcion;
 
     public Estado(String descripcion) {

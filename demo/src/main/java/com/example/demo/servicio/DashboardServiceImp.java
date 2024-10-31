@@ -1,14 +1,19 @@
 package com.example.demo.servicio;
 
+import java.time.LocalDate;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.Droga;
-import com.example.demo.repositorio.DrogaRepository;
+import com.example.demo.DTO.EstadoMascotasDTO;
+import com.example.demo.DTO.EstadoVeterinariosDTO;
+import com.example.demo.DTO.TratamientoDrogaDTO;
+import com.example.demo.model.Estado;
+import com.example.demo.repositorio.EstadoRepository;
 import com.example.demo.repositorio.MascotaRepository;
 import com.example.demo.repositorio.TratamientoRepository;
+import com.example.demo.repositorio.VeterinarioRepository;
 
 @Service
 public class DashboardServiceImp implements DashboardService {
@@ -17,58 +22,89 @@ public class DashboardServiceImp implements DashboardService {
     private TratamientoRepository tratamientoRepository;
 
     @Autowired
-    private DrogaRepository drogaRepository;
-
-    @Autowired
     private MascotaRepository mascotaRepository;
 
-    // Método para obtener el total de ventas por medicamento
-    public Map<String, Double> obtenerTotalVentasPorMedicamento() {
-        List<Map<String, Object>> resultados = tratamientoRepository.findTotalVentasPorDroga();
-        Map<String, Double> totalVentasPorMedicamento = new HashMap<>();
+    @Autowired
+    private VeterinarioRepository veterinarioRepository;
 
-        for (Map<String, Object> resultado : resultados) {
-            String medicamento = (String) resultado.get("medicamento");
-            Double totalVentas = ((Number) resultado.get("totalVentas")).doubleValue();
-            totalVentasPorMedicamento.put(medicamento, totalVentas);
+    @Autowired
+    private EstadoRepository estadoRepository;
+
+    // Método para contar tratamientos del mes actual
+    @Override
+    public Integer countTreatmentsLastMonth() {
+        LocalDate fechaActual = LocalDate.now();
+        // Primer día del mes actual
+        LocalDate primerDiaDelMes = LocalDate.of(fechaActual.getYear(), fechaActual.getMonth(), 1);
+
+        // Contar tratamientos del mes actual hasta la fecha actual
+        Integer count = tratamientoRepository.countTreatmentsCurrentMonth(primerDiaDelMes, fechaActual);
+        return count;
+    }
+
+    // Método para contar tratamientos por medicamento en el mes actual
+    @Override
+    public List<TratamientoDrogaDTO> countTreatmentsByDrug() {
+        LocalDate fechaActual = LocalDate.now();
+        LocalDate primerDiaDelMes = LocalDate.of(fechaActual.getYear(), fechaActual.getMonth(), 1);
+
+        List<Object[]> resultados = tratamientoRepository.countTreatmentsByMedication(primerDiaDelMes, fechaActual);
+        List<TratamientoDrogaDTO> tratamientosPorDrogaDTO = new ArrayList<>();
+
+        for (Object[] resultado : resultados) {
+            String nombreDroga = (String) resultado[0];
+            Integer cantidad = ((Number) resultado[1]).intValue();
+            tratamientosPorDrogaDTO.add(new TratamientoDrogaDTO(nombreDroga, cantidad));
         }
 
-        return totalVentasPorMedicamento;
+        return tratamientosPorDrogaDTO;
     }
 
-    public Integer obtenerTotalMedicamentosSuministrados() {
-        return tratamientoRepository.totalMedicamentosSuministrados();
-    }
+    @Override
+    public List<EstadoVeterinariosDTO> countStatesVeterinarians() {
+        List<Object[]> resultados = veterinarioRepository.countVeterinariansByStatus();
+        List<EstadoVeterinariosDTO> estadosVeterinariosDTO = new ArrayList<>();
 
-    // @Transactional
-    // public boolean incrementarCantidadVendida(Long drogaId) {
-    // Droga droga = drogaRepository.findById(drogaId)
-    // .orElseThrow(() -> new RuntimeException("Droga no encontrada"));
-
-    // // Usar el método que reduce unidades disponibles y aumenta unidades vendidas
-    // boolean actualizado = droga.actualizarUnidadesVentas();
-
-    // if (actualizado) {
-    // drogaRepository.save(droga); // Guardar si se pudo actualizar
-    // }
-
-    // return actualizado; // Devuelve si se hizo la actualización
-    // }
-
-    public Double calcularGanancias() {
-        List<Droga> drogas = drogaRepository.findAll();
-        double ganancias = 0;
-
-        for (Droga droga : drogas) {
-            ganancias += droga.getUnidadesVendidas() * (droga.getPrecioVenta() - droga.getPrecioCompra());
+        for (Object[] resultado : resultados) {
+            String estado = (String) resultado[0]; // Esto ahora funcionará
+            Integer cantidad = ((Integer) resultado[1]).intValue(); // Cambia a Long si prefieres
+            estadosVeterinariosDTO.add(new EstadoVeterinariosDTO(estado, cantidad));
         }
 
-        return ganancias;
+        return estadosVeterinariosDTO;
     }
 
-    // Método para obtener el total de mascotas
-    public Long obtenerTotalMascotas() {
-        return mascotaRepository.count(); // Método para contar todas las mascotas
+    @Override
+    public Integer countTotalPets() {
+        return mascotaRepository.countTotalPets();
+    }
+
+    @Override
+    public List<EstadoMascotasDTO> countPetsByEstado() {
+        List<EstadoMascotasDTO> estadoMascotaDTOs = new ArrayList<>();
+
+        // Obtener todos los estados
+        List<Estado> estados = estadoRepository.findAll(); // Asegúrate de tener acceso a estadoRepository
+
+        // Contar las mascotas por estado
+        for (Estado estado : estados) {
+            Integer count = mascotaRepository.countPetsByEstado(estado.getId());
+            estadoMascotaDTOs.add(new EstadoMascotasDTO(estado.getDescripcion(), count));
+        }
+
+        return estadoMascotaDTOs;
+    }
+
+    @Override
+    public Double calculateTotalSales() {
+        // Llamar al método del repositorio para obtener el total de ventas
+        return tratamientoRepository.calculateTotalSales();
+    }
+
+    @Override
+    public Double calculateTotalProfits() {
+        // Llamar al método del repositorio para obtener el total de ganancias
+        return tratamientoRepository.calculateTotalProfits();
     }
 
 }

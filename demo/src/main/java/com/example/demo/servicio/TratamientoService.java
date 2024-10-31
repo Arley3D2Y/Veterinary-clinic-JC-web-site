@@ -3,7 +3,6 @@ package com.example.demo.servicio;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.demo.DTO.GenericoDTO;
 import com.example.demo.model.Tratamiento;
 
 public interface TratamientoService {
@@ -75,14 +74,5 @@ public interface TratamientoService {
      * @return La lista de tratamientos
      */
     public List<Tratamiento> searchByDrogaId(Long id);
-
-    
-
-
-    public Number countTratamientosByMonth();
-
-    public List<GenericoDTO> getTratamientosPorMedicamento();
-    
-    public List<Tratamiento> getTopTratamientos();
 
 }

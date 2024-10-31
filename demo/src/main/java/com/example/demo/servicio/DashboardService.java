@@ -1,19 +1,32 @@
 package com.example.demo.servicio;
 
-import java.util.*;
+import com.example.demo.DTO.EstadoMascotasDTO;
+import com.example.demo.DTO.EstadoVeterinariosDTO;
+import com.example.demo.DTO.TratamientoDrogaDTO;
+
+import java.util.List;
 
 public interface DashboardService {
 
-    public Map<String, Double> obtenerTotalVentasPorMedicamento();
+    // Método para obtener el total de tratamientos del último mes
+    public Integer countTreatmentsLastMonth();
 
-    // Método para obtener el total de medicamentos suministrados
-    public Integer obtenerTotalMedicamentosSuministrados();
+    // Método para obtener el total de tratamientos por droga
+    public List<TratamientoDrogaDTO> countTreatmentsByDrug();
 
-    // Método para calcular las ganancias generadas por ventas de tratamientos
-    public Double calcularGanancias();
+    // Método para obtener el total de tratamientos por estado
+    public List<EstadoVeterinariosDTO> countStatesVeterinarians();
 
-    // public boolean incrementarCantidadVendida(Long drogaId);
+    // Método para obtener el total de mascotas
+    public Integer countTotalPets();
 
-    // Método para obtener el total de mascotas
-    public Long obtenerTotalMascotas();
+    // Método para obtener el total de mascotas por estado
+    public List<EstadoMascotasDTO> countPetsByEstado();
+
+    // Método para obtener el total de ventas
+    public Double calculateTotalSales();
+
+    // Método para obtener el total de ganancias
+    public Double calculateTotalProfits();
+
 }

@@ -38,14 +38,14 @@ public class Veterinario {
 
     public Veterinario() { }
 
-    public Veterinario(String nombre, String cedula,  String correo, String password, String fotoString) {
+    public Veterinario(String nombre, String cedula,  String correo, String password, String fotoString, Boolean estado) {
         this.cedula = cedula;
         this.password = password;
         this.nombre = nombre;
         this.correo = correo;
         this.fotoString = fotoString;
         this.cantidadAtenciones = 0;
-        this.estado = true;
+        this.estado = estado;
     }
 
     // Métodos
