@@ -38,7 +38,6 @@ public interface MascotaRepository extends JpaRepository<Mascota, Long> {
     @Query("SELECT COUNT(m) FROM Mascota m")
     Integer countTotalPets();
 
-
     @Query("SELECT COUNT(m) FROM Mascota m WHERE m.estado.id = :estadoId")
     Integer countPetsByEstado(@Param("estadoId") Long estadoId);
 }
