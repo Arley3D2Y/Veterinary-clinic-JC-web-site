@@ -65,11 +65,11 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
     @Query("SELECT SUM(d.precioVenta) FROM Tratamiento t JOIN t.droga d")
     Double calculateTotalSales();
 
-    // Consulta para calcular el total de ganancias
-    @Query("SELECT SUM((d.precioVenta - d.precioCompra) * d.unidadesVendidas) " +
-    "FROM Tratamiento t JOIN t.droga d " +
-    "WHERE d.unidadesVendidas IS NOT NULL AND d.unidadesVendidas > 0")
-    Double calculateTotalProfits();
+    // // Consulta para calcular el total de ganancias
+    // @Query("SELECT SUM((d.precioVenta - d.precioCompra) * d.unidadesVendidas) " +
+    // "FROM Tratamiento t JOIN t.droga d " +
+    // "WHERE d.unidadesVendidas IS NOT NULL AND d.unidadesVendidas > 0")
+    // Double calculateTotalProfits();
 
     
 }

@@ -503,7 +503,6 @@ public class DatabaseInit implements ApplicationRunner {
                                 "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
                 mascotaRepository.save(new Mascota("Max", "2", "5.5", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
-
                 mascotaRepository.save(new Mascota("Luna", "4", "4.3", "Hembra", "Birmano",
                                 "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
                 mascotaRepository.save(new Mascota("Daisy", "3", "3.6", "Hembra", "Persa",
@@ -577,7 +576,7 @@ public class DatabaseInit implements ApplicationRunner {
                                 "Reducción de inflamación y dolor", LocalDate.of(2025, 1, 1)));
                 tratamientoRepository.save(new Tratamiento("Suministro de antintibiótico",
                                 "Eliminación de infección bacteriana", LocalDate.of(2025, 1, 2)));
-               /* tratamientoRepository.save(new Tratamiento("Dermatológico",
+                tratamientoRepository.save(new Tratamiento("Dermatológico",
                                 "Tratamiento para problemas de piel", LocalDate.of(2025, 1, 3)));
                 tratamientoRepository.save(new Tratamiento("Vacunación", "Aplicación de vacunas rutinarias",
                                 LocalDate.of(2025, 1, 4)));
@@ -597,7 +596,7 @@ public class DatabaseInit implements ApplicationRunner {
                                 "Plan de control de la diabetes", LocalDate.of(2025, 1, 11)));
                 tratamientoRepository.save(new Tratamiento("Regulamiento de la hipertensión",
                                 "Plan de control de la hipertensión", LocalDate.of(2025, 1, 12)));
-                */
+                
                 // Administradores
                 administradorRepository.save(new Administrador("Arley", "1111"));
                 administradorRepository.save(new Administrador("Kevin", "2222"));

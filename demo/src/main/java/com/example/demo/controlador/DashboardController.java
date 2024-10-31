@@ -89,8 +89,6 @@ public class DashboardController {
     public ResponseEntity<Double> getTotalProfits() {
         Double totalProfits  = dashboardService.calculateTotalProfits();
 
-        System.out.println("\n\n\n\nTotal Profits: " + totalProfits);
-
         return ResponseEntity.ok(totalProfits);
     }
 

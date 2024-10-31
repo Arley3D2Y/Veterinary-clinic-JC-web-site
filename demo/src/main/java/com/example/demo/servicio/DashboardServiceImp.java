@@ -10,6 +10,7 @@ import com.example.demo.DTO.EstadoMascotasDTO;
 import com.example.demo.DTO.EstadoVeterinariosDTO;
 import com.example.demo.DTO.TratamientoDrogaDTO;
 import com.example.demo.model.Estado;
+import com.example.demo.repositorio.DrogaRepository;
 import com.example.demo.repositorio.EstadoRepository;
 import com.example.demo.repositorio.MascotaRepository;
 import com.example.demo.repositorio.TratamientoRepository;
@@ -29,6 +30,9 @@ public class DashboardServiceImp implements DashboardService {
 
     @Autowired
     private EstadoRepository estadoRepository;
+
+    @Autowired
+    private DrogaRepository drogaRepository;
 
     // Método para contar tratamientos del mes actual
     @Override
@@ -104,7 +108,7 @@ public class DashboardServiceImp implements DashboardService {
     @Override
     public Double calculateTotalProfits() {
         // Llamar al método del repositorio para obtener el total de ganancias
-        return tratamientoRepository.calculateTotalProfits();
+        return drogaRepository.calculateTotalProfits();
     }
 
 }
