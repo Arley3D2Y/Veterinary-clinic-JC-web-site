@@ -76,20 +76,12 @@ public class ClienteController {
     private ResponseEntity<Cliente> actualizarCliente(@PathVariable Long id, @RequestBody Cliente cliente) {
         Optional<Cliente> clienteActualizado = clienteService.updateById(id, cliente);
 
-        return clienteActualizado.map(ResponseEntity::ok).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return clienteActualizado.map(ResponseEntity::ok)
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     
     /* Busquedas - search by */
-
-    // localhost:8088/clientes/search-by-name/{search}
-    @GetMapping("/search-by-name/{search}")
-    @Operation(summary = "Find client by name")
-    public ResponseEntity<List<Cliente>> searchByNombre(@PathVariable String search) {
-        List<Cliente> clientes = clienteService.searchByNombre(search);
-        
-        return ResponseEntity.ok(clientes);
-    }
 
     // localhost:8088/clientes/search-by-document/{document}
     @GetMapping("/search-by-document/{document}")
@@ -100,12 +92,19 @@ public class ClienteController {
         return cliente.map(c -> new ResponseEntity<>(c, HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+    
+    // localhost:8088/clientes/search-by-name/{search}
+    @GetMapping("/search-by-name/{search}")
+    @Operation(summary = "Find client by name")
+    public ResponseEntity<List<Cliente>> searchByNombre(@PathVariable String search) {
+        List<Cliente> clientes = clienteService.searchByNombre(search);
+        
+        return ResponseEntity.ok(clientes);
+    }
 
 
 
-
-    /* buscar listas del cliente o por entidades */
-
+    /* Buscar listas del cliente o por entidades */
 
     // localhost:8088/clientes/mascotas-cliente/{id}
     @GetMapping("/mascotas-cliente/{id}")
@@ -113,20 +112,8 @@ public class ClienteController {
     public ResponseEntity<List<Mascota>> getMascotascliente(@PathVariable Long id) {
         List<Mascota> mascotas = clienteService.getMascotascliente(id);
         
-        return (mascotas == null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND)
-            : new ResponseEntity<>(mascotas, HttpStatus.OK); 
+        return ResponseEntity.ok(mascotas);
     }
 
-
-    // localhost:8088/clientes/search-by-pet_id/{id}
-    @GetMapping("/search-by-pet_id/{id}")
-    @Operation(summary = "Find client by pet ID")
-    public ResponseEntity<Cliente> buscarClienteByMascotaId(@PathVariable Long id) {
-        Optional<Cliente> cliente = clienteService.searchByMascotaId(id);
-        
-        return cliente.map(c -> new ResponseEntity<>(c, HttpStatus.OK))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
-    
     
 }

@@ -96,18 +96,7 @@ public class ClienteServiceImp implements ClienteService {
         if (clientOpt.isPresent()) {
             return clientOpt.get().getMascotas();
         }
-        return null;
+        return List.of();
     }
 
-    public Optional<Cliente> searchByMascotaId(Long id) {
-        Optional<Mascota> mascotaOpt = mascotaRepo.findById(id);
-
-        if (mascotaOpt.isPresent()) {
-            Cliente c = mascotaOpt.get().getCliente();
-            return Optional.of(c);
-        }
-        return Optional.empty();
-    }
-
-    
 }
