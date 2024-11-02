@@ -17,6 +17,8 @@ import com.example.demo.servicio.EnfermedadService;
 
 import io.swagger.v3.oas.annotations.Operation;
 
+
+
 @RestController
 @RequestMapping("/enfermedades")
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -26,7 +28,7 @@ public class EnfermedadController {
 
     /* Tratamientos: Peticiones CRUD */
 
-    // localhost:8088/tratamientos
+    // localhost:8088/enfermedades
     @GetMapping
     @Operation(summary = "Find all treatments")
     public ResponseEntity<List<Enfermedad>> obtenerTratamientos() {
@@ -44,6 +46,12 @@ public class EnfermedadController {
         return enfermedad.map(ResponseEntity::ok)
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-    
+
+    //localhost:8088/enfermedades/search-by-name/{search}
+    @GetMapping("//search-by-name/{search}")
+    public ResponseEntity<List<Enfermedad>>  searchByNombre(@PathVariable String search) {
+        List<Enfermedad> enfermedades= enfermedadService.serchEnfermedadByNombre(search);
+        return ResponseEntity.ok(enfermedades);
+    }
 }
 

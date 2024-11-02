@@ -15,7 +15,7 @@ public class EnfermedadServiceImp implements EnfermedadService {
     @Autowired
     EnfermedadRepository enfermedadRepo;
 
-    /* Droga: Peticiones CRUD */
+    /* Enfermedades: Peticiones CRUD */
 
     // Busqueda de todas las drogas
     @Override
@@ -23,10 +23,23 @@ public class EnfermedadServiceImp implements EnfermedadService {
         return enfermedadRepo.findAll();
     }
 
-    // Busqueda de una droga por ID
+    // Busqueda de una enfermedad por ID
     @Override
     public Optional<Enfermedad> searchEnfermedadById(Long id) {
         return enfermedadRepo.findById(id);
+    }
+
+    // Busqueda de enfermedades por nombre
+    @Override
+    public List<Enfermedad> serchEnfermedadByNombre(String nombre) {
+
+        return enfermedadRepo.findByNombreStartingWithIgnoreCase(nombre);
+    }
+
+    @Override
+    public List<Enfermedad> serchEnfermedadsBySintomas(String sintomas) {
+        
+        return enfermedadRepo.findBySintomas(sintomas);
     }
 
 }
