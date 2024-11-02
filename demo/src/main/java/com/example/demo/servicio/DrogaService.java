@@ -63,7 +63,4 @@ public interface DrogaService {
      */
     public List<Tratamiento> getTratamientosDroga(Long id);
 
-
-    public boolean decreaseDrugQuantity(Long id);
-
 }

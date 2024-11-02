@@ -87,30 +87,18 @@ public class DrogaServiceImp implements DrogaService {
     }
 
 
-    /* buscar listas del veterinario o por entidades */
+    /* Buscar listas del veterinario o por entidades */
 
-    // Obtener tratamientos de una mascota
+    // Obtener tratamientos de una droga
     @Override
     public List<Tratamiento> getTratamientosDroga(Long id) {
         Optional<Droga> dorgOpt = drogaRepo.findById(id);
+
         if (dorgOpt.isPresent()) {
            return dorgOpt.get().getTratamientos();
         }
-        return null;
+        return List.of();
+
     }
 
-    // Servicio raro no visto para tratamiento
-
-    @Override
-    public boolean decreaseDrugQuantity(Long id) {
-        Optional<Droga> drogaOpt = drogaRepo.findById(id);
-        if (drogaOpt.isPresent()) {
-            Droga droga = drogaOpt.get();
-            droga.setUnidadesDisponibles(droga.getUnidadesDisponibles() - 1);
-            droga.setUnidadesVendidas(droga.getUnidadesVendidas() + 1);
-            drogaRepo.save(droga);
-            return true;
-        }
-        return false;
-    }
 }

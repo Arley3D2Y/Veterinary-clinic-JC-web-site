@@ -26,6 +26,7 @@ public interface EspecialidadRepository extends JpaRepository<Especialidad, Long
     // O se puede hacer una lista que devuelva todos los nombres usando:
     // List<Especialidad> findByNombreStartingWithIgnoreCase(String nombre);
 
+    
     /** Query **/
 
     // Contar todas las especialidades
