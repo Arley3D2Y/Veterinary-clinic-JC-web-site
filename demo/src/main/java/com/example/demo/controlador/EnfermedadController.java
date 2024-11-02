@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -58,7 +59,16 @@ public class EnfermedadController {
                 .orElse(new ResponseEntity<>(HttpStatus.CONFLICT));
     }
 
-    // localhost:8088/clientes/delete/{id}
+    // localhost:8088/enfermedad/update/{id}
+    @PutMapping("/update/{id}")
+    @Operation(summary = "Update disease by id")
+    private ResponseEntity<Enfermedad> actualizarEnfermedad(@PathVariable Long id, @RequestBody Enfermedad enfermedad) {
+        Optional<Enfermedad> enfermerdadActualizada = enfermedadService.updateById(id, enfermedad);
+
+        return enfermerdadActualizada.map(ResponseEntity::ok).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    // localhost:8088/enfermedades/delete/{id}
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "Delete disease by id")
     private ResponseEntity<Void> eliminarEnfermedad(@PathVariable Long id) {
