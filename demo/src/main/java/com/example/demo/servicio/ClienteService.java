@@ -71,6 +71,4 @@ public interface ClienteService {
      */
     public List<Mascota> getMascotascliente(Long id);
 
-    public Optional<Cliente> searchByMascotaId(Long id);
-
 }
