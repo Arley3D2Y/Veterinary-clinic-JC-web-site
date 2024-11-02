@@ -26,9 +26,7 @@ public interface DrogaRepository extends JpaRepository<Droga, Long> {
     // Buscar drogas por nombre inicial
     List<Droga> findByNombreStartingWithIgnoreCase(String nombre);
 
-    // Buscar drogas de un tratamiento Id
-    List<Droga> findByTratamientoId(Long id);
-
+    
     /** Query **/
 
     // Contar todas las drogas

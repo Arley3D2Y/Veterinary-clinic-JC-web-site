@@ -36,8 +36,6 @@ public interface VeterinarioRepository extends JpaRepository<Veterinario, Long> 
     // Método para buscar veterinarios con estado activo
     List<Veterinario> findByEstadoTrue();
 
-    // Método para buscar veterinarios de un tratamiento Id
-    List<Veterinario> findByTratamientoId(Long id);
 
     /** Querys **/
 

@@ -16,12 +16,10 @@ public class Enfermedad {
     private Long id;
     private String nombre;
     private String sintomas;
-    private String medicamentos;
 
-    public Enfermedad(String nombre, String sintomas, String medicamentos) {
+    public Enfermedad(String nombre, String sintomas) {
         this.nombre = nombre;
         this.sintomas = sintomas;
-        this.medicamentos = medicamentos;
     }
     
 }

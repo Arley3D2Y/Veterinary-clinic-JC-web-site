@@ -26,7 +26,6 @@ import org.springframework.context.annotation.Profile;
 
 import jakarta.transaction.Transactional;
 
-
 @Controller
 @Transactional
 @Profile("test")
@@ -218,84 +217,68 @@ public class DataBaseInitTest implements ApplicationRunner {
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
 
                 // ENFERMEDADES
-                enfermedadRepository.save(new Enfermedad("Sin enfermedad", "La mascota está saludable", "No Aplica"));
+                enfermedadRepository.save(new Enfermedad("Sin enfermedad", "La mascota está saludable"));
 
                 enfermedadRepository.save(new Enfermedad("Gripe Felina",
-                                "Resfriado común con estornudos, ojos llorosos y fiebre", "ACOLAN, ACTIONIS"));
+                                "Resfriado común con estornudos, ojos llorosos y fiebre"));
                 enfermedadRepository.save(new Enfermedad("Infección Respiratoria Superior",
-                                "Congestión nasal, tos y pérdida de apetito", "AQUACOLI, AMOXICILINA"));
+                                "Congestión nasal, tos y pérdida de apetito"));
                 enfermedadRepository.save(new Enfermedad("Dermatitis Felina",
-                                "Irritación en la piel, enrojecimiento y picazón", "APRAVET, AURIZON"));
-                enfermedadRepository.save(new Enfermedad("Otitis", "Infección del oído, mal olor y rascado excesivo",
-                                "CANAURAL, OTOMAX"));
+                                "Irritación en la piel, enrojecimiento y picazón"));
+                enfermedadRepository.save(new Enfermedad("Otitis", "Infección del oído, mal olor y rascado excesivo"));
                 enfermedadRepository.save(new Enfermedad("Cistitis Felina",
-                                "Dolor al orinar, sangre en la orina y letargo", "COTRISUL, DIACOL"));
-                enfermedadRepository.save(new Enfermedad("Gastroenteritis", "Vómitos, diarrea y deshidratación",
-                                "ENTEROSTREP, ENROCAT"));
+                                "Dolor al orinar, sangre en la orina y letargo"));
+                enfermedadRepository.save(new Enfermedad("Gastroenteritis", "Vómitos, diarrea y deshidratación"));
                 enfermedadRepository.save(new Enfermedad("Conjuntivitis",
-                                "Ojos irritados, secreción ocular y parpadeo constante", "OPHTOCYCLINE, ISATHAL"));
-                enfermedadRepository.save(new Enfermedad("Parásitos Intestinales", "Pérdida de peso, vómitos y diarrea",
-                                "DEPOCILLIN, COLIMICINA"));
-                enfermedadRepository.save(new Enfermedad("Moquillo Felino",
-                                "Secreción nasal, fiebre y pérdida de apetito", "BAYTRIL, CLAMOXYL"));
-                enfermedadRepository.save(new Enfermedad("Infección Urinaria",
-                                "Dificultad al orinar, orina turbia y olor fuerte", "COTRISUL, CEVAXEL-RTU"));
-                enfermedadRepository.save(new Enfermedad("Panleucopenia", "Fiebre alta, vómitos y deshidratación",
-                                "CONVENIA, FLORON"));
-                enfermedadRepository.save(new Enfermedad("Anemia Infecciosa Felina",
-                                "Letargo, pérdida de apetito y encías pálidas", "GENTAMOX, ENROVET"));
-                enfermedadRepository.save(new Enfermedad("Toxoplasmosis", "Diarrea, vómitos y fiebre",
-                                "PANTOMICINA, TETRACICLINA"));
-                enfermedadRepository.save(new Enfermedad("Leucemia Felina",
-                                "Pérdida de peso, infecciones recurrentes y letargo", "LYDAXX, RONAXAN"));
-                enfermedadRepository.save(new Enfermedad("Tiña Felina",
-                                "Lesiones circulares en la piel y pérdida de pelaje", "CLORTETRA, FUNGINIX"));
-                enfermedadRepository.save(new Enfermedad("Artritis Felina",
-                                "Rigidez en las articulaciones y dificultad para moverse", "DEXABIOPEN, VETMULIN"));
-                enfermedadRepository.save(new Enfermedad("Rabia Felina",
-                                "Agitación, cambios de comportamiento y agresividad", "ZUPREVO, STABOX"));
-                enfermedadRepository.save(new Enfermedad("Calicivirus", "Úlceras en la boca, fiebre y secreción nasal",
-                                "ENROX, ADVOCIN"));
-                enfermedadRepository.save(new Enfermedad("Peritonitis Infecciosa Felina",
-                                "Fiebre, inflamación abdominal y pérdida de apetito", "DENAGARD, METROTAB"));
-                enfermedadRepository.save(new Enfermedad("Asma Felina",
-                                "Tos, dificultad para respirar y silbidos al exhalar", "AEROFAR, MARBOSOL"));
-                enfermedadRepository.save(new Enfermedad("Enfermedad periodontal",
-                                "Inflamación de los tejidos que rodean los dientes, puede causar mal aliento y pérdida dental",
-                                "AMOXICILINA, CLINDAMICINA"));
-                enfermedadRepository.save(new Enfermedad("Gingivitis felina",
-                                "Inflamación de las encías, puede provocar dolor y dificultad para comer",
-                                "CLAVULÁNICO, ENROVET"));
-                enfermedadRepository.save(new Enfermedad("Miocardiopatía hipertrófica",
-                                "Engrosamiento del músculo cardíaco, puede causar insuficiencia cardíaca",
-                                "DIGOXINA, BENAZEPRIL"));
-                enfermedadRepository.save(new Enfermedad("Enfermedad valvular",
-                                "Afección de las válvulas del corazón que puede provocar soplos cardíacos",
-                                "FUROSEMIDA, SPIRONOLACTONA"));
-                enfermedadRepository.save(new Enfermedad("Linfoma felino",
-                                "Cáncer que afecta los ganglios linfáticos y otros órganos",
-                                "DOXORUBICINA, VINCRISTINA"));
-                enfermedadRepository.save(new Enfermedad("Tumores mamarios",
-                                "Crecimientos anormales en las glándulas mamarias, pueden ser benignos o malignos",
-                                "MASTINIB, CARBOPLATINO"));
+                                "Ojos irritados, secreción ocular y parpadeo constante"));
+                enfermedadRepository
+                                .save(new Enfermedad("Parásitos Intestinales", "Pérdida de peso, vómitos y diarrea"));
                 enfermedadRepository.save(
-                                new Enfermedad("Piometra", "Infección del útero que puede ser potencialmente mortal",
-                                                "CEFALEXINA, PROSTAGLANDINAS"));
+                                new Enfermedad("Moquillo Felino", "Secreción nasal, fiebre y pérdida de apetito"));
+                enfermedadRepository.save(new Enfermedad("Infección Urinaria",
+                                "Dificultad al orinar, orina turbia y olor fuerte"));
+                enfermedadRepository.save(new Enfermedad("Panleucopenia", "Fiebre alta, vómitos y deshidratación"));
+                enfermedadRepository.save(new Enfermedad("Anemia Infecciosa Felina",
+                                "Letargo, pérdida de apetito y encías pálidas"));
+                enfermedadRepository.save(new Enfermedad("Toxoplasmosis", "Diarrea, vómitos y fiebre"));
+                enfermedadRepository.save(new Enfermedad("Leucemia Felina",
+                                "Pérdida de peso, infecciones recurrentes y letargo"));
+                enfermedadRepository.save(
+                                new Enfermedad("Tiña Felina", "Lesiones circulares en la piel y pérdida de pelaje"));
+                enfermedadRepository.save(new Enfermedad("Artritis Felina",
+                                "Rigidez en las articulaciones y dificultad para moverse"));
+                enfermedadRepository.save(
+                                new Enfermedad("Rabia Felina", "Agitación, cambios de comportamiento y agresividad"));
+                enfermedadRepository
+                                .save(new Enfermedad("Calicivirus", "Úlceras en la boca, fiebre y secreción nasal"));
+                enfermedadRepository.save(new Enfermedad("Peritonitis Infecciosa Felina",
+                                "Fiebre, inflamación abdominal y pérdida de apetito"));
+                enfermedadRepository.save(
+                                new Enfermedad("Asma Felina", "Tos, dificultad para respirar y silbidos al exhalar"));
+                enfermedadRepository.save(new Enfermedad("Enfermedad periodontal",
+                                "Inflamación de los tejidos que rodean los dientes, puede causar mal aliento y pérdida dental"));
+                enfermedadRepository.save(new Enfermedad("Gingivitis felina",
+                                "Inflamación de las encías, puede provocar dolor y dificultad para comer"));
+                enfermedadRepository.save(new Enfermedad("Miocardiopatía hipertrófica",
+                                "Engrosamiento del músculo cardíaco, puede causar insuficiencia cardíaca"));
+                enfermedadRepository.save(new Enfermedad("Enfermedad valvular",
+                                "Afección de las válvulas del corazón que puede provocar soplos cardíacos"));
+                enfermedadRepository.save(new Enfermedad("Linfoma felino",
+                                "Cáncer que afecta los ganglios linfáticos y otros órganos"));
+                enfermedadRepository.save(new Enfermedad("Tumores mamarios",
+                                "Crecimientos anormales en las glándulas mamarias, pueden ser benignos o malignos"));
+                enfermedadRepository.save(new Enfermedad("Piometra",
+                                "Infección del útero que puede ser potencialmente mortal"));
                 enfermedadRepository.save(new Enfermedad("Aborto espontáneo",
-                                "Pérdida del embarazo en etapas avanzadas, puede ser causada por infecciones o problemas hormonales",
-                                "PROGESTERONA, ANTIBIÓTICOS"));
+                                "Pérdida del embarazo en etapas avanzadas, puede ser causada por infecciones o problemas hormonales"));
                 enfermedadRepository.save(new Enfermedad("Reacciones adversas a la anestesia",
-                                "Complicaciones que pueden surgir durante o después de la anestesia",
-                                "DEXMETOROMIDINA, ISOFLURANO"));
+                                "Complicaciones que pueden surgir durante o después de la anestesia"));
                 enfermedadRepository.save(new Enfermedad("Hipotensión anestésica",
-                                "Descenso en la presión arterial durante la anestesia que puede ser peligroso",
-                                "DOBUTAMINA, NORADRENALINA"));
+                                "Descenso en la presión arterial durante la anestesia que puede ser peligroso"));
                 enfermedadRepository.save(new Enfermedad("Obesidad felina",
-                                "Acumulación excesiva de grasa que puede provocar enfermedades secundarias",
-                                "ORLISTAT, suplementos nutricionales"));
+                                "Acumulación excesiva de grasa que puede provocar enfermedades secundarias"));
                 enfermedadRepository.save(new Enfermedad("Enfermedades gastrointestinales",
-                                "Trastornos que afectan el tracto digestivo, pueden causar vómitos y diarrea",
-                                "METRONIDAZOL, PROBIÓTICOS"));
+                                "Trastornos que afectan el tracto digestivo, pueden causar vómitos y diarrea"));
 
                 // Mascotas
                 mascotaRepository.save(new Mascota("Nina", "4", "5", "Hembra", "Birmano",
@@ -627,8 +610,8 @@ public class DataBaseInitTest implements ApplicationRunner {
         private void asignarEstadosAMascotas(List<Mascota> mascotas) {
                 Random random = new Random(); // Se crea una instancia de Random para generar valores aleatorios.
                 for (Mascota mascota : mascotas) { // Itera a través de la lista de mascotas.
-                    // Asigna un estado de salud aleatorio a cada mascota:
-                    mascota.setEstado(random.nextBoolean() ? EstadoSalud.SANO : EstadoSalud.ENFERMO);
+                        // Asigna un estado de salud aleatorio a cada mascota:
+                        mascota.setEstado(random.nextBoolean() ? EstadoSalud.SANO : EstadoSalud.ENFERMO);
                 }
         }
 
@@ -690,7 +673,8 @@ public class DataBaseInitTest implements ApplicationRunner {
                                 Tratamiento tratamiento = tratamientos.get(i);
                                 veterinarioFijo.agregarTratamiento(tratamiento);
                                 drogaFija.agregarTratamiento(tratamiento);
-                                mascotaFija.agregarTratamiento(tratamiento, EstadoSalud.OBSERVACION); // Estado final (ej. "En
+                                mascotaFija.agregarTratamiento(tratamiento, EstadoSalud.OBSERVACION); // Estado final
+                                                                                                      // (ej. "En
                         }
                 }
 
