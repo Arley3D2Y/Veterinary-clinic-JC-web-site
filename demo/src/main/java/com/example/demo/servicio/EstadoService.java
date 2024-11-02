@@ -3,12 +3,12 @@ package com.example.demo.servicio;
 import java.util.Optional;
 
 import java.util.List;
-import com.example.demo.model.Estado;
+import com.example.demo.model.EstadoSalud;
 
 public interface EstadoService {
     
-    public List<Estado> searchAllEstados();
+    public List<EstadoSalud> searchAllEstados();
     
-    public Optional<Estado> searchEstadoById(Long id);
+    public Optional<EstadoSalud> searchEstadoById(Long id);
 
 }

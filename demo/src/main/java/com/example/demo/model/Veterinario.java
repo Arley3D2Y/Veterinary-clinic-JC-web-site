@@ -13,7 +13,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
+@Data
+@NoArgsConstructor
 public class Veterinario {
 
     @Id
@@ -26,7 +31,7 @@ public class Veterinario {
     private String correo;
     private String fotoString;
     private Integer cantidadAtenciones;
-    private boolean estado;
+    private Boolean estado;
 
     @ManyToOne
     Especialidad especialidad;
@@ -34,9 +39,6 @@ public class Veterinario {
     @JsonIgnore
     @OneToMany(mappedBy = "veterinario", cascade = CascadeType.DETACH, orphanRemoval = false)
     private List<Tratamiento> tratamientos = new ArrayList<Tratamiento>();
-
-
-    public Veterinario() { }
 
     public Veterinario(String nombre, String cedula,  String correo, String password, String fotoString, Boolean estado) {
         this.cedula = cedula;
@@ -47,8 +49,6 @@ public class Veterinario {
         this.cantidadAtenciones = 0;
         this.estado = estado;
     }
-
-    // Métodos
 
     public boolean agregarTratamiento(Tratamiento tratamiento) {
         if (!this.tratamientos.contains(tratamiento)) {
@@ -67,88 +67,6 @@ public class Veterinario {
             return true;
         }
         return false;
-    }
-
-    // Getters y setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public String getFotoString() {
-        return fotoString;
-    }
-
-    public void setFotoString(String fotoString) {
-        this.fotoString = fotoString;
-    }
-
-    public Number getCantidadAtenciones() {
-        return cantidadAtenciones;
-    }
-
-    public void setCantidadAtenciones(Integer cantidadAtenciones) {
-        this.cantidadAtenciones = cantidadAtenciones;
-    }
-
-    public boolean getEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
-
-    public Especialidad getEspecialidad() {
-        return especialidad;
-    }
-
-    public void setEspecialidad(Especialidad especialidad) {
-        this.especialidad = especialidad;
-    }
-
-    public List<Tratamiento> getTratamientos() {
-        return tratamientos;
-    }
-
-    public void setTratamientos(List<Tratamiento> tratamientos) {
-        this.tratamientos = tratamientos;
     }
 
 }

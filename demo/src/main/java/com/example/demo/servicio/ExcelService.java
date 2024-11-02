@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 @Service
 public class ExcelService {
@@ -20,7 +20,7 @@ public class ExcelService {
 
     public List<Droga> cargarDrogasDesdeExcel() {
         try {
-            List<Droga> drogas = new ArrayList<>();
+            List<Droga> drogas = new ArrayList<Droga>();
             InputStream inputStream = getClass().getResourceAsStream("/MEDICAMENTOS_VETERINARIA.xlsx");
             Workbook workbook = new XSSFWorkbook(inputStream);
             Sheet sheet = workbook.getSheetAt(0);

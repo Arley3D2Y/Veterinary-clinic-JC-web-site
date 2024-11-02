@@ -54,7 +54,7 @@ public class UseCaseTest2 {
     }
 
     @Test
-    public void SystemTest_useCase1_login() {
+    public void SystemTest_useCase2_l() {
 
         List<Integer> preData = new ArrayList<>();
 

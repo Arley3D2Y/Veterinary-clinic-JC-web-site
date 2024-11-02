@@ -8,12 +8,17 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Data
+@NoArgsConstructor
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,10 +46,6 @@ public class Cliente {
         this.mascotas = new ArrayList<>();
     }
 
-    public Cliente() {
-        
-    }
-
     // métodos
     public void guardarMascota(Mascota mascota) {
         if (!this.mascotas.contains(mascota)) {
@@ -68,74 +69,4 @@ public class Cliente {
             }
         }
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public String getCelular() {
-        return celular;
-    }
-
-    public void setCelular(String celular) {
-        this.celular = celular;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getFotoString() {
-        return fotoString;
-    }
-
-    public void setFotoString(String fotoString) {
-        this.fotoString = fotoString;
-    }
-
-    public List<Mascota> getMascotas() {
-        return mascotas;
-    }
-
-    public void setMascotas(List<Mascota> mascotas) {
-        this.mascotas = mascotas;
-    }
-
-
-    // Getters y setters
-        
-
-
 }

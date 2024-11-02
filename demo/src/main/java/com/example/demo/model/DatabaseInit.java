@@ -17,7 +17,6 @@ import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.DrogaRepository;
 import com.example.demo.repositorio.EnfermedadRepository;
 import com.example.demo.repositorio.EspecialidadRepository;
-import com.example.demo.repositorio.EstadoRepository;
 import com.example.demo.repositorio.MascotaRepository;
 import com.example.demo.repositorio.TratamientoRepository;
 import com.example.demo.repositorio.VeterinarioRepository;
@@ -36,8 +35,6 @@ public class DatabaseInit implements ApplicationRunner {
         ClienteRepository clienteRepository;
         @Autowired
         EnfermedadRepository enfermedadRepository;
-        @Autowired
-        EstadoRepository estadoRepository;
         @Autowired
         MascotaRepository mascotaRepository;
         @Autowired
@@ -218,12 +215,6 @@ public class DatabaseInit implements ApplicationRunner {
                                 "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
                 mascotaRepository.save(new Mascota("Trixy", "3", "6", "Hembra", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
-
-                // ESTADOS DE MASCOTAS
-                estadoRepository.save(new Estado("Sano"));
-                estadoRepository.save(new Estado("Enfermo"));
-                estadoRepository.save(new Estado("Medicado"));
-                estadoRepository.save(new Estado("Recuperado"));
 
                 // ENFERMEDADES
                 enfermedadRepository.save(new Enfermedad("Sin enfermedad", "La mascota está saludable", "No Aplica"));
@@ -596,7 +587,7 @@ public class DatabaseInit implements ApplicationRunner {
                                 "Plan de control de la diabetes", LocalDate.of(2025, 1, 11)));
                 tratamientoRepository.save(new Tratamiento("Regulamiento de la hipertensión",
                                 "Plan de control de la hipertensión", LocalDate.of(2025, 1, 12)));
-                
+
                 // Administradores
                 administradorRepository.save(new Administrador("Arley", "1111"));
                 administradorRepository.save(new Administrador("Kevin", "2222"));
@@ -607,7 +598,6 @@ public class DatabaseInit implements ApplicationRunner {
 
                 // Asignar mascotas aleatoriamente a clientes
                 List<Mascota> mascotas = mascotaRepository.findAll();
-                List<Estado> estados = estadoRepository.findAll();
                 List<Enfermedad> enfermedades = enfermedadRepository.findAll();
 
                 List<Cliente> clientes = clienteRepository.findAll();
@@ -617,7 +607,7 @@ public class DatabaseInit implements ApplicationRunner {
                 List<Droga> drogas = drogaRepository.findAll();
 
                 // Asociar estados a las mascotas
-                asignarEstadosAMascotas(estados, mascotas);
+                asignarEstadosAMascotas(mascotas);
 
                 // Asociar enfermedades a las mascotas
                 asignarEnfermedadesAMascotas(enfermedades, mascotas);
@@ -629,25 +619,24 @@ public class DatabaseInit implements ApplicationRunner {
                 asignarEspecialidadesAVeterinarios(veterinarios, especialidades);
 
                 // Asigna valores a un tratamiento
-                asignarRelacionesATratamientos(veterinarios, tratamientos, drogas, mascotas, estados);
+                asignarRelacionesATratamientos(veterinarios, tratamientos, drogas, mascotas);
 
         }
 
-        private void asignarEstadosAMascotas(List<Estado> estados, List<Mascota> mascotas) {
-                Random random = new Random();
-                for (Mascota mascota : mascotas) {
-                        mascota.setEstado(estados.get(random.nextInt(estados.size())));
+        private void asignarEstadosAMascotas(List<Mascota> mascotas) {
+                Random random = new Random(); // Se crea una instancia de Random para generar valores aleatorios.
+                for (Mascota mascota : mascotas) { // Itera a través de la lista de mascotas.
+                    // Asigna un estado de salud aleatorio a cada mascota:
+                    mascota.setEstado(random.nextBoolean() ? EstadoSalud.SANO : EstadoSalud.ENFERMO);
                 }
         }
 
         private void asignarEnfermedadesAMascotas(List<Enfermedad> enfermedades, List<Mascota> mascotas) {
                 Random random = new Random();
+
                 for (Mascota mascota : mascotas) {
-                        String estado = mascota.getEstado().getDescripcion();
-                        if (estado.equals("Enfermo") || estado.equals("Medicado")) {
+                        if (mascota.getEnfermedad() == null) {
                                 mascota.setEnfermedad(enfermedades.get(random.nextInt(enfermedades.size() - 1) + 1));
-                        } else if (estado.equals("Sano") || estado.equals("Recuperado")) {
-                                mascota.setEnfermedad(enfermedades.get(0));
                         }
                 }
         }
@@ -687,7 +676,7 @@ public class DatabaseInit implements ApplicationRunner {
         }
 
         private void asignarRelacionesATratamientos(List<Veterinario> veterinarios, List<Tratamiento> tratamientos,
-                        List<Droga> drogas, List<Mascota> mascotas, List<Estado> estados) {
+                        List<Droga> drogas, List<Mascota> mascotas) {
                 Random random = new Random();
 
                 // Asignar los mismos datos para los primeros tres tratamientos
@@ -700,7 +689,7 @@ public class DatabaseInit implements ApplicationRunner {
                                 Tratamiento tratamiento = tratamientos.get(i);
                                 veterinarioFijo.agregarTratamiento(tratamiento);
                                 drogaFija.agregarTratamiento(tratamiento);
-                                mascotaFija.agregarTratamiento(tratamiento, estados.get(2)); // Estado final (ej. "En
+                                mascotaFija.agregarTratamiento(tratamiento, EstadoSalud.OBSERVACION); // Estado final (ej. "En
                         }
                 }
 
@@ -732,7 +721,7 @@ public class DatabaseInit implements ApplicationRunner {
                         Mascota mascotaAsignada = null;
                         for (int j = 0; j < mascotas.size(); j++) {
                                 Mascota mascota = mascotas.get(random.nextInt(mascotas.size()));
-                                if (mascota.getEstado().getDescripcion().equals("Enfermo")) {
+                                if (mascota.getEstado() == EstadoSalud.ENFERMO) {
                                         mascotaAsignada = mascota;
                                         break;
                                 }
@@ -743,7 +732,7 @@ public class DatabaseInit implements ApplicationRunner {
                         if (veterinarioAsignado != null && drogaAsignada != null && mascotaAsignada != null) {
                                 veterinarioAsignado.agregarTratamiento(tratamiento);
                                 drogaAsignada.agregarTratamiento(tratamiento);
-                                mascotaAsignada.agregarTratamiento(tratamiento, estados.get(2));
+                                mascotaAsignada.agregarTratamiento(tratamiento, EstadoSalud.OBSERVACION);
                         }
                 }
         }

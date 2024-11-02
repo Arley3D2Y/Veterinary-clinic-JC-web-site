@@ -27,18 +27,21 @@ public interface VeterinarioRepository extends JpaRepository<Veterinario, Long> 
     // Método para buscar veterinario por correo
     Optional<Veterinario> findByCorreo(String correo);
 
-
     // Método para buscar un veterinario por nombre
     Optional<Veterinario> findByNombreIgnoreCase(String nombre);
-
+    
+    // Método para buscar veterinarios por nombre inicial
     List<Veterinario> findByNombreStartingWithIgnoreCase(String nombre);
 
-    List<Veterinario> findByNombreContainingIgnoreCase(String nombre);
+    // Método para buscar veterinarios con estado activo
+    List<Veterinario> findByEstadoTrue();
 
-
+    // Método para buscar veterinarios de un tratamiento Id
+    List<Veterinario> findByTratamientoId(Long id);
 
     /** Querys **/
 
+    // Contar todos los veterinarios
     @Query("SELECT CASE WHEN v.estado THEN 'Activo' ELSE 'Inactivo' END AS estado, CAST(COUNT(v) AS int) " +
     "FROM Veterinario v GROUP BY v.estado")
     List<Object[]> countVeterinariansByStatus();

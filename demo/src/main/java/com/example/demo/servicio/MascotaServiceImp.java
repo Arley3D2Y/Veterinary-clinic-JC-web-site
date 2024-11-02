@@ -8,13 +8,12 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Cliente;
 import com.example.demo.model.Enfermedad;
-import com.example.demo.model.Estado;
+import com.example.demo.model.EstadoSalud;
 import com.example.demo.model.Mascota;
 import com.example.demo.model.Tratamiento;
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.MascotaRepository;
 import com.example.demo.repositorio.EnfermedadRepository;
-import com.example.demo.repositorio.EstadoRepository;
 
 @Service
 public class MascotaServiceImp implements MascotaService {
@@ -25,8 +24,6 @@ public class MascotaServiceImp implements MascotaService {
     ClienteRepository clienteRepo;
     @Autowired
     EnfermedadRepository enfermedadRepo;
-    @Autowired
-    EstadoRepository estadoRepo;
 
     /* Mascotas: Peticiones CRUD */
 
@@ -48,14 +45,14 @@ public Optional<Mascota> addMascota(Long id, Mascota mascota) {
     Optional<Cliente> clienteOpt = clienteRepo.findById(id);
     
     // Suponiendo que tienes métodos para encontrar Estado y Enfermedad
-    Optional<Estado> estadoOpt = estadoRepo.findById(mascota.getEstado().getId());
+    EstadoSalud estado = mascota.getEstado();
     Optional<Enfermedad> enfermedadOpt = enfermedadRepo.findById(mascota.getEnfermedad().getId());
 
-    if (clienteOpt.isPresent() && estadoOpt.isPresent() && enfermedadOpt.isPresent()) {
+    if (clienteOpt.isPresent() && estado.equals(EstadoSalud.ENFERMO) && enfermedadOpt.isPresent()) {
         Cliente cliente = clienteOpt.get();
         
         // Asocia la enfermedad y el estado a la mascota
-        mascota.setEstado(estadoOpt.get());
+        mascota.setEstado(EstadoSalud.ENFERMO);
         mascota.setEnfermedad(enfermedadOpt.get());
 
         // Asocia la mascota al cliente

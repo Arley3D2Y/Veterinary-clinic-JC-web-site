@@ -6,12 +6,17 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Data
+@NoArgsConstructor
 public class Droga {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,10 +31,6 @@ public class Droga {
     @JsonIgnore
     @OneToMany(mappedBy = "droga", cascade = CascadeType.DETACH, orphanRemoval = false)
     private List<Tratamiento> tratamientos = new ArrayList<>();
-
-    // Constructores
-
-    public Droga() {  }
 
     public Droga(String nombre, Float precioCompra, Float precioVenta, Integer unidadesDisponibles, Integer unidadesVendidas) {
         this.nombre = nombre;
@@ -61,63 +62,4 @@ public class Droga {
         return false;
     }
 
-    // Getters y setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Float getPrecioCompra() {
-        return precioCompra;
-    }
-
-    public void setPrecioCompra(Float precioCompra) {
-        this.precioCompra = precioCompra;
-    }
-
-    public Float getPrecioVenta() {
-        return precioVenta;
-    }
-
-    public void setPrecioVenta(Float precioVenta) {
-        this.precioVenta = precioVenta;
-    }
-
-    public Integer getUnidadesDisponibles() {
-        return unidadesDisponibles;
-    }
-
-    public void setUnidadesDisponibles(Integer unidadesDisponibles) {
-        this.unidadesDisponibles = unidadesDisponibles;
-    }
-
-    public Integer getUnidadesVendidas() {
-        return unidadesVendidas;
-    }
-
-    public void setUnidadesVendidas(Integer unidadesVendidas) {
-        this.unidadesVendidas = unidadesVendidas;
-    }
-
-    public List<Tratamiento> getTratamientos() {
-        return tratamientos;
-    }
-
-    public void setTratamientos(List<Tratamiento> tratamientos) {
-        this.tratamientos = tratamientos;
-    }
-
-    
 }

@@ -24,11 +24,7 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
     // update whit save()
 
     // Buscar por descripcion
-    List<Tratamiento> findByDescripcionIgnoreCase(String nombre);
-
     List<Tratamiento> findByDescripcionStartingWithIgnoreCase(String nombre);
-
-    List<Tratamiento> findByDescripcionContainingIgnoreCase(String nombre);
 
     // Buscar por veterinario
     List<Tratamiento> findByVeterinarioId(Long id);
@@ -49,9 +45,11 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
     List<Tratamiento> findByFechaInicioBetween(LocalDate fechaInicio, LocalDate fechaFin);
 
 
-
-
     /** Querys **/
+
+    // Contar todos los tratamientos
+    @Query("SELECT COUNT(t) FROM Tratamiento t")
+    Integer countAllTreatments();
 
     // Contar tratamientos del mes actual desde el 1 hasta la fecha actual
     @Query("SELECT COUNT(t) FROM Tratamiento t WHERE t.fechaInicio BETWEEN :startDate AND :endDate")
@@ -61,15 +59,8 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
     @Query("SELECT t.droga.nombre, COUNT(t) FROM Tratamiento t WHERE t.fechaInicio BETWEEN :startDate AND :endDate GROUP BY t.droga.nombre")
     List<Object[]> countTreatmentsByMedication(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
-    // Obtener tratamientos por droga en el mes actual
+    // Calcular el total de ventas sumando el precio de cada tratamiento
     @Query("SELECT SUM(d.precioVenta) FROM Tratamiento t JOIN t.droga d")
     Double calculateTotalSales();
 
-    // // Consulta para calcular el total de ganancias
-    // @Query("SELECT SUM((d.precioVenta - d.precioCompra) * d.unidadesVendidas) " +
-    // "FROM Tratamiento t JOIN t.droga d " +
-    // "WHERE d.unidadesVendidas IS NOT NULL AND d.unidadesVendidas > 0")
-    // Double calculateTotalProfits();
-
-    
 }

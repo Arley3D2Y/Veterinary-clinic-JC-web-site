@@ -20,16 +20,26 @@ public interface DrogaRepository extends JpaRepository<Droga, Long> {
 
     // update whit save()
 
+    // Buscar droga por nombre
     Optional<Droga> findByNombreIgnoreCase(String nombre);
 
+    // Buscar drogas por nombre inicial
     List<Droga> findByNombreStartingWithIgnoreCase(String nombre);
 
-    List<Droga> findByNombreContainingIgnoreCase(String nombre);
+    // Buscar drogas de un tratamiento Id
+    List<Droga> findByTratamientoId(Long id);
 
-    @Query("SELECT SUM((d.precioVenta - d.precioCompra) * d.unidadesVendidas) " +
-            "FROM Droga d WHERE d.unidadesVendidas > 0")
+    /** Query **/
+
+    // Contar todas las drogas
+    @Query("SELECT COUNT(d) FROM Droga d")
+    Integer countTotalDrugs();
+
+    // Obtener el total de ganancias
+    @Query("SELECT SUM((d.precioVenta - d.precioCompra) * d.unidadesVendidas) FROM Droga d WHERE d.unidadesVendidas > 0")
     Double calculateTotalProfits();
 
+    // Obtener el total de unidades vendidas
     @Query("SELECT SUM(d.unidadesVendidas) FROM Droga d WHERE d.unidadesVendidas IS NOT NULL")
     Integer calculateTotalUnitsSold();
 

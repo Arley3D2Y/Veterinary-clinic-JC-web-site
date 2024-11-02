@@ -4,57 +4,24 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@NoArgsConstructor
 public class Enfermedad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String nombre;
-    private String caracteristicas;
-    private String medicacion;
+    private String sintomas;
+    private String medicamentos;
 
-    public Enfermedad(String nombre, String caracteristicas, String medicacion) {
+    public Enfermedad(String nombre, String sintomas, String medicamentos) {
         this.nombre = nombre;
-        this.caracteristicas = caracteristicas;
-        this.medicacion = medicacion;
+        this.sintomas = sintomas;
+        this.medicamentos = medicamentos;
     }
-
-    public Enfermedad() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getCaracteristicas() {
-        return caracteristicas;
-    }
-
-    public void setCaracteristicas(String caracteristicas) {
-        this.caracteristicas = caracteristicas;
-    }
-
-    public String getmedicacion() {
-        return medicacion;
-    }
-
-    public void setmedicacion(String medicacion) {
-        this.medicacion = medicacion;
-    }
-
     
 }

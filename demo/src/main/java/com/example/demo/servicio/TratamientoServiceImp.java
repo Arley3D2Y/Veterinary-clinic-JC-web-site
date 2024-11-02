@@ -6,12 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Droga;
-import com.example.demo.model.Estado;
+import com.example.demo.model.EstadoSalud;
 import com.example.demo.model.Mascota;
 import com.example.demo.model.Tratamiento;
 import com.example.demo.model.Veterinario;
 import com.example.demo.repositorio.DrogaRepository;
-import com.example.demo.repositorio.EstadoRepository;
 import com.example.demo.repositorio.MascotaRepository;
 import com.example.demo.repositorio.TratamientoRepository;
 import com.example.demo.repositorio.VeterinarioRepository;
@@ -27,8 +26,6 @@ public class TratamientoServiceImp implements TratamientoService {
     VeterinarioRepository veterinarioRepo;
     @Autowired
     DrogaRepository drogaRep;
-    @Autowired
-    EstadoRepository estadoRep;
 
     /* Tratamiento: Peticiones CRUD */
 
@@ -50,7 +47,7 @@ public class TratamientoServiceImp implements TratamientoService {
         Optional<Mascota> mascota = mascotaRep.findById(idp);
         Optional<Veterinario> veterinario = veterinarioRepo.findById(idv);
         Optional<Droga> droga = drogaRep.findById(idd);
-        Optional<Estado> estado = estadoRep.findById(3L);
+        EstadoSalud estado = EstadoSalud.SANO;
 
         if (mascota.isPresent() && veterinario.isPresent() && droga.isPresent()) {
             if (veterinario.get().getEstado() ) {
@@ -58,7 +55,7 @@ public class TratamientoServiceImp implements TratamientoService {
                 Droga d = droga.get();
                 Veterinario v = veterinario.get();
 
-                if (v.agregarTratamiento(tratamiento) && m.agregarTratamiento(tratamiento, estado.get()) && d.agregarTratamiento(tratamiento)) {
+                if (v.agregarTratamiento(tratamiento) && m.agregarTratamiento(tratamiento, estado) && d.agregarTratamiento(tratamiento)) {
                     return Optional.of(tratamientoRep.save(tratamiento)); // Guardar el tratamiento
                 } else {
                     v.eliminarTratamiento(tratamiento);

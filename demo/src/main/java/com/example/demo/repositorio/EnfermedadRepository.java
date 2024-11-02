@@ -3,10 +3,10 @@ package com.example.demo.repositorio;
 import com.example.demo.model.Enfermedad;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface EnfermedadRepository extends JpaRepository<Enfermedad, Long> {
@@ -21,10 +21,14 @@ public interface EnfermedadRepository extends JpaRepository<Enfermedad, Long> {
 
     // update whit save()
 
-    Optional<Enfermedad> findByNombre(String nombre);
-
+    // Busqueda por nombre
     List<Enfermedad> findByNombreStartingWithIgnoreCase(String nombre);
 
-    List<Enfermedad> findByNombreContainingIgnoreCase(String nombre);
+
+    /** Query **/
+
+    // Contar todas las enfermedades
+    @Query("SELECT COUNT(e) FROM Enfermedad e")
+    Integer countTotalDiseases();
 
 }

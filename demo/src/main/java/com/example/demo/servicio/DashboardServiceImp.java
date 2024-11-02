@@ -9,9 +9,8 @@ import org.springframework.stereotype.Service;
 import com.example.demo.DTO.EstadoMascotasDTO;
 import com.example.demo.DTO.EstadoVeterinariosDTO;
 import com.example.demo.DTO.TratamientoDrogaDTO;
-import com.example.demo.model.Estado;
+import com.example.demo.model.EstadoSalud;
 import com.example.demo.repositorio.DrogaRepository;
-import com.example.demo.repositorio.EstadoRepository;
 import com.example.demo.repositorio.MascotaRepository;
 import com.example.demo.repositorio.TratamientoRepository;
 import com.example.demo.repositorio.VeterinarioRepository;
@@ -27,9 +26,6 @@ public class DashboardServiceImp implements DashboardService {
 
     @Autowired
     private VeterinarioRepository veterinarioRepository;
-
-    @Autowired
-    private EstadoRepository estadoRepository;
 
     @Autowired
     private DrogaRepository drogaRepository;
@@ -87,13 +83,10 @@ public class DashboardServiceImp implements DashboardService {
     public List<EstadoMascotasDTO> countPetsByEstado() {
         List<EstadoMascotasDTO> estadoMascotaDTOs = new ArrayList<>();
 
-        // Obtener todos los estados
-        List<Estado> estados = estadoRepository.findAll(); // Asegúrate de tener acceso a estadoRepository
-
         // Contar las mascotas por estado
-        for (Estado estado : estados) {
-            Integer count = mascotaRepository.countPetsByEstado(estado.getId());
-            estadoMascotaDTOs.add(new EstadoMascotasDTO(estado.getDescripcion(), count));
+        for (EstadoSalud estado : EstadoSalud.values()) {
+            // Integer count = mascotaRepository.countPetsByEstado(estado);
+            // estadoMascotaDTOs.add(new EstadoMascotasDTO(estado.getDescripcion(), count));
         }
 
         return estadoMascotaDTOs;

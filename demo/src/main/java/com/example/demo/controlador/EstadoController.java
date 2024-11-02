@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.Estado;
+import com.example.demo.model.EstadoSalud;
 import com.example.demo.servicio.EstadoService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,8 +29,8 @@ public class EstadoController {
     // localhost:8088/tratamientos
     @GetMapping
     @Operation(summary = "Find all states")
-    public ResponseEntity<List<Estado>> obtenerEstados() {
-        List<Estado> estados = estadoService.searchAllEstados();
+    public ResponseEntity<List<EstadoSalud>> obtenerEstados() {
+        List<EstadoSalud> estados = estadoService.searchAllEstados();
         
         return ResponseEntity.ok(estados);
     }
@@ -38,8 +38,8 @@ public class EstadoController {
     // localhost:8088/tratamientos/find/{id}
     @GetMapping("/find/{id}")
     @Operation(summary = "Find state by id")
-    public ResponseEntity<Estado> obtenerInfoEstadoPorId(@PathVariable Long id) {
-        Optional<Estado> estado = estadoService.searchEstadoById(id);
+    public ResponseEntity<EstadoSalud> obtenerInfoEstadoPorId(@PathVariable Long id) {
+        Optional<EstadoSalud> estado = estadoService.searchEstadoById(id);
 
         return estado.map(ResponseEntity::ok)
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));

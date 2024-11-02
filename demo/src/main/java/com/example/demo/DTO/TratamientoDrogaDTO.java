@@ -1,6 +1,7 @@
 package com.example.demo.DTO;
-import jakarta.validation.constraints.Min;
+
 import lombok.Data;
+import jakarta.validation.constraints.Min;
 
 @Data
 public class TratamientoDrogaDTO {
