@@ -12,6 +12,11 @@ public interface EnfermedadService {
     
     public Optional<Enfermedad> searchEnfermedadById(Long id);
 
+    public Optional<Enfermedad> addEnfermedad(Enfermedad enfermedad);
+
+    public boolean removeById(Long identificacion);
+
+
     public List<Enfermedad>  serchEnfermedadByNombre(String nombre);
 
     public List<Enfermedad> serchEnfermedadsBySintomas(String sintomas);
