@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.*;
 
 @Repository
 public interface EnfermedadRepository extends JpaRepository<Enfermedad, Long> {
@@ -24,6 +24,8 @@ public interface EnfermedadRepository extends JpaRepository<Enfermedad, Long> {
     // Busqueda por nombre
     List<Enfermedad> findByNombreStartingWithIgnoreCase(String nombre);
 
+    // Busqueda por sintomas
+    List<Enfermedad> findBySintomas(String sintoString);
 
     /** Query **/
 
