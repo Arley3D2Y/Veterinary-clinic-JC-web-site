@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Cliente;
 import com.example.demo.model.Enfermedad;
-import com.example.demo.model.EstadoSalud;
 import com.example.demo.model.Mascota;
 import com.example.demo.model.Tratamiento;
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.MascotaRepository;
+import com.example.demo.repositorio.TratamientoRepository;
 import com.example.demo.repositorio.EnfermedadRepository;
 
 @Service
@@ -23,7 +23,10 @@ public class MascotaServiceImp implements MascotaService {
     @Autowired
     ClienteRepository clienteRepo;
     @Autowired
+    TratamientoRepository tratamientoRepo;
+    @Autowired
     EnfermedadRepository enfermedadRepo;
+
 
     /* Mascotas: Peticiones CRUD */
 
@@ -40,34 +43,37 @@ public class MascotaServiceImp implements MascotaService {
     }
 
     // Creacion de una nueva mascota
-@Override
-public Optional<Mascota> addMascota(Long id, Mascota mascota) {
-    Optional<Cliente> clienteOpt = clienteRepo.findById(id);
-    
-    // Suponiendo que tienes métodos para encontrar Estado y Enfermedad
-    EstadoSalud estado = mascota.getEstado();
-    Optional<Enfermedad> enfermedadOpt = enfermedadRepo.findById(mascota.getEnfermedad().getId());
+    @Override
+    public Optional<Mascota> addMascota(Long idC, Long idE, Mascota mascota) {
+        Optional<Cliente> clienteOpt = clienteRepo.findById(idC);
+        Optional<Enfermedad> enfermedadOpt = enfermedadRepo.findById(idE);
 
-    if (clienteOpt.isPresent() && estado.equals(EstadoSalud.ENFERMO) && enfermedadOpt.isPresent()) {
-        Cliente cliente = clienteOpt.get();
-        
-        // Asocia la enfermedad y el estado a la mascota
-        mascota.setEstado(EstadoSalud.ENFERMO);
-        mascota.setEnfermedad(enfermedadOpt.get());
+        if (clienteOpt.isPresent() && enfermedadOpt.isPresent()) {
+            Cliente cliente = clienteOpt.get();
+            mascota.setCliente(cliente);
+            Enfermedad enfermedad = enfermedadOpt.get();
+            mascota.setEnfermedad(enfermedad);
 
-        // Asocia la mascota al cliente
-        mascota.setCliente(cliente);
-        mascota = mascotaRep.save(mascota);  // Save es usado tanto para crear como para actualizar
-        return Optional.of(mascota);
+            mascota = mascotaRep.save(mascota); // Save es usado tanto para crear como para actualizar
+            return Optional.of(mascota);
+        }
+        return Optional.empty();
     }
-    return Optional.empty();
-}
-    
+
     // Eliminacion de una mascotas
     @Override
     public boolean removeById(Long id) {
-        if (mascotaRep.existsById(id)) {
-            mascotaRep.deleteById(id);
+        Optional<Mascota> mascotaOpt = mascotaRep.findById(id);
+
+        if (mascotaOpt.isPresent()) {
+            Mascota mascota = mascotaOpt.get();
+
+            for (Tratamiento tratamiento : mascota.getTratamientos()) {
+                tratamiento.setMascota(null); // Desasociar el veterinario
+                tratamientoRepo.save(tratamiento); // Guardar el cambio en cada tratamiento
+            }
+
+            mascotaRep.deleteById(id); // Ahora se puede eliminar la mascota
             return true;
         }
         return false;
@@ -82,7 +88,7 @@ public Optional<Mascota> addMascota(Long id, Mascota mascota) {
             mascota.setId(m.getId());
             mascota.setCliente(m.getCliente());
             mascota.setTratamientos(m.getTratamientos());
-            mascota = mascotaRep.save(mascota);  // Save es usado tanto para crear como para actualizar
+            mascota = mascotaRep.save(mascota); // Save es usado tanto para crear como para actualizar
             return Optional.of(mascota);
         }
         return Optional.empty();
@@ -96,7 +102,6 @@ public Optional<Mascota> addMascota(Long id, Mascota mascota) {
         return mascotaRep.findByNombreStartingWithIgnoreCase(nombre);
     }
 
-
     /* Buscar listas del veterinario o por entidades */
 
     // Busqueda de mascotas de un cliente
@@ -105,18 +110,16 @@ public Optional<Mascota> addMascota(Long id, Mascota mascota) {
         return mascotaRep.findByClienteId(id);
     }
 
-   // Obtener tratamientos de una mascota
-   @Override
-   public List<Tratamiento> getTratamientosMascotas(Long id) {
-       Optional<Mascota> mascotaOpt = mascotaRep.findById(id);
-       if (mascotaOpt.isPresent()) {
-           return mascotaOpt.get().getTratamientos();
-       }
-       return null;
-   }
+    // Obtener tratamientos de una mascota
+    @Override
+    public List<Tratamiento> getTratamientosMascotas(Long id) {
+        Optional<Mascota> mascotaOpt = mascotaRep.findById(id);
+        if (mascotaOpt.isPresent()) {
+            return mascotaOpt.get().getTratamientos();
+        }
+        return null;
+    }
 
-
-   
     // Métodos no revisados
 
     @Override
@@ -129,5 +132,4 @@ public Optional<Mascota> addMascota(Long id, Mascota mascota) {
         return 0;
     }
 
-    
 }

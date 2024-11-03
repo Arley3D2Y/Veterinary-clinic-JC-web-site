@@ -44,7 +44,7 @@ public class Mascota {
     private List<Tratamiento> tratamientos = new ArrayList<>();
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "cliente_id")
     private Cliente cliente; // Cambiado de duenho a cliente
 

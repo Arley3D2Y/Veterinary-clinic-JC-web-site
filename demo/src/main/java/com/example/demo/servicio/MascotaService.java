@@ -30,7 +30,7 @@ public interface MascotaService {
      * @param mascora El objeto Mascora que se desea agregar al sistema.
      *
      */
-    public Optional<Mascota> addMascota(Long id, Mascota mascota);
+    public Optional<Mascota> addMascota(Long idC, Long idE, Mascota mascota);
 
     /**
      * Este metodo es usado para borrar una mascota del sistema.

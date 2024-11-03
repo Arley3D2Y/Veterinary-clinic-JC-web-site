@@ -58,13 +58,13 @@ public class MascotaController {
     }
 
     // localhost:8088/mascotas/add
-    @PostMapping("/add/cliente-id/{id}")
+    @PostMapping("/add/cliente-id/{idC}/enfermedad-id/{idE}")
     @Operation(summary = "Add a new pet by client id")
-    public ResponseEntity<Mascota> crearMascota(@PathVariable Long id, @RequestBody Mascota mascota) {
-        Optional<Mascota> nuevaMascota = mascotaService.addMascota(id, mascota);
+    public ResponseEntity<Mascota> crearMascota(@PathVariable("idC") Long idC, @PathVariable("idE") Long idE, @RequestBody Mascota mascota) {
+        Optional<Mascota> nuevaMascota = mascotaService.addMascota(idC, idE, mascota);
 
         return nuevaMascota.map(ResponseEntity::ok)
-            .orElse(new ResponseEntity<>(HttpStatus.CONFLICT));
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     // localhost:8088/mascotas/delete/{id}

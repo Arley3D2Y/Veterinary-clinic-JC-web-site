@@ -619,7 +619,7 @@ public class DatabaseInit implements ApplicationRunner {
                 Random random = new Random();
 
                 for (Mascota mascota : mascotas) {
-                        if (mascota.getEnfermedad() == null) {
+                        if (mascota.getEnfermedad() == null && mascota.getEstado() == EstadoSalud.ENFERMO ) {
                                 mascota.setEnfermedad(enfermedades.get(random.nextInt(enfermedades.size() - 1) + 1));
                         }
                 }
@@ -667,14 +667,16 @@ public class DatabaseInit implements ApplicationRunner {
                 if (!veterinarios.isEmpty() && !drogas.isEmpty() && !mascotas.isEmpty()) {
                         Veterinario veterinarioFijo = veterinarios.get(0); // El primer veterinario disponible
                         Droga drogaFija = drogas.get(0); // La primera droga disponible
-                        Mascota mascotaFija = mascotas.get(2); // La primera mascota disponible
+                        Mascota mascotaFija = mascotas.get(0); // La primera mascota disponible
+                        mascotaFija.setEstado(EstadoSalud.ENFERMO);
 
                         for (int i = 0; i < 3 && i < tratamientos.size(); i++) {
                                 Tratamiento tratamiento = tratamientos.get(i);
                                 veterinarioFijo.agregarTratamiento(tratamiento);
                                 drogaFija.agregarTratamiento(tratamiento);
                                 mascotaFija.agregarTratamiento(tratamiento, EstadoSalud.OBSERVACION); // Estado final
-                                                                                                      // (ej. "En
+
+                                mascotaFija.setEstado(EstadoSalud.ENFERMO);
                         }
                 }
 
