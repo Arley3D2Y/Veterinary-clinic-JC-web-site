@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import java.util.List;
 import com.example.demo.model.Droga;
-import com.example.demo.model.Tratamiento;
 
 public interface DrogaService {
     
@@ -54,13 +53,4 @@ public interface DrogaService {
      */
     public List<Droga> searchByNombre(String nombre);
     
-
-    /**
-     * Obtener tratamientos de una droga
-     * 
-     * @param id El ID de la droga
-     * @return La lista de tratamientos
-     */
-    public List<Tratamiento> getTratamientosDroga(Long id);
-
 }

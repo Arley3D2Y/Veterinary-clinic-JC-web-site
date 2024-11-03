@@ -103,16 +103,16 @@ public class ClienteController {
     }
 
 
+    /* Buscar listas del cliente o las entidades */
 
-    /* Buscar listas del cliente o por entidades */
-
-    // localhost:8088/clientes/mascotas-cliente/{id}
-    @GetMapping("/mascotas-cliente/{id}")
+    // localhost:8088/clientes/{id}/mascotas
+    @GetMapping("/{id}/mascotas")
     @Operation(summary = "Get pets by client")
     public ResponseEntity<List<Mascota>> getMascotascliente(@PathVariable Long id) {
-        List<Mascota> mascotas = clienteService.getMascotascliente(id);
-        
-        return ResponseEntity.ok(mascotas);
+        Optional<Cliente> clienteOpt = clienteService.searchClienteById(id);
+
+        return clienteOpt.map(cliente -> ResponseEntity.ok(cliente.getMascotas()))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     

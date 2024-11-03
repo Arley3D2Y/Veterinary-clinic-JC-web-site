@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.model.Especialidad;
 import com.example.demo.model.Tratamiento;
 import com.example.demo.model.Veterinario;
+import com.example.demo.repositorio.EspecialidadRepository;
 import com.example.demo.repositorio.TratamientoRepository;
 import com.example.demo.repositorio.VeterinarioRepository;
 
@@ -19,6 +21,9 @@ public class VeterinarioServiceImp implements VeterinarioService {
 
     @Autowired  
     TratamientoRepository tratamientoRepo;
+
+    @Autowired
+    EspecialidadRepository especialidadRepo;
 
     /* Veterinarios: Peticiones CRUD */
 
@@ -36,12 +41,12 @@ public class VeterinarioServiceImp implements VeterinarioService {
 
     // Creacion de un nuevo veterinario
     @Override
-    public Optional<Veterinario> addVeterinario(Veterinario veterinario) {
+    public Optional<Veterinario> addVeterinario(Long idEs, Veterinario veterinario) {
         Optional<Veterinario> veterinarioOpt = veterinarioRepo.findByCedula(veterinario.getCedula());
-        // Se debe buscar especialidades seleccionadas desde el Frontend
-        // Se debe crear con la lista de tratamientos vacía
+        Optional<Especialidad> especialidadOpt = especialidadRepo.findById(idEs);
 
-        if (!veterinarioOpt.isPresent()) {
+        if (!veterinarioOpt.isPresent() && especialidadOpt.isPresent()) {
+            
             veterinario = veterinarioRepo.save(veterinario);
             return Optional.of(veterinario);
         }
@@ -70,6 +75,7 @@ public class VeterinarioServiceImp implements VeterinarioService {
     @Override
     public Optional<Veterinario> updateById(Long id, Veterinario veterinario) {
         Optional<Veterinario> veterinarioOpt = veterinarioRepo.findById(id);
+
         if (veterinarioOpt.isPresent()) {
             Veterinario v = veterinarioOpt.get();
             veterinario.setId(v.getId());
@@ -100,19 +106,6 @@ public class VeterinarioServiceImp implements VeterinarioService {
     @Override
     public Optional<Veterinario> searchByCorreo(String correo) {
         return veterinarioRepo.findByCorreo(correo);
-    }
-
-
-    /* buscar listas del veterinario o por entidades */
-
-    // Obtener tratamientos de un veterinario
-    @Override
-    public List<Tratamiento> getTratamientosVeterinario(Long id) {
-        Optional<Veterinario> vetOpt = veterinarioRepo.findById(id);
-        if (vetOpt.isPresent()) {
-            return vetOpt.get().getTratamientos();
-        }
-        return null;
     }
 
 }

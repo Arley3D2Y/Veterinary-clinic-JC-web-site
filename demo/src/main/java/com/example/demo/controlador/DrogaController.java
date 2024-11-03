@@ -94,13 +94,14 @@ public class DrogaController {
 
     /* Buscar listas del veterinario o por entidades */
 
-    // localhost:8088/drogas/tratamientos-droga/{id}
-    @GetMapping("/tratamientos-droga/{id}")
+    // localhost:8088/drogas/{id}/tratamientos
+    @GetMapping("/{id}/tratamientos")
     @Operation(summary = "Get treatments by drug")
-    public ResponseEntity<List<Tratamiento>> getTratamientosDroga(@PathVariable Long id) {
-        List<Tratamiento> tratamientos = drogaService.getTratamientosDroga(id);
-        
-        return ResponseEntity.ok(tratamientos);
+    public ResponseEntity<List<Tratamiento>> getTratamientoPorDroga(@PathVariable Long id) {
+        Optional<Droga> drogaOpt = drogaService.searchDrogaById(id);
+
+        return drogaOpt.map(droga -> ResponseEntity.ok(droga.getTratamientos()))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
 }

@@ -48,25 +48,27 @@ public class Veterinario {
         this.fotoString = fotoString;
         this.cantidadAtenciones = 0;
         this.estado = estado;
+        this.especialidad = null;
     }
 
-    public boolean agregarTratamiento(Tratamiento tratamiento) {
+    public boolean isTreatmentAddable(Tratamiento tratamiento) {
+        return (this.estado && this.especialidad != null) ? true : false;
+    }
+
+    public void agregarTratamiento(Tratamiento tratamiento) {
         if (!this.tratamientos.contains(tratamiento)) {
             tratamiento.setVeterinario(this);
             this.cantidadAtenciones++;
             this.tratamientos.add(tratamiento);
-            return true;
         }
-        return false;
     }
 
     public boolean eliminarTratamiento(Tratamiento tratamiento) {
-        if (this.tratamientos.contains(tratamiento) && this.estado) {
+        if (this.tratamientos.contains(tratamiento)) {
             this.cantidadAtenciones--;
             this.tratamientos.remove(tratamiento);
             return true;
         }
         return false;
     }
-
 }

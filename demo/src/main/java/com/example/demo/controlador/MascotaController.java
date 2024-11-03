@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.model.Cliente;
+import com.example.demo.model.Enfermedad;
 import com.example.demo.model.Mascota;
 import com.example.demo.model.Tratamiento;
 import com.example.demo.servicio.MascotaService;
 import java.util.List;
 import java.util.Optional;
 import io.swagger.v3.oas.annotations.Operation;
+
 
 @RestController
 @RequestMapping("/mascotas")
@@ -57,11 +60,11 @@ public class MascotaController {
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    // localhost:8088/mascotas/add
+    // localhost:8088/mascotas/add/cliente-id/{idC}/enfermedad-id/{idE}
     @PostMapping("/add/cliente-id/{idC}/enfermedad-id/{idE}")
     @Operation(summary = "Add a new pet by client id")
-    public ResponseEntity<Mascota> crearMascota(@PathVariable("idC") Long idC, @PathVariable("idE") Long idE, @RequestBody Mascota mascota) {
-        Optional<Mascota> nuevaMascota = mascotaService.addMascota(idC, idE, mascota);
+    public ResponseEntity<Mascota> crearMascota(@PathVariable("idC") Long clienteId, @PathVariable("idE") Long enfermedadId, @RequestBody Mascota mascota) {
+        Optional<Mascota> nuevaMascota = mascotaService.addMascota(clienteId, enfermedadId, mascota);
 
         return nuevaMascota.map(ResponseEntity::ok)
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -99,24 +102,38 @@ public class MascotaController {
     }
 
 
-    /* buscar listas del veterinario o por entidades */
+    /* Buscar listas del veterinario o por entidades */
 
-    // localhost:8088/mascotas/tratamientos-mascota/{id}
-    @GetMapping("/tratamientos-mascota/{id}")
-    @Operation(summary = "Get treatments by pet")
+    // localhost:8088/mascotas/{id}/tratamientos
+    @GetMapping("/{id}/tratamientos")
+    @Operation(summary = "Get treatments by pet id")
     public ResponseEntity<List<Tratamiento>> getTratamientosMascota(@PathVariable Long id) {
-        List<Tratamiento> tratamientos = mascotaService.getTratamientosMascotas(id);
-        
-        return (tratamientos == null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND)
-            : new ResponseEntity<>(tratamientos, HttpStatus.OK); 
+        Optional<Mascota> mascotaOpt = mascotaService.searchMascotaById(id);
+
+        return mascotaOpt.map(mascota -> ResponseEntity.ok(mascota.getTratamientos()))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    // localhost:8088/mascotas/search-by-client_id/{id}
-    @GetMapping("/search-by-client_id/{id}")
-    @Operation(summary = "Find pets by client ID")
-    public ResponseEntity<List<Mascota>> buscarMascotasByClienteId(@PathVariable Long id) {
-        List<Mascota> mascotas = mascotaService.searchByClienteId(id);
-        
-        return ResponseEntity.ok(mascotas); // 200 OK
+    // localhost:8088/mascotas/{id}/cliente
+    @GetMapping("/{id}/cliente")
+    @Operation(summary = "Get client by pet id")
+    public ResponseEntity<Cliente> getClienteMascota(@PathVariable Long id) {
+        Optional<Mascota> mascotaOpt = mascotaService.searchMascotaById(id);
+
+        return mascotaOpt.map(mascota -> ResponseEntity.ok(mascota.getCliente()))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
+    // localhost:8088/mascotas/{id}/enfermedad
+    @GetMapping("/{id}/enfermedad")
+    @Operation(summary = "Get disease by pet id")
+    public ResponseEntity<Enfermedad> getEnfermedadMascota(@PathVariable Long id) {
+        Optional<Mascota> mascotaOpt = mascotaService.searchMascotaById(id);
+
+        return mascotaOpt.map(mascota -> ResponseEntity.ok(mascota.getEnfermedad()))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    
+
 }

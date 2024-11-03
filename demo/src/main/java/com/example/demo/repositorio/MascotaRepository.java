@@ -29,10 +29,6 @@ public interface MascotaRepository extends JpaRepository<Mascota, Long> {
     // Busqueda de mascotas por el id del dueño
     List<Mascota> findByClienteId(Long id);
 
-    // Busqueda de mascotas por estado
-    List<Mascota> findByEstado(EstadoSalud estado);
-
-
     /** Querys **/
 
     // Contar todas las mascotas

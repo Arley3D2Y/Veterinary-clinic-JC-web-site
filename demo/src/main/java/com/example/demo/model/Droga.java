@@ -40,9 +40,13 @@ public class Droga {
         this.unidadesVendidas = unidadesVendidas;
     }
 
+    public boolean isTreatmentAddable(Tratamiento tratamiento) {
+        return (this.unidadesDisponibles > 0) ? true : false;
+    }
+
     // Métodos para agregar tratamiento y actualizar unidades
     public boolean agregarTratamiento(Tratamiento tratamiento) {
-        if (!this.tratamientos.contains(tratamiento) && this.unidadesDisponibles > 0) {
+        if (!this.tratamientos.contains(tratamiento)) {
             tratamiento.setDroga(this);
             this.tratamientos.add(tratamiento);
             this.unidadesDisponibles--; // Disminuir unidades disponibles
@@ -52,6 +56,7 @@ public class Droga {
         return false; // El tratamiento ya está en la lista
     }
 
+    // Métodos para eliminar tratamiento y actualizar unidades
     public boolean eliminarTratamiento(Tratamiento tratamiento) {
         if (this.tratamientos.contains(tratamiento)) {
             this.tratamientos.remove(tratamiento);

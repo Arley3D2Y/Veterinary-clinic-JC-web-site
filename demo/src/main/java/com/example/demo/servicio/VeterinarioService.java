@@ -3,7 +3,6 @@ package com.example.demo.servicio;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.demo.model.Tratamiento;
 import com.example.demo.model.Veterinario;
 
 public interface VeterinarioService {
@@ -30,7 +29,7 @@ public interface VeterinarioService {
      * @param veterinario El objeto Veterinario que se desea agregar al sistema.
      *
      */
-    public Optional<Veterinario> addVeterinario(Veterinario veterinario);
+    public Optional<Veterinario> addVeterinario(Long idEs, Veterinario veterinario);
 
     /**
      * Este metodo es usado para borrar un veterinario del sistema.
@@ -73,15 +72,6 @@ public interface VeterinarioService {
      *         o null si no existe
      */
     public Optional<Veterinario> searchByCorreo(String correo);
-
-    /**
-     * Este metodo es usado para buscar tratamientos por su id.
-     * 
-     * @param id El ID con el que es identificado el veterinario.
-     * @return La colección de todos los tratamientos que contengan el id dado
-     *         o null si no existe
-     */
-    public List<Tratamiento> getTratamientosVeterinario(Long id);
 
 }
 

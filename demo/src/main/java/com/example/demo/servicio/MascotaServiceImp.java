@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Cliente;
 import com.example.demo.model.Enfermedad;
+import com.example.demo.model.EstadoSalud;
 import com.example.demo.model.Mascota;
 import com.example.demo.model.Tratamiento;
 import com.example.demo.repositorio.ClienteRepository;
@@ -48,10 +49,10 @@ public class MascotaServiceImp implements MascotaService {
         Optional<Cliente> clienteOpt = clienteRepo.findById(idC);
         Optional<Enfermedad> enfermedadOpt = enfermedadRepo.findById(idE);
 
-        if (clienteOpt.isPresent() && enfermedadOpt.isPresent()) {
+        if (clienteOpt.isPresent() && enfermedadOpt.isPresent() && mascota.getEstado().equals(EstadoSalud.ENFERMO)) {
             Cliente cliente = clienteOpt.get();
             mascota.setCliente(cliente);
-            Enfermedad enfermedad = enfermedadOpt.get();
+            Enfermedad enfermedad =  enfermedadOpt.get();
             mascota.setEnfermedad(enfermedad);
 
             mascota = mascotaRep.save(mascota); // Save es usado tanto para crear como para actualizar
@@ -104,12 +105,6 @@ public class MascotaServiceImp implements MascotaService {
 
     /* Buscar listas del veterinario o por entidades */
 
-    // Busqueda de mascotas de un cliente
-    @Override
-    public List<Mascota> searchByClienteId(Long id) {
-        return mascotaRep.findByClienteId(id);
-    }
-
     // Obtener tratamientos de una mascota
     @Override
     public List<Tratamiento> getTratamientosMascotas(Long id) {
@@ -117,19 +112,13 @@ public class MascotaServiceImp implements MascotaService {
         if (mascotaOpt.isPresent()) {
             return mascotaOpt.get().getTratamientos();
         }
-        return null;
+        return List.of();
     }
 
-    // Métodos no revisados
-
+    // Busqueda de mascotas de un cliente
     @Override
-    public Number countMascotas() {
-        return 0;
-    }
-
-    @Override
-    public Number countMascotasEnTratamiento() {
-        return 0;
+    public List<Mascota> searchByClienteId(Long id) {
+        return mascotaRep.findByClienteId(id);
     }
 
 }

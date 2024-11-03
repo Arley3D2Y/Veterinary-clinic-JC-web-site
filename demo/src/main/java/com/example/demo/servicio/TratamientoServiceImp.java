@@ -47,7 +47,7 @@ public class TratamientoServiceImp implements TratamientoService {
         Optional<Mascota> mascota = mascotaRep.findById(idp);
         Optional<Veterinario> veterinario = veterinarioRepo.findById(idv);
         Optional<Droga> droga = drogaRep.findById(idd);
-        EstadoSalud estado = EstadoSalud.SANO;
+        EstadoSalud estado = EstadoSalud.OBSERVACION;
 
         if (mascota.isPresent() && veterinario.isPresent() && droga.isPresent()) {
             if (veterinario.get().getEstado() ) {
@@ -55,16 +55,14 @@ public class TratamientoServiceImp implements TratamientoService {
                 Droga d = droga.get();
                 Veterinario v = veterinario.get();
 
-                if (v.agregarTratamiento(tratamiento) && m.agregarTratamiento(tratamiento, estado) && d.agregarTratamiento(tratamiento)) {
-                    return Optional.of(tratamientoRep.save(tratamiento)); // Guardar el tratamiento
-                } else {
-                    v.eliminarTratamiento(tratamiento);
-                    m.eliminarTratamiento(tratamiento);
-                    d.eliminarTratamiento(tratamiento);
+                if (v.isTreatmentAddable(tratamiento) && d.isTreatmentAddable(tratamiento) && m.isTreatmentAddable(tratamiento)) {
+                    v.agregarTratamiento(tratamiento);
+                    d.agregarTratamiento(tratamiento);
+                    m.agregarTratamiento(tratamiento, estado);
 
-                    return Optional.empty();
+                    tratamiento = tratamientoRep.save(tratamiento);
+                    return Optional.of(tratamiento);
                 }
-
             }       
         }
         return Optional.empty();
@@ -85,9 +83,10 @@ public class TratamientoServiceImp implements TratamientoService {
     public Optional<Tratamiento> updateById(Long id, Tratamiento tratamiento) {
         Optional<Tratamiento> tratOpt = tratamientoRep.findById(id);
         if (tratOpt.isPresent()) {
-            tratamiento.setMascota(tratOpt.get().getMascota());
+            tratamiento.setDroga(tratamiento.getDroga());
+            
+            tratamiento.setMascota(tratOpt.get().getMascota());                
             tratamiento.setVeterinario(tratOpt.get().getVeterinario());
-            tratamiento.setDroga(tratOpt.get().getDroga());
             tratamiento = tratamientoRep.save(tratamiento);
             return Optional.of(tratamiento);
         }
@@ -97,7 +96,7 @@ public class TratamientoServiceImp implements TratamientoService {
 
     /* Busquedas - search by */
 
-    // Busqueda de tratamientos por nombre
+    // Busqueda de tratamientos por descripción
     @Override
     public List<Tratamiento> searchByDescription(String description) {
         List<Tratamiento> tratamientos = tratamientoRep.findByDescripcionStartingWithIgnoreCase(description);
@@ -107,24 +106,25 @@ public class TratamientoServiceImp implements TratamientoService {
 
     /* Buscar listas del tratamiento o por entidades */
 
-    // Busqueda de tratamientos de un veterinario
+    // Busqueda de veterinario por tratamiento
     @Override
-    public List<Tratamiento> searchByVeterinarioId(Long id) {
-        return tratamientoRep.findByVeterinarioId(id);
+    public Optional<Veterinario> obtenerVeterinarioPorTratamiento(Long tratamientoId) {
+        Optional<Tratamiento> tratamiento = tratamientoRep.findById(tratamientoId);
+        return tratamiento.map(Tratamiento::getVeterinario);
     }
 
-    // Busqueda de tratamientos de una mascota
+    // Busqueda de mascota por tratamiento
     @Override
-    public List<Tratamiento> searchByMascotaId(Long id) {
-        return tratamientoRep.findByMascotaId(id);
+    public Optional<Mascota> obtenerMascotaPorTratamiento(Long tratamientoId) {
+        Optional<Tratamiento> tratamiento = tratamientoRep.findById(tratamientoId);
+        return tratamiento.map(Tratamiento::getMascota);
     }
 
-    // Busqueda de tratamientos por droga
+    // Busqueda de droga por tratamiento
     @Override
-    public List<Tratamiento> searchByDrogaId(Long id) {
-        return tratamientoRep.findByDrogaId(id);
+    public Optional<Droga> obtenerDrogaPorTratamiento(Long tratamientoId) {
+        Optional<Tratamiento> tratamiento = tratamientoRep.findById(tratamientoId);
+        return tratamiento.map(Tratamiento::getDroga);
     }
-
-    /* Aún no revisado */
 
 }

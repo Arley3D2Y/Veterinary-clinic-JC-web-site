@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Cliente;
-import com.example.demo.model.Mascota;
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.MascotaRepository;
 
@@ -84,19 +83,6 @@ public class ClienteServiceImp implements ClienteService {
     @Override
     public Optional<Cliente> searchByCedula(String cedula) {
         return clientRepo.findByCedula(cedula);
-    }
-
-
-    /* buscar listas del veterinario o por entidades */
-
-    // Obtener mascotas de un cliente
-    @Override
-    public List<Mascota> getMascotascliente(Long id) {
-        Optional<Cliente> clientOpt = clientRepo.findById(id);
-        if (clientOpt.isPresent()) {
-            return clientOpt.get().getMascotas();
-        }
-        return List.of();
     }
 
 }

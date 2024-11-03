@@ -21,20 +21,17 @@ public interface VeterinarioRepository extends JpaRepository<Veterinario, Long> 
 
     // update whit save()
 
-    // Método para buscar veterinario por cédula
-    Optional<Veterinario> findByCedula(String cedula);
-
-    // Método para buscar veterinario por correo
-    Optional<Veterinario> findByCorreo(String correo);
-
     // Método para buscar un veterinario por nombre
     Optional<Veterinario> findByNombreIgnoreCase(String nombre);
     
     // Método para buscar veterinarios por nombre inicial
     List<Veterinario> findByNombreStartingWithIgnoreCase(String nombre);
 
-    // Método para buscar veterinarios con estado activo
-    List<Veterinario> findByEstadoTrue();
+    // Método para buscar veterinario por cédula
+    Optional<Veterinario> findByCedula(String cedula);
+
+    // Método para buscar veterinario por correo
+    Optional<Veterinario> findByCorreo(String correo);
 
 
     /** Querys **/

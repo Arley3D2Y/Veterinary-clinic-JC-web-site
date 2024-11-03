@@ -1,6 +1,5 @@
 package com.example.demo.servicio;
 import com.example.demo.model.Cliente;
-import com.example.demo.model.Mascota;
 
 import java.util.List;
 import java.util.Optional;
@@ -60,15 +59,5 @@ public interface ClienteService {
      * @return La colección de todos los clientes que contengan el nombre dado
      */
     public List<Cliente> searchByNombre(String nombre);
-
-
-    /**
-     * Este metodo es usado para obtener la información de todas las mascotas del cliente.
-     *
-     * @param id El ID del cliente.
-     * @return La colección de las mascotas de un cliente.
-     * 
-     */
-    public List<Mascota> getMascotascliente(Long id);
 
 }
