@@ -35,6 +35,8 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
     // Buscar por droga
     List<Tratamiento> findByDrogaId(Long id);
 
+    /* Métodos no usados en Controllador */
+    
     // Buscar por fecha inicio
     List<Tratamiento> findByFechaInicio(LocalDate fechaInicio);
 

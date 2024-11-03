@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.demo.model.Especialidad;
 import com.example.demo.model.Tratamiento;
 import com.example.demo.model.Veterinario;
 import com.example.demo.servicio.VeterinarioService;
@@ -52,11 +53,11 @@ public class VeterinarioController {
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    // localhost:8088/veterinarios/add
-    @PostMapping("/add")
-    @Operation(summary = "Add a new veterinary")
-    public ResponseEntity<Veterinario> crearVeterinario(@RequestBody Veterinario veterinario) {
-        Optional<Veterinario> nuevoVeterinario = veterinarioService.addVeterinario(veterinario);
+    // localhost:8088/veterinarios/add/especialidad-id/{idE}
+    @PostMapping("/add/especialidad-id/{idE}")
+    @Operation(summary = "Add a new veterinary by especialty id")
+    public ResponseEntity<Veterinario> crearVeterinario(@PathVariable("idE") Long especialityId, @RequestBody Veterinario veterinario) {
+        Optional<Veterinario> nuevoVeterinario = veterinarioService.addVeterinario(especialityId, veterinario);
 
         return nuevoVeterinario.map(c -> new ResponseEntity<>(c, HttpStatus.CREATED))
             .orElse(new ResponseEntity<>(HttpStatus.CONFLICT));
@@ -77,8 +78,9 @@ public class VeterinarioController {
     @Operation(summary = "Update veterinary by id")
     public ResponseEntity<Veterinario> actualizarVeterinario(@PathVariable Long id, @RequestBody Veterinario veterinario) {
         Optional<Veterinario> veterionarioActualizado = veterinarioService.updateById(id, veterinario);
-        
-        return veterionarioActualizado.map(ResponseEntity::ok).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+
+        return veterionarioActualizado.map(ResponseEntity::ok)
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND)); 
     }
 
     /* Busquedas - search by */
@@ -112,18 +114,26 @@ public class VeterinarioController {
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    /* buscar listas del veterinario o por entidades */
+    /* Buscar listas del veterinario o las entidades */
 
-    // localhost:8088/veterinarios/tratamientos-veterinario/{id}
-    @GetMapping("/tratamientos-veterinario/{id}")
+    // localhost:8088/veterinarios/{id}/tratamientos
+    @GetMapping("/{id}/tratamientos")
     @Operation(summary = "Get treatments by veterinary")
     public ResponseEntity<List<Tratamiento>> getTratamientosVeterinario(@PathVariable Long id) {
-        List<Tratamiento> tratamientos = veterinarioService.getTratamientosVeterinario(id);
-        
-        return (tratamientos == null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND)
-            : new ResponseEntity<>(tratamientos, HttpStatus.OK); 
-    }
-    
+        Optional<Veterinario> veterinarioOpt = veterinarioService.searchVeterinarioById(id);
 
+        return veterinarioOpt.map(veterinario -> ResponseEntity.ok(veterinario.getTratamientos()))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    // localhost:8088/veterinarios/{id}/especialidad
+    @GetMapping("/{id}/especialidad")
+    @Operation(summary = "Get specialty by veterinary id")
+    public ResponseEntity<Especialidad> getEspecialidadVeterinario(@PathVariable Long id) {
+        Optional<Veterinario> veterinarioOpt = veterinarioService.searchVeterinarioById(id);
+
+        return veterinarioOpt.map(veterinario -> ResponseEntity.ok(veterinario.getEspecialidad()))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 
 }

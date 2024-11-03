@@ -90,4 +90,5 @@ public class EnfermedadController {
         List<Enfermedad> enfermedades = enfermedadService.serchEnfermedadsBySintomas(search);
         return ResponseEntity.ok(enfermedades);
     }
+    
 }

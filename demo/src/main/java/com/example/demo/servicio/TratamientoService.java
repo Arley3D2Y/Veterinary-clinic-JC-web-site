@@ -3,7 +3,10 @@ package com.example.demo.servicio;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.demo.model.Droga;
+import com.example.demo.model.Mascota;
 import com.example.demo.model.Tratamiento;
+import com.example.demo.model.Veterinario;
 
 public interface TratamientoService {
 
@@ -53,26 +56,11 @@ public interface TratamientoService {
      * @return La colección de todos los tratamientos que contengan el nombre dado
      */
     public List<Tratamiento> searchByDescription(String name);
-    
-    /**
-     * Este metodo es usado para obtener los tratamientos de un veterinario.
-     * @param id El ID del veterinario
-     * @return La lista de tratamientos
-     */
-    public List<Tratamiento> searchByVeterinarioId(Long id);
 
-    /**
-     * Este metodo es usado para obtener la lista de tratamientos de una mascota
-     * @param id El ID de la mascota
-     * @return La lista de tratamientos
-     */
-    public List<Tratamiento> searchByMascotaId(Long id);
 
-    /**
-     * Este metodo es usado para obtener la lista de tratamientos de una droga
-     * @param id El ID de la droga
-     * @return La lista de tratamientos
-     */
-    public List<Tratamiento> searchByDrogaId(Long id);
+    public Optional<Veterinario> obtenerVeterinarioPorTratamiento(Long tratamientoId);
 
+    public Optional<Mascota> obtenerMascotaPorTratamiento(Long tratamientoId);
+
+    public Optional<Droga> obtenerDrogaPorTratamiento(Long tratamientoId);
 }

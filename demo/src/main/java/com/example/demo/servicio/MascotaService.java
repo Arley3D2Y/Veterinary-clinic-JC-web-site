@@ -68,11 +68,5 @@ public interface MascotaService {
      * @return La lista de tratamientos
      */
     public List<Tratamiento> getTratamientosMascotas(Long id);
-
-
-
-
-    public Number countMascotas();
-    public Number countMascotasEnTratamiento();
-
+    
 }

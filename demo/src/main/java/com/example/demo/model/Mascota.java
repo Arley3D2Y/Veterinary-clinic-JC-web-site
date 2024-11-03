@@ -62,8 +62,12 @@ public class Mascota {
 
     // Métodos funcionales de listas de tratamientos
 
+    public boolean isTreatmentAddable(Tratamiento tratamiento) {
+        return (this.estado.equals(EstadoSalud.ENFERMO)) ? true : false;
+    }
+
     public boolean agregarTratamiento(Tratamiento tratamiento, EstadoSalud estado) {
-        if (!this.tratamientos.contains(tratamiento) && this.estado.equals(EstadoSalud.ENFERMO)) {
+        if (!this.tratamientos.contains(tratamiento)) {
             tratamiento.setMascota(this);
             this.estado = estado;
             this.tratamientos.add(tratamiento);

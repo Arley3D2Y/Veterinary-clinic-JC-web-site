@@ -86,19 +86,4 @@ public class DrogaServiceImp implements DrogaService {
         return drogaRepo.findByNombreStartingWithIgnoreCase(nombre);
     }
 
-
-    /* Buscar listas del veterinario o por entidades */
-
-    // Obtener tratamientos de una droga
-    @Override
-    public List<Tratamiento> getTratamientosDroga(Long id) {
-        Optional<Droga> dorgOpt = drogaRepo.findById(id);
-
-        if (dorgOpt.isPresent()) {
-           return dorgOpt.get().getTratamientos();
-        }
-        return List.of();
-
-    }
-
 }
