@@ -28,8 +28,6 @@ public class EnfermedadController {
     @Autowired
     private EnfermedadService enfermedadService;
 
-    /* Tratamientos: Peticiones CRUD */
-
     // localhost:8088/enfermedades
     @GetMapping
     @Operation(summary = "Find all treatments")
@@ -39,7 +37,7 @@ public class EnfermedadController {
         return ResponseEntity.ok(enfermedades);
     }
 
-    // localhost:8088/tratamientos/find/{id}
+    // localhost:8088/enfermedades/find/{id}
     @GetMapping("/find/{id}")
     @Operation(summary = "Find treatment by id")
     public ResponseEntity<Enfermedad> obtenerInfoEnfermedadPorId(@PathVariable Long id) {
@@ -86,7 +84,6 @@ public class EnfermedadController {
         return ResponseEntity.ok(enfermedades);
     }
 
-    // localhost:8088/enfermedades/search-by-name/{search}
     @GetMapping("/search-by-sintomas/{search}")
     @Operation(summary = "Find disease by sintoma")
     public ResponseEntity<List<Enfermedad>> searchBySintomas(@PathVariable String search) {
