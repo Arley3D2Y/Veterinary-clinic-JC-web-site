@@ -8,10 +8,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Administrador {
+
+    // Security
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserEntity user;
+
     @Id
     @GeneratedValue
     private Long id;
     private String usuario;
+
+    @Transient
     private String password;
 
     public Administrador(String usuario, String password) {

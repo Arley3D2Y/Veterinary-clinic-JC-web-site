@@ -12,9 +12,9 @@ import com.example.demo.model.EstadoSalud;
 import com.example.demo.model.Mascota;
 import com.example.demo.model.Tratamiento;
 import com.example.demo.repositorio.ClienteRepository;
+import com.example.demo.repositorio.EnfermedadRepository;
 import com.example.demo.repositorio.MascotaRepository;
 import com.example.demo.repositorio.TratamientoRepository;
-import com.example.demo.repositorio.EnfermedadRepository;
 
 @Service
 public class MascotaServiceImp implements MascotaService {

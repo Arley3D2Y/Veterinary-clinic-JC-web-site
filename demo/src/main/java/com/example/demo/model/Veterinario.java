@@ -12,7 +12,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Transient;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,13 +21,21 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Veterinario {
+    
+    // Security
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserEntity user;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String cedula;
+
+    @Transient
     private String password;
+
     private String nombre;
     private String correo;
     private String fotoString;
