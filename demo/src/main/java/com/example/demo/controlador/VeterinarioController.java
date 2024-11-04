@@ -21,6 +21,9 @@ import com.example.demo.model.Tratamiento;
 import com.example.demo.model.Veterinario;
 import com.example.demo.servicio.VeterinarioService;
 
+import com.example.demo.DTO.VeterinarioDTO;
+import com.example.demo.DTO.VeterinarioMapper;
+
 import io.swagger.v3.oas.annotations.Operation;
 
 
@@ -56,11 +59,12 @@ public class VeterinarioController {
     // localhost:8088/veterinarios/add/especialidad-id/{idE}
     @PostMapping("/add/especialidad-id/{idE}")
     @Operation(summary = "Add a new veterinary by especialty id")
-    public ResponseEntity<Veterinario> crearVeterinario(@PathVariable("idE") Long especialityId, @RequestBody Veterinario veterinario) {
+    public ResponseEntity<VeterinarioDTO> crearVeterinario(@PathVariable("idE") Long especialityId, @RequestBody Veterinario veterinario) {
         Optional<Veterinario> nuevoVeterinario = veterinarioService.addVeterinario(especialityId, veterinario);
+        VeterinarioDTO veterinarioDTO = VeterinarioMapper.INSTANCE.convert(nuevoVeterinario.get());
 
-        return nuevoVeterinario.map(c -> new ResponseEntity<>(c, HttpStatus.CREATED))
-            .orElse(new ResponseEntity<>(HttpStatus.CONFLICT));
+        return veterinarioDTO != null ? new ResponseEntity<>(veterinarioDTO, HttpStatus.CREATED)
+            : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     // localhost:8088/veterinarios/delete/{id}

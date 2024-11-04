@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 
@@ -20,6 +21,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Data
 @NoArgsConstructor
 public class Cliente {
+
+    // Security
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserEntity user;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
