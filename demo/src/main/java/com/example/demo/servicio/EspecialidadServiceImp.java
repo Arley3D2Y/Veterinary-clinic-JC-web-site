@@ -18,11 +18,15 @@ public class EspecialidadServiceImp implements EspecialidadService {
     // CRUD
     @Override
     public Optional<Especialidad> addEspecialidad(Especialidad especialidad) {
+  
         Optional<Especialidad> espOptional = especialidadRepo.findById(especialidad.getId());
+
         if (!espOptional.isPresent()) {
+            // Guardar la nueva especialidad
             especialidad = especialidadRepo.save(especialidad);
             return Optional.of(especialidad);
         }
+        // Retornar vacío si ya existe una especialidad 
         return Optional.empty();
     }
 
