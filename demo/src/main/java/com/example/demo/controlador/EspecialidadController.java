@@ -51,26 +51,26 @@ public class EspecialidadController {
 
     // localhost:8088/especialidades/add
     @PostMapping("/add")
-    @Operation(summary = "Add a new disease")
-    private ResponseEntity<Especialidad> crearEspecialidad(@RequestBody Especialidad especialidad) {
+    public ResponseEntity<Especialidad> crearEspecialidad(@RequestBody Especialidad especialidad) {
         Optional<Especialidad> nuevaEspecialidad = especialidadService.addEspecialidad(especialidad);
-
-        return nuevaEspecialidad.map(e -> new ResponseEntity<>(e, HttpStatus.CREATED))
+        
+        return nuevaEspecialidad
+                .map(e -> new ResponseEntity<>(e, HttpStatus.CREATED))
                 .orElse(new ResponseEntity<>(HttpStatus.CONFLICT));
     }
-
+    
     // localhost:8088/especialidades/update/{id}
     @PutMapping("/update/{id}")
-    @Operation(summary = "Update disease by id")
+    @Operation(summary = "Update specialty by id")
     private ResponseEntity<Especialidad> actualizarEspecialidad(@PathVariable Long id, @RequestBody Especialidad especialidad) {
-        Optional<Especialidad> enfermerdadActualizada = especialidadService.updateById(id, especialidad);
+        Optional<Especialidad> especialidadActualizada = especialidadService.updateById(id, especialidad);
 
-        return enfermerdadActualizada.map(ResponseEntity::ok).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return especialidadActualizada.map(ResponseEntity::ok).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     // localhost:8088/especialidades/delete/{id}
     @DeleteMapping("/delete/{id}")
-    @Operation(summary = "Delete disease by id")
+    @Operation(summary = "Delete specialty by id")
     private ResponseEntity<Void> eliminarEspecialidad(@PathVariable Long id) {
         boolean isDeleted = especialidadService.removeById(id);
 
@@ -80,7 +80,7 @@ public class EspecialidadController {
 
     // localhost:8088/especialidades/search-by-name/{search}
     @GetMapping("/search-by-name/{search}")
-    @Operation(summary = "Find disease by name")
+    @Operation(summary = "Find specialty by name")
     public ResponseEntity<Optional<Especialidad>> searchByNombre(@PathVariable String search) {
         Optional<Especialidad> especialidades = especialidadService.serchEspecialidadByNombre(search);
         return ResponseEntity.ok(especialidades);
@@ -88,7 +88,7 @@ public class EspecialidadController {
 
     // localhost:8088/especialidades/total-especialidades
     @GetMapping("/total-especialidades")
-    @Operation(summary = "Find disease by name")
+    @Operation(summary = "Find specialty by name")
     public ResponseEntity<Integer> numTotalEspecialidades() {
        Integer coountEspecialidades = especialidadService.totalEspecalidadades();
         return ResponseEntity.ok(coountEspecialidades);

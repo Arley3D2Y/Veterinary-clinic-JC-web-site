@@ -14851,3 +14851,59 @@ The connection was not closed by the application and is garbage collected [90018
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 94 more
 >>>>>>> 538e0b86f7bee2d88af51311cfd47e2c38c24631
+2024-11-03 19:05:34.188934-05:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLTimeoutException: Tiempo vencido intentando trabar (lock) la tabla "ADMINISTRADOR"
+Timeout trying to lock table "ADMINISTRADOR"; SQL statement:
+drop table if exists administrador cascade [50200-224]
+2024-11-03 19:05:35.340921-05:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-11-03 19:05:35.344465-05:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-11-03 19:05:35.346484-05:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-11-03 19:05:35.349484-05:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-11-03 19:05:35.371620-05:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-11-03 19:05:35.400974-05:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-11-03 19:05:35.435814-05:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-11-03 19:05:35.482937-05:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-11-03 19:54:59.820096-05:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLTimeoutException: Tiempo vencido intentando trabar (lock) la tabla "ADMINISTRADOR"
+Timeout trying to lock table "ADMINISTRADOR"; SQL statement:
+drop table if exists administrador cascade [50200-224]
+2024-11-03 19:55:00.938817-05:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-11-03 19:55:00.940815-05:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-11-03 19:55:00.952398-05:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-11-03 19:55:00.976948-05:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-11-03 19:55:01.024124-05:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-11-03 19:55:01.037194-05:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-11-03 19:55:01.040737-05:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
+2024-11-03 19:55:01.052191-05:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-224]
