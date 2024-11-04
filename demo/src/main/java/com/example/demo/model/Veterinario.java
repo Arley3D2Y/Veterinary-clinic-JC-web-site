@@ -23,6 +23,7 @@ import lombok.NoArgsConstructor;
 public class Veterinario {
     
     // Security
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     private UserEntity user;
 

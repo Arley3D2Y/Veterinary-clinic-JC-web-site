@@ -14,8 +14,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.model.Administrador;
+import com.example.demo.model.Cliente;
 import com.example.demo.model.Role;
 import com.example.demo.model.UserEntity;
+import com.example.demo.model.Veterinario;
 import com.example.demo.repositorio.RoleRepository;
 import com.example.demo.repositorio.UserRepository;
 
@@ -49,4 +52,38 @@ public class CustomUserDetailService implements UserDetailsService {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
 
     }
+
+    public UserEntity ClienteToUser(Cliente cliente) {
+        UserEntity user = new UserEntity();
+        user.setUsername(cliente.getCedula());
+        user.setPassword(passwordEncoder.encode("1234"));
+
+        Role role = roleRepository.findByName("CLIENTE").get();
+        user.setRoles(List.of(role));
+
+        return user;
+    }
+
+    public UserEntity VeterinarioToUser(Veterinario veterinario) {
+        UserEntity user = new UserEntity();
+        user.setUsername(veterinario.getCorreo());
+        user.setPassword(passwordEncoder.encode(veterinario.getPassword()));
+
+        Role role = roleRepository.findByName("VETERINARIO").get();
+        user.setRoles(List.of(role));
+
+        return user;
+    }
+
+    public UserEntity AdminToUser(Administrador admin) {
+        UserEntity user = new UserEntity();
+        user.setUsername(admin.getUsuario());
+        user.setPassword(passwordEncoder.encode(admin.getPassword()));
+
+        Role role = roleRepository.findByName("ADMINISTRADOR").get();
+        user.setRoles(List.of(role));
+
+        return user;
+    }
+
 }

@@ -18,7 +18,10 @@ import java.util.Optional;
 
 import com.example.demo.model.Especialidad;
 import com.example.demo.model.Tratamiento;
+import com.example.demo.model.UserEntity;
 import com.example.demo.model.Veterinario;
+import com.example.demo.repositorio.UserRepository;
+import com.example.demo.security.CustomUserDetailService;
 import com.example.demo.servicio.VeterinarioService;
 
 import com.example.demo.DTO.VeterinarioDTO;
@@ -34,6 +37,10 @@ public class VeterinarioController {
 
     @Autowired
     private VeterinarioService veterinarioService;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private CustomUserDetailService customUserDetailService;
 
     /* Veterinarios: Peticiones CRUD */
 
@@ -56,15 +63,28 @@ public class VeterinarioController {
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    /* Hacerlo en todos los Users - Usar DTO para retornar lo creado */
+
     // localhost:8088/veterinarios/add/especialidad-id/{idE}
     @PostMapping("/add/especialidad-id/{idE}")
-    @Operation(summary = "Add a new veterinary by especialty id")
-    public ResponseEntity<VeterinarioDTO> crearVeterinario(@PathVariable("idE") Long especialityId, @RequestBody Veterinario veterinario) {
-        Optional<Veterinario> nuevoVeterinario = veterinarioService.addVeterinario(especialityId, veterinario);
-        VeterinarioDTO veterinarioDTO = VeterinarioMapper.INSTANCE.convert(nuevoVeterinario.get());
-
-        return veterinarioDTO != null ? new ResponseEntity<>(veterinarioDTO, HttpStatus.CREATED)
-            : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @Operation(summary = "Add a new veterinary by specialty id")
+    public ResponseEntity<?> crearVeterinario(@PathVariable("idE") Long especialityId, @RequestBody Veterinario veterinario) {
+        
+        if (!userRepository.existsByUsername(veterinario.getCorreo())) {
+            UserEntity userEntity = customUserDetailService.VeterinarioToUser(veterinario);
+            veterinario.setUser(userEntity);
+    
+            Optional<Veterinario> nuevoVeterinario = veterinarioService.addVeterinario(especialityId, veterinario);
+            if (nuevoVeterinario.isPresent()) {
+                VeterinarioDTO veterinarioDTO = VeterinarioMapper.INSTANCE.convert(nuevoVeterinario.get());
+                
+                return new ResponseEntity<>(veterinarioDTO, HttpStatus.CREATED);
+            } else {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        } else {
+            return new ResponseEntity<String>("El usuario ya existe", HttpStatus.CONFLICT);
+        }
     }
 
     // localhost:8088/veterinarios/delete/{id}

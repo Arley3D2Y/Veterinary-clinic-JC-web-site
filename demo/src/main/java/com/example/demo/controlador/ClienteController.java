@@ -15,8 +15,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.DTO.ClienteDTO;
+import com.example.demo.DTO.ClienteMapper;
 import com.example.demo.model.Cliente;
 import com.example.demo.model.Mascota;
+import com.example.demo.model.UserEntity;
+import com.example.demo.repositorio.UserRepository;
+import com.example.demo.security.CustomUserDetailService;
 import com.example.demo.servicio.ClienteService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,6 +33,10 @@ public class ClienteController {
 
     @Autowired
     private ClienteService clienteService;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private CustomUserDetailService customUserDetailService;
 
     /* Clientes: Peticiones CRUD */
 
@@ -53,11 +62,28 @@ public class ClienteController {
     // localhost:8088/clientes/add
     @PostMapping("/add")
     @Operation(summary = "Add a new client")
-    private ResponseEntity<Cliente> crearCliente(@RequestBody Cliente cliente) {
+    private ResponseEntity<?> crearCliente(@RequestBody Cliente cliente) {
+        /*
         Optional<Cliente> nuevoCliente = clienteService.addCliente(cliente);
 
         return nuevoCliente.map(c -> new ResponseEntity<>(c, HttpStatus.CREATED))
             .orElse(new ResponseEntity<>(HttpStatus.CONFLICT));
+        */
+        if (!userRepository.existsByUsername(cliente.getCedula())) {
+            UserEntity userEntity = customUserDetailService.ClienteToUser(cliente);
+            cliente.setUser(userEntity);
+            
+            Optional<Cliente> nuevoCliente = clienteService.addCliente(cliente);
+            if (nuevoCliente.isPresent()) {
+                ClienteDTO clienteDTO = ClienteMapper.INSTANCE.convert(nuevoCliente.get());
+
+                return new ResponseEntity<>(clienteDTO, HttpStatus.CREATED);
+            } else {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        } else {
+            return new ResponseEntity<String>("El usuario ya existe", HttpStatus.CONFLICT);
+        }
     }
 
     // localhost:8088/clientes/delete/{id}

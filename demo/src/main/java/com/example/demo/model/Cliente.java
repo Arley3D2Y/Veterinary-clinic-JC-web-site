@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Cliente {
 
     // Security
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     private UserEntity user;
 
