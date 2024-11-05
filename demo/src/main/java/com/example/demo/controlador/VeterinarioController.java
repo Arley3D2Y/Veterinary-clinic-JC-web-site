@@ -1,7 +1,12 @@
 package com.example.demo.controlador;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties.Jwt;
+import org.springframework.security.core.Authentication;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,13 +27,13 @@ import com.example.demo.model.UserEntity;
 import com.example.demo.model.Veterinario;
 import com.example.demo.repositorio.UserRepository;
 import com.example.demo.security.CustomUserDetailService;
+import com.example.demo.security.JWTGenerator;
 import com.example.demo.servicio.VeterinarioService;
 
 import com.example.demo.DTO.VeterinarioDTO;
 import com.example.demo.DTO.VeterinarioMapper;
 
 import io.swagger.v3.oas.annotations.Operation;
-
 
 @RestController
 @RequestMapping("/veterinarios")
@@ -42,6 +47,10 @@ public class VeterinarioController {
     @Autowired
     private CustomUserDetailService customUserDetailService;
 
+    @Autowired
+    AuthenticationManager authenticationManager;
+    @Autowired
+    JWTGenerator jwtGenerator;
     /* Veterinarios: Peticiones CRUD */
 
     // localhost:8088/veterinarios
@@ -58,9 +67,9 @@ public class VeterinarioController {
     @Operation(summary = "Find veterinary by id")
     public ResponseEntity<Veterinario> obtenerVeterinarioPorId(@PathVariable Long id) {
         Optional<Veterinario> veterinario = veterinarioService.searchVeterinarioById(id);
-        
+
         return veterinario.map(ResponseEntity::ok)
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     /* Hacerlo en todos los Users - Usar DTO para retornar lo creado */
@@ -68,16 +77,17 @@ public class VeterinarioController {
     // localhost:8088/veterinarios/add/especialidad-id/{idE}
     @PostMapping("/add/especialidad-id/{idE}")
     @Operation(summary = "Add a new veterinary by specialty id")
-    public ResponseEntity<?> crearVeterinario(@PathVariable("idE") Long especialityId, @RequestBody Veterinario veterinario) {
-        
+    public ResponseEntity<?> crearVeterinario(@PathVariable("idE") Long especialityId,
+            @RequestBody Veterinario veterinario) {
+
         if (!userRepository.existsByUsername(veterinario.getCorreo())) {
             UserEntity userEntity = customUserDetailService.VeterinarioToUser(veterinario);
             veterinario.setUser(userEntity);
-    
+
             Optional<Veterinario> nuevoVeterinario = veterinarioService.addVeterinario(especialityId, veterinario);
             if (nuevoVeterinario.isPresent()) {
                 VeterinarioDTO veterinarioDTO = VeterinarioMapper.INSTANCE.convert(nuevoVeterinario.get());
-                
+
                 return new ResponseEntity<>(veterinarioDTO, HttpStatus.CREATED);
             } else {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -94,17 +104,18 @@ public class VeterinarioController {
         boolean isDeleted = veterinarioService.removeById(id);
 
         return isDeleted ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
-        : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     // localhost:8088/veterinarios/update/{id}
     @PutMapping("/update/{id}")
     @Operation(summary = "Update veterinary by id")
-    public ResponseEntity<Veterinario> actualizarVeterinario(@PathVariable Long id, @RequestBody Veterinario veterinario) {
+    public ResponseEntity<Veterinario> actualizarVeterinario(@PathVariable Long id,
+            @RequestBody Veterinario veterinario) {
         Optional<Veterinario> veterionarioActualizado = veterinarioService.updateById(id, veterinario);
 
         return veterionarioActualizado.map(ResponseEntity::ok)
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND)); 
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     /* Busquedas - search by */
@@ -125,7 +136,7 @@ public class VeterinarioController {
         Optional<Veterinario> veterinario = veterinarioService.searchByCedula(search);
 
         return veterinario.map(v -> new ResponseEntity<>(v, HttpStatus.OK))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     // localhost:8088/veterinarios/search-by-email/{search}
@@ -133,9 +144,9 @@ public class VeterinarioController {
     @Operation(summary = "Search veterinary by email")
     public ResponseEntity<Veterinario> buscarVeterinarioByCorreo(@PathVariable String search) {
         Optional<Veterinario> veterinario = veterinarioService.searchByCorreo(search);
-        
+
         return veterinario.map(v -> new ResponseEntity<>(v, HttpStatus.OK))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     /* Buscar listas del veterinario o las entidades */
@@ -147,7 +158,7 @@ public class VeterinarioController {
         Optional<Veterinario> veterinarioOpt = veterinarioService.searchVeterinarioById(id);
 
         return veterinarioOpt.map(veterinario -> ResponseEntity.ok(veterinario.getTratamientos()))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     // localhost:8088/veterinarios/{id}/especialidad
@@ -157,7 +168,20 @@ public class VeterinarioController {
         Optional<Veterinario> veterinarioOpt = veterinarioService.searchVeterinarioById(id);
 
         return veterinarioOpt.map(veterinario -> ResponseEntity.ok(veterinario.getEspecialidad()))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
+    // localhost:8080/administradores/login
+    @PostMapping("/login")
+    public ResponseEntity loginVeterinary(@RequestBody Veterinario veterinario) {
+   
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(veterinario.getCorreo(), veterinario.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String token = jwtGenerator.generateToken(authentication);
+
+        return new ResponseEntity<String>( token, HttpStatus.OK);}
 
 }

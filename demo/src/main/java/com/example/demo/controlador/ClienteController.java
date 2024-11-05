@@ -1,10 +1,14 @@
 package com.example.demo.controlador;
+
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
 
 import com.example.demo.DTO.ClienteDTO;
 import com.example.demo.DTO.ClienteMapper;
@@ -37,7 +42,8 @@ public class ClienteController {
     private UserRepository userRepository;
     @Autowired
     private CustomUserDetailService customUserDetailService;
-
+    @Autowired
+    AuthenticationManager authenticationManager;
     /* Clientes: Peticiones CRUD */
 
     // localhost:8088/clientes
@@ -45,7 +51,7 @@ public class ClienteController {
     @Operation(summary = "Find all clients")
     public ResponseEntity<List<Cliente>> obtenerClientes() {
         List<Cliente> clientes = clienteService.searchAllClientes();
-        
+
         return ResponseEntity.ok(clientes);
     }
 
@@ -54,9 +60,9 @@ public class ClienteController {
     @Operation(summary = "Find client by id")
     private ResponseEntity<Cliente> obtenerClientePorId(@PathVariable Long id) {
         Optional<Cliente> cliente = clienteService.searchClienteById(id);
-        
+
         return cliente.map(ResponseEntity::ok)
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     // localhost:8088/clientes/add
@@ -64,15 +70,15 @@ public class ClienteController {
     @Operation(summary = "Add a new client")
     private ResponseEntity<?> crearCliente(@RequestBody Cliente cliente) {
         /*
-        Optional<Cliente> nuevoCliente = clienteService.addCliente(cliente);
-
-        return nuevoCliente.map(c -> new ResponseEntity<>(c, HttpStatus.CREATED))
-            .orElse(new ResponseEntity<>(HttpStatus.CONFLICT));
-        */
+         * Optional<Cliente> nuevoCliente = clienteService.addCliente(cliente);
+         * 
+         * return nuevoCliente.map(c -> new ResponseEntity<>(c, HttpStatus.CREATED))
+         * .orElse(new ResponseEntity<>(HttpStatus.CONFLICT));
+         */
         if (!userRepository.existsByUsername(cliente.getCedula())) {
             UserEntity userEntity = customUserDetailService.ClienteToUser(cliente);
             cliente.setUser(userEntity);
-            
+
             Optional<Cliente> nuevoCliente = clienteService.addCliente(cliente);
             if (nuevoCliente.isPresent()) {
                 ClienteDTO clienteDTO = ClienteMapper.INSTANCE.convert(nuevoCliente.get());
@@ -91,9 +97,9 @@ public class ClienteController {
     @Operation(summary = "Delete client by id")
     private ResponseEntity<Void> eliminarCliente(@PathVariable Long id) {
         boolean isDeleted = clienteService.removeById(id);
-        
+
         return isDeleted ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
-            : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     // localhost:8088/clientes/update/{id}
@@ -103,10 +109,9 @@ public class ClienteController {
         Optional<Cliente> clienteActualizado = clienteService.updateById(id, cliente);
 
         return clienteActualizado.map(ResponseEntity::ok)
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    
     /* Busquedas - search by */
 
     // localhost:8088/clientes/search-by-document/{document}
@@ -114,20 +119,19 @@ public class ClienteController {
     @Operation(summary = "Find client by document")
     public ResponseEntity<Cliente> buscarClienteByCedula(@PathVariable("document") String cedula) {
         Optional<Cliente> cliente = clienteService.searchByCedula(cedula);
-        
+
         return cliente.map(c -> new ResponseEntity<>(c, HttpStatus.OK))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-    
+
     // localhost:8088/clientes/search-by-name/{search}
     @GetMapping("/search-by-name/{search}")
     @Operation(summary = "Find client by name")
     public ResponseEntity<List<Cliente>> searchByNombre(@PathVariable String search) {
         List<Cliente> clientes = clienteService.searchByNombre(search);
-        
+
         return ResponseEntity.ok(clientes);
     }
-
 
     /* Buscar listas del cliente o las entidades */
 
@@ -138,8 +142,18 @@ public class ClienteController {
         Optional<Cliente> clienteOpt = clienteService.searchClienteById(id);
 
         return clienteOpt.map(cliente -> ResponseEntity.ok(cliente.getMascotas()))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    
+    // // localhost:8088/clientes/login
+    // @PostMapping("/login")
+    // public ResponseEntity loginCliente(@RequestBody Cliente cliente) {
+    //     Authentication authentication = authenticationManager.authenticate(
+    //             new UsernamePasswordAuthenticationToken(cliente.getCedula()));
+
+    //     SecurityContextHolder.getContext().setAuthentication(authentication);
+
+    //     return new ResponseEntity<String>("Usuario ingresado con exito", HttpStatus.OK);
+    // }
+
 }
