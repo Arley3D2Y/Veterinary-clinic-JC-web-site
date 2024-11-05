@@ -1,7 +1,6 @@
 package com.example.demo.controlador;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties.Jwt;
 import org.springframework.security.core.Authentication;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -173,7 +172,7 @@ public class VeterinarioController {
 
     // localhost:8080/administradores/login
     @PostMapping("/login")
-    public ResponseEntity loginVeterinary(@RequestBody Veterinario veterinario) {
+    public ResponseEntity<?> loginVeterinary(@RequestBody Veterinario veterinario) {
    
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(veterinario.getCorreo(), veterinario.getPassword()));
