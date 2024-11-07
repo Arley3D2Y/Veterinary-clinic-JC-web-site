@@ -84,11 +84,4 @@ public class EnfermedadController {
         return ResponseEntity.ok(enfermedades);
     }
 
-    @GetMapping("/search-by-sintomas/{search}")
-    @Operation(summary = "Find disease by sintoma")
-    public ResponseEntity<List<Enfermedad>> searchBySintomas(@PathVariable String search) {
-        List<Enfermedad> enfermedades = enfermedadService.serchEnfermedadsBySintomas(search);
-        return ResponseEntity.ok(enfermedades);
-    }
-    
 }

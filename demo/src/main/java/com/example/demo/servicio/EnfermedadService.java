@@ -20,6 +20,4 @@ public interface EnfermedadService {
 
     public List<Enfermedad> serchEnfermedadByNombre(String nombre);
 
-    public List<Enfermedad> serchEnfermedadsBySintomas(String sintomas);
-
 }

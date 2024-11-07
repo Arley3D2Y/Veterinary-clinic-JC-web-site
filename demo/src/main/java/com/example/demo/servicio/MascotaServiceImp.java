@@ -28,7 +28,6 @@ public class MascotaServiceImp implements MascotaService {
     @Autowired
     EnfermedadRepository enfermedadRepo;
 
-
     /* Mascotas: Peticiones CRUD */
 
     // Busqueda de todas las mascotas
@@ -65,21 +64,23 @@ public class MascotaServiceImp implements MascotaService {
     @Override
     public boolean removeById(Long id) {
         Optional<Mascota> mascotaOpt = mascotaRep.findById(id);
-
+    
         if (mascotaOpt.isPresent()) {
             Mascota mascota = mascotaOpt.get();
-
+    
+            // Desasocia cada tratamiento y guarda el cambio
             for (Tratamiento tratamiento : mascota.getTratamientos()) {
-                tratamiento.setMascota(null); // Desasociar el veterinario
+                tratamiento.setMascota(null); // Desasociar el tratamiento de la mascota
                 tratamientoRepo.save(tratamiento); // Guardar el cambio en cada tratamiento
             }
-
-            mascotaRep.deleteById(id); // Ahora se puede eliminar la mascota
+    
+            // Después de desasociar los tratamientos, elimina la mascota
+            mascotaRep.deleteById(id);
             return true;
         }
         return false;
     }
-
+    
     // Actualizacion de una mascota
     @Override
     public Optional<Mascota> updateById(Long id, Mascota mascota) {

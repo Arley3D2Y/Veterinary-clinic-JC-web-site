@@ -37,9 +37,10 @@ public class CorsConfig {
         ));
 
         source.registerCorsConfiguration("/**", config);
+
         FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
         bean.setOrder(-102);
 
-        return new FilterRegistrationBean<>(new CorsFilter(source));
+        return bean;
     }
 }

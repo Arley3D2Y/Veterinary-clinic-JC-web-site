@@ -229,308 +229,287 @@ public class DatabaseInit implements ApplicationRunner {
 
                 // agregar mascotas
                 mascotaRepository.save(new Mascota("Toby", "5", "4", "Macho", "Birmano",
-                                "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Manchas", "3", "6", "Macho", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
                 mascotaRepository.save(new Mascota("Orion", "4", "5", "Macho", "Burmés",
-                                "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Linsy", "5", "4.5", "Hembra", "Ragdoll",
-                                "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Trixy", "3", "6", "Hembra", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
 
                 // ENFERMEDADES
-                enfermedadRepository.save(new Enfermedad("Sin enfermedad", "La mascota está saludable"));
-
-                enfermedadRepository.save(new Enfermedad("Gripe Felina",
-                                "Resfriado común con estornudos, ojos llorosos y fiebre"));
-                enfermedadRepository.save(new Enfermedad("Infección Respiratoria Superior",
-                                "Congestión nasal, tos y pérdida de apetito"));
-                enfermedadRepository.save(new Enfermedad("Dermatitis Felina",
-                                "Irritación en la piel, enrojecimiento y picazón"));
-                enfermedadRepository.save(new Enfermedad("Otitis", "Infección del oído, mal olor y rascado excesivo"));
-                enfermedadRepository.save(new Enfermedad("Cistitis Felina",
-                                "Dolor al orinar, sangre en la orina y letargo"));
-                enfermedadRepository.save(new Enfermedad("Gastroenteritis", "Vómitos, diarrea y deshidratación"));
-                enfermedadRepository.save(new Enfermedad("Conjuntivitis",
-                                "Ojos irritados, secreción ocular y parpadeo constante"));
-                enfermedadRepository
-                                .save(new Enfermedad("Parásitos Intestinales", "Pérdida de peso, vómitos y diarrea"));
-                enfermedadRepository.save(
-                                new Enfermedad("Moquillo Felino", "Secreción nasal, fiebre y pérdida de apetito"));
-                enfermedadRepository.save(new Enfermedad("Infección Urinaria",
-                                "Dificultad al orinar, orina turbia y olor fuerte"));
-                enfermedadRepository.save(new Enfermedad("Panleucopenia", "Fiebre alta, vómitos y deshidratación"));
-                enfermedadRepository.save(new Enfermedad("Anemia Infecciosa Felina",
-                                "Letargo, pérdida de apetito y encías pálidas"));
-                enfermedadRepository.save(new Enfermedad("Toxoplasmosis", "Diarrea, vómitos y fiebre"));
-                enfermedadRepository.save(new Enfermedad("Leucemia Felina",
-                                "Pérdida de peso, infecciones recurrentes y letargo"));
-                enfermedadRepository.save(
-                                new Enfermedad("Tiña Felina", "Lesiones circulares en la piel y pérdida de pelaje"));
-                enfermedadRepository.save(new Enfermedad("Artritis Felina",
-                                "Rigidez en las articulaciones y dificultad para moverse"));
-                enfermedadRepository.save(
-                                new Enfermedad("Rabia Felina", "Agitación, cambios de comportamiento y agresividad"));
-                enfermedadRepository
-                                .save(new Enfermedad("Calicivirus", "Úlceras en la boca, fiebre y secreción nasal"));
-                enfermedadRepository.save(new Enfermedad("Peritonitis Infecciosa Felina",
-                                "Fiebre, inflamación abdominal y pérdida de apetito"));
-                enfermedadRepository.save(
-                                new Enfermedad("Asma Felina", "Tos, dificultad para respirar y silbidos al exhalar"));
-                enfermedadRepository.save(new Enfermedad("Enfermedad periodontal",
-                                "Inflamación de los tejidos que rodean los dientes, puede causar mal aliento y pérdida dental"));
-                enfermedadRepository.save(new Enfermedad("Gingivitis felina",
-                                "Inflamación de las encías, puede provocar dolor y dificultad para comer"));
-                enfermedadRepository.save(new Enfermedad("Miocardiopatía hipertrófica",
-                                "Engrosamiento del músculo cardíaco, puede causar insuficiencia cardíaca"));
-                enfermedadRepository.save(new Enfermedad("Enfermedad valvular",
-                                "Afección de las válvulas del corazón que puede provocar soplos cardíacos"));
-                enfermedadRepository.save(new Enfermedad("Linfoma felino",
-                                "Cáncer que afecta los ganglios linfáticos y otros órganos"));
-                enfermedadRepository.save(new Enfermedad("Tumores mamarios",
-                                "Crecimientos anormales en las glándulas mamarias, pueden ser benignos o malignos"));
-                enfermedadRepository.save(new Enfermedad("Piometra",
-                                "Infección del útero que puede ser potencialmente mortal"));
-                enfermedadRepository.save(new Enfermedad("Aborto espontáneo",
-                                "Pérdida del embarazo en etapas avanzadas, puede ser causada por infecciones o problemas hormonales"));
-                enfermedadRepository.save(new Enfermedad("Reacciones adversas a la anestesia",
-                                "Complicaciones que pueden surgir durante o después de la anestesia"));
-                enfermedadRepository.save(new Enfermedad("Hipotensión anestésica",
-                                "Descenso en la presión arterial durante la anestesia que puede ser peligroso"));
-                enfermedadRepository.save(new Enfermedad("Obesidad felina",
-                                "Acumulación excesiva de grasa que puede provocar enfermedades secundarias"));
-                enfermedadRepository.save(new Enfermedad("Enfermedades gastrointestinales",
-                                "Trastornos que afectan el tracto digestivo, pueden causar vómitos y diarrea"));
+                enfermedadRepository.save(Enfermedad.builder().nombre("Sin enfermedad").sintomas("La mascota está saludable").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Gripe Felina").sintomas("Resfriado común con estornudos, ojos llorosos y fiebre").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Infección Respiratoria Superior").sintomas("Congestión nasal, tos y pérdida de apetito").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Dermatitis Felina").sintomas("Irritación en la piel, enrojecimiento y picazón").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Otitis").sintomas("Infección del oído, mal olor y rascado excesivo").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Cistitis Felina").sintomas("Dolor al orinar, sangre en la orina y letargo").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Gastroenteritis").sintomas("Vómitos, diarrea y deshidratación").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Conjuntivitis").sintomas("Ojos irritados, secreción ocular y parpadeo constante").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Parásitos Intestinales").sintomas("Pérdida de peso, vómitos y diarrea").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Moquillo Felino").sintomas("Secreción nasal, fiebre y pérdida de apetito").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Infección Urinaria").sintomas("Dificultad al orinar, orina turbia y olor fuerte").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Panleucopenia").sintomas("Fiebre alta, vómitos y deshidratación").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Anemia Infecciosa Felina").sintomas("Letargo, pérdida de apetito y encías pálidas").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Toxoplasmosis").sintomas("Diarrea, vómitos y fiebre").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Leucemia Felina").sintomas("Pérdida de peso, infecciones recurrentes y letargo").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Tiña Felina").sintomas("Lesiones circulares en la piel y pérdida de pelaje").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Artritis Felina").sintomas("Rigidez en las articulaciones y dificultad para moverse").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Rabia Felina").sintomas("Agitación, cambios de comportamiento y agresividad").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Calicivirus").sintomas("Úlceras en la boca, fiebre y secreción nasal").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Peritonitis Infecciosa Felina").sintomas("Fiebre, inflamación abdominal y pérdida de apetito").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Asma Felina").sintomas("Tos, dificultad para respirar y silbidos al exhalar").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Enfermedad periodontal").sintomas("Inflamación de los tejidos que rodean los dientes, puede causar mal aliento y pérdida dental").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Gingivitis felina").sintomas("Inflamación de las encías, puede provocar dolor y dificultad para comer").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Miocardiopatía hipertrófica").sintomas("Engrosamiento del músculo cardíaco, puede causar insuficiencia cardíaca").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Enfermedad valvular").sintomas("Afección de las válvulas del corazón que puede provocar soplos cardíacos").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Linfoma felino").sintomas("Cáncer que afecta los ganglios linfáticos y otros órganos").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Tumores mamarios").sintomas("Crecimientos anormales en las glándulas mamarias, pueden ser benignos o malignos").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Piometra").sintomas("Infección del útero que puede ser potencialmente mortal").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Aborto espontáneo").sintomas("Pérdida del embarazo en etapas avanzadas, puede ser causada por infecciones o problemas hormonales").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Reacciones adversas a la anestesia").sintomas("Complicaciones que pueden surgir durante o después de la anestesia").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Hipotensión anestésica").sintomas("Descenso en la presión arterial durante la anestesia que puede ser peligroso").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Obesidad felina").sintomas("Acumulación excesiva de grasa que puede provocar enfermedades secundarias").build());
+                enfermedadRepository.save(Enfermedad.builder().nombre("Enfermedades gastrointestinales").sintomas("Trastornos que afectan el tracto digestivo, pueden causar vómitos y diarrea").build());
 
                 // Mascotas
                 mascotaRepository.save(new Mascota("Nina", "4", "5", "Hembra", "Birmano",
-                                "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Rex", "3", "5.5", "Macho", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
                 mascotaRepository.save(new Mascota("Luna", "4", "4", "Hembra", "Burmés",
-                                "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Tom", "6", "5", "Macho", "Ragdoll",
-                                "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Bella", "3", "5.5", "Hembra", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
 
                 mascotaRepository.save(new Mascota("Oreo", "4", "5", "Macho", "Birmano",
-                                "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Cleo", "3", "4.5", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
                 mascotaRepository.save(new Mascota("Leo", "5", "6", "Macho", "Burmés",
-                                "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Sasha", "7", "5", "Hembra", "Ragdoll",
-                                "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Milo", "4", "5.5", "Macho", "Siberiano",
-                                "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
+                                "https://images.unsplash.com/photo-1536590158209-e9d615d525e4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8R2F0b3N8ZW58MHx8MHx8fDA%3D"));
 
                 mascotaRepository.save(new Mascota("Simba", "5", "4.2", "Macho", "Birmano",
-                                "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Misty", "3", "3.8", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
                 mascotaRepository.save(new Mascota("Whiskers", "6", "5.0", "Macho", "Burmés",
-                                "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Lola", "8", "4.5", "Hembra", "Ragdoll",
-                                "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Charlie", "4", "6.2", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
 
                 mascotaRepository.save(new Mascota("Pepper", "5", "4.1", "Hembra", "Birmano",
-                                "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Nala", "3", "3.9", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
                 mascotaRepository.save(new Mascota("Zeus", "7", "5.5", "Macho", "Burmés",
-                                "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Maggie", "9", "4.8", "Hembra", "Ragdoll",
-                                "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Buddy", "4", "5.5", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
 
                 mascotaRepository.save(new Mascota("Jack", "4", "5.0", "Macho", "Birmano",
-                                "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Minnie", "3", "3.5", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
                 mascotaRepository.save(new Mascota("Smokey", "5", "4.8", "Macho", "Burmés",
-                                "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Sandy", "8", "6.2", "Hembra", "Ragdoll",
-                                "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Rusty", "2", "5.5", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
 
                 mascotaRepository.save(new Mascota("Milo", "4", "4.0", "Hembra", "Birmano",
-                                "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Oreo", "3", "4.1", "Macho", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
                 mascotaRepository.save(new Mascota("Cleo", "6", "5.0", "Hembra", "Burmés",
-                                "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Tommy", "9", "6.0", "Macho", "Ragdoll",
-                                "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Zara", "5", "5.3", "Hembra", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
 
                 mascotaRepository.save(new Mascota("Dexter", "4", "5.2", "Macho", "Birmano",
-                                "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Maggie", "3", "4.0", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
                 mascotaRepository.save(new Mascota("Oscar", "5", "4.8", "Macho", "Burmés",
-                                "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Penny", "8", "6.0", "Hembra", "Ragdoll",
-                                "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Fritz", "2", "5.5", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
 
                 mascotaRepository.save(new Mascota("Juno", "4", "4.4", "Hembra", "Birmano",
-                                "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Milo", "3", "4.2", "Macho", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
                 mascotaRepository.save(new Mascota("Bella", "6", "5.3", "Hembra", "Burmés",
-                                "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Rex", "9", "6.1", "Macho", "Ragdoll",
-                                "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Luna", "5", "5.5", "Hembra", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
 
                 mascotaRepository.save(new Mascota("Nina", "4", "4.5", "Hembra", "Birmano",
-                                "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Cleo", "3", "3.9", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
                 mascotaRepository.save(new Mascota("Leo", "5", "5.1", "Macho", "Burmés",
-                                "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Sasha", "8", "6.3", "Hembra", "Ragdoll",
-                                "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Max", "2", "5.4", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
 
                 mascotaRepository.save(new Mascota("Toby", "4", "4.0", "Hembra", "Birmano",
-                                "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Rex", "3", "5.1", "Macho", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
                 mascotaRepository.save(new Mascota("Oreo", "5", "4.5", "Macho", "Burmés",
-                                "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Trixy", "8", "6.0", "Hembra", "Ragdoll",
-                                "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Manchas", "2", "5.8", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
 
                 mascotaRepository.save(new Mascota("Pip", "4", "4.2", "Macho", "Birmano",
-                                "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Chloe", "3", "3.8", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
-                mascotaRepository.save(new Mascota("Toby", "5", "4.9", "Macho", "Burmés",
-                                "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
+                mascotaRepository.save(new Mascota("Mercurio", "5", "4.9", "Macho", "Burmés",
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Lola", "9", "6.5", "Hembra", "Ragdoll",
-                                "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Sam", "6", "5.2", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
 
                 mascotaRepository.save(new Mascota("Jasper", "4", "4.0", "Macho", "Birmano",
-                                "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Fifi", "3", "3.5", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
                 mascotaRepository.save(new Mascota("Tiger", "5", "4.8", "Macho", "Burmés",
-                                "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Ella", "8", "5.0", "Hembra", "Ragdoll",
-                                "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Marty", "2", "5.5", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
 
                 mascotaRepository.save(new Mascota("Jack", "4", "4.1", "Hembra", "Birmano",
-                                "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Penny", "3", "3.9", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
                 mascotaRepository.save(new Mascota("Ginger", "5", "4.7", "Macho", "Burmés",
-                                "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Luna", "8", "5.4", "Hembra", "Ragdoll",
-                                "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Rufus", "2", "5.3", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
 
                 mascotaRepository.save(new Mascota("Lily", "4", "4.2", "Hembra", "Birmano",
-                                "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Oscar", "3", "3.8", "Macho", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
                 mascotaRepository.save(new Mascota("Sammy", "5", "4.6", "Hembra", "Burmés",
-                                "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Maggie", "8", "5.7", "Macho", "Ragdoll",
-                                "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Cleo", "2", "5.0", "Hembra", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
 
                 mascotaRepository.save(new Mascota("Dexter", "4", "4.0", "Macho", "Birmano",
-                                "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Luna", "3", "3.8", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
                 mascotaRepository.save(new Mascota("Charlie", "5", "4.5", "Macho", "Burmés",
-                                "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Maggie", "8", "6.0", "Hembra", "Ragdoll",
-                                "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Rusty", "2", "5.1", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
 
                 mascotaRepository.save(new Mascota("Oscar", "4", "4.2", "Macho", "Birmano",
-                                "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Zara", "3", "3.9", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
                 mascotaRepository.save(new Mascota("Buddy", "5", "4.8", "Macho", "Burmés",
-                                "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Ellie", "8", "5.5", "Hembra", "Ragdoll",
-                                "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Max", "6", "5.0", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
 
                 mascotaRepository.save(new Mascota("Ziggy", "4", "4.0", "Macho", "Birmano",
-                                "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Nina", "3", "3.5", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
                 mascotaRepository.save(new Mascota("Finn", "5", "4.8", "Macho", "Burmés",
-                                "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Lola", "9", "6.3", "Hembra", "Ragdoll",
-                                "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Leo", "3", "5.2", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
 
                 mascotaRepository.save(new Mascota("Misty", "4", "4.1", "Hembra", "Birmano",
-                                "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Gizmo", "3", "4.5", "Macho", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
                 mascotaRepository.save(new Mascota("Apollo", "5", "4.9", "Macho", "Burmés",
-                                "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Nala", "9", "6.0", "Hembra", "Ragdoll",
-                                "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Max", "2", "5.5", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
                 mascotaRepository.save(new Mascota("Luna", "4", "4.3", "Hembra", "Birmano",
-                                "https://content.elmueble.com/medio/2025/04/12/gato-birmano_40aca551_230412112429_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Daisy", "3", "3.6", "Hembra", "Persa",
                                 "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian-Long-Hair.jpg?itok=AOnt5aNF"));
                 mascotaRepository.save(new Mascota("Buster", "5", "4.7", "Macho", "Burmés",
-                                "https://miperroesunico.com/img/razas-de-gatos/Raza-de-Gato-Burmes.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Mia", "9", "6.4", "Hembra", "Ragdoll",
-                                "https://content.elmueble.com/medio/2025/02/24/gato-de-raza-ragdoll_5c5827ec_230224104944_900x900.jpg"));
+                                "https://static.vecteezy.com/system/resources/previews/025/436/159/non_2x/cat-sit-black-silhouette-domestic-pet-profile-cat-for-print-card-sticker-illustration-vector.jpg"));
                 mascotaRepository.save(new Mascota("Rusty", "2", "5.0", "Macho", "Siberiano",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_126848656-1024x995.jpg"));
 
                 // ESPECIALIDADES
-                especialidadRepository.save(new Especialidad("Ortopédico", "Tratamiento de las articulaciones"));
-                
-                especialidadRepository.save(new Especialidad("Dermatología",
-                                "Diagnóstico y tratamiento de enfermedades de la piel"));
-                especialidadRepository
-                                .save(new Especialidad("Odontología Veterinaria", "Cuidado y tratamiento dental"));
-                especialidadRepository.save(new Especialidad("Cardiología",
-                                "Diagnóstico y tratamiento de enfermedades del corazón"));
-                especialidadRepository
-                                .save(new Especialidad("Oncología", "Diagnóstico y tratamiento de cáncer en animales"));
-                especialidadRepository.save(new Especialidad("Medicina Interna",
-                                "Diagnóstico y tratamiento de enfermedades internas"));
-                especialidadRepository.save(new Especialidad("Reproducción y Obstetricia",
-                                "Manejo de la reproducción y cuidado durante el parto"));
-                especialidadRepository.save(
-                                new Especialidad("Anestesiología", "Administración de anestesia y manejo del dolor"));
-                especialidadRepository.save(new Especialidad("Nutrición Veterinaria",
-                                "Asesoría en dietas y alimentación para mascotas"));
+                especialidadRepository.save(Especialidad.builder()
+                .nombre("Ortopédico").caracteristicas("Tratamiento de las articulaciones").build());
+        
+                especialidadRepository.save(Especialidad.builder()
+                .nombre("Dermatología").caracteristicas("Diagnóstico y tratamiento de enfermedades de la piel").build());
+        
+                especialidadRepository.save(Especialidad.builder()
+                .nombre("Odontología Veterinaria").caracteristicas("Cuidado y tratamiento dental").build());
+        
+                especialidadRepository.save(Especialidad.builder()
+                .nombre("Cardiología").caracteristicas("Diagnóstico y tratamiento de enfermedades del corazón").build());
+        
+                especialidadRepository.save(Especialidad.builder()
+                .nombre("Oncología").caracteristicas("Diagnóstico y tratamiento de cáncer en animales").build());
+        
+                especialidadRepository.save(Especialidad.builder()
+                .nombre("Medicina Interna").caracteristicas("Tratamiento de enfermedades internas").build());
+        
+                especialidadRepository.save(Especialidad.builder()
+                .nombre("Reproducción y Obstetricia").caracteristicas("Manejo de la reproducción y cuidado durante el parto").build());
+        
+                especialidadRepository.save(Especialidad.builder()
+                .nombre("Anestesiología").caracteristicas("Administración de anestesia y manejo del dolor").build());
+        
+                especialidadRepository.save(Especialidad.builder()
+                .nombre("Nutrición Veterinaria").caracteristicas("Asesoría en dietas y alimentación para mascotas").build());
 
                 // VETERINARIOS
                 List<Veterinario> vetsUsers = new ArrayList<>();

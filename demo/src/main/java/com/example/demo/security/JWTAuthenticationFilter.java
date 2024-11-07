@@ -1,5 +1,7 @@
 package com.example.demo.security;
 
+import org.springframework.lang.NonNull;
+
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +25,11 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     private CustomUserDetailService customUserDetailService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request,
-            HttpServletResponse response,
-            FilterChain filterChain)
-            throws ServletException, IOException {
+    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
+                @NonNull FilterChain filterChain) throws ServletException, IOException {
+
         String token = getJWT(request);
+
         if (token != null && jwtGenerator.validateToken(token)) {
             String username = jwtGenerator.extractUsername(token);
             UserDetails userDetails = customUserDetailService.loadUserByUsername(username);
@@ -48,4 +50,5 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
         }
         return null;
     }
+
 }

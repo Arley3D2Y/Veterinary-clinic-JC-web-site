@@ -86,12 +86,4 @@ public class EspecialidadController {
         return ResponseEntity.ok(especialidades);
     }
 
-    // localhost:8088/especialidades/total-especialidades
-    @GetMapping("/total-especialidades")
-    @Operation(summary = "Find specialty by name")
-    public ResponseEntity<Integer> numTotalEspecialidades() {
-       Integer coountEspecialidades = especialidadService.totalEspecalidadades();
-        return ResponseEntity.ok(coountEspecialidades);
-    }
-
 }

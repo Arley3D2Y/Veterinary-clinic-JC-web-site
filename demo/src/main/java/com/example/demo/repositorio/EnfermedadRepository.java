@@ -24,8 +24,6 @@ public interface EnfermedadRepository extends JpaRepository<Enfermedad, Long> {
     // Busqueda por nombre
     List<Enfermedad> findByNombreStartingWithIgnoreCase(String nombre);
 
-    // Busqueda por sintomas
-    List<Enfermedad> findBySintomas(String sintoString);
 
     /** Query **/
 

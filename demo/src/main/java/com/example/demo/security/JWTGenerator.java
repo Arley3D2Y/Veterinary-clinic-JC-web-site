@@ -23,11 +23,11 @@ public class JWTGenerator {
 
         /* Crear el JWT */
         String token = Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(currentDate)
-                .setExpiration(expireDate)
-                .signWith(key, SignatureAlgorithm.HS512)
-                .compact();
+            .setSubject(username)
+            .setIssuedAt(currentDate)
+            .setExpiration(expireDate)
+            .signWith(key, SignatureAlgorithm.HS512)
+            .compact();
 
         return token;
     }
@@ -38,7 +38,7 @@ public class JWTGenerator {
 
     public boolean validateToken(String token) {
         try {
-            Jwts.parser().setSigningKey(key).parseClaimsJws(token);
+            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;
         } catch (Exception e) {
             return false;

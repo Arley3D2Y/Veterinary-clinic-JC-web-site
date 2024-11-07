@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import com.example.demo.model.Mascota;
 import com.example.demo.model.Tratamiento;
 import com.example.demo.model.Veterinario;
 import com.example.demo.servicio.TratamientoService;
+import com.example.demo.servicio.VeterinarioService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +32,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class TratamientoController {
     @Autowired
     private TratamientoService tratamientoService;
+    @Autowired
+    private VeterinarioService veterinarioService;
 
     /* Tratamientos: Peticiones CRUD */
 
@@ -52,16 +56,24 @@ public class TratamientoController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    // http://localhost:8088/tratamientos/add/mascota/2/veterinario/1/droga/1
-    @PostMapping("/add/mascota/{petId}/veterinario/{vetId}/droga/{drugId}")
-    private ResponseEntity<Tratamiento> crearTratamiento(@PathVariable("petId") Long mascotaId,
-            @PathVariable("vetId") Long veterinarioId, @PathVariable("drugId") Long drogaId,
+    // localhost:8088/tratamientos/add/mascota/{petId}/droga/{drugId}
+    @PostMapping("/add/mascota/{petId}/droga/{drugId}")
+    private ResponseEntity<Tratamiento> crearTratamiento(@PathVariable("petId") Long mascotaId, @PathVariable("drugId") Long drogaId,
             @RequestBody Tratamiento tratamiento) {
-        
-        Optional<Tratamiento> nuevoTratamiento = tratamientoService.addTratamiento(mascotaId, veterinarioId, drogaId, tratamiento);
 
-        return nuevoTratamiento.map(ResponseEntity::ok)
-            .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
+        Optional<Veterinario> veterinario = veterinarioService.searchByCorreo(
+            SecurityContextHolder.getContext().getAuthentication().getName()
+        );
+        
+        if (!veterinario.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        } else {
+            Optional<Tratamiento> nuevoTratamiento = tratamientoService.addTratamiento(mascotaId, veterinario.get().getId(), drogaId, tratamiento);
+
+            return nuevoTratamiento.map(ResponseEntity::ok)
+            .orElse(ResponseEntity.status(HttpStatus.CONFLICT).body(null));
+        }
+
     }
     
 

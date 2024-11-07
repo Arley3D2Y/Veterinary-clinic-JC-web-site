@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,8 +39,7 @@ public class ClienteController {
     private UserRepository userRepository;
     @Autowired
     private CustomUserDetailService customUserDetailService;
-    @Autowired
-    AuthenticationManager authenticationManager;
+    
     /* Clientes: Peticiones CRUD */
 
     // localhost:8088/clientes
@@ -111,14 +110,23 @@ public class ClienteController {
 
     /* Busquedas - search by */
 
-    // localhost:8088/clientes/search-by-document/{document}
-    @GetMapping("/search-by-document/{document}")
-    @Operation(summary = "Find client by document")
-    public ResponseEntity<Cliente> buscarClienteByCedula(@PathVariable("document") String cedula) {
+    // localhost:8088/clientes/details
+    @GetMapping("/details")
+    @Operation(summary = "show client details")
+    public ResponseEntity<Cliente> mostarCliente() {
+        /*
         Optional<Cliente> cliente = clienteService.searchByCedula(cedula);
 
         return cliente.map(c -> new ResponseEntity<>(c, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        */
+        Optional<Cliente> cliente = clienteService.searchByCedula(
+            SecurityContextHolder.getContext().getAuthentication().getName()
+        );
+
+        return cliente.map(c -> new ResponseEntity<Cliente>(c, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+
     }
 
     // localhost:8088/clientes/search-by-name/{search}
@@ -141,16 +149,5 @@ public class ClienteController {
         return clienteOpt.map(cliente -> ResponseEntity.ok(cliente.getMascotas()))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-
-    // // localhost:8088/clientes/login
-    // @PostMapping("/login")
-    // public ResponseEntity loginCliente(@RequestBody Cliente cliente) {
-    //     Authentication authentication = authenticationManager.authenticate(
-    //             new UsernamePasswordAuthenticationToken(cliente.getCedula()));
-
-    //     SecurityContextHolder.getContext().setAuthentication(authentication);
-
-    //     return new ResponseEntity<String>("Usuario ingresado con exito", HttpStatus.OK);
-    // }
 
 }

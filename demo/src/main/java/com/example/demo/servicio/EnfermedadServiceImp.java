@@ -65,10 +65,4 @@ public class EnfermedadServiceImp implements EnfermedadService {
         return enfermedadRepo.findByNombreStartingWithIgnoreCase(nombre);
     }
 
-    @Override
-    public List<Enfermedad> serchEnfermedadsBySintomas(String sintomas) {
-
-        return enfermedadRepo.findBySintomas(sintomas);
-    }
-
 }

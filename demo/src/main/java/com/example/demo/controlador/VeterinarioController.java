@@ -1,10 +1,8 @@
 package com.example.demo.controlador;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -119,6 +117,19 @@ public class VeterinarioController {
 
     /* Busquedas - search by */
 
+    // localhost:8088/veterinarios/search-by-email/{search}
+    @GetMapping("/details")
+    @Operation(summary = "Show veterinary details")
+    public ResponseEntity<Veterinario> mostrarVeterinario() {
+
+        Optional<Veterinario> veterinario = veterinarioService.searchByCorreo(
+            SecurityContextHolder.getContext().getAuthentication().getName()
+        );
+
+        return veterinario.map(v -> new ResponseEntity<Veterinario>(v, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
     // localhost:8088/veterinarios/search-by-name/{search}
     @GetMapping("/search-by-name/{search}")
     @Operation(summary = "Search veterinarians by name")
@@ -128,36 +139,19 @@ public class VeterinarioController {
         return ResponseEntity.ok(veterinarios); // 200 OK
     }
 
-    // localhost:8088/veterinarios/search-by-document/{search}
-    @GetMapping("/search-by-document/{search}")
-    @Operation(summary = "Search veterinary by document")
-    public ResponseEntity<Veterinario> buscarVeterinarioByCedula(@PathVariable String search) {
-        Optional<Veterinario> veterinario = veterinarioService.searchByCedula(search);
-
-        return veterinario.map(v -> new ResponseEntity<>(v, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
-
-    // localhost:8088/veterinarios/search-by-email/{search}
-    @GetMapping("/search-by-email/{search}")
-    @Operation(summary = "Search veterinary by email")
-    public ResponseEntity<Veterinario> buscarVeterinarioByCorreo(@PathVariable String search) {
-        Optional<Veterinario> veterinario = veterinarioService.searchByCorreo(search);
-
-        return veterinario.map(v -> new ResponseEntity<>(v, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
-
     /* Buscar listas del veterinario o las entidades */
 
     // localhost:8088/veterinarios/{id}/tratamientos
-    @GetMapping("/{id}/tratamientos")
+    @GetMapping("/tratamientos")
     @Operation(summary = "Get treatments by veterinary")
-    public ResponseEntity<List<Tratamiento>> getTratamientosVeterinario(@PathVariable Long id) {
-        Optional<Veterinario> veterinarioOpt = veterinarioService.searchVeterinarioById(id);
+    public ResponseEntity<List<Tratamiento>> getTratamientosVeterinario() {
+    
+        Optional<Veterinario> veterinario = veterinarioService.searchByCorreo(
+            SecurityContextHolder.getContext().getAuthentication().getName()
+        );
 
-        return veterinarioOpt.map(veterinario -> ResponseEntity.ok(veterinario.getTratamientos()))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return veterinario.map(v -> ResponseEntity.ok(v.getTratamientos()))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     // localhost:8088/veterinarios/{id}/especialidad
@@ -170,17 +164,6 @@ public class VeterinarioController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    // localhost:8080/administradores/login
-    @PostMapping("/login")
-    public ResponseEntity<?> loginVeterinary(@RequestBody Veterinario veterinario) {
-   
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(veterinario.getCorreo(), veterinario.getPassword()));
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        String token = jwtGenerator.generateToken(authentication);
-
-        return new ResponseEntity<String>( token, HttpStatus.OK);}
 
 }

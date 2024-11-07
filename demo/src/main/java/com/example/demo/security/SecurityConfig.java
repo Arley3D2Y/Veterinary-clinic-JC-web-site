@@ -23,16 +23,17 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
-                .headers((headers) -> headers.frameOptions(frame -> frame.disable()))
-                .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/h2/**").permitAll()
-                        .requestMatchers("/veterinarios/login**").permitAll()
-                        .requestMatchers("/veterinarios/find/**").permitAll()
-                        .requestMatchers("/dashboard/**").authenticated()
-                        .anyRequest().permitAll())
-                        .exceptionHandling(exceptions -> exceptions.authenticationEntryPoint(jwtAuthEntryPoint));
-                        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-                        return http.build();
+                    .headers((headers) -> headers.frameOptions(frame -> frame.disable()))
+                    .authorizeHttpRequests((requests) -> requests
+                    .requestMatchers("/h2/**").permitAll()
+                    .requestMatchers("/swagger-ui/**").permitAll()
+                    .requestMatchers("/login/**").permitAll()
+
+                    .anyRequest().permitAll()
+                )
+                .exceptionHandling(exceptions -> exceptions.authenticationEntryPoint(jwtAuthEntryPoint));
+                http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+                return http.build();
     }
 
     @Bean
@@ -40,16 +41,16 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    // clase para autenticarse en el sistema
+    // Clase para autenticarse en el sistema
     @Bean
-    public AuthenticationManager authenticationManager(
+    AuthenticationManager authenticationManager(
             AuthenticationConfiguration authenticationConfiguration) throws Exception {
+
         return authenticationConfiguration.getAuthenticationManager();
     }
 
     @Bean
-    public JWTAuthenticationFilter jwtAuthenticationFilter() {
-
+    JWTAuthenticationFilter jwtAuthenticationFilter() {
         return new JWTAuthenticationFilter();
     }
 }
