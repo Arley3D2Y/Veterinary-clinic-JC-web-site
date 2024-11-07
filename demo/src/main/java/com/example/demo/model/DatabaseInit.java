@@ -515,41 +515,41 @@ public class DatabaseInit implements ApplicationRunner {
                 List<Veterinario> vetsUsers = new ArrayList<>();
 
                 vetsUsers.add(new Veterinario("Sergio", "123456789", "s@t.com", "1234",
-                                "https://i.ibb.co/0qX2b8t/sergio.jpg", true));
+                                "https://ibb.co/nq2t6DW", true));
                 vetsUsers.add(new Veterinario("Carlos", "987654321", "c@vets.com", "2345",
-                                "https://i.ibb.co/1JZfv1Z/carlos.jpg", true));
+                                "https://ibb.co/x76Xm4C", true));
                 vetsUsers.add(new Veterinario("Laura", "456789123", "l@vetmail.com", "3456",
-                                "https://i.ibb.co/Zh2ZDS3/laura.jpg", true));
+                                "https://ibb.co/BBGLpQ3", true));
                 vetsUsers.add(new Veterinario("Andrés", "321456987", "a@clinic.com", "4567",
-                                "https://i.ibb.co/YktjXzK/andres.jpg", true));
+                                "https://ibb.co/YTZ53rd", true));
                 vetsUsers.add(new Veterinario("Fernanda", "654321789", "f@catvets.com", "5678",
-                                "https://i.ibb.co/Ms1FbJZ/fernanda.jpg", true));
+                                "https://ibb.co/n7J20b3", true));
                 vetsUsers.add(new Veterinario("Ricardo", "123987654", "r@medvet.com", "6789",
-                                "https://i.ibb.co/LdWh1rX/ricardo.jpg", true));
+                                "https://ibb.co/pnNWsG8", true));
                 vetsUsers.add(new Veterinario("Paula", "789456123", "p@vetservice.com", "7890",
-                                "https://i.ibb.co/ZXWJLSB/paula.jpg", true));
+                                "https://ibb.co/6whRfQ7", true));
                 vetsUsers.add(new Veterinario("María", "321654987", "m@vetclinic.com", "8901",
-                                "https://i.ibb.co/F7bc0Z8/maria.jpg", true));
+                                "https://ibb.co/fQ9cVPX", true));
                 vetsUsers.add(new Veterinario("Javier", "456123789", "j@animalhealth.com", "9012",
-                                "https://i.ibb.co/WghgDxX/javier.jpg", true));
+                                "https://ibb.co/f2WnPxn", true));
                 vetsUsers.add(new Veterinario("Ana", "789123456", "ana@vetcare.com", "0123",
-                                "https://i.ibb.co/qW0tdBh/ana.jpg", true));
+                                "https://ibb.co/kc7f2bV", true));
                 vetsUsers.add(new Veterinario("Pedro", "987321654", "pedro@cathealth.com", "1235",
-                                "https://i.ibb.co/0r5X4B3/pedro.jpg", true));
+                                "https://ibb.co/TWmmLmc", true));
                 vetsUsers.add(new Veterinario("Daniela", "654789123", "daniela@felineclinic.com", "2346",
-                                "https://i.ibb.co/t2X5PCm/daniela.jpg", true));
+                                "https://ibb.co/LkTxXk8", true));
                 vetsUsers.add(new Veterinario("Gustavo", "123789654", "gustavo@animalclinic.com", "3457",
-                                "https://i.ibb.co/Fqf7vLY/gustavo.jpg", true));
+                                "https://ibb.co/Jmp08Ny", true));
                 vetsUsers.add(new Veterinario("Lucía", "789321456", "lucia@vetprofession.com", "4568",
-                                "https://i.ibb.co/1Zh7rdV/lucia.jpg", true));
+                                "https://ibb.co/Sd7jzD8", true));
                 vetsUsers.add(new Veterinario("Mauricio", "321987654", "mauricio@petcare.com", "5679",
-                                "https://i.ibb.co/HqKNPP5/mauricio.jpg", true));
+                                "https://ibb.co/vkNB1xj", true));
                 vetsUsers.add(new Veterinario("Adriana", "654123987", "adriana@vetservice.com", "6780",
-                                "https://i.ibb.co/hgQkWdk/adriana.jpg", true));
+                                "https://ibb.co/FYH7P6g", true));
                 vetsUsers.add(new Veterinario("Diego", "987456123", "diego@animaldoctor.com", "7891",
-                                "https://i.ibb.co/LJSx78r/diego.jpg", true));
+                                "https://ibb.co/cFML9x7", true));
                 vetsUsers.add(new Veterinario("Claudia", "456789321", "claudia@clinicvet.com", "8902",
-                                "https://i.ibb.co/MBSM4pj/claudia.jpg", false));
+                                "https://ibb.co/6Wtnv6H", false));
 
                 saveVeterinariosWithUserEntities(vetsUsers);
 
