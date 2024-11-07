@@ -85,8 +85,8 @@ public class DashboardServiceImp implements DashboardService {
 
         // Contar las mascotas por estado
         for (EstadoSalud estado : EstadoSalud.values()) {
-            // Integer count = mascotaRepository.countPetsByEstado(estado);
-            // estadoMascotaDTOs.add(new EstadoMascotasDTO(estado.getDescripcion(), count));
+            Integer count = mascotaRepository.countPetsByEstado(estado);
+            estadoMascotaDTOs.add(new EstadoMascotasDTO(estado.name(), count));
         }
 
         return estadoMascotaDTOs;
